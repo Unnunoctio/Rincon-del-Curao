@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .bg-page {
+    @apply bg-[#edf2f7] dark:bg-[#222629]
+  }
+  .text-primary {
+    @apply text-[#1a202c] dark:text-[#FFFFFFEB]
+  }
+  .text-hover {
+    @apply hover:text-active dark:hover:text-active
+  }
+  .border-primary {
+    @apply border-[#718096] dark:border-[#3a424d]
+  }
+  .border-hover {
+    @apply hover:border-active dark:hover:border-active
+  }
+}

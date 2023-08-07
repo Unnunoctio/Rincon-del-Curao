@@ -20,7 +20,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
       <body className={roboto.className}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ThemeSwitcher />
-          <main>
+          <main className='min-h-screen bg-page'>
             {children}
           </main>
         </ThemeProvider>
