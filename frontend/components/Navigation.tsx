@@ -50,7 +50,7 @@ export const Navigation = (): React.ReactNode => {
     >
       <nav className='flex justify-between px-2 sm:px-4 md:px-8 max-w-nav-container w-full'>
         <div className='flex items-center h-[71px]'>
-          <Link href='/' className='transition-transform hover:scale-105'>
+          <Link href='/' className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105'>
             <Image src='/Logo.png' alt='Logo' width={140} height={44.3} priority />
           </Link>
         </div>
@@ -58,7 +58,7 @@ export const Navigation = (): React.ReactNode => {
         {/* Items and Buttons */}
         <div className='flex'>
           <ul
-            className={`flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}
+            className={`hidden md:flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}
             onMouseEnter={() => setIsOpen(true)}
           >
             {links.map((link) => (
@@ -86,7 +86,7 @@ export const Navigation = (): React.ReactNode => {
             ))}
           </ul>
           {/* Options Button */}
-          <div className='flex items-center ml-12 h-[71px]'>
+          <div className='flex items-center ml-0 md:ml-12 h-[71px]'>
             <OptionsButton navClose={() => setIsOpen(false)} />
             {/* <Example /> */}
           </div>

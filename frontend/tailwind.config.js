@@ -18,7 +18,8 @@ module.exports = {
         'page-container': 'calc(100vh - 72px)'
       },
       maxWidth: {
-        'nav-container': '1400px'
+        'nav-container': '1400px',
+        'page-container': '1400px'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

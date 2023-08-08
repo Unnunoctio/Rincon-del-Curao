@@ -21,7 +21,11 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Navigation />
           <div className='h-[72px]' />
-          {children}
+          <main className='flex justify-center w-full'>
+            <div className='px-2 sm:px-4 md:px-8 min-h-page-container max-w-page-container w-full'>
+              {children}
+            </div>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
