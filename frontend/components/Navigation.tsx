@@ -105,7 +105,11 @@ const OptionsButton = ({ navClose }: { navClose: Function }): React.ReactNode =>
     <Popover className='relative'>
       {({ open }) => (
         <>
-          <Popover.Button onClick={handleClick} className='group p-2 h-fit rounded-full focus:outline-none'>
+          <Popover.Button
+            onClick={handleClick}
+            className='group p-2 h-fit rounded-full focus:outline-none'
+            aria-label='Options'
+          >
             <GearIcon className={`w-7 h-7 fill-transparent transition-colors icon-group-stroke-hover ${open ? 'stroke-active' : 'icon-stroke-primary'}`} />
           </Popover.Button>
           <Popover.Overlay className='fixed inset-0' />
@@ -137,12 +141,14 @@ const ThemeSwitch = (): React.ReactNode => {
       <button
         onClick={() => setTheme('light')}
         className={`group ${theme === 'dark' ? 'bg-transparent' : 'bg-page'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        aria-label='Light Mode'
       >
         <SunIcon className={`w-5 h-5 fill-transparent ${theme === 'dark' ? 'icon-stroke-primary' : 'stroke-active'} transition-colors`} />
       </button>
       <button
         onClick={() => setTheme('dark')}
         className={`group ${theme === 'dark' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        aria-label='Dark Mode'
       >
         <MoonIcon className={`w-5 h-5 fill-transparent ${theme === 'dark' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
       </button>
