@@ -34,9 +34,9 @@
     @apply stroke-[#1a202c] dark:stroke-[#FFFFFFEB]
   }
   .icon-hover {
-    @apply fill-active dark:hover:fill-active 
+    @apply hover:fill-active dark:hover:fill-active 
   }
   .icon-stroke-hover {
-    @apply stroke-active dark:hover:stroke-active
+    @apply hover:stroke-active dark:hover:stroke-active
   }
 }
