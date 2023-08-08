@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { ThemeProvider } from './theme-provider'
-import { ThemeSwitcher } from '@/components/ThemeSwitcher'
+import { Footer, Navigation } from '@/components'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout ({ children }: { children: React.ReactNode }): React.ReactNode {
   return (
-    <html lang='en'>
-      <body className={roboto.className}>
+    <html lang='es'>
+      <body className={`${roboto.className} bg-page`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <ThemeSwitcher />
-          <main className='min-h-screen bg-page'>
-            {children}
-          </main>
+          <Navigation />
+          <div className='h-[72px]' />
+          {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function NotFound (): React.ReactNode {
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <main className='flex items-center justify-center px-2 sm:px-4 md:px-8 min-h-page-container'>
       <div className='flex flex-col gap-6'>
         <div className='flex flex-col'>
           <span className='pb-1 text-2xl font-medium text-active'>Error 404</span>
@@ -16,6 +16,6 @@ export default function NotFound (): React.ReactNode {
           Ir al Home
         </Link>
       </div>
-    </div>
+    </main>
   )
 }

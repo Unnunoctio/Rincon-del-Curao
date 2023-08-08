@@ -11,10 +11,22 @@ module.exports = {
       colors: {
         active: '#d69e2e'
       },
+      margin: {
+        15: '3.75rem'
+      },
+      minHeight: {
+        'page-container': 'calc(100vh - 72px)'
+      },
+      maxWidth: {
+        'nav-container': '1400px'
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+      },
+      transitionProperty: {
+        height: 'height'
       }
     }
   },

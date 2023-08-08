@@ -6,16 +6,37 @@
   .bg-page {
     @apply bg-[#edf2f7] dark:bg-[#222629]
   }
+  .bg-primary {
+    @apply bg-white dark:bg-[#121212]
+  }
   .text-primary {
     @apply text-[#1a202c] dark:text-[#FFFFFFEB]
+  }
+  .text-secondary {
+    @apply text-[#718096] dark:text-[#7b8aa1]
   }
   .text-hover {
     @apply hover:text-active dark:hover:text-active
   }
   .border-primary {
-    @apply border-[#718096] dark:border-[#3a424d]
+    @apply border-[#bfc9d6] dark:border-[#3a424d]
   }
   .border-hover {
     @apply hover:border-active dark:hover:border-active
+  }
+  .divider-primary {
+    @apply border-[#e2e8f0] dark:border-[#434548]
+  }
+  .icon-primary {
+    @apply fill-[#1a202c] dark:fill-[#FFFFFFEB]
+  }
+  .icon-stroke-primary {
+    @apply stroke-[#1a202c] dark:stroke-[#FFFFFFEB]
+  }
+  .icon-hover {
+    @apply fill-active dark:hover:fill-active 
+  }
+  .icon-stroke-hover {
+    @apply stroke-active dark:hover:stroke-active
   }
 }
