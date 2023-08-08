@@ -15,7 +15,7 @@ export const ScrollTopButton = (): React.ReactNode => {
       onClick={scrollToTop}
       className='group absolute sm:static top-0 -left-10 p-2 h-fit rounded-full transition-colors hover:bg-page'
     >
-      <ArrowUpIcon className='w-6 h-6 icon-primary transition-colors group-hover:icon-hover' />
+      <ArrowUpIcon className='w-6 h-6 icon-primary transition-colors icon-group-hover' />
     </button>
   )
 }

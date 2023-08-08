@@ -33,10 +33,10 @@
   .icon-stroke-primary {
     @apply stroke-[#1a202c] dark:stroke-[#FFFFFFEB]
   }
-  .icon-hover {
-    @apply hover:fill-active dark:hover:fill-active 
+  .icon-group-hover {
+    @apply group-hover:fill-active dark:group-hover:fill-active
   }
-  .icon-stroke-hover {
-    @apply hover:stroke-active dark:hover:stroke-active
+  .icon-group-stroke-hover {
+    @apply group-hover:stroke-active dark:group-hover:stroke-active
   }
 }
