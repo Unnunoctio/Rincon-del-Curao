@@ -1,4 +1,6 @@
 export * from './ArrowUpIcon'
+export * from './ChevronDownIcon'
 export * from './GearIcon'
 export * from './MoonIcon'
 export * from './SunIcon'
+export * from './SystemIcon'

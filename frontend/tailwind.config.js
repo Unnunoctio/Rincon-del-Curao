@@ -14,6 +14,9 @@ module.exports = {
       margin: {
         15: '3.75rem'
       },
+      padding: {
+        13: '3.25rem'
+      },
       minHeight: {
         'page-container': 'calc(100vh - 72px)'
       },
@@ -27,7 +30,8 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
       transitionProperty: {
-        height: 'height'
+        height: 'height',
+        'text-colors': 'color'
       }
     }
   },

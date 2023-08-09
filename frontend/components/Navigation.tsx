@@ -1,6 +1,6 @@
 'use client'
 
-import { GearIcon, MoonIcon, SunIcon } from '@/icons'
+import { GearIcon, MoonIcon, SunIcon, SystemIcon } from '@/icons'
 import { Popover, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
@@ -48,7 +48,7 @@ export const Navigation = (): React.ReactNode => {
       className='fixed z-30 flex justify-center w-full bg-primary border-b divider-primary'
       onMouseLeave={() => setIsOpen(false)}
     >
-      <nav className='flex justify-between px-2 sm:px-4 md:px-8 max-w-nav-container w-full'>
+      <nav className='flex justify-between px-2 sm:px-8 md:px-13 max-w-nav-container w-full'>
         <div className='flex items-center h-[71px]'>
           <Link href='/' className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105'>
             <Image src='/Logo.png' alt='Logo' width={140} height={44.3} priority />
@@ -136,14 +136,22 @@ const OptionsButton = ({ navClose }: { navClose: Function }): React.ReactNode =>
 
 const ThemeSwitch = (): React.ReactNode => {
   const { theme, setTheme } = useTheme()
+
   return (
     <div className='flex items-center gap-1 p-1 rounded-full border divider-primary'>
       <button
         onClick={() => setTheme('light')}
-        className={`group ${theme === 'dark' ? 'bg-transparent' : 'bg-page'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        className={`group ${theme === 'light' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
         aria-label='Light Mode'
       >
-        <SunIcon className={`w-5 h-5 fill-transparent ${theme === 'dark' ? 'icon-stroke-primary' : 'stroke-active'} transition-colors`} />
+        <SunIcon className={`w-5 h-5 fill-transparent ${theme === 'light' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
+      </button>
+      <button
+        onClick={() => setTheme('system')}
+        className={`group ${theme === 'system' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        aria-label='System Mode'
+      >
+        <SystemIcon className={`w-5 h-5 fill-transparent ${theme === 'system' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
       </button>
       <button
         onClick={() => setTheme('dark')}
