@@ -1,3 +1,5 @@
+import { OrderByEnum } from './enum'
+
 export type Route = `/${string}`
 
 export interface PathLink {
@@ -12,4 +14,9 @@ interface CategoryQuery {
 
 export interface PathLinkAll extends PathLink {
   categories: CategoryQuery[]
+}
+
+export interface OrderByItem {
+  label: string
+  value: OrderByEnum
 }

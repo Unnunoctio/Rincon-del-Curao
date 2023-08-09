@@ -1,5 +1,7 @@
 'use client'
 
+import { getDefaultOrderBy, getOrderBy, orderByItems } from '@/helpers/orderByHelper'
+import { OrderByItem } from '@/helpers/types'
 import { ChevronDownIcon } from '@/icons'
 import { Listbox, Transition } from '@headlessui/react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
@@ -17,7 +19,7 @@ export const OrderBySelect = (): React.ReactNode => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [selected, setSelected] = useState(items.find(item => item.value === searchParams.get('order_by')) ?? items[0])
+  const [selected, setSelected] = useState(getDefaultOrderBy(searchParams.get('order_by')))
 
   const createQueryString = useCallback((name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -30,7 +32,7 @@ export const OrderBySelect = (): React.ReactNode => {
   // order_by es un valor no válido, se redirecciona
   // selected value !== order_by value, se actualiza
   useEffect(() => {
-    const itemUrl = items.find(item => item.value === searchParams.get('order_by'))
+    const itemUrl = getOrderBy(searchParams.get('order_by'))
     if (itemUrl === undefined) {
       router.replace(pathname + '?' + createQueryString('order_by', items[0].value))
     } else {
@@ -40,7 +42,7 @@ export const OrderBySelect = (): React.ReactNode => {
     }
   }, [searchParams.get('order_by')])
 
-  const selectItem = (item: { value: string, label: string }): void => {
+  const selectItem = (item: OrderByItem): void => {
     setSelected(item)
     router.push(pathname + '?' + createQueryString('order_by', item.value))
   }
@@ -74,7 +76,7 @@ export const OrderBySelect = (): React.ReactNode => {
               leaveTo='opacity-0'
             >
               <Listbox.Options className='absolute overflow-auto my-2 py-2 max-h-60 w-full bg-primary rounded-md border divider-primary shadow-md'>
-                {items.map((item, idx) => (
+                {orderByItems.map((item, idx) => (
                   <Listbox.Option
                     key={idx}
                     value={item}
