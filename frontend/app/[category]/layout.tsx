@@ -1,20 +1,15 @@
 import { notFound } from 'next/navigation'
 import { Breadcrumb } from '@/components/products'
 import { Metadata } from 'next'
-
-const pathValids = ['cervezas', 'vinos', 'destilados']
-const categoryLinks = [
-  { name: 'Cervezas', route: '/cervezas' },
-  { name: 'Vinos', route: '/vinos' },
-  { name: 'Destilados', route: '/destilados' }
-]
+import { getNavigateLink, isValidNavigateLink } from '@/helpers/pathsHelper'
 
 export function generateMetadata ({ params }: { params: { category: string } }): Metadata {
-  const category = categoryLinks.find(link => link.route === `/${params.category}`)
+  const { category } = params
+  const navigateLink = getNavigateLink(`/${category}`)
 
-  if (category !== undefined) {
+  if (navigateLink !== undefined) {
     return {
-      title: `${category.name} | Rincón del Curao`
+      title: `${navigateLink.name} | Rincón del Curao`
     }
   }
   return {}
@@ -22,7 +17,7 @@ export function generateMetadata ({ params }: { params: { category: string } }):
 
 export default function ProductsLayout ({ children, params }: { children: React.ReactNode, params: { category: string } }): React.ReactNode {
   const { category } = params
-  if (!pathValids.includes(category)) {
+  if (!isValidNavigateLink(`/${category}`)) {
     notFound()
   }
 

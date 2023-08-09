@@ -1,12 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollTopButton } from '.'
-
-const links = [
-  { name: 'Cervezas', route: '/cervezas' },
-  { name: 'Vinos', route: '/vinos' },
-  { name: 'Destilados', route: '/destilados' }
-]
+import { navigateLinks } from '@/helpers/pathsHelper'
 
 export const Footer = (): React.ReactNode => {
   return (
@@ -28,7 +23,7 @@ export const Footer = (): React.ReactNode => {
             <div className='hidden md:block'>
               <h6 className='text-[18px] font-medium text-primary'>Navegación</h6>
               <ul className='flex flex-col gap-3 mt-3'>
-                {links.map((link) => (
+                {navigateLinks.map((link) => (
                   <li key={link.route}>
                     <Link href={link.route} className='w-fit text-secondary hover:underline'>
                       {link.name}

@@ -5,40 +5,8 @@ import { Popover, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { Fragment, useState } from 'react'
-
-const links = [
-  {
-    name: 'Cervezas',
-    route: '/cervezas',
-    categories: [
-      { name: 'Cervezas Artesanales', query: 'Cervezas Artesanales' },
-      { name: 'Cervezas Tradicionales', query: 'Cervezas Tradicionales' },
-      { name: 'Cervezas Importadas', query: 'Cervezas Importadas' },
-      { name: 'Cervezas Sin Alcohol', query: 'Cervezas Sin Alcohol' }
-    ]
-  },
-  {
-    name: 'Vinos',
-    route: '/vinos',
-    categories: [
-      { name: 'Vinos Tintos', query: 'Vinos Tintos' },
-      { name: 'Vinos Blancos', query: 'Vinos Blancos' },
-      { name: 'Vinos Rosé', query: 'Vinos Rose' },
-      { name: 'Vinos Cero', query: 'Vinos Cero' }
-    ]
-  },
-  {
-    name: 'Destilados',
-    route: '/destilados',
-    categories: [
-      { name: 'Ron', query: 'Ron' },
-      { name: 'Pisco', query: 'Pisco' },
-      { name: 'Vodka', query: 'Vodka' },
-      { name: 'Whisky', query: 'Whisky' }
-    ]
-  }
-]
+import { Fragment, useState } from 'react'
+import { navigateLinks } from '@/helpers/pathsHelper'
 
 export const Navigation = (): React.ReactNode => {
   const [isOpen, setIsOpen] = useState(false)
@@ -61,7 +29,7 @@ export const Navigation = (): React.ReactNode => {
             className={`hidden md:flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}
             onMouseEnter={() => setIsOpen(true)}
           >
-            {links.map((link) => (
+            {navigateLinks.map((link) => (
               <li key={link.route}>
                 <div className='flex flex-col pb-8'>
                   <h4 className='flex items-center h-[71px] text-[18px] font-medium text-primary select-none'>

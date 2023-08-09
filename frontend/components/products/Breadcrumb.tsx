@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 'use client'
 
-import React from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-
-const categoryLinks = [
-  { name: 'Cervezas', route: '/cervezas' },
-  { name: 'Vinos', route: '/vinos' },
-  { name: 'Destilados', route: '/destilados' }
-]
+import { getNavigateLink } from '@/helpers/pathsHelper'
 
 export const Breadcrumb = (): React.ReactNode => {
   const { category, id } = useParams()
+  const categoryLink = getNavigateLink(`/${category}`)
 
   return (
     <nav aria-label='breadcrumb'>
@@ -27,14 +22,14 @@ export const Breadcrumb = (): React.ReactNode => {
           {id !== undefined && (
             <>
               <Link href={`/${category}`} className='hover:underline'>
-                {categoryLinks.find(link => link.route === `/${category}`)?.name}
+                {categoryLink?.name}
               </Link>
               <Separator />
             </>
           )}
           {id === undefined && (
             <p className='text-active select-none'>
-              {categoryLinks.find(link => link.route === `/${category}`)?.name}
+              {categoryLink?.name}
             </p>
           )}
         </li>
