@@ -3,10 +3,11 @@
     "rootDirs": ["src"],
     "outDir": "dist",
     "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
+    "target": "es2022",
+    "module": "ES2022",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "strictNullChecks": true,
     "types": ["node"]
   }
 }
