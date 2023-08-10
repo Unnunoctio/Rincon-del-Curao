@@ -75,7 +75,7 @@ export const OrderBySelect = (): React.ReactNode => {
               leaveFrom='opacity-100'
               leaveTo='opacity-0'
             >
-              <Listbox.Options className='absolute overflow-auto my-2 py-2 max-h-60 w-full bg-primary rounded-md border divider-primary shadow-md'>
+              <Listbox.Options className='absolute overflow-auto z-10 my-2 py-2 max-h-60 w-full bg-primary rounded-md border divider-primary shadow-md'>
                 {orderByItems.map((item, idx) => (
                   <Listbox.Option
                     key={idx}
