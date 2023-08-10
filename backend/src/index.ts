@@ -10,6 +10,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/Rincon_del_Curao')
 
 // Configure typeDefs
 const typeDefs = `#graphql
+  enum OrderByEnum {
+    SCORE_DESC
+    PRICE_DESC
+    PRICE_ASC
+    NAME_ASC
+    NAME_DESC
+  }
+
   type ProductList {
     path: ID!
     title: String!
@@ -21,7 +29,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
-    products(page: Int!): [ProductList]!
+    products(orderBy: OrderByEnum!, page: Int!): [ProductList]!
   }
 `
 
