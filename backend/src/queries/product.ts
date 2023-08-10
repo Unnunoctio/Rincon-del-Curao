@@ -1,14 +1,36 @@
 import { Filter, Product } from '../types'
-import ProductModel from '../models/ProductModel.js'
 import { OrderByEnum } from '../enums.js'
+import ProductModel from '../models/ProductModel.js'
 
-const getProducts = async (root, args): Promise<Product[]> => {
+const getMatchStage = (filters: Filter): any => {
+  const matchStage = {
+    'product.category': filters.category
+  }
+
+  return matchStage
+}
+
+export const getTotalPages = async (root, args): Promise<number> => {
+  try {
+    const { filters }: { filters: Filter } = args
+    const productPerPage = 12
+    const matchStage = getMatchStage(filters)
+
+    const totalProducts = await ProductModel.countDocuments(matchStage)
+    let totalPages = Math.ceil(totalProducts / productPerPage)
+    if (totalPages === 0) totalPages = 1
+
+    return totalPages
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+export const getProducts = async (root, args): Promise<Product[]> => {
   try {
     const { page, orderBy, filters }: { page: number, orderBy: string, filters: Filter } = args
     const productsPerPage = 12
-    const matchStage = {
-      'product.category': filters.category
-    }
+    const matchStage = getMatchStage(filters)
 
     const products = await ProductModel.aggregate([
       { $unwind: '$websites' },
@@ -65,8 +87,4 @@ const getProducts = async (root, args): Promise<Product[]> => {
   } catch (error) {
     throw new Error(error.message)
   }
-}
-
-export {
-  getProducts
 }

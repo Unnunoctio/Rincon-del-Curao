@@ -24,15 +24,15 @@ export const OrderBySelect = (): React.ReactNode => {
   // order_by es un valor no válido, se redirecciona
   // selected value !== order_by value, se actualiza
   useEffect(() => {
-    const itemUrl = getOrderBy(searchParams.get('order_by'))
-    if (itemUrl === undefined) {
+    const orderUrl = getOrderBy(searchParams.get('order_by'))
+    if (orderUrl === undefined) {
       router.replace(pathname + '?' + createQueryString('order_by', orderByItems[0].value))
     } else {
-      if (itemUrl.value !== selected.value) {
-        setSelected(itemUrl)
+      if (orderUrl.value !== selected.value) {
+        setSelected(orderUrl)
       }
     }
-  }, [searchParams.get('order_by')])
+  }, [searchParams])
 
   const selectItem = (item: OrderByItem): void => {
     setSelected(item)

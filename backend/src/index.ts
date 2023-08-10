@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import mongoose from 'mongoose'
-import { getProducts } from './queries/product.js'
+import { getProducts, getTotalPages } from './queries/product.js'
 
 // Configure Database
 mongoose.connect('mongodb://127.0.0.1:27017/Rincon_del_Curao')
@@ -33,6 +33,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
+    totalPages(filters: FilterInput!): Int!
     products(orderBy: OrderByEnum!, page: Int!, filters: FilterInput!): [ProductList]!
   }
 `
@@ -40,6 +41,7 @@ const typeDefs = `#graphql
 // Create resolvers
 const resolvers = {
   Query: {
+    totalPages: getTotalPages,
     products: getProducts
   },
 

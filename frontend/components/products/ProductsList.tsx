@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
+import { ReadonlyURLSearchParams, useParams, useSearchParams } from 'next/navigation'
 import { gql } from '@apollo/client'
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
 import { Product } from '@/helpers/types'
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation'
+import { getVariablesFilter } from '@/helpers/filterHelper'
 import { getDefaultOrderBy } from '@/helpers/orderByHelper'
-import { getNavigateLink } from '@/helpers/pathsHelper'
-import Image from 'next/image'
 
 const GET_PRODUCTS_QUERY = gql`
   query GetProducts($orderBy: OrderByEnum!, $page: Int!, $filters: FilterInput!) {
@@ -24,28 +24,23 @@ const GET_PRODUCTS_QUERY = gql`
 `
 
 const fetchProducts = (category: string, searchParams: ReadonlyURLSearchParams): Product[] => {
-  // console.log('entre')
-  // console.log(searchParams)
-
   const variables = {
     orderBy: getDefaultOrderBy(searchParams.get('order_by')).value,
     page: 1,
-    filters: {
-      category: getNavigateLink(`/${category}`)?.name
-    }
+    filters: getVariablesFilter(category, searchParams)
   }
 
   const { data }: { data: { products: Product[] } } = useSuspenseQuery(GET_PRODUCTS_QUERY, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
   return data.products
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function ProductsList ({ category }: { category: string }) {
+export function ProductsList (): React.ReactNode {
+  const { category } = useParams()
   const searchParams = useSearchParams()
-  const products = fetchProducts(category, searchParams)
+  const products = fetchProducts(category as string, searchParams)
 
   return products.map((product, index) => (
-    <Link key={index} href={`${category}/${product.path}`}>
+    <Link key={index} href={`${category as string}/${product.path}`}>
       <div className='p-2 w-[250px] bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
         <Image src={product.imageUrl} alt={product.title} width={234} height={234} className='aspect-[234/200] object-cover rounded-sm' />
         <div className='flex flex-col justify-between pt-2'>
