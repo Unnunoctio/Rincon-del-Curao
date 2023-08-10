@@ -20,6 +20,15 @@ export const OrderBySelect = (): React.ReactNode => {
     return params.toString()
   }, [searchParams])
 
+  const createMultiQueryString = useCallback((queries: Array<{ name: string, value: string }>) => {
+    const params = new URLSearchParams(searchParams.toString())
+    queries.forEach(query => {
+      params.set(query.name, query.value)
+    })
+
+    return params.toString()
+  }, [searchParams])
+
   // validaciones:
   // order_by es un valor no válido, se redirecciona
   // selected value !== order_by value, se actualiza
@@ -36,7 +45,7 @@ export const OrderBySelect = (): React.ReactNode => {
 
   const selectItem = (item: OrderByItem): void => {
     setSelected(item)
-    router.push(pathname + '?' + createQueryString('order_by', item.value))
+    router.push(pathname + '?' + createMultiQueryString([{ name: 'order_by', value: item.value }, { name: 'page', value: '1' }]))
   }
 
   return (

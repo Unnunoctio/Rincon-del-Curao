@@ -8,6 +8,7 @@ import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
 import { Product } from '@/helpers/types'
 import { getVariablesFilter } from '@/helpers/filterHelper'
 import { getDefaultOrderBy } from '@/helpers/orderByHelper'
+import { getDefaultPage } from '@/helpers/paginatorHelper'
 
 const GET_PRODUCTS_QUERY = gql`
   query GetProducts($orderBy: OrderByEnum!, $page: Int!, $filters: FilterInput!) {
@@ -26,7 +27,7 @@ const GET_PRODUCTS_QUERY = gql`
 const fetchProducts = (category: string, searchParams: ReadonlyURLSearchParams): Product[] => {
   const variables = {
     orderBy: getDefaultOrderBy(searchParams.get('order_by')).value,
-    page: 1,
+    page: getDefaultPage(searchParams.get('page')),
     filters: getVariablesFilter(category, searchParams)
   }
 
