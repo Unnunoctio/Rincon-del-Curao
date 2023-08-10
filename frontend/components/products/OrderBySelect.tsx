@@ -7,14 +7,6 @@ import { Listbox, Transition } from '@headlessui/react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useState, Fragment, useCallback, useEffect } from 'react'
 
-const items = [
-  { value: 'SCORE_DESC', label: 'Recomendados' },
-  { value: 'PRICE_DESC', label: 'Mayor Precio' },
-  { value: 'PRICE_ASC', label: 'Menor Precio' },
-  { value: 'NAME_ASC', label: 'A - Z' },
-  { value: 'NAME_DESC', label: 'Z - A' }
-]
-
 export const OrderBySelect = (): React.ReactNode => {
   const router = useRouter()
   const pathname = usePathname()
@@ -34,7 +26,7 @@ export const OrderBySelect = (): React.ReactNode => {
   useEffect(() => {
     const itemUrl = getOrderBy(searchParams.get('order_by'))
     if (itemUrl === undefined) {
-      router.replace(pathname + '?' + createQueryString('order_by', items[0].value))
+      router.replace(pathname + '?' + createQueryString('order_by', orderByItems[0].value))
     } else {
       if (itemUrl.value !== selected.value) {
         setSelected(itemUrl)

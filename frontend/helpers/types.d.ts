@@ -23,6 +23,11 @@ export interface OrderByItem {
   value: OrderByEnum
 }
 
+// Filters
+export interface Filter {
+  category: string
+}
+
 // Products
 export interface AllProducts {
   totalProducts: number
@@ -30,12 +35,12 @@ export interface AllProducts {
   allProducts: Product[]
 }
 
-interface Product {
+export interface Product {
   path: string
   title: string
   brand: string
   alcoholicGrade: number
   content: number
   bestPrice: number
-  image: string
+  imageUrl: string
 }

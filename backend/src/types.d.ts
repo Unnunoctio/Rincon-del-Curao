@@ -27,7 +27,7 @@ interface Website {
 export interface Product extends Document {
   title: string
   quantity: number
-  image_path: string
+  image_url: string
   product: ProductUnit
   websites: Types.DocumentArray<Website>
 }

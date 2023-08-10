@@ -1,4 +1,3 @@
-import { getTotalProducts } from '@/_mock/products'
 import { OrderBySelect } from '@/components/products'
 import { ProductsList } from '@/components/products/ProductsList'
 import { getNavigateLink } from '@/helpers/pathsHelper'
@@ -6,7 +5,6 @@ import { getNavigateLink } from '@/helpers/pathsHelper'
 export default function ProductsPage ({ params }: { params: { category: string } }): React.ReactNode {
   const { category } = params
   const titleLink = getNavigateLink(`/${category}`)
-  const totalProducts = getTotalProducts()
 
   return (
     <>
@@ -17,7 +15,7 @@ export default function ProductsPage ({ params }: { params: { category: string }
             {titleLink?.name}
           </h2>
           <p className='inline-block xl:hidden text-active'>
-            {totalProducts} productos
+            Nan productos
           </p>
         </div>
 

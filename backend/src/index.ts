@@ -29,7 +29,7 @@ const typeDefs = `#graphql
     alcoholicGrade: Float!
     content: Int!
     bestPrice: Int!
-    image: String!
+    imageUrl: String!
   }
 
   type Query {
@@ -56,7 +56,7 @@ const resolvers = {
     alcoholicGrade: (root) => root.product.alcoholic_grade,
     content: (root) => root.product.content,
     bestPrice: (root) => root.websites[0].best_price,
-    image: (root) => root.image_path
+    imageUrl: (root) => root.image_url
   }
 }
 
