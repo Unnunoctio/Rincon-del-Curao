@@ -1,12 +1,14 @@
-import { Product } from '../types'
+import { Filter, Product } from '../types'
 import ProductModel from '../models/ProductModel.js'
 import { OrderByEnum } from '../enums.js'
 
 const getProducts = async (root, args): Promise<Product[]> => {
   try {
-    const { page, orderBy } = args
+    const { page, orderBy, filters }: { page: number, orderBy: string, filters: Filter } = args
     const productsPerPage = 12
-    const matchStage = {}
+    const matchStage = {
+      'product.category': filters.category
+    }
 
     const products = await ProductModel.aggregate([
       { $unwind: '$websites' },

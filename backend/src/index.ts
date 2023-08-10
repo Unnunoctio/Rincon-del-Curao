@@ -10,6 +10,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/Rincon_del_Curao')
 
 // Configure typeDefs
 const typeDefs = `#graphql
+  input FilterInput {
+    category: String!
+  }
+
   enum OrderByEnum {
     SCORE_DESC
     PRICE_DESC
@@ -29,7 +33,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
-    products(orderBy: OrderByEnum!, page: Int!): [ProductList]!
+    products(orderBy: OrderByEnum!, page: Int!, filters: FilterInput!): [ProductList]!
   }
 `
 
@@ -43,7 +47,9 @@ const resolvers = {
     path: (root) => {
       const idString: string = root._id.toString()
       const pidString: string = root.product._id.toString()
-      return idString.substring(idString.length - 3) + pidString.substring(pidString.length - 3)
+      const idPath = idString.substring(idString.length - 3) + pidString.substring(pidString.length - 3)
+      const titlePath: string = root.title.toLowerCase().replaceAll('.', '').replaceAll('°', '').replaceAll(' ', '-').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      return `${idPath}-${titlePath}`
     },
     title: (root) => root.title,
     brand: (root) => root.product.brand,

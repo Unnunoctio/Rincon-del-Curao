@@ -31,3 +31,7 @@ export interface Product extends Document {
   product: ProductUnit
   websites: Types.DocumentArray<Website>
 }
+
+export interface Filter {
+  category: string
+}
