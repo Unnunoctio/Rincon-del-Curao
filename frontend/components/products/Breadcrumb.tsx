@@ -1,13 +1,33 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 'use client'
 
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { getNavigateLink } from '@/helpers/pathsHelper'
+import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
+import { gql } from '@apollo/client'
+
+const GET_PRODUCT_TITLE = gql`
+  query GetProductTitle($path: ID!) {
+    product(path: $path) {
+      title
+    }
+  }
+`
+
+const fetchProductTitle = (path: string): string => {
+  const variables = {
+    path
+  }
+
+  const { data }: { data: { product: { title: string } } } = useSuspenseQuery(GET_PRODUCT_TITLE, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
+  return data.product.title
+}
 
 export const Breadcrumb = (): React.ReactNode => {
-  const { category, id } = useParams()
+  const { category, path } = useParams()
   const categoryLink = getNavigateLink(`/${category}`)
+  const titlePath = path !== undefined ? fetchProductTitle(path as string) : undefined
 
   return (
     <nav aria-label='breadcrumb'>
@@ -19,7 +39,7 @@ export const Breadcrumb = (): React.ReactNode => {
           <Separator />
         </li>
         <li>
-          {id !== undefined && (
+          {path !== undefined && (
             <>
               <Link href={`/${category}`} className='hover:underline'>
                 {categoryLink?.name}
@@ -27,15 +47,15 @@ export const Breadcrumb = (): React.ReactNode => {
               <Separator />
             </>
           )}
-          {id === undefined && (
+          {path === undefined && (
             <p className='text-active select-none'>
               {categoryLink?.name}
             </p>
           )}
         </li>
-        {id !== undefined && (
+        {path !== undefined && (
           <li className='overflow-hidden'>
-            <p className='text-active select-none whitespace-nowrap overflow-hidden text-ellipsis'>{id}</p>
+            <p className='text-active select-none whitespace-nowrap overflow-hidden text-ellipsis'>{titlePath}</p>
           </li>
         )}
       </ol>

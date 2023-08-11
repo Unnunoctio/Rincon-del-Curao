@@ -1,6 +1,7 @@
 import { Filter, Product } from '../types'
 import { OrderByEnum } from '../enums.js'
 import ProductModel from '../models/ProductModel.js'
+import { generatePath } from '../helpers/product.js'
 
 const getMatchStage = (filters: Filter): any => {
   const matchStage = {
@@ -98,6 +99,43 @@ export const getProducts = async (root, args): Promise<Product[]> => {
 
     const startIndex = (page - 1) * productsPerPage
     return products.slice(startIndex, startIndex + productsPerPage)
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+export const getProduct = async (root, args): Promise<Product> => {
+  try {
+    const { path }: { path: string } = args
+    const products = await ProductModel.aggregate([
+      { $unwind: '$websites' },
+      { $sort: { 'websites.best_price': 1 } },
+      {
+        $group: {
+          _id: '$_id',
+          websites: { $push: '$websites' },
+          otherFields: { $first: '$$ROOT' }
+        }
+      },
+      { $replaceRoot: { newRoot: { $mergeObjects: ['$otherFields', { websites: '$websites' }] } } }
+    ])
+
+    const productsFilter = products.filter(p => generatePath(p._id.toString(), p.product._id.toString(), p.title) === path)
+    if (productsFilter.length === 0) throw new Error('Product not found')
+
+    return productsFilter[0]
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+export const isProductPath = async (root, args): Promise<boolean> => {
+  try {
+    const { path }: { path: string } = args
+    const products = await ProductModel.find()
+    const productsFilter = products.filter(p => generatePath(p._id.toString(), p.product._id.toString(), p.title) === path)
+
+    return productsFilter.length > 0
   } catch (error) {
     throw new Error(error.message)
   }
