@@ -43,9 +43,9 @@ export const OrderBySelect = (): React.ReactNode => {
     }
   }, [searchParams])
 
-  const selectItem = (item: OrderByItem): void => {
-    setSelected(item)
-    router.push(pathname + '?' + createMultiQueryString([{ name: 'order_by', value: item.value }, { name: 'page', value: '1' }]))
+  const selectItem = (order: OrderByItem): void => {
+    setSelected(order)
+    router.push(pathname + '?' + createMultiQueryString([{ name: 'order_by', value: order.value }, { name: 'page', value: '1' }]))
   }
 
   return (

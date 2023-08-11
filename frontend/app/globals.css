@@ -22,6 +22,9 @@
   .text-secondary {
     @apply text-[#718096] dark:text-[#7b8aa1]
   }
+  .text-contrast {
+    @apply text-[#1a202c] dark:text-[#1a202c]
+  }
 
   .text-hover {
     @apply hover:text-active dark:hover:text-active

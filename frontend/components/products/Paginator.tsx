@@ -53,9 +53,26 @@ export const Paginator = (): React.ReactNode => {
         setSelected(pageUrl)
       }
     }
-  }, [searchParams, totalPages])
+  }, [searchParams])
+
+  const handlePage = (page: number): void => {
+    if (page !== selected) {
+      setSelected(page)
+      router.push(pathname + '?' + createQueryString('page', page.toString()))
+    }
+  }
 
   return (
-    <div className='w-full bg-red-500'>Paginator: {totalPages}, Page Actual: {selected}</div>
+    <div className={`${totalPages > 1 ? 'flex' : 'hidden'} justify-center w-full gap-3 mt-3`}>
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page, index) => (
+        <button
+          onClick={() => handlePage(page)}
+          key={index}
+          className={`w-[38px] h-[38px] font-bold rounded-md border transition-colors ${page === selected ? 'text-contrast bg-active/75 border-transparent' : 'text-secondary text-hover border-primary border-hover'}`}
+        >
+          {page}
+        </button>
+      ))}
+    </div>
   )
 }
