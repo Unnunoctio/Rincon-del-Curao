@@ -26,6 +26,19 @@ export const getTotalPages = async (root, args): Promise<number> => {
   }
 }
 
+export const getTotalProducts = async (root, args): Promise<number> => {
+  try {
+    const { filters }: { filters: Filter } = args
+    const matchStage = getMatchStage(filters)
+
+    const totalProducts = await ProductModel.countDocuments(matchStage)
+
+    return totalProducts
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
 export const getProducts = async (root, args): Promise<Product[]> => {
   try {
     const { page, orderBy, filters }: { page: number, orderBy: string, filters: Filter } = args
