@@ -26,6 +26,7 @@ export interface OrderByItem {
 // Filters
 export interface Filter {
   category: string
+  sub_category?: string[]
 }
 
 // Products

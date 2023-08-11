@@ -12,6 +12,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Rincon_del_Curao')
 const typeDefs = `#graphql
   input FilterInput {
     category: String!
+    sub_category: [String]
   }
 
   enum OrderByEnum {

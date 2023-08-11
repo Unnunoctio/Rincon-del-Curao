@@ -6,6 +6,7 @@ const getMatchStage = (filters: Filter): any => {
   const matchStage = {
     'product.category': filters.category
   }
+  if (filters.sub_category !== undefined) matchStage['product.sub_category'] = { $in: filters.sub_category }
 
   return matchStage
 }

@@ -34,4 +34,5 @@ export interface Product extends Document {
 
 export interface Filter {
   category: string
+  sub_category?: string
 }
