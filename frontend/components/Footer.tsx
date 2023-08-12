@@ -21,7 +21,7 @@ export const Footer = (): React.ReactNode => {
 
           <div className='relative flex align-start gap-8'>
             <div className='hidden md:block'>
-              <h6 className='text-[18px] font-medium text-primary'>Navegación</h6>
+              <h5 className='text-[18px] font-medium text-primary'>Navegación</h5>
               <ul className='flex flex-col gap-3 mt-3'>
                 {navigateLinks.map((link) => (
                   <li key={link.route}>

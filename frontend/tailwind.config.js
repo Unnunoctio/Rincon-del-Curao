@@ -32,6 +32,9 @@ module.exports = {
       transitionProperty: {
         height: 'height',
         'text-colors': 'color'
+      },
+      screens: {
+        xs: '440px'
       }
     }
   },

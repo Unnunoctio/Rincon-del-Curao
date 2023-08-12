@@ -1,5 +1,6 @@
-import { OrderBySelect, Paginator, ProductsCount, ProductsList } from '@/components/products'
+import { BreadcrumbV2, OrderBySelect, Paginator, ProductsCount, ProductsList } from '@/components/products'
 import { getNavigateLink } from '@/helpers/pathsHelper'
+import { PathLink } from '@/helpers/types'
 
 export default function ProductsPage ({ params }: { params: { category: string } }): React.ReactNode {
   const { category } = params
@@ -7,6 +8,7 @@ export default function ProductsPage ({ params }: { params: { category: string }
 
   return (
     <>
+      <BreadcrumbV2 links={[{ name: 'Home', route: '/' }, titleLink as PathLink]} />
       {/* Title & OrderBy */}
       <header className='flex justify-between py-4'>
         <div className='flex items-baseline gap-1.5'>

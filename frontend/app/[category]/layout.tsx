@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import { Breadcrumb } from '@/components/products'
 import { Metadata } from 'next'
 import { getNavigateLink, isValidNavigateLink } from '@/helpers/pathsHelper'
 
@@ -23,7 +22,6 @@ export default function ProductsLayout ({ children, params }: { children: React.
 
   return (
     <>
-      <Breadcrumb />
       {children}
     </>
   )
