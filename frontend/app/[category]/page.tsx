@@ -25,9 +25,7 @@ export default function ProductsPage ({ params }: { params: { category: string }
       <section className='flex gap-4 mt-6'>
         <div className='hidden xl:block w-56 bg-red-500'>Filtro</div>
         <div className='flex flex-1 flex-col'>
-          <div className='grid grid-cols-product-list justify-items-center gap-4'>
-            <ProductsList />
-          </div>
+          <ProductsList />
           <Paginator />
         </div>
       </section>
