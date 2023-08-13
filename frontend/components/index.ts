@@ -1,3 +1,3 @@
 export * from './Footer'
-export * from './Navigation'
+export * from './NavigationV2'
 export * from './ScrollTopButton'

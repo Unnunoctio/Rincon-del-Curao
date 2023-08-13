@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { ThemeProvider } from './theme-provider'
-import { Footer, Navigation } from '@/components'
+import { Footer, NavigationV2 } from '@/components'
 import { ApolloWrapper } from './apollo-wrapper'
 
 const roboto = Roboto({
@@ -21,7 +21,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
       <body className={`${roboto.className} bg-page`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ApolloWrapper>
-            <Navigation />
+            <NavigationV2 />
             <div className='h-[72px]' />
             <main className='flex justify-center w-full'>
               <div className='px-2 sm:px-8 md:px-13 py-2 md:py-4 min-h-page-container max-w-page-container w-full'>

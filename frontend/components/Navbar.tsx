@@ -1,20 +1,18 @@
 'use client'
 
-import { GearIcon, MoonIcon, SunIcon, SystemIcon } from '@/icons'
+import { navigateLinks } from '@/helpers/pathsHelper'
+import { GearIcon, MenuIcon, MoonIcon, SunIcon, SystemIcon } from '@/icons'
 import { Popover, Transition } from '@headlessui/react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Fragment, useState } from 'react'
-import { navigateLinks } from '@/helpers/pathsHelper'
+import React, { Fragment } from 'react'
 
-export const Navigation = (): React.ReactNode => {
-  const [isOpen, setIsOpen] = useState(false)
-
+export const Navbar = ({ isNavOpen, setIsNavOpen, setIsSideOpen }: { isNavOpen: boolean, setIsNavOpen: (value: boolean) => void, setIsSideOpen: (value: boolean) => void }): React.ReactNode => {
   return (
     <header
       className='fixed z-30 flex justify-center w-full bg-primary border-b divider-primary'
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseLeave={() => setIsNavOpen(false)}
     >
       <nav className='flex justify-between px-2 sm:px-8 md:px-13 max-w-nav-container w-full'>
         <div className='flex items-center h-[71px]'>
@@ -25,42 +23,53 @@ export const Navigation = (): React.ReactNode => {
 
         {/* Items and Buttons */}
         <div className='flex'>
-          <ul
-            className={`hidden md:flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}
-            onMouseEnter={() => setIsOpen(true)}
-          >
-            {navigateLinks.map((link) => (
-              <li key={link.route}>
-                <div className='flex flex-col pb-8'>
-                  <h4 className='flex items-center h-[71px] text-[18px] font-medium text-primary select-none'>
-                    {link.name}
-                  </h4>
-                  <div className='flex flex-col gap-3'>
-                    {link.categories.map((category) => (
-                      <Link
-                        key={category.query}
-                        href={`${link.route}?category=${category.query}`}
-                        className='w-fit text-secondary hover:underline'
-                      >
-                        {category.name}
-                      </Link>
-                    ))}
-                    <Link href={link.route} className='w-fit text-active hover:underline'>
-                      Ver Todos
-                    </Link>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-          {/* Options Button */}
-          <div className='flex items-center ml-0 md:ml-12 h-[71px]'>
-            <OptionsButton navClose={() => setIsOpen(false)} />
-            {/* <Example /> */}
-          </div>
+          <NavigateItems isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+          <NavbarButtons setIsNavOpen={setIsNavOpen} setIsSideOpen={setIsSideOpen} />
         </div>
       </nav>
     </header>
+  )
+}
+
+const NavigateItems = ({ isNavOpen, setIsNavOpen }: { isNavOpen: boolean, setIsNavOpen: (value: boolean) => void }): React.ReactNode => {
+  return (
+    <ul
+      className={`hidden md:flex items-start gap-6 overflow-hidden ${isNavOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}
+      onMouseEnter={() => setIsNavOpen(true)}
+    >
+      {navigateLinks.map((link) => (
+        <li key={link.route} className='flex flex-col pb-8'>
+          <h4 className='flex items-center h-[71px] text-[18px] font-medium text-primary select-none'>
+            {link.name}
+          </h4>
+          <div className='flex flex-col gap-3'>
+            {link.categories.map((category) => (
+              <Link
+                key={category.query}
+                href={`${link.route}?category=${category.query}`}
+                className='w-fit text-secondary hover:underline'
+              >
+                {category.name}
+              </Link>
+            ))}
+            <Link href={link.route} className='w-fit text-active hover:underline'>
+              Ver Todos
+            </Link>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const NavbarButtons = ({ setIsNavOpen, setIsSideOpen }: { setIsNavOpen: (value: boolean) => void, setIsSideOpen: (value: boolean) => void }): React.ReactNode => {
+  return (
+    <div className='flex items-center gap-2 ml-0 md:ml-12 h-[71px]'>
+      <OptionsButton navClose={() => setIsNavOpen(false)} />
+      <button className='group block md:hidden p-2 h-fit rounded-full' onClick={() => setIsSideOpen(true)}>
+        <MenuIcon className='w-7 h-7 fill-transparent transition-colors icon-group-stroke-hover icon-stroke-primary' />
+      </button>
+    </div>
   )
 }
 
