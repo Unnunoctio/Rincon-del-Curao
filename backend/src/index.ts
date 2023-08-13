@@ -51,6 +51,7 @@ const typeDefs = `#graphql
 
   type Website {
     name: String!
+    logo: String!
     url: String!
     price: Int!
     bestPrice: Int!
@@ -109,6 +110,7 @@ const resolvers = {
   },
   Website: {
     name: (root) => root.name,
+    logo: (root) => root.logo,
     url: (root) => root.url,
     price: (root) => root.price,
     bestPrice: (root) => root.best_price,

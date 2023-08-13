@@ -1,6 +1,7 @@
 'use client'
 
 import { FeatureList } from '@/components/productDetail/FeatureList'
+import { WebsiteList } from '@/components/productDetail/WebsiteList'
 import { BreadcrumbV2 } from '@/components/products'
 import { getNavigateLink } from '@/helpers/pathsHelper'
 import { PathLink } from '@/helpers/types'
@@ -30,6 +31,7 @@ const GET_PRODUCT = gql`
       }
       websites {
         name
+        logo
         url
         price
         bestPrice
@@ -57,12 +59,19 @@ export default function ProductDetailPage ({ params }: { params: { category: str
       <BreadcrumbV2 links={[{ name: 'Home', route: '/' }, getNavigateLink(`/${category}`) as PathLink, { name: product.title, route: `/${category}/${path}` }]} />
       <div className='flex flex-col lg:flex-row gap-x-6 py-4'>
         <section className='max-w-[38rem] w-full'>
-          <h2 className='text-3xl font-medium text-primary'>{product.title}</h2>
-          <FeatureList {...product.product} {...product} />
+          <h2 className='text-2xl xs:text-3xl font-medium text-primary'>{product.title}</h2>
+          <div className='hidden lg:block'>
+            <FeatureList {...product.product} {...product} />
+            <WebsiteList websites={product.websites} />
+          </div>
         </section>
-        <section className='flex justify-center items-center py-4 lg:justify-end w-full'>
+        <section className='flex justify-center items-center pt-4 lg:pt-0 lg:justify-end w-full'>
           <Image src={product.imageUrl} width={600} height={600} alt={product.title} priority className='rounded-lg' />
         </section>
+        <div className='block lg:hidden'>
+          <WebsiteList websites={product.websites} />
+          <FeatureList {...product.product} {...product} />
+        </div>
       </div>
     </>
   )

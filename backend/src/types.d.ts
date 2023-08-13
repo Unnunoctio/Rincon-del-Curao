@@ -18,6 +18,7 @@ interface ProductUnit {
 
 interface Website {
   name: string
+  logo: string
   url: string
   price: number
   best_price: number

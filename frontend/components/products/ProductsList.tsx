@@ -41,8 +41,8 @@ export function ProductsList (): React.ReactNode {
   const products = fetchProducts(category as string, searchParams)
 
   return products.map((product, index) => (
-    <Link key={index} href={`${category as string}/${product.path}`}>
-      <div className='p-2 w-[250px] bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
+    <Link key={index} href={`${category as string}/${product.path}`} className='w-[250px]'>
+      <div className='p-2 bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
         <Image src={product.imageUrl} alt={product.title} width={234} height={234} className='aspect-[234/200] object-cover rounded-sm' />
         <div className='flex flex-col justify-between pt-2'>
           <header>

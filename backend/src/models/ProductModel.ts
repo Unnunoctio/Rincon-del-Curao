@@ -23,6 +23,7 @@ const ProductSchema = new Schema<Product>({
   websites: [
     {
       name: { type: String, required: true },
+      logo: { type: String, required: true },
       url: { type: String, required: true },
       price: { type: Number, required: true },
       best_price: { type: Number, required: true },

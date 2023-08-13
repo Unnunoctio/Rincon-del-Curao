@@ -19,7 +19,7 @@ export const FeatureList = ({ brand, subCategory, quantity, content, variety, st
   return (
     <div className='mt-6'>
       <h3 className='text-primary text-[20px]'>Caracteristicas</h3>
-      <div className='grid grid-cols-1 xs:grid-cols-2'>
+      <div className='grid grid-cols-1 xs:grid-cols-2 gap-x-3 mt-2'>
         <FeatureItem title='Marca' value={brand}>
           <BrandIcon className='w-8 h-8 fill-transparent stroke-active' />
         </FeatureItem>

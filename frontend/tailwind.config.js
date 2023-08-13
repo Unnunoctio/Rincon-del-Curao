@@ -33,6 +33,9 @@ module.exports = {
         height: 'height',
         'text-colors': 'color'
       },
+      gridTemplateColumns: {
+        'product-list': 'repeat(auto-fit, minmax(250px, 1fr))'
+      },
       screens: {
         xs: '440px'
       }
