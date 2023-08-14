@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
+import { getBestDiscountProducts, getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
 import { generatePath } from './helpers/product.js'
 
 // Configure Database
@@ -30,6 +30,15 @@ const typeDefs = `#graphql
     brand: String!
     alcoholicGrade: Float!
     content: Int!
+    bestPrice: Int!
+    imageUrl: String!
+  }
+
+  type ProductDiscount {
+    path: ID!
+    title: String!
+    brand: String!
+    discount: Int!
     bestPrice: Int!
     imageUrl: String!
   }
@@ -70,6 +79,7 @@ const typeDefs = `#graphql
     totalPages(filters: FilterInput!): Int!
     totalProducts(filters: FilterInput!): Int!
     products(orderBy: OrderByEnum!, page: Int!, filters: FilterInput!): [ProductList]!
+    bestDiscountProducts: [ProductDiscount]!
     product(path: ID!): Product!
     isProductPath(path: ID!): Boolean!
   }
@@ -81,6 +91,7 @@ const resolvers = {
     totalPages: getTotalPages,
     totalProducts: getTotalProducts,
     products: getProducts,
+    bestDiscountProducts: getBestDiscountProducts,
     product: getProduct,
     isProductPath
   },
@@ -91,6 +102,14 @@ const resolvers = {
     brand: (root) => root.product.brand,
     alcoholicGrade: (root) => root.product.alcoholic_grade,
     content: (root) => root.product.content,
+    bestPrice: (root) => root.websites[0].best_price,
+    imageUrl: (root) => root.image_url
+  },
+  ProductDiscount: {
+    path: (root) => generatePath(root._id.toString(), root.product._id.toString(), root.title),
+    title: (root) => root.title,
+    brand: (root) => root.product.brand,
+    discount: (root) => Math.round(100 - ((root.websites[0].best_price * 100) / root.websites[0].price)),
     bestPrice: (root) => root.websites[0].best_price,
     imageUrl: (root) => root.image_url
   },

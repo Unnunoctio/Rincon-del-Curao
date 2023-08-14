@@ -104,6 +104,36 @@ export const getProducts = async (root, args): Promise<Product[]> => {
   }
 }
 
+export const getBestDiscountProducts = async (root, args): Promise<Product[]> => {
+  try {
+    const products = await ProductModel.aggregate([
+      { $unwind: '$websites' },
+      { $sort: { 'websites.best_price': 1 } },
+      {
+        $group: {
+          _id: '$_id',
+          websites: { $push: '$websites' },
+          otherFields: { $first: '$$ROOT' }
+        }
+      },
+      { $replaceRoot: { newRoot: { $mergeObjects: ['$otherFields', { websites: '$websites' }] } } }
+    ])
+
+    products.sort((a, b) => {
+      const discountA = Math.round(100 - (a.websites[0].best_price * 100) / a.websites[0].price)
+      const discountB = Math.round(100 - (b.websites[0].best_price * 100) / b.websites[0].price)
+
+      if (discountA !== discountB) return discountB - discountA
+      if (a.websites[0].best_price !== b.websites[0].best_price) return a.websites[0].best_price - b.websites[0].best_price
+      return a.title.localeCompare(b.title)
+    })
+
+    return products.slice(0, 12)
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
 export const getProduct = async (root, args): Promise<Product> => {
   try {
     const { path }: { path: string } = args
