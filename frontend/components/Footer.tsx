@@ -36,7 +36,7 @@ export const Footer = (): React.ReactNode => {
           </div>
         </div>
         <hr className='my-6 divider-primary' />
-        <p className='text-center'>&copy; {new Date().getFullYear()} Rincón del Curao. Todos los derechos reservados.</p>
+        <p className='text-center text-primary'>&copy; {new Date().getFullYear()} Rincón del Curao. Todos los derechos reservados.</p>
       </div>
     </footer>
   )

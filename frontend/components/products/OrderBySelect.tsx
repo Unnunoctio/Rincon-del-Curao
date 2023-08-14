@@ -60,7 +60,7 @@ export const OrderBySelect = (): React.ReactNode => {
             <span className={`absolute -top-3 left-2 px-1 bg-page text-[14px] ${open ? 'text-active' : 'text-secondary'} group-hover:text-active transition-text-colors`}>
               Ordenar por
             </span>
-            <span className='block px-4 py-1.5 w-full text-left'>{selected.label}</span>
+            <span className='block px-4 py-1.5 w-full text-left text-primary'>{selected.label}</span>
             <span className='h-5 border-l border-primary' />
             <span className='block px-3'>
               <ChevronDownIcon className={`icon-secondary transition-transform ${open ? 'rotate-180' : 'rotate-0'}`} />
@@ -81,7 +81,7 @@ export const OrderBySelect = (): React.ReactNode => {
                   <Listbox.Option
                     key={idx}
                     value={item}
-                    className={({ selected }) => `relative cursor-pointer select-none py-1.5 pl-3 ${selected ? 'bg-selected' : ''} ${!selected ? 'hover:bg-hover active:bg-selected' : ''}`}
+                    className={({ selected }) => `relative cursor-pointer select-none py-1.5 pl-3 text-primary ${selected ? 'bg-selected' : ''} ${!selected ? 'hover:bg-hover active:bg-selected' : ''}`}
                   >
                     {item.label}
                   </Listbox.Option>

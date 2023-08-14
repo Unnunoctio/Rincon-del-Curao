@@ -23,7 +23,7 @@ export const WebsiteList = ({ websites }: { websites: WebsiteProps[] }): React.R
               </div>
               <div className='flex flex-col w-full'>
                 <div className='flex justify-between'>
-                  <h4 className='text.primary text-[18px] font-medium'>{website.name}</h4>
+                  <h4 className='text.primary text-[18px] font-medium text-primary'>{website.name}</h4>
                   <StarRating value={website.average} />
                 </div>
                 <div className='flex justify-between gap-2'>
