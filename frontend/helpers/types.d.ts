@@ -50,3 +50,8 @@ export interface ProductDiscount extends Omit<Product, 'alcoholicGrade' | 'conte
   category: string
   discount: number
 }
+
+export interface ProductAverage extends Omit<Product, 'alcoholicGrade' | 'content'> {
+  category: string
+  average: number
+}
