@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { getBestDiscountProducts, getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
-import { generatePath } from './helpers/product.js'
+import { getBestAverageProducts, getBestDiscountProducts, getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
+import { generatePath, getProductAverage } from './helpers/product.js'
 
 // Configure Database
 mongoose.connect('mongodb://127.0.0.1:27017/Rincon_del_Curao')
@@ -44,6 +44,16 @@ const typeDefs = `#graphql
     imageUrl: String!
   }
 
+  type ProductAverage {
+    path: ID!
+    title: String!
+    brand: String!
+    category: String!
+    average: Float!
+    bestPrice: Int!
+    imageUrl: String!
+  }
+
   type ProductUnit {
     name: String!
     brand: String!
@@ -81,6 +91,7 @@ const typeDefs = `#graphql
     totalProducts(filters: FilterInput!): Int!
     products(orderBy: OrderByEnum!, page: Int!, filters: FilterInput!): [ProductList]!
     bestDiscountProducts: [ProductDiscount]!
+    bestAverageProducts: [ProductAverage]!
     product(path: ID!): Product!
     isProductPath(path: ID!): Boolean!
   }
@@ -93,6 +104,7 @@ const resolvers = {
     totalProducts: getTotalProducts,
     products: getProducts,
     bestDiscountProducts: getBestDiscountProducts,
+    bestAverageProducts: getBestAverageProducts,
     product: getProduct,
     isProductPath
   },
@@ -112,6 +124,15 @@ const resolvers = {
     brand: (root) => root.product.brand,
     category: (root) => root.product.category,
     discount: (root) => Math.round(100 - ((root.websites[0].best_price * 100) / root.websites[0].price)),
+    bestPrice: (root) => root.websites[0].best_price,
+    imageUrl: (root) => root.image_url
+  },
+  ProductAverage: {
+    path: (root) => generatePath(root._id.toString(), root.product._id.toString(), root.title),
+    title: (root) => root.title,
+    brand: (root) => root.product.brand,
+    category: (root) => root.product.category,
+    average: (root) => getProductAverage(root.websites),
     bestPrice: (root) => root.websites[0].best_price,
     imageUrl: (root) => root.image_url
   },
