@@ -50,6 +50,9 @@
   .icon-stroke-primary {
     @apply stroke-[#1a202c] dark:stroke-[#FFFFFFEB]
   }
+  .icon-stroke-secondary {
+    @apply stroke-[#718096] dark:stroke-[#7b8aa1]
+  }
   .icon-group-hover {
     @apply group-hover:fill-active dark:group-hover:fill-active
   }

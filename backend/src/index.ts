@@ -38,6 +38,7 @@ const typeDefs = `#graphql
     path: ID!
     title: String!
     brand: String!
+    category: String!
     discount: Int!
     bestPrice: Int!
     imageUrl: String!
@@ -109,6 +110,7 @@ const resolvers = {
     path: (root) => generatePath(root._id.toString(), root.product._id.toString(), root.title),
     title: (root) => root.title,
     brand: (root) => root.product.brand,
+    category: (root) => root.product.category,
     discount: (root) => Math.round(100 - ((root.websites[0].best_price * 100) / root.websites[0].price)),
     bestPrice: (root) => root.websites[0].best_price,
     imageUrl: (root) => root.image_url

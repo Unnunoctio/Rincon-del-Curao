@@ -45,3 +45,8 @@ export interface Product {
   bestPrice: number
   imageUrl: string
 }
+
+export interface ProductDiscount extends Omit<Product, 'alcoholicGrade' | 'content'> {
+  category: string
+  discount: number
+}

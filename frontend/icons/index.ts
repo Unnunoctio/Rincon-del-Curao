@@ -1,5 +1,7 @@
 export * from './ArrowUpIcon'
 export * from './ChevronDownIcon'
+export * from './ChevronLeftIcon'
+export * from './ChevronRightIcon'
 export * from './ExclamationIcon'
 export * from './GearIcon'
 export * from './MenuIcon'

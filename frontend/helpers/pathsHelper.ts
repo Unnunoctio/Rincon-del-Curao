@@ -37,6 +37,10 @@ export const getNavigateLink = (link: Route): PathLink | undefined => {
   return navigateLinks.find(l => l.route === link)
 }
 
+export const getNavigateLinkByName = (name: string): PathLink | undefined => {
+  return navigateLinks.find(l => l.name === name)
+}
+
 export const isValidNavigateLink = (link: Route): boolean => {
   if (navigateLinks.find(l => l.route === link) == null) return false
   return true
