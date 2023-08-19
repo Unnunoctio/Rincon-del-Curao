@@ -29,6 +29,15 @@ export interface Filter {
   sub_category?: string[]
 }
 
+interface ObjectString {
+  label: string
+  value: string
+}
+
+export interface FilterOptions {
+  subCategory: ObjectString[]
+}
+
 // Products
 export interface AllProducts {
   totalProducts: number
