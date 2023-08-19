@@ -90,7 +90,7 @@ export const MultiSelectV2 = ({ queryName, options }: { queryName: string, optio
                   <Listbox.Option
                     key={option.value}
                     value={option}
-                    className={({ selected }) => `relative cursor-pointer select-none py-1.5 pl-3 text-primary ${selected ? 'bg-selected' : ''} ${!selected ? 'hover:bg-hover active:bg-selected' : ''}`}
+                    className='relative cursor-pointer select-none py-1.5 pl-3 text-primary hover:bg-hover active:bg-selected'
                   >
                     {option.label}
                   </Listbox.Option>

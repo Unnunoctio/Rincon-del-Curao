@@ -15,6 +15,7 @@ const typeDefs = `#graphql
     category: String!
     sub_category: [String]
     brand: [String]
+    content: [Int]
   }
 
   enum OrderByEnum {
@@ -92,9 +93,15 @@ const typeDefs = `#graphql
     value: String!
   }
 
+  type ObjectNumber {
+    label: String!
+    value: Int!
+  }
+
   type FilterOptions {
     subCategory: [ObjectString]
     brand: [ObjectString]
+    content: [ObjectNumber]
   }
 
   type Query {
@@ -180,7 +187,8 @@ const resolvers = {
   },
   FilterOptions: {
     subCategory: (root) => Object.entries(root.sub_category).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } }).sort((a, b) => a.value.localeCompare(b.value)),
-    brand: (root) => Object.entries(root.brand).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } }).sort((a, b) => a.value.localeCompare(b.value))
+    brand: (root) => Object.entries(root.brand).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } }).sort((a, b) => a.value.localeCompare(b.value)),
+    content: (root) => Object.entries(root.content).map(([key, value]: [string, number]) => { return { label: (parseInt(key) > 1000 ? `${(parseInt(key) / 1000).toFixed(1)}L (${value})` : `${parseInt(key)}cc (${value})`), value: parseInt(key) } }).sort((a, b) => a.value - b.value)
   }
 }
 

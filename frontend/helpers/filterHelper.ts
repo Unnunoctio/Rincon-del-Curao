@@ -13,6 +13,9 @@ export const getVariablesFilter = (category: string, searchParams: ReadonlyURLSe
   if (searchParams.getAll('brand').length > 0) {
     filters.brand = searchParams.getAll('brand')
   }
+  if (searchParams.getAll('content').length > 0) {
+    filters.content = searchParams.getAll('content').map((value) => parseInt(value))
+  }
 
   return filters
 }
