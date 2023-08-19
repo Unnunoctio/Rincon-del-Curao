@@ -1,7 +1,7 @@
-import { Filter, Product } from '../types'
+import { Filter, FilterOutput, Product } from '../types'
 import { OrderByEnum } from '../enums.js'
 import ProductModel from '../models/ProductModel.js'
-import { generatePath, getProductAverage } from '../helpers/product.js'
+import { generatePath, getOptionsByKey, getProductAverage } from '../helpers/product.js'
 
 const getMatchStage = (filters: Filter): any => {
   const matchStage = {
@@ -36,6 +36,43 @@ export const getTotalProducts = async (root, args): Promise<number> => {
     const totalProducts = await ProductModel.countDocuments(matchStage)
 
     return totalProducts
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+export const getFilterOptions = async (root, { filters }: { filters: Filter }): Promise<FilterOutput> => {
+  try {
+    const { category } = filters
+
+    let products = await ProductModel.aggregate([
+      { $unwind: '$websites' },
+      { $match: { 'product.category': category } },
+      { $sort: { 'websites.best_price': 1 } },
+      {
+        $group: {
+          _id: '$_id',
+          websites: { $push: '$websites' },
+          otherFields: { $first: '$$ROOT' }
+        }
+      },
+      { $replaceRoot: { newRoot: { $mergeObjects: ['$otherFields', { websites: '$websites' }] } } }
+    ])
+
+    const filterOptions: FilterOutput = {
+      sub_category: {}
+    }
+
+    //* filter exists
+    if (filters.sub_category !== undefined) {
+      filterOptions.sub_category = getOptionsByKey(products, 'sub_category', 2)
+      products = products.filter(product => filters.sub_category?.includes(product.product.sub_category))
+    }
+
+    //* not exist filter
+    if (filters.sub_category === undefined) filterOptions.sub_category = getOptionsByKey(products, 'sub_category', 2)
+
+    return filterOptions
   } catch (error) {
     throw new Error(error.message)
   }

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { getBestAverageProducts, getBestDiscountProducts, getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
+import { getBestAverageProducts, getBestDiscountProducts, getFilterOptions, getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
 import { generatePath, getProductAverage } from './helpers/product.js'
 
 // Configure Database
@@ -86,9 +86,19 @@ const typeDefs = `#graphql
     websites: [Website]!
   }
 
+  type ObjectString {
+    label: String!
+    value: String!
+  }
+
+  type FilterOptions {
+    subCategory: [ObjectString]
+  }
+
   type Query {
     totalPages(filters: FilterInput!): Int!
     totalProducts(filters: FilterInput!): Int!
+    filterOptions(filters: FilterInput!): FilterOptions!
     products(orderBy: OrderByEnum!, page: Int!, filters: FilterInput!): [ProductList]!
     bestDiscountProducts: [ProductDiscount]!
     bestAverageProducts: [ProductAverage]!
@@ -102,6 +112,7 @@ const resolvers = {
   Query: {
     totalPages: getTotalPages,
     totalProducts: getTotalProducts,
+    filterOptions: getFilterOptions,
     products: getProducts,
     bestDiscountProducts: getBestDiscountProducts,
     bestAverageProducts: getBestAverageProducts,
@@ -164,6 +175,9 @@ const resolvers = {
     imageUrl: (root) => root.image_url,
     product: (root) => root.product,
     websites: (root) => root.websites
+  },
+  FilterOptions: {
+    subCategory: (root) => Object.entries(root.sub_category).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } })
   }
 }
 

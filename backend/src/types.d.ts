@@ -37,3 +37,13 @@ export interface Filter {
   category: string
   sub_category?: string
 }
+
+interface DynamicObject { [key: string]: number }
+
+export interface MultiDynamicObject {
+  [key: string]: DynamicObject
+}
+
+export interface FilterOutput {
+  sub_category: MultiDynamicObject
+}
