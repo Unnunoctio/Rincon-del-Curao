@@ -54,15 +54,14 @@ export const OrderBySelect = (): React.ReactNode => {
         <div className='relative'>
           <Listbox.Button
             id='OrderBySelect'
-            className={`group relative flex items-center w-[200px] rounded-md border ${open ? 'border-active' : 'border-primary'} hover:border-active cursor-pointer transition-colors`}
+            className={`group relative flex items-center w-[170px] sm:w-[200px] rounded-md border ${open ? 'border-active' : 'border-primary'} hover:border-active cursor-pointer transition-colors`}
             aria-label='Order By'
           >
             <span className={`absolute -top-3 left-2 px-1 bg-page text-[14px] ${open ? 'text-active' : 'text-secondary'} group-hover:text-active transition-text-colors`}>
               Ordenar por
             </span>
-            <span className='block px-4 py-1.5 w-full text-left text-primary'>{selected.label}</span>
-            <span className='h-5 border-l border-primary' />
-            <span className='block px-3'>
+            <span className='block px-2 sm:px-4 py-1 sm:py-1.5 w-full text-left text-primary border-r border-primary'>{selected.label}</span>
+            <span className='block px-1.5 sm:px-3'>
               <ChevronDownIcon className={`icon-secondary transition-transform ${open ? 'rotate-180' : 'rotate-0'}`} />
             </span>
           </Listbox.Button>

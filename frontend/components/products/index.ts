@@ -1,4 +1,5 @@
 export * from './BreadcrumbV2'
+export * from './MultiSelectV2'
 export * from './OrderBySelect'
 export * from './Paginator'
 export * from './ProductsCount'

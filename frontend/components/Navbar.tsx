@@ -66,7 +66,7 @@ const NavbarButtons = ({ setIsNavOpen, setIsSideOpen }: { setIsNavOpen: (value: 
   return (
     <div className='flex items-center gap-2 ml-0 md:ml-12 h-[71px]'>
       <OptionsButton navClose={() => setIsNavOpen(false)} />
-      <button className='group block md:hidden p-2 h-fit rounded-full' onClick={() => setIsSideOpen(true)}>
+      <button aria-label='Menu' className='group block md:hidden p-2 h-fit rounded-full' onClick={() => setIsSideOpen(true)}>
         <MenuIcon className='w-7 h-7 fill-transparent transition-colors icon-group-stroke-hover icon-stroke-primary' />
       </button>
     </div>
