@@ -28,7 +28,7 @@ export default function ProductsPage ({ params }: { params: { category: string }
 
       {/* Filter & Products */}
       <section className='flex gap-4 mt-6'>
-        <div className='hidden xl:block w-56'>
+        <div className='hidden xl:block w-[274px]'>
           <FilterProducts />
         </div>
         <div className='flex flex-1 flex-col'>

@@ -22,8 +22,8 @@ module.exports = {
         'product-list': 'calc(100vh - 272px)'
       },
       maxWidth: {
-        'nav-container': '1400px',
-        'page-container': '1400px'
+        'nav-container': '1450px',
+        'page-container': '1450px'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -27,6 +27,7 @@ export interface OrderByItem {
 export interface Filter {
   category: string
   sub_category?: string[]
+  brand?: string[]
 }
 
 export interface ObjectFilter {
@@ -36,6 +37,7 @@ export interface ObjectFilter {
 
 export interface FilterOptions {
   subCategory: ObjectFilter[]
+  brand: ObjectFilter[]
 }
 
 // Products

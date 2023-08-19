@@ -16,6 +16,10 @@ const GET_FILTER_OPTIONS = gql`
         label
         value
       }
+      brand {
+        label
+        value
+      }
     }
   }
 `
@@ -46,6 +50,10 @@ export const FilterProducts = (): React.ReactNode => {
         <div className='flex flex-col'>
           <span className='text-primary text-[18px] font-medium'>Categoria</span>
           <MultiSelectV2 queryName='category' options={filterOptions.subCategory} />
+        </div>
+        <div className='flex flex-col'>
+          <span className='text-primary text-[18px] font-medium'>Marca</span>
+          <MultiSelectV2 queryName='brand' options={filterOptions.brand} />
         </div>
       </div>
     </section>
