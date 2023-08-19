@@ -29,13 +29,13 @@ export interface Filter {
   sub_category?: string[]
 }
 
-interface ObjectString {
+export interface ObjectFilter {
   label: string
-  value: string
+  value: string | number
 }
 
 export interface FilterOptions {
-  subCategory: ObjectString[]
+  subCategory: ObjectFilter[]
 }
 
 // Products

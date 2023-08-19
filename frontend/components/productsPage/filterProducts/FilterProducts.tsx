@@ -34,7 +34,7 @@ export const FilterProducts = (): React.ReactNode => {
   const searchParams = useSearchParams()
 
   const filterOptions = fetchFilterOptions(category as string, searchParams)
-  console.log(filterOptions)
+  // console.log(filterOptions)
 
   return (
     <section className='flex flex-col w-full h-full'>
@@ -43,7 +43,10 @@ export const FilterProducts = (): React.ReactNode => {
         <DeleteFilters />
       </header>
       <div className='flex flex-col gap-2 py-3'>
-        <MultiSelectV2 />
+        <div className='flex flex-col'>
+          <span className='text-primary text-[18px] font-medium'>Categoria</span>
+          <MultiSelectV2 queryName='category' options={filterOptions.subCategory} />
+        </div>
       </div>
     </section>
   )
