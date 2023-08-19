@@ -35,7 +35,8 @@ export interface Product extends Document {
 
 export interface Filter {
   category: string
-  sub_category?: string
+  sub_category?: string[]
+  brand?: string[]
 }
 
 interface DynamicObject { [key: string]: number }
@@ -46,4 +47,5 @@ export interface MultiDynamicObject {
 
 export interface FilterOutput {
   sub_category: MultiDynamicObject
+  brand: MultiDynamicObject
 }

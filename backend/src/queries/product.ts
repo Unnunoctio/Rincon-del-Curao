@@ -8,6 +8,7 @@ const getMatchStage = (filters: Filter): any => {
     'product.category': filters.category
   }
   if (filters.sub_category !== undefined) matchStage['product.sub_category'] = { $in: filters.sub_category }
+  if (filters.brand !== undefined) matchStage['product.brand'] = { $in: filters.brand }
 
   return matchStage
 }
@@ -60,7 +61,8 @@ export const getFilterOptions = async (root, { filters }: { filters: Filter }): 
     ])
 
     const filterOptions: FilterOutput = {
-      sub_category: {}
+      sub_category: {},
+      brand: {}
     }
 
     //* filter exists
@@ -68,9 +70,14 @@ export const getFilterOptions = async (root, { filters }: { filters: Filter }): 
       filterOptions.sub_category = getOptionsByKey(products, 'sub_category', 2)
       products = products.filter(product => filters.sub_category?.includes(product.product.sub_category))
     }
+    if (filters.brand !== undefined) {
+      filterOptions.brand = getOptionsByKey(products, 'brand', 2)
+      products = products.filter(product => filters.brand?.includes(product.product.brand))
+    }
 
     //* not exist filter
     if (filters.sub_category === undefined) filterOptions.sub_category = getOptionsByKey(products, 'sub_category', 2)
+    if (filters.brand === undefined) filterOptions.brand = getOptionsByKey(products, 'brand', 2)
 
     return filterOptions
   } catch (error) {

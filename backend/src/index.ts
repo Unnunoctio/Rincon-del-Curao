@@ -14,6 +14,7 @@ const typeDefs = `#graphql
   input FilterInput {
     category: String!
     sub_category: [String]
+    brand: [String]
   }
 
   enum OrderByEnum {
@@ -93,6 +94,7 @@ const typeDefs = `#graphql
 
   type FilterOptions {
     subCategory: [ObjectString]
+    brand: [ObjectString]
   }
 
   type Query {
@@ -177,7 +179,8 @@ const resolvers = {
     websites: (root) => root.websites
   },
   FilterOptions: {
-    subCategory: (root) => Object.entries(root.sub_category).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } })
+    subCategory: (root) => Object.entries(root.sub_category).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } }).sort((a, b) => a.value.localeCompare(b.value)),
+    brand: (root) => Object.entries(root.brand).map(([key, value]: [string, number]) => { return { label: `${key} (${value})`, value: key } }).sort((a, b) => a.value.localeCompare(b.value))
   }
 }
 
