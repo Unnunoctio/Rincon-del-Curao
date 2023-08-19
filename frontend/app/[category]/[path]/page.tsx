@@ -1,13 +1,12 @@
 'use client'
 
-import { FeatureList } from '@/components/productDetail/FeatureList'
-import { WebsiteList } from '@/components/productDetail/WebsiteList'
-import { BreadcrumbV2 } from '@/components/products'
-import { getNavigateLink } from '@/helpers/pathsHelper'
-import { PathLink } from '@/helpers/types'
+import Image from 'next/image'
 import { gql } from '@apollo/client'
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
-import Image from 'next/image'
+import { getNavigateLink } from '@/helpers/pathsHelper'
+import { PathLink } from '@/helpers/types'
+import { BreadcrumbV2 } from '@/components/BreadcrumbV2'
+import { FeatureList, WebsiteList } from '@/components/productDetailPage'
 
 const GET_PRODUCT = gql`
   query GetProduct($path: ID!) {

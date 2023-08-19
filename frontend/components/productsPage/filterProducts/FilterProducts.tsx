@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
-import { MultiSelectV2, ProductsCount } from '.'
+import { ProductsCount } from '../ProductsCount'
+import { MultiSelectV2 } from './MultiSelectV2'
 
 export const FilterProducts = (): React.ReactNode => {
   const router = useRouter()

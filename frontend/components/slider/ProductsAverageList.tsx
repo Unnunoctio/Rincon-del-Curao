@@ -6,7 +6,7 @@ import { gql } from '@apollo/client'
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
 import Image from 'next/image'
 import Link from 'next/link'
-import { StarRating } from './productDetail/StarRating'
+import { StarRating } from '../StarRating'
 
 const GET_PRODUCTS_AVERAGE_QUERY = gql`
   query BestAverageProducts {

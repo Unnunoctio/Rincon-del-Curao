@@ -1,5 +1,4 @@
-import { ProductsAverageList, ProductsDiscountList } from '@/components'
-import { SliderProducts } from '@/components/SliderProducts'
+import { ProductsAverageList, ProductsDiscountList, SliderProducts } from '@/components/slider'
 
 export default function HomePage (): React.ReactNode {
   return (

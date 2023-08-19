@@ -2,8 +2,9 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { ThemeProvider } from './theme-provider'
-import { Footer, NavigationV2 } from '@/components'
 import { ApolloWrapper } from './apollo-wrapper'
+import { NavigationV2 } from '@/components/navigation'
+import { Footer } from '@/components/footer'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],

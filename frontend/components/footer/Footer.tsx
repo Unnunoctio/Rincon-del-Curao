@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ScrollTopButton } from '.'
 import { navigateLinks } from '@/helpers/pathsHelper'
+import { ScrollTopButton } from './ScrollTopButton'
 
 export const Footer = (): React.ReactNode => {
   return (

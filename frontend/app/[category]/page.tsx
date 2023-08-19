@@ -1,5 +1,6 @@
-import { BreadcrumbV2, OrderBySelect, Paginator, ProductsCount, ProductsList } from '@/components/products'
-import { FilterProducts } from '@/components/products/FilterProducts'
+import { BreadcrumbV2 } from '@/components/BreadcrumbV2'
+import { OrderBySelect, Paginator, ProductsCount, ProductsList } from '@/components/productsPage'
+import { FilterProducts } from '@/components/productsPage/filterProducts'
 import { getNavigateLink } from '@/helpers/pathsHelper'
 import { PathLink } from '@/helpers/types'
 
