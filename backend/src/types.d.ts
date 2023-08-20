@@ -38,6 +38,8 @@ export interface Filter {
   sub_category?: string[]
   brand?: string[]
   content?: number[]
+  quantity?: number[]
+  package?: string[]
 }
 
 interface DynamicObject { [key: string]: number }
@@ -50,4 +52,6 @@ export interface FilterOutput {
   sub_category: MultiDynamicObject
   brand: MultiDynamicObject
   content: MultiDynamicObject
+  quantity: MultiDynamicObject
+  package: MultiDynamicObject
 }

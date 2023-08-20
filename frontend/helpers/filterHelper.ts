@@ -16,6 +16,12 @@ export const getVariablesFilter = (category: string, searchParams: ReadonlyURLSe
   if (searchParams.getAll('content').length > 0) {
     filters.content = searchParams.getAll('content').map((value) => parseInt(value))
   }
+  if (searchParams.getAll('quantity').length > 0) {
+    filters.quantity = searchParams.getAll('quantity').map((value) => parseInt(value))
+  }
+  if (searchParams.getAll('package').length > 0) {
+    filters.package = searchParams.getAll('package')
+  }
 
   return filters
 }

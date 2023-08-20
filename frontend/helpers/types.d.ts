@@ -29,6 +29,8 @@ export interface Filter {
   sub_category?: string[]
   brand?: string[]
   content?: number[]
+  quantity?: number[]
+  package?: string[]
 }
 
 export interface ObjectFilter {
@@ -40,6 +42,8 @@ export interface FilterOptions {
   subCategory: ObjectFilter[]
   brand: ObjectFilter[]
   content: ObjectFilter[]
+  quantity: ObjectFilter[]
+  package: ObjectFilter[]
 }
 
 // Products

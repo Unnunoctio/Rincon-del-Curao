@@ -24,6 +24,14 @@ const GET_FILTER_OPTIONS = gql`
         label
         value
       }
+      quantity {
+        label
+        value
+      }
+      package {
+        label
+        value
+      }
     }
   }
 `
@@ -62,6 +70,14 @@ export const FilterProducts = (): React.ReactNode => {
         <div className='flex flex-col'>
           <span className='text-primary text-[18px] font-medium'>Contenido</span>
           <MultiSelectV2 queryName='content' options={filterOptions.content} />
+        </div>
+        <div className='flex flex-col'>
+          <span className='text-primary text-[18px] font-medium'>Cantidad</span>
+          <MultiSelectV2 queryName='quantity' options={filterOptions.quantity} />
+        </div>
+        <div className='flex flex-col'>
+          <span className='text-primary text-[18px] font-medium'>Envase</span>
+          <MultiSelectV2 queryName='package' options={filterOptions.package} />
         </div>
       </div>
     </section>

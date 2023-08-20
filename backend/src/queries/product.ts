@@ -10,6 +10,9 @@ const getMatchStage = (filters: Filter): any => {
   if (filters.sub_category !== undefined) matchStage['product.sub_category'] = { $in: filters.sub_category }
   if (filters.brand !== undefined) matchStage['product.brand'] = { $in: filters.brand }
   if (filters.content !== undefined) matchStage['product.content'] = { $in: filters.content }
+  // eslint-disable-next-line @typescript-eslint/dot-notation
+  if (filters.quantity !== undefined) matchStage['quantity'] = { $in: filters.quantity }
+  if (filters.package !== undefined) matchStage['product.package'] = { $in: filters.package }
 
   return matchStage
 }
@@ -64,7 +67,9 @@ export const getFilterOptions = async (root, { filters }: { filters: Filter }): 
     const filterOptions: FilterOutput = {
       sub_category: {},
       brand: {},
-      content: {}
+      content: {},
+      quantity: {},
+      package: {}
     }
 
     //* filter exists
@@ -80,11 +85,21 @@ export const getFilterOptions = async (root, { filters }: { filters: Filter }): 
       filterOptions.content = getOptionsByKey(products, 'content', 2)
       products = products.filter(product => filters.content?.includes(product.product.content))
     }
+    if (filters.quantity !== undefined) {
+      filterOptions.quantity = getOptionsByKey(products, 'quantity', 1)
+      products = products.filter(product => filters.quantity?.includes(product.quantity))
+    }
+    if (filters.package !== undefined) {
+      filterOptions.package = getOptionsByKey(products, 'package', 2)
+      products = products.filter(product => filters.package?.includes(product.product.package))
+    }
 
     //* not exist filter
     if (filters.sub_category === undefined) filterOptions.sub_category = getOptionsByKey(products, 'sub_category', 2)
     if (filters.brand === undefined) filterOptions.brand = getOptionsByKey(products, 'brand', 2)
     if (filters.content === undefined) filterOptions.content = getOptionsByKey(products, 'content', 2)
+    if (filters.quantity === undefined) filterOptions.quantity = getOptionsByKey(products, 'quantity', 1)
+    if (filters.package === undefined) filterOptions.package = getOptionsByKey(products, 'package', 2)
 
     return filterOptions
   } catch (error) {
