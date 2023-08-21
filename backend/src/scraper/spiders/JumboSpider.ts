@@ -90,6 +90,7 @@ export class JumboSpider implements Spider {
     const allProducts = products.flat()
     const productsNotFound = await Promise.all(allProducts.map(async (product: JumboProduct) => {
       const url = `${this.websiteUrl}/${product.linkText}/p`
+
       if (await isProductExist(url)) {
         const { data }: { data: Average[] } = await axios.get(`${this.averageUrl}?ids=${product.productId}`, { headers: this.headers })
         const update: UpdateWebsite = {
@@ -104,6 +105,7 @@ export class JumboSpider implements Spider {
         return undefined
       } else {
         let productData = this.getMainProductData(product)
+
         if (await isBrandExist(productData.brand)) {
           productData = this.getExtraProductData(productData, product)
           if (productData.quantity === undefined || productData.alcoholicGrade === undefined || productData.content === undefined || productData.package === undefined) return productData
@@ -194,13 +196,13 @@ export class JumboSpider implements Spider {
 
     //* Alcoholic Grade
     if (product['Graduación Alcohólica'] !== undefined) {
-      const match = product['Graduación Alcohólica'][0].match(/(\d+\.\d+)°/)
+      const match = product['Graduación Alcohólica'][0].match(/(\d+(?:\.\d+)?)°/)
       extraData.alcoholicGrade = (match != null) ? Number(match[1]) : undefined
     } else if (product.Grado !== undefined) {
-      const match = product.Grado[0].match(/(\d+\.\d+)°/)
+      const match = product.Grado[0].match(/(\d+(?:\.\d+)?)°/)
       extraData.alcoholicGrade = (match != null) ? Number(match[1]) : undefined
     } else if (product.productName.includes('°')) {
-      const match = product.productName.match(/(\d+\.\d+)°/)
+      const match = product.productName.match(/(\d+(?:\.\d+)?)°/)
       extraData.alcoholicGrade = (match != null) ? Number(match[1]) : undefined
     }
 
@@ -226,6 +228,9 @@ export class JumboSpider implements Spider {
     }
 
     //* Package
+    //* Package Default Destilados
+    if (productData.category === 'Destilados') extraData.package = 'Botella'
+
     if (product.Envase !== undefined) {
       if (product.Envase[0].includes('Botella')) {
         extraData.package = 'Botella'

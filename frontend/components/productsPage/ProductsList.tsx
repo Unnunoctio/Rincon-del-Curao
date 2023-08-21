@@ -69,7 +69,7 @@ export function ProductsList (): React.ReactNode {
               <div className='flex items-end justify-between'>
                 <div className='text-secondary text-[14px]'>
                   <span className='block'>Graduación: {product.alcoholicGrade}°</span>
-                  <span className='block'>Contenido: {(product.content > 1000) ? `${product.content / 1000} L` : `${product.content} cc`}</span>
+                  <span className='block'>Contenido: {(product.content >= 1000) ? `${product.content / 1000} L` : `${product.content} cc`}</span>
                 </div>
                 <span className='font-medium text-[20px] text-primary'>${product.bestPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>
               </div>

@@ -29,7 +29,7 @@ export const FeatureList = ({ brand, subCategory, quantity, content, variety, st
         <FeatureItem title='Cantidad' value={`${quantity} ${quantity > 1 ? 'Unidades' : 'Unidad'}`}>
           <QuantityIcon className='w-9 h-9 fill-active' />
         </FeatureItem>
-        <FeatureItem title='Contenido' value={(content > 1000) ? `${content / 1000} L` : `${content} cc`}>
+        <FeatureItem title='Contenido' value={(content >= 1000) ? `${content / 1000} L` : `${content} cc`}>
           <ContentIcon className='w-8 h-8 fill-active' />
         </FeatureItem>
         {variety !== null && (
