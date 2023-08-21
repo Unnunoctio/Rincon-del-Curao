@@ -19,9 +19,14 @@ const getProductTitle = (name: string, packageData: string, content: number, qua
 }
 
 export const isProductExist = async (urlWebsite: string): Promise<boolean> => {
-  const product = await ProductModel.findOne({ 'websites.url': urlWebsite })
-  if (product === null) return false
-  return true
+  try {
+    const product = await ProductModel.findOne({ 'websites.url': urlWebsite })
+    if (product === null) return false
+    return true
+  } catch (error) {
+    console.error(error.message)
+    return false
+  }
 }
 
 export const addProduct = async (website: Website, product: ProductScraper): Promise<boolean> => {
@@ -47,22 +52,27 @@ export const addProduct = async (website: Website, product: ProductScraper): Pro
 }
 
 export const updateWebsite = async (updateWebsite: UpdateWebsite): Promise<boolean> => {
-  const product = await ProductModel.findOneAndUpdate(
-    {
-      'websites.url': updateWebsite.url
-    },
-    {
-      $set: {
-        'websites.$.price': updateWebsite.price,
-        'websites.$.best_price': updateWebsite.best_price,
-        'websites.$.average': updateWebsite.average,
-        'websites.$.watch': updateWebsite.watch
+  try {
+    const product = await ProductModel.findOneAndUpdate(
+      {
+        'websites.url': updateWebsite.url
+      },
+      {
+        $set: {
+          'websites.$.price': updateWebsite.price,
+          'websites.$.best_price': updateWebsite.best_price,
+          'websites.$.average': updateWebsite.average,
+          'websites.$.watch': updateWebsite.watch
+        }
       }
-    }
-  )
+    )
 
-  if (product == null) return false
-  return true
+    if (product == null) return false
+    return true
+  } catch (error) {
+    console.error(error.message)
+    return false
+  }
 }
 
 export const deleteWithoutStock = async (websiteName: string, websiteWatch: number): Promise<boolean> => {
