@@ -3,6 +3,7 @@ import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import { getBestAverageProducts, getBestDiscountProducts, getFilterOptions, getProduct, getProducts, getTotalPages, getTotalProducts, isProductPath } from './queries/product.js'
 import { generatePath, getProductAverage } from './helpers/product.js'
+import { startScraping } from './scraper/index.js'
 
 // Configure Database
 mongoose.connect('mongodb://127.0.0.1:27017/Rincon_del_Curao')
@@ -117,6 +118,8 @@ const typeDefs = `#graphql
     bestAverageProducts: [ProductAverage]!
     product(path: ID!): Product!
     isProductPath(path: ID!): Boolean!
+
+    runScraping: Boolean!
   }
 `
 
@@ -130,7 +133,9 @@ const resolvers = {
     bestDiscountProducts: getBestDiscountProducts,
     bestAverageProducts: getBestAverageProducts,
     product: getProduct,
-    isProductPath
+    isProductPath,
+
+    runScraping: startScraping
   },
 
   ProductList: {

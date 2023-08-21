@@ -27,7 +27,8 @@ const ProductSchema = new Schema<Product>({
       url: { type: String, required: true },
       price: { type: Number, required: true },
       best_price: { type: Number, required: true },
-      average: { type: Number }
+      average: { type: Number },
+      watch: { type: Number, required: true } // only backend
     }
   ]
 })

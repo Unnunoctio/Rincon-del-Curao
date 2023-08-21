@@ -23,6 +23,7 @@ interface Website {
   price: number
   best_price: number
   average: number
+  watch: number
 }
 
 export interface Product extends Document {

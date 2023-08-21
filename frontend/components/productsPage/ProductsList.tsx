@@ -58,7 +58,7 @@ export function ProductsList (): React.ReactNode {
   return (
     <div className='grid grid-cols-product-list justify-items-center gap-4 min-h-product-list'>
       {products.map((product, index) => (
-        <Link key={index} href={`${category as string}/${product.path}`} className='w-[250px]'>
+        <Link key={index} href={`${category as string}/${product.path}`} className='w-[250px] h-fit'>
           <div className='p-2 bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
             <Image src={product.imageUrl} alt={product.title} width={234} height={234} className='aspect-[234/200] object-cover rounded-sm' />
             <div className='flex flex-col justify-between pt-2'>
