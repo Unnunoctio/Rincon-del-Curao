@@ -108,6 +108,11 @@ export class JumboSpider implements Spider {
 
         if (await isBrandExist(productData.brand)) {
           productData = this.getExtraProductData(productData, product)
+          // TODO: Test urls
+          if (url === '') {
+            console.log(productData)
+            console.log(product)
+          }
           if (productData.quantity === undefined || productData.alcoholicGrade === undefined || productData.content === undefined || productData.package === undefined) return productData
 
           const { data }: { data: Average[] } = await axios.get(`${this.averageUrl}?ids=${product.productId}`, { headers: this.headers })
