@@ -13,6 +13,7 @@
   "dependencies": {
     "@apollo/server": "4.9.1",
     "axios": "1.4.0",
+    "exceljs": "^4.3.0",
     "graphql": "16.7.1",
     "mongoose": "7.4.2"
   },

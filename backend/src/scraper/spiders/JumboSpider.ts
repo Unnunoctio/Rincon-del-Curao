@@ -68,7 +68,7 @@ export class JumboSpider implements Spider {
   watcher: number = new Date().getTime()
   averageUrl: UrlType = 'https://sm-web-api.ecomm.cencosud.com/catalog/api/v1/reviews/ratings'
 
-  async run (): Promise<void> {
+  async run (): Promise<ProductScraper[]> {
     console.time('Jumbo Spider')
     console.log('Running Jumbo Spider')
 
@@ -141,9 +141,9 @@ export class JumboSpider implements Spider {
     // ?: Elimina los websites de Jumbo de los productos donde el watcher es distinto al generado
     await deleteWithoutStock(this.websiteName, this.watcher)
 
-    console.log('Productos no encontrados: ', productsNotFound.filter(product => product !== undefined).length)
     console.log('Jumbo Spider finished')
     console.timeEnd('Jumbo Spider')
+    return productsNotFound.filter(product => product !== undefined) as ProductScraper[]
   }
 
   async getTotalPages (url: UrlType): Promise<number> {

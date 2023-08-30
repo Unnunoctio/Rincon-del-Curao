@@ -70,7 +70,7 @@ export class SantaSpider implements Spider {
   watcher: number = new Date().getTime()
   averageUrl: UrlType = 'https://sm-web-api.ecomm.cencosud.com/catalog/api/v1/reviews/ratings'
 
-  async run (): Promise<void> {
+  async run (): Promise<ProductScraper[]> {
     console.time('Santa Spider')
     console.log('Running Santa Spider')
 
@@ -143,9 +143,9 @@ export class SantaSpider implements Spider {
     // ?: Elimina los websites de Santa de los productos donde el watcher es distinto al generado
     await deleteWithoutStock(this.websiteName, this.watcher)
 
-    console.log('Productos no encontrados: ', productsNotFound.filter(product => product !== undefined).length)
     console.log('Santa Spider finished')
     console.timeEnd('Santa Spider')
+    return productsNotFound.filter(product => product !== undefined) as ProductScraper[]
   }
 
   async getTotalPages (url: UrlType): Promise<number> {

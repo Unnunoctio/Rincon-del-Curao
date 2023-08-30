@@ -13,7 +13,7 @@ export interface Spider {
   productUrl: UrlType
   watcher: number
 
-  run: () => void
+  run: () => Promise<ProductScraper[]>
 }
 
 export interface UpdateWebsite {
