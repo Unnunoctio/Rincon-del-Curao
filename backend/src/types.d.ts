@@ -16,7 +16,20 @@ export interface Drink {
   vineyard?: string
 }
 
-export type ProductUnit = Omit<Drink, '_id'>
+export interface ProductUnit extends Document {
+  name: string
+  brand: string
+  alcoholic_grade: number
+  content: number
+  package: string
+  category: string
+  sub_category: string
+  made_in?: string
+  variety?: string
+  bitterness?: string
+  strain?: string
+  vineyard?: string
+}
 
 interface Website {
   name: string

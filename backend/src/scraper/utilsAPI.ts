@@ -34,12 +34,10 @@ export const getNewProductUnits = async (): Promise<void> => {
   }
 }
 
-// TODO: Modificar las funcionalidades con tal optener los productos desde Productos Unitarios en vez de hacer peticiones a DrinksAPI (Se sobrecarga la api)
 export const isBrandExist = async (brand: string): Promise<boolean> => {
   try {
-    const { data }: { data: Drink[] } = await axios.get(`${drinksAPI}&brand=${brand}`)
-    if (data.length === 0) return false
-    return true
+    const productsCount = await ProductUnitModel.countDocuments({ brand })
+    return productsCount > 0
   } catch (error) {
     console.log(brand)
     console.error(error.message)
@@ -49,14 +47,19 @@ export const isBrandExist = async (brand: string): Promise<boolean> => {
 
 export const getDrink = async (title: string, brand: string, content: number, packageData: string, alcoholicGrade: number): Promise<Drink | null> => {
   try {
-    const { data }: { data: Drink[] } = await axios.get(`${drinksAPI}&brand=${brand}&content=${content}&package=${packageData}&alcoholic_grade=${alcoholicGrade}`)
-    if (data.length === 0) return null
+    const products = await ProductUnitModel.find({
+      brand,
+      content,
+      package: packageData,
+      alcoholic_grade: alcoholicGrade
+    })
+    if (products.length === 0) return null
 
-    let productCorrect: Drink | null = null
+    let productCorrect: ProductUnit | null = null
     let nameCorrect: string[] = []
 
     const titleSplit = title.toLowerCase().split(' ')
-    data.forEach(product => {
+    products.forEach(product => {
       const nameSplit = product.name.replace(`${brand} `, '').toLowerCase().split(' ')
       const isContains = nameSplit.every((word) => titleSplit.includes(word))
       if (isContains && (nameSplit.length > nameCorrect.length)) {
