@@ -1,11 +1,43 @@
 import axios from 'axios'
-import { ProductUnit } from '../types'
+import { Drink, ProductUnit } from '../types'
+import ProductUnitModel from '../models/ProductUnitModel.js'
 
-const drinksAPI = 'http://localhost:4000/api/drinks?limit=0'
+const drinksAPI = 'https://drinks-api-dev.fl0.io/api/drinks?limit=0'
 
+export const getNewProductUnits = async (): Promise<void> => {
+  const pages = [`${drinksAPI}&category=Cervezas`, `${drinksAPI}&category=Destilados`, `${drinksAPI}&category=Vinos`]
+  try {
+    const drinks = await Promise.all(pages.map(async page => {
+      const { data }: { data: Drink[] } = await axios.get(page)
+      return data
+    }))
+
+    const allDrinks = drinks.flat()
+    const newProducts: Array<ProductUnit | undefined> = await Promise.all(allDrinks.map(async drink => {
+      const drinkExists = await ProductUnitModel.findOne({
+        name: drink.name,
+        brand: drink.brand,
+        alcoholic_grade: drink.alcoholic_grade,
+        content: drink.content,
+        package: drink.package
+      })
+
+      if (drinkExists === null) {
+        const { _id, ...rest } = drink
+        return rest as ProductUnit
+      }
+    }))
+
+    await ProductUnitModel.insertMany(newProducts.filter(product => product !== undefined))
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
+// TODO: Modificar las funcionalidades con tal optener los productos desde Productos Unitarios en vez de hacer peticiones a DrinksAPI (Se sobrecarga la api)
 export const isBrandExist = async (brand: string): Promise<boolean> => {
   try {
-    const { data }: { data: ProductUnit[] } = await axios.get(`${drinksAPI}&brand=${brand}`)
+    const { data }: { data: Drink[] } = await axios.get(`${drinksAPI}&brand=${brand}`)
     if (data.length === 0) return false
     return true
   } catch (error) {
@@ -15,12 +47,12 @@ export const isBrandExist = async (brand: string): Promise<boolean> => {
   }
 }
 
-export const getDrink = async (title: string, brand: string, content: number, packageData: string, alcoholicGrade: number): Promise<ProductUnit | null> => {
+export const getDrink = async (title: string, brand: string, content: number, packageData: string, alcoholicGrade: number): Promise<Drink | null> => {
   try {
-    const { data }: { data: ProductUnit[] } = await axios.get(`${drinksAPI}&brand=${brand}&content=${content}&package=${packageData}&alcoholic_grade=${alcoholicGrade}`)
+    const { data }: { data: Drink[] } = await axios.get(`${drinksAPI}&brand=${brand}&content=${content}&package=${packageData}&alcoholic_grade=${alcoholicGrade}`)
     if (data.length === 0) return null
 
-    let productCorrect: ProductUnit | null = null
+    let productCorrect: Drink | null = null
     let nameCorrect: string[] = []
 
     const titleSplit = title.toLowerCase().split(' ')

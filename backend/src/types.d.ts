@@ -1,6 +1,6 @@
 import { Document, Types } from 'mongoose'
 
-interface ProductUnit {
+export interface Drink {
   _id: Types.ObjectId
   name: string
   brand: string
@@ -16,6 +16,8 @@ interface ProductUnit {
   vineyard?: string
 }
 
+export type ProductUnit = Omit<Drink, '_id'>
+
 interface Website {
   name: string
   logo: string
@@ -30,7 +32,7 @@ export interface Product extends Document {
   title: string
   quantity: number
   image_url: string
-  product: ProductUnit
+  product: Drink
   websites: Types.DocumentArray<Website>
 }
 

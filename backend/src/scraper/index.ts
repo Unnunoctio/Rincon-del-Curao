@@ -1,24 +1,27 @@
-import { JumboSpider, SantaSpider } from './spiders/index.js'
-import { ProductScraper } from './types.js'
-import { createExcel } from './utilsExcel.js'
+import { getNewProductUnits } from './utilsAPI.js'
 
 export const startScraping = async (): Promise<boolean> => {
-  console.time('Scraping')
-  console.log('Starting scraping')
-  const productsNotFound: ProductScraper[] = []
+  await getNewProductUnits()
 
-  const jumboSpider = new JumboSpider()
-  const santaSpider = new SantaSpider()
+  // TODO: Ejecutar el scraping a cada tienda
+  // TODO: Crear el Excel
+  // console.time('Scraping')
+  // console.log('Starting scraping')
 
-  const jumboNotFound = await jumboSpider.run()
-  productsNotFound.push(...jumboNotFound)
+  // const productsNotFound: ProductScraper[] = []
 
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  // const jumboSpider = new JumboSpider()
+  // const santaSpider = new SantaSpider()
 
-  const santaNotFound = await santaSpider.run()
-  productsNotFound.push(...santaNotFound)
+  // const jumboNotFound = await jumboSpider.run()
+  // productsNotFound.push(...jumboNotFound)
 
-  createExcel(productsNotFound)
-  console.timeEnd('Scraping')
+  // await new Promise(resolve => setTimeout(resolve, 1000))
+
+  // const santaNotFound = await santaSpider.run()
+  // productsNotFound.push(...santaNotFound)
+
+  // createExcel(productsNotFound)
+  // console.timeEnd('Scraping')
   return true
 }
