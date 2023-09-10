@@ -1,1 +1,7 @@
 export * from './ArrowUpIcon'
+export * from './GearIcon'
+export * from './MenuIcon'
+export * from './MoonIcon'
+export * from './SunIcon'
+export * from './SystemIcon'
+export * from './XIcon'
