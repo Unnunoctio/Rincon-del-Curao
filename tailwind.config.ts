@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
   darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -25,11 +26,6 @@ module.exports = {
         'nav-container': '1450px',
         'page-container': '1450px'
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
-      },
       transitionProperty: {
         height: 'height',
         'text-colors': 'color'
@@ -44,3 +40,4 @@ module.exports = {
   },
   plugins: []
 }
+export default config

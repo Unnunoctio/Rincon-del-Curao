@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-page {
+    @apply bg-[#edf2f7] dark:bg-[#222629]
+  }
+}

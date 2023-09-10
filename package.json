@@ -1,0 +1,39 @@
+{
+  "name": "rincon-del-curao",
+  "version": "0.1.0",
+  "author": "Rafael Carvacho",
+  "license": "MIT",
+  "repository": "https://github.com/Unnunoctio/Rincon-del-Curao.git",
+  "dependencies": {
+    "@headlessui/react": "1.7.17",
+    "autoprefixer": "10.4.15",
+    "next": "13.4.19",
+    "next-themes": "0.2.1",
+    "postcss": "8.4.29",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sharp": "0.32.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.6.0",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "tailwindcss": "3.3.3",
+    "ts-standard": "12.0.2",
+    "typescript": "5.2.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ]
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
+}
