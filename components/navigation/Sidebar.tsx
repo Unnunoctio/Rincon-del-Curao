@@ -38,7 +38,7 @@ export const Sidebar = ({ isSideOpen, setIsSideOpen }: { isSideOpen: boolean, se
                     <div className='px-4'>
                       <Dialog.Title className='flex items-center justify-between h-[88px]'>
                         <Link href='/' className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105' onClick={() => setIsSideOpen(false)}>
-                          <Image src='/Logo.png' alt='Logo' width={140} height={44.3} priority />
+                          <Image src='/rdc-logo.png' alt='Logo' width={140} height={44.3} priority />
                         </Link>
                         <button className='group block md:hidden p-2 h-fit rounded-full' onClick={() => setIsSideOpen(false)}>
                           <XIcon className='w-7 h-7 fill-transparent transition-colors icon-group-stroke-hover icon-stroke-primary' />
