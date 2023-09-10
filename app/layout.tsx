@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { ThemeProvider } from './theme-provider'
+import { Footer } from '@/components/footer/Footer'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -25,7 +26,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
               {children}
             </div>
           </main>
-          {/* Footer */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
