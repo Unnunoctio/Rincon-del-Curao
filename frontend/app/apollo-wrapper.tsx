@@ -9,7 +9,10 @@ function makeClient (): NextSSRApolloClient<NormalizedCacheObject> {
     uri: 'http://localhost:5000/',
     // you can disable result caching here if you want to
     // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
-    fetchOptions: { cache: 'no-store' }
+    fetchOptions: { cache: 'no-store' },
+    headers: {
+      'x-api-key': '7b6c806f-4923-4e35-9458-8877598e2b62'
+    }
     // you can override the default `fetchOptions` on a per query basis
     // via the `context` property on the options passed as a second argument
     // to an Apollo Client data fetching hook, e.g.:
