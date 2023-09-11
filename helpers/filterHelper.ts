@@ -1,4 +1,5 @@
 // import { ReadonlyURLSearchParams } from 'next/navigation'
+import { ReadonlyURLSearchParams } from 'next/navigation'
 import { getNavigateLink } from './pathsHelper'
 import { Filter } from './types'
 
@@ -15,10 +16,7 @@ export const parseSearchParams = (searchParams: any): string => {
   return queryString
 }
 
-// export const getVariablesFilter = (category: string, searchParams: ReadonlyURLSearchParams): Filter => {
-export const getVariablesFilter = (category: string, queryString: string): Filter => {
-  const searchParams = new URLSearchParams(queryString)
-
+export const getVariablesFilter = (category: string, searchParams: ReadonlyURLSearchParams | URLSearchParams): Filter => {
   const filters: Filter = {
     category: getNavigateLink(`/${category}`)?.name ?? ''
   }
@@ -40,4 +38,10 @@ export const getVariablesFilter = (category: string, queryString: string): Filte
   }
 
   return filters
+}
+
+export const getVariablesFilterByQueryString = (category: string, queryString: string): Filter => {
+  const searchParams = new URLSearchParams(queryString)
+
+  return getVariablesFilter(category, searchParams)
 }

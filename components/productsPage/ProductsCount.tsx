@@ -1,11 +1,9 @@
-import { getVariablesFilter } from '@/helpers/filterHelper'
-// import { ReadonlyURLSearchParams } from 'next/navigation'
+import { getVariablesFilterByQueryString } from '@/helpers/filterHelper'
 
 // const fetchTotalProducts = async (category: string, searchParams: ReadonlyURLSearchParams): Promise<number> => {
 const fetchTotalProducts = async (category: string, queryString: string): Promise<number> => {
   const variables = {
-    // filters: getVariablesFilter(category, searchParams)
-    filters: getVariablesFilter(category, queryString)
+    filters: getVariablesFilterByQueryString(category, queryString)
   }
 
   const { data }: { data: { totalProducts: number } } = await fetch(process.env.RDC_BACKEND as string, {
@@ -30,8 +28,6 @@ const fetchTotalProducts = async (category: string, queryString: string): Promis
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const ProductsCount = async ({ className, category, queryString }: { className: string, category: string, queryString: string }) => {
-// export const ProductsCount = async ({ className, category, searchParams }: { className: string, category: string, searchParams: ReadonlyURLSearchParams }) => {
-  // const totalProducts = await fetchTotalProducts(category, searchParams)
   const totalProducts = await fetchTotalProducts(category, queryString)
 
   return (
