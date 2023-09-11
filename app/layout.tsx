@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import { ThemeProvider } from './theme-provider'
+import { ThemeProvider } from '@/lib/theme-provider'
+import { ApolloWrapper } from '@/lib/apollo-wrapper'
 import { Footer } from '@/components/footer/Footer'
 import { Navigation } from '@/components/navigation/Navigation'
 
@@ -20,14 +21,16 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
     <html lang='es'>
       <body className={`${roboto.className} bg-page`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <Navigation />
-          <div className='h-[72px]' />
-          <main className='flex justify-center w-full'>
-            <div className='px-2 sm:px-8 md:px-13 py-2 md:py-4 min-h-page-container max-w-page-container w-full'>
-              {children}
-            </div>
-          </main>
-          <Footer />
+          <ApolloWrapper>
+            <Navigation />
+            <div className='h-[72px]' />
+            <main className='flex justify-center w-full'>
+              <div className='px-2 sm:px-8 md:px-13 py-2 md:py-4 min-h-page-container max-w-page-container w-full'>
+                {children}
+              </div>
+            </main>
+            <Footer />
+          </ApolloWrapper>
         </ThemeProvider>
       </body>
     </html>

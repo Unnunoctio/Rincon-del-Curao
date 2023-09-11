@@ -1,19 +1,16 @@
 import { BreadcrumbV2 } from '@/components/BreadcrumbV2'
 import { ProductsCount } from '@/components/productsPage'
 // import { FilterProducts } from '@/components/productsPage/filterProducts'
-import { parseSearchParams } from '@/helpers/filterHelper'
 import { getNavigateLink } from '@/helpers/pathsHelper'
 import { PathLink } from '@/helpers/types'
 import { Suspense } from 'react'
 
 interface Props {
   params: { category: string }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export default function ProductsPage (props: Props): React.ReactNode {
   const { category } = props.params
-  const queryString = parseSearchParams(props.searchParams)
 
   const titleLink = getNavigateLink(`/${category}`)
 
@@ -27,7 +24,7 @@ export default function ProductsPage (props: Props): React.ReactNode {
             {titleLink?.name}
           </h2>
           <Suspense fallback={<p className='inline-block xl:hidden text-active'>Cargando ...</p>}>
-            <ProductsCount className='inline-block xl:hidden text-active' category={category} queryString={queryString} />
+            <ProductsCount className='inline-block xl:hidden text-active' />
           </Suspense>
         </div>
 
