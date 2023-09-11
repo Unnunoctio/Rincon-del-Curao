@@ -1,41 +1,33 @@
-import { getNavigateLinkByName } from '@/helpers/pathsHelper'
-import { ProductDiscount } from '@/helpers/types'
-import Image from 'next/image'
+'use client'
+
+import { gql } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
 import Link from 'next/link'
+import Image from 'next/image'
+import { ProductDiscount } from '@/helpers/types'
+import { getNavigateLinkByName } from '@/helpers/pathsHelper'
 
-const fetchProducts = async (): Promise<ProductDiscount[]> => {
-  const { data }: { data: { bestDiscountProducts: ProductDiscount[] } } = await fetch(process.env.RDC_BACKEND as string, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': process.env.API_KEY as string
-    },
-    body: JSON.stringify({
-      query: `
-        query BestDiscountProducts {
-          bestDiscountProducts {
-            path
-            title
-            brand
-            category
-            discount
-            bestPrice
-            imageUrl
-          }
-        }
-      `
-    }),
-    cache: 'no-cache'
-  }).then(async res => await res.json())
-
-  return data.bestDiscountProducts
+const query = gql`
+  query Query {
+    bestDiscountProducts {
+      path
+      title
+      brand
+      category
+      discount
+      bestPrice
+      imageUrl
+    }
+  }
+`
+interface Response {
+  bestDiscountProducts: ProductDiscount[]
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const ProductsDiscountList = async () => {
-  const products = await fetchProducts()
+export const ProductsDiscountList = (): React.ReactNode => {
+  const { data } = useSuspenseQuery<Response>(query)
 
-  return products.map((product, index) => (
+  return data.bestDiscountProducts.map((product, index) => (
     <Link key={index} href={`${getNavigateLinkByName(product.category)?.route as string}/${product.path}`} className='min-w-[250px] snap-center snap-always'>
       <div className='p-2 bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
         <Image src={product.imageUrl} alt={product.title} width={234} height={234} className='aspect-[234/200] object-cover rounded-sm' />

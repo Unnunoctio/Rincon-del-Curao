@@ -1,42 +1,34 @@
-import { getNavigateLinkByName } from '@/helpers/pathsHelper'
-import { ProductAverage } from '@/helpers/types'
-import Image from 'next/image'
+'use client'
+
+import { gql } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
 import Link from 'next/link'
+import Image from 'next/image'
+import { ProductAverage } from '@/helpers/types'
+import { getNavigateLinkByName } from '@/helpers/pathsHelper'
 import { StarRating } from '../StarRating'
 
-const fetchProducts = async (): Promise<ProductAverage[]> => {
-  const { data }: { data: { bestAverageProducts: ProductAverage[] } } = await fetch(process.env.RDC_BACKEND as string, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': process.env.API_KEY as string
-    },
-    body: JSON.stringify({
-      query: `
-        query BestAverageProducts {
-          bestAverageProducts {
-            path
-            title
-            brand
-            category
-            average
-            bestPrice
-            imageUrl
-          }
-        }
-      `
-    }),
-    cache: 'no-cache'
-  }).then(async res => await res.json())
-
-  return data.bestAverageProducts
+const query = gql`
+  query Query {
+    bestAverageProducts {
+      path
+      title
+      brand
+      category
+      average
+      bestPrice
+      imageUrl
+    }
+  }
+`
+interface Response {
+  bestAverageProducts: ProductAverage[]
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const ProductsAverageList = async () => {
-  const products = await fetchProducts()
+export const ProductsAverageList = (): React.ReactNode => {
+  const { data } = useSuspenseQuery<Response>(query)
 
-  return products.map((product, index) => (
+  return data.bestAverageProducts.map((product, index) => (
     <Link key={index} href={`${getNavigateLinkByName(product.category)?.route as string}/${product.path}`} className='min-w-[250px] snap-center snap-always'>
       <div className='p-2 bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
         <Image src={product.imageUrl} alt={product.title} width={234} height={234} className='aspect-[234/200] object-cover rounded-sm' />
