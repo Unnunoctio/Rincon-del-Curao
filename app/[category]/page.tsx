@@ -1,16 +1,21 @@
-'use client'
-
 import { BreadcrumbV2 } from '@/components/BreadcrumbV2'
 import { ProductsCount } from '@/components/productsPage'
 // import { FilterProducts } from '@/components/productsPage/filterProducts'
+import { parseSearchParams } from '@/helpers/filterHelper'
 import { getNavigateLink } from '@/helpers/pathsHelper'
 import { PathLink } from '@/helpers/types'
-import { useParams, useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-export default function ProductsPage (): React.ReactNode {
-  const { category } = useParams()
-  const searchParams = useSearchParams()
-  const titleLink = getNavigateLink(`/${category as string}`)
+interface Props {
+  params: { category: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default function ProductsPage (props: Props): React.ReactNode {
+  const { category } = props.params
+  const queryString = parseSearchParams(props.searchParams)
+
+  const titleLink = getNavigateLink(`/${category}`)
 
   return (
     <>
@@ -21,7 +26,9 @@ export default function ProductsPage (): React.ReactNode {
           <h2 className='text-3xl font-medium text-primary'>
             {titleLink?.name}
           </h2>
-          <ProductsCount className='inline-block xl:hidden text-active' category={category as string} searchParams={searchParams} />
+          <Suspense fallback={<p className='inline-block xl:hidden text-active'>Cargando ...</p>}>
+            <ProductsCount className='inline-block xl:hidden text-active' category={category} queryString={queryString} />
+          </Suspense>
         </div>
 
         <div className='flex justify-between'>
