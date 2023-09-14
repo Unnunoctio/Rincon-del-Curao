@@ -18,7 +18,7 @@ const fetchTotalPages = (category: string, searchParams: ReadonlyURLSearchParams
     filters: getVariablesFilter(category, searchParams)
   }
 
-  const { data }: { data: { totalPages: number } } = useSuspenseQuery(GET_TOTAL_PAGES, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: { totalPages: number } } = useSuspenseQuery(GET_TOTAL_PAGES, { variables })
   return data.totalPages
 }
 

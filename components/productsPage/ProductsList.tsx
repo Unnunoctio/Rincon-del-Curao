@@ -32,7 +32,7 @@ const fetchProducts = (category: string, searchParams: ReadonlyURLSearchParams):
     filters: getVariablesFilter(category, searchParams)
   }
 
-  const { data }: { data: { products: Product[] } } = useSuspenseQuery(GET_PRODUCTS_QUERY, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: { products: Product[] } } = useSuspenseQuery(GET_PRODUCTS_QUERY, { variables })
   return data.products
 }
 

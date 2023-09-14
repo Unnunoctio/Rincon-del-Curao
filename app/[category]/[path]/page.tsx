@@ -45,7 +45,7 @@ const fetchProduct = (path: string): any => {
     path
   }
 
-  const { data }: { data: any } = useSuspenseQuery(GET_PRODUCT, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: any } = useSuspenseQuery(GET_PRODUCT, { variables })
   return data.product
 }
 

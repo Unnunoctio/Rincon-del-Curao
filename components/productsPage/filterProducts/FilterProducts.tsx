@@ -41,7 +41,7 @@ const fetchFilterOptions = (category: string, searchParams: ReadonlyURLSearchPar
     filters: getVariablesFilter(category, searchParams)
   }
 
-  const { data }: { data: { filterOptions: FilterOptions } } = useSuspenseQuery(GET_FILTER_OPTIONS, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: { filterOptions: FilterOptions } } = useSuspenseQuery(GET_FILTER_OPTIONS, { variables })
   return data.filterOptions
 }
 

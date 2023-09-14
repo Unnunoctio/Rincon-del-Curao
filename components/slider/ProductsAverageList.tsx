@@ -23,7 +23,7 @@ const GET_PRODUCTS_AVERAGE_QUERY = gql`
 `
 
 const fetchProducts = (): ProductAverage[] => {
-  const { data }: { data: { bestAverageProducts: ProductAverage[] } } = useSuspenseQuery(GET_PRODUCTS_AVERAGE_QUERY, { context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: { bestAverageProducts: ProductAverage[] } } = useSuspenseQuery(GET_PRODUCTS_AVERAGE_QUERY)
   return data.bestAverageProducts
 }
 

@@ -22,7 +22,7 @@ const GET_PRODUCTS_DISCOUNT_QUERY = gql`
 `
 
 const fetchProducts = (): ProductDiscount[] => {
-  const { data }: { data: { bestDiscountProducts: ProductDiscount[] } } = useSuspenseQuery(GET_PRODUCTS_DISCOUNT_QUERY, { context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: { bestDiscountProducts: ProductDiscount[] } } = useSuspenseQuery(GET_PRODUCTS_DISCOUNT_QUERY)
   return data.bestDiscountProducts
 }
 

@@ -17,7 +17,7 @@ const fetchTotalProducts = (category: string, searchParams: ReadonlyURLSearchPar
     filters: getVariablesFilter(category, searchParams)
   }
 
-  const { data }: { data: { totalProducts: number } } = useSuspenseQuery(GET_TOTAL_PRODUCTS, { variables, context: { fetchOptions: { cache: 'force-cache' } } })
+  const { data }: { data: { totalProducts: number } } = useSuspenseQuery(GET_TOTAL_PRODUCTS, { variables })
   return data.totalProducts
 }
 
