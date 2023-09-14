@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 
 const fetchIsProduct = async (path: string): Promise<boolean> => {
-  const res = await fetch('http://localhost:5000/', {
+  const res = await fetch('https://rincon-del-curao-api-v2-unnunoctio-org.koyeb.app', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-api-key': '7b6c806f-4923-4e35-9458-8877598e2b62'
     },
     body: JSON.stringify({
       query: `
@@ -23,10 +24,11 @@ const fetchIsProduct = async (path: string): Promise<boolean> => {
 }
 
 const fetchProductTitle = async (path: string): Promise<string | undefined> => {
-  const res = await fetch('http://localhost:5000/', {
+  const res = await fetch('https://rincon-del-curao-api-v2-unnunoctio-org.koyeb.app', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-api-key': '7b6c806f-4923-4e35-9458-8877598e2b62'
     },
     body: JSON.stringify({
       query: `

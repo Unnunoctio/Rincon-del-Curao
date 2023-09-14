@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: [
+      'santaisabel.vtexassets.com',
       'jumbo.vtexassets.com',
       'assets.jumbo.cl',
       'assets.santaisabel.cl'
