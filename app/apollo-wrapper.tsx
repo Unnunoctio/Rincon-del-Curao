@@ -6,12 +6,12 @@ import { ApolloNextAppProvider, NextSSRInMemoryCache, NextSSRApolloClient, SSRMu
 function makeClient (): NextSSRApolloClient<NormalizedCacheObject> {
   const httpLink = new HttpLink({
     // this needs to be an absolute url, as relative urls cannot be used in SSR
-    uri: 'https://rincon-del-curao-api-v2-unnunoctio-org.koyeb.app',
+    uri: process.env.API_ENDPOINT,
     // you can disable result caching here if you want to
     // (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
     fetchOptions: { cache: 'no-store' },
     headers: {
-      'x-api-key': '7b6c806f-4923-4e35-9458-8877598e2b62'
+      'x-api-key': process.env.API_KEY as string
     }
     // you can override the default `fetchOptions` on a per query basis
     // via the `context` property on the options passed as a second argument
