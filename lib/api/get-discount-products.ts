@@ -1,7 +1,6 @@
 import { DiscountProduct } from '@/types/api'
-import { gql, request } from 'graphql-request'
 
-const query = gql`
+const query = `
   query Query {
     bestDiscountProducts {
       path
@@ -19,9 +18,18 @@ interface Response {
 }
 
 export const getDiscountProducts = async (): Promise<DiscountProduct[]> => {
-  const headers = {
-    'x-api-key': process.env.API_KEY as string
-  }
-  const data = await request<Response>(process.env.API_ENDPOINT as string, query, {}, headers)
+  const res = await fetch(process.env.API_ENDPOINT as string, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.API_KEY as string
+    },
+    body: JSON.stringify({
+      query
+    }),
+    cache: 'no-store'
+  })
+
+  const { data }: { data: Response } = await res.json()
   return data.bestDiscountProducts
 }
