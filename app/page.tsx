@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { DiscountList, SliderBox, SliderLoader } from '@/components/slider'
+import { AverageList, DiscountList, SliderBox, SliderLoader } from '@/components/slider'
 
 export default function HomePage (): JSX.Element {
   return (
@@ -7,6 +7,12 @@ export default function HomePage (): JSX.Element {
       <SliderBox title='Ofertas del Día'>
         <Suspense fallback={<SliderLoader />}>
           <DiscountList />
+        </Suspense>
+      </SliderBox>
+
+      <SliderBox title='Mejor Valorados'>
+        <Suspense fallback={<SliderLoader />}>
+          <AverageList />
         </Suspense>
       </SliderBox>
     </div>
