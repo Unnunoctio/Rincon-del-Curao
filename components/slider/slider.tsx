@@ -2,7 +2,7 @@
 
 import '@/styles/slider.css'
 import { useRef } from 'react'
-// import { ChevronLeftIcon, ChevronRightIcon } from '../icons/react'
+import { ChevronLeftIcon, ChevronRightIcon } from './icons'
 
 interface Props {
   children: JSX.Element
@@ -42,10 +42,10 @@ export const Slider: React.FC<Props> = ({ children }): JSX.Element => {
         {children}
       </div>
       <button onClick={leftScroll} className='group absolute bottom-1/2 -left-[24px] hidden sm:block'>
-        {/* <ChevronLeftIcon style='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' /> */}
+        <ChevronLeftIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>
       <button onClick={rightScroll} className='group absolute bottom-1/2 -right-[24px] hidden sm:block'>
-        {/* <ChevronRightIcon style='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' /> */}
+        <ChevronRightIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>
     </>
   )
