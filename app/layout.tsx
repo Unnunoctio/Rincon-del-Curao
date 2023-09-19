@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 }
 
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: JSX.Element
 }
 
-export default function RootLayout ({ children }: RootLayoutProps): React.ReactNode {
+export default function RootLayout ({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang='es'>
       <body className={`${roboto.className} bg-page`}>
