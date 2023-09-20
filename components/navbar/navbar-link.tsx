@@ -8,8 +8,10 @@ interface Props {
 
 export const NavbarLink: React.FC<Props> = ({ title, href, className }) => {
   return (
-    <Link href={href} className={className}>
-      {title}
-    </Link>
+    <li>
+      <Link href={href} className={className}>
+        {title}
+      </Link>
+    </li>
   )
 }

@@ -1,4 +1,4 @@
-import { Logo } from '../logo/logo'
+import { Logo } from '../logo'
 import { FooterNavigation } from './footer-navigation'
 import { ScrollTopButton } from './scroll-top-button'
 

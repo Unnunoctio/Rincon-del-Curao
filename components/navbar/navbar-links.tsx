@@ -15,12 +15,12 @@ export const NavbarLinks: React.FC<Props> = ({ isNavOpen, navOpen }) => {
       {navigateLinks.map((link, index) => (
         <li key={index} className='flex flex-col pb-8'>
           <h4 className='flex items-center h-[71px] text-[18px] font-medium text-primary select-none'>{link.name}</h4>
-          <div className='flex flex-col gap-3'>
+          <ul className='flex flex-col gap-3'>
             {link.categories.map((category, index) => (
               <NavbarLink key={index} title={category.name} href={`${link.route}?category=${category.query}`} className='w-fit text-secondary hover:underline' />
             ))}
             <NavbarLink title='Ver Todos' href={link.route} className='w-fit text-active hover:underline' />
-          </div>
+          </ul>
         </li>
       ))}
     </ul>
