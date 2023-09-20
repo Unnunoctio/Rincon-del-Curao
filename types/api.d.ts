@@ -18,6 +18,11 @@ export interface AverageProduct extends ProductSlider {
   average: number
 }
 
+export interface ProductList extends Omit<ProductSlider, 'category'> {
+  alcoholicGrade: number
+  content: number
+}
+
 interface ProductUnit {
   name: string
   brand: string
