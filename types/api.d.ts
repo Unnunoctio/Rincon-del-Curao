@@ -25,7 +25,7 @@ interface ProductUnit {
   content: number
   package: string
   category: string
-  subcategory: string
+  subCategory: string
   madeIn?: string
   variety?: string
   bitterness?: string
