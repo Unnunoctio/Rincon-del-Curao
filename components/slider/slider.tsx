@@ -38,7 +38,7 @@ export const Slider: React.FC<Props> = ({ children }): JSX.Element => {
 
   return (
     <>
-      <div ref={sliderRef} className='slider-products flex gap-6 py-3 px-2 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory'>
+      <div ref={sliderRef} className='slider flex gap-8 py-3 px-2 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory'>
         {children}
       </div>
       <button

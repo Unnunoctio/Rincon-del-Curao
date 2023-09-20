@@ -10,7 +10,7 @@ export const ProgressProvider: React.FC<Props> = ({ children }) => {
   return (
     <>
       {children}
-      <Next13ProgressBar height='2px' color='#d69e2e' options={{ showSpinner: false }} showOnShallow />
+      <Next13ProgressBar height='3px' color='#d69e2e' options={{ showSpinner: false }} showOnShallow />
     </>
   )
 }
