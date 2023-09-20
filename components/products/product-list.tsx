@@ -29,7 +29,7 @@ export const ProductList: React.FC = () => {
   if (products.length === 0) return <ProductListNotFound />
 
   return (
-    <div className='grid grid-cols-product-list justify-items-center gap-4 min-h-product-list'>
+    <div className='grid grid-cols-product-list justify-items-center gap-8 min-h-product-list'>
       {products.map((product, index) => (
         <ProductCard key={index} {...product} />
       ))}
