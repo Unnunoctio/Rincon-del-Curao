@@ -8,7 +8,7 @@ interface Props {
   className: string
 }
 
-export const ProductsCount: React.FC<Props> = ({ className }) => {
+export const ProductCount: React.FC<Props> = ({ className }) => {
   const [loading, setLoading] = useState(true)
   const [count, setCount] = useState(0)
 

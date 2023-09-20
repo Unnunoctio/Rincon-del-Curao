@@ -8,7 +8,7 @@ export const ProductCard: React.FC<Props> = ({ path, title, brand, alcoholicGrad
   return (
     <Link href={`productos/${path}`} className='w-[250px] h-fit'>
       <div className='p-2 bg-primary rounded-md border divider-primary transition-transform hover:scale-105'>
-        <Image src={imageUrl} alt={title} width={234} height={200} className='aspect-[234/200] object-cover rounded-sm' />
+        <Image src={imageUrl} alt={title} width={234} height={200} loading='lazy' className='aspect-[234/200] object-cover rounded-sm' />
         <div className='flex flex-col justify-between pt-2'>
           <header>
             <span className='text-secondary'>{brand}</span>
