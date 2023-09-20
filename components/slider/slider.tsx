@@ -41,10 +41,18 @@ export const Slider: React.FC<Props> = ({ children }): JSX.Element => {
       <div ref={sliderRef} className='slider-products flex gap-6 py-3 px-2 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory'>
         {children}
       </div>
-      <button onClick={leftScroll} className='group absolute bottom-1/2 -left-[24px] hidden sm:block'>
+      <button
+        onClick={leftScroll}
+        className='group absolute bottom-1/2 -left-[24px] hidden sm:block'
+        aria-label='scroll left'
+      >
         <ChevronLeftIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>
-      <button onClick={rightScroll} className='group absolute bottom-1/2 -right-[24px] hidden sm:block'>
+      <button
+        onClick={rightScroll}
+        className='group absolute bottom-1/2 -right-[24px] hidden sm:block'
+        aria-label='scroll right'
+      >
         <ChevronRightIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>
     </>
