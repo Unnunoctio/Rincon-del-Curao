@@ -1,7 +1,8 @@
 import { Breadcrumb } from '@/components/breadcrumb'
+import { OrderBySelect } from '@/components/order-by'
 import { ProductList } from '@/components/products'
 import { ProductCount } from '@/components/products-count'
-import { getNavigateLink } from '@/helpers/pathHelper'
+import { getNavigateLink } from '@/helpers/path-helper'
 import { PathLink } from '@/types/path'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -36,7 +37,7 @@ export default function ProductsPage ({ params }: Props): JSX.Element {
 
         <div className='flex justify-between'>
           <div className='block xl:hidden'>Filter</div>
-          {/* <OrderBySelect /> */}
+          <OrderBySelect />
         </div>
       </header>
 

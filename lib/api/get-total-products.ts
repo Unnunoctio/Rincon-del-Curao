@@ -1,4 +1,4 @@
-import { getVariablesFilter } from '@/helpers/filterHelper'
+import { getVariablesFilter } from '@/helpers/filter-helper'
 import { ReadonlyURLSearchParams } from 'next/navigation'
 
 const query = `
