@@ -1,4 +1,5 @@
 import { Breadcrumb } from '@/components/breadcrumb'
+import { ProductsCount } from '@/components/products-count'
 import { getNavigateLink } from '@/helpers/pathHelper'
 import { PathLink } from '@/types/path'
 import { Metadata } from 'next'
@@ -31,7 +32,7 @@ export default function ProductsPage ({ params }: Props): JSX.Element {
           <h2 className='text-3xl font-medium text-primary'>
             {link.name}
           </h2>
-          {/* <ProductsCount className='inline-block xl:hidden text-active' /> */}
+          <ProductsCount className='inline-block xl:hidden text-active' />
         </div>
 
         <div className='flex justify-between'>
