@@ -18,11 +18,11 @@ interface Response {
 }
 
 export const getDiscountProducts = async (): Promise<DiscountProduct[]> => {
-  const res = await fetch(process.env.API_ENDPOINT as string, {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': process.env.API_KEY as string
+      'x-api-key': process.env.NEXT_PUBLIC_API_KEY as string
     },
     body: JSON.stringify({
       query
