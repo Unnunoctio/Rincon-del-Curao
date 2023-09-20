@@ -1,6 +1,6 @@
 import { Filter } from '@/types/api'
 import { ReadonlyURLSearchParams } from 'next/navigation'
-import { getNavigateLink } from './pathHelper'
+import { getNavigateLink } from './path-helper'
 
 export const getVariablesFilter = (category: string, searchParams: ReadonlyURLSearchParams): Filter => {
   const filters: Filter = {

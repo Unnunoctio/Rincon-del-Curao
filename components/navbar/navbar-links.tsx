@@ -1,4 +1,4 @@
-import { navigateLinks } from '@/helpers/pathHelper'
+import { navigateLinks } from '@/helpers/path-helper'
 import { NavbarLink } from './navbar-link'
 
 interface Props {
