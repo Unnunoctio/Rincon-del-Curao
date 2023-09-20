@@ -41,13 +41,13 @@ export const OrderBySelect: React.FC = () => {
     }
   }, [searchParams])
 
-  const selectItem = (order: OrderByItem): void => {
+  const handleOrderBy = (order: OrderByItem): void => {
     setSelected(order)
     router.push(pathname + '?' + createMultiQuery([{ name: 'order_by', value: order.value }, { name: 'page', value: '1' }]))
   }
 
   return (
-    <Listbox value={selected} onChange={selectItem}>
+    <Listbox value={selected} onChange={handleOrderBy}>
       {({ open }) => (
         <div className='relative'>
           <Listbox.Button
