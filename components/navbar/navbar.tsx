@@ -16,7 +16,9 @@ export const Navbar: React.FC<Props> = ({ isNavOpen, navOpen, navClose, sideOpen
       onMouseLeave={navClose}
     >
       <nav className='flex justify-between px-2 sm:px-8 md:px-13 max-w-nav-container w-full'>
-        <Logo width={140} height={44.3} boxHeight={71} className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105' />
+        <div className='flex items-center h-[71px]'>
+          <Logo width={140} height={44.3} className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105' />
+        </div>
 
         {/* Items and Buttons */}
         <div className='flex'>

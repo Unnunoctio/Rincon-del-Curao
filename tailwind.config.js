@@ -23,7 +23,7 @@ module.exports = {
       },
       maxWidth: {
         'nav-container': '1450px',
-        'page-container': '1450px'
+        'page-container': '1500px'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

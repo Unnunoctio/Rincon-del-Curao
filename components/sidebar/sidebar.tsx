@@ -41,7 +41,9 @@ export const Sidebar: React.FC<Props> = ({ isSideOpen, sideClose }) => {
                   <div className='flex h-full flex-col overflow-y-auto bg-primary shadow-xl border-r divider-primary'>
                     <div className='px-4'>
                       <Dialog.Title className='flex items-center justify-between'>
-                        <SidebarLogo width={140} height={44.3} boxHeight={88} sideClose={sideClose} className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105' />
+                        <div className='flex items-center h-[88px]'>
+                          <SidebarLogo width={140} height={44.3} sideClose={sideClose} className='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105' />
+                        </div>
                         <CloseButton sideClose={sideClose} />
                       </Dialog.Title>
                     </div>
