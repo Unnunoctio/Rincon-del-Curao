@@ -1,5 +1,6 @@
 import { getVariablesFilter } from '@/helpers/filter-helper'
 import { getDefaultOrderBy } from '@/helpers/order-by-helper'
+import { getDefaultPage } from '@/helpers/pagination-helper'
 import { ProductList } from '@/types/api'
 import { ReadonlyURLSearchParams } from 'next/navigation'
 
@@ -23,7 +24,7 @@ interface Response {
 export const getProducts = async (category: string, searchParams: ReadonlyURLSearchParams): Promise<ProductList[]> => {
   const variables = {
     orderBy: getDefaultOrderBy(searchParams.get('order_by')).value,
-    page: 1,
+    page: getDefaultPage(searchParams.get('page')),
     filters: getVariablesFilter(category, searchParams)
   }
 

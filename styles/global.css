@@ -55,6 +55,9 @@
   .icon-stroke-secondary {
     @apply stroke-[#718096] dark:stroke-[#7b8aa1]
   }
+  .icon-stroke-contrast {
+    @apply stroke-[#1a202c] dark:stroke-[#1a202c]
+  }
   .icon-stroke-primary-60 {
     @apply stroke-[#1a202c]/60 dark:stroke-[#FFFFFFEB]/60
   }

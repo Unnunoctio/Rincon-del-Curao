@@ -1,5 +1,6 @@
 import { Breadcrumb } from '@/components/breadcrumb'
 import { OrderBySelect } from '@/components/order-by'
+import { Pagination } from '@/components/pagination'
 import { ProductList } from '@/components/products'
 import { ProductCount } from '@/components/products-count'
 import { getNavigateLink } from '@/helpers/path-helper'
@@ -46,9 +47,9 @@ export default function ProductsPage ({ params }: Props): JSX.Element {
         <div className='hidden xl:block w-[274px]'>
           {/* <FilterProducts /> */}
         </div>
-        <div className='flex flex-1 flex-col'>
+        <div className='flex flex-1 flex-col gap-y-8'>
           <ProductList />
-          {/* <Paginator /> */}
+          <Pagination />
         </div>
       </section>
     </>
