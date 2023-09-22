@@ -2,10 +2,9 @@
 
 import { GetTotalPages } from '@/lib/api/get-total-pages'
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { PaginationSlider } from './pagination-slider'
 import { getDefaultPage, getPage } from '@/helpers/pagination-helper'
-import { createQueryPath } from '@/helpers/path-helper'
 
 export const Pagination: React.FC = () => {
   const [totalPages, setTotalPages] = useState(-1)
@@ -16,6 +15,12 @@ export const Pagination: React.FC = () => {
   const searchParams = useSearchParams()
 
   const [selected, setSelected] = useState(getDefaultPage(searchParams.get('page')))
+
+  const createQuery = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set(name, value)
+    return params.toString()
+  }, [searchParams])
 
   const fetchData = async (): Promise<void> => {
     setTotalPages(await GetTotalPages(category as string, searchParams))
@@ -34,9 +39,9 @@ export const Pagination: React.FC = () => {
     if (totalPages !== -1) {
       const page = getPage(searchParams.get('page'))
       if (page === undefined || page < 1) {
-        router.replace(pathname + '?' + createQueryPath('page', '1'))
+        router.replace(pathname + '?' + createQuery('page', '1'))
       } else if (page > totalPages) {
-        router.replace(pathname + '?' + createQueryPath('page', totalPages.toString()))
+        router.replace(pathname + '?' + createQuery('page', totalPages.toString()))
       } else if (selected !== page) {
         setSelected(page)
       }
@@ -46,7 +51,7 @@ export const Pagination: React.FC = () => {
   const handlePage = (page: number): void => {
     if (page !== selected) {
       setSelected(page)
-      router.push(pathname + '?' + createQueryPath('page', page.toString()))
+      router.push(pathname + '?' + createQuery('page', page.toString()))
     }
   }
 

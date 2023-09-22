@@ -46,8 +46,8 @@ export const isValidNavigateLink = (link: Route): boolean => {
   return true
 }
 
-export const createQueryPath = (name: string, value: string): string => {
-  const params = new URLSearchParams(location.search)
-  params.set(name, value)
-  return params.toString()
-}
+// export const createQueryPath = (name: string, value: string): string => {
+//   const params = new URLSearchParams(location.search)
+//   params.set(name, value)
+//   return params.toString()
+// }
