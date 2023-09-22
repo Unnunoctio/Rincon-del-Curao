@@ -4,8 +4,9 @@ import { getDefaultOrderBy, getOrderBy, orderByItems } from '@/helpers/order-by-
 import { OrderByItem } from '@/types/api'
 import { Listbox, Transition } from '@headlessui/react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { ChevronDownIcon } from './icons'
+import { createMultiQueryPath, createQueryPath } from '@/helpers/path-helper'
 
 export const OrderBySelect: React.FC = () => {
   const router = useRouter()
@@ -13,27 +14,13 @@ export const OrderBySelect: React.FC = () => {
   const searchParams = useSearchParams()
   const [selected, setSelected] = useState(getDefaultOrderBy(searchParams.get('order_by')))
 
-  const createQuery = useCallback((name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set(name, value)
-    return params.toString()
-  }, [searchParams])
-
-  const createMultiQuery = useCallback((queries: Array<{ name: string, value: string }>) => {
-    const params = new URLSearchParams(searchParams.toString())
-    queries.forEach(query => {
-      params.set(query.name, query.value)
-    })
-    return params.toString()
-  }, [searchParams])
-
   // validaciones:
   // order_by es un valor no valido, se redirecciona
   // selected value !== order_by value, se actualiza
   useEffect(() => {
     const orderBy = getOrderBy(searchParams.get('order_by'))
     if (orderBy === undefined) {
-      router.replace(pathname + '?' + createQuery('order_by', orderByItems[0].value))
+      router.replace(pathname + '?' + createQueryPath('order_by', orderByItems[0].value))
     } else {
       if (orderBy.value !== selected.value) {
         setSelected(orderBy)
@@ -43,7 +30,7 @@ export const OrderBySelect: React.FC = () => {
 
   const handleOrderBy = (order: OrderByItem): void => {
     setSelected(order)
-    router.push(pathname + '?' + createMultiQuery([{ name: 'order_by', value: order.value }, { name: 'page', value: '1' }]))
+    router.push(pathname + '?' + createMultiQueryPath([{ name: 'order_by', value: order.value }, { name: 'page', value: '1' }]))
   }
 
   return (

@@ -17,12 +17,6 @@ export const Pagination: React.FC = () => {
 
   const [selected, setSelected] = useState(getDefaultPage(searchParams.get('page')))
 
-  // const createQuery = useCallback((name: string, value: string) => {
-  //   const params = new URLSearchParams(searchParams.toString())
-  //   params.set(name, value)
-  //   return params.toString()
-  // }, [searchParams])
-
   const fetchData = async (): Promise<void> => {
     setTotalPages(await GetTotalPages(category as string, searchParams))
   }

@@ -51,3 +51,11 @@ export const createQueryPath = (name: string, value: string): string => {
   params.set(name, value)
   return params.toString()
 }
+
+export const createMultiQueryPath = (queries: Array<{ name: string, value: string }>): string => {
+  const params = new URLSearchParams(location.search)
+  queries.forEach(query => {
+    params.set(query.name, query.value)
+  })
+  return params.toString()
+}
