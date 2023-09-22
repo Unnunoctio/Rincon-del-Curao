@@ -1,3 +1,4 @@
+// paginacion funcionando
 'use client'
 
 import { GetTotalPages } from '@/lib/api/get-total-pages'
