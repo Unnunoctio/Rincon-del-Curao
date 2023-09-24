@@ -59,3 +59,14 @@ export const createMultiQueryPath = (queries: Array<{ name: string, value: strin
   })
   return params.toString()
 }
+
+export const createAndDeleteQueryPath = (name: string, values: string[], deleteQueries: string[]): string => {
+  const params = new URLSearchParams(location.search)
+  deleteQueries.forEach(query => {
+    params.delete(query)
+  })
+  values.forEach(value => {
+    params.append(name, value)
+  })
+  return params.toString()
+}

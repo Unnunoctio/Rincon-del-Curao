@@ -1,4 +1,4 @@
-import { Filter } from '@/types/api'
+import { Filter, ObjectFilter } from '@/types/api'
 import { ReadonlyURLSearchParams } from 'next/navigation'
 import { getNavigateLink } from './path-helper'
 
@@ -24,4 +24,11 @@ export const getVariablesFilter = (category: string, searchParams: ReadonlyURLSe
   }
 
   return filters
+}
+
+export const getDefaultValues = (values: string[], options: ObjectFilter[]): ObjectFilter[] => {
+  if (values.length === 0) {
+    return []
+  }
+  return options.filter((option) => values.includes(option.value.toString()))
 }
