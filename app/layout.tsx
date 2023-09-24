@@ -1,10 +1,10 @@
-import './globals.css'
+import '@/styles/global.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import { ThemeProvider } from './theme-provider'
-import { ApolloWrapper } from './apollo-wrapper'
-import { NavigationV2 } from '@/components/navigation'
+import { ThemeProvider } from '@/lib/provider/theme-provider'
 import { Footer } from '@/components/footer'
+import { Navigation } from '@/components/navigation'
+import { ProgressProvider } from '@/lib/provider/progress-provider'
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -16,13 +16,17 @@ export const metadata: Metadata = {
   description: 'Recopilador de precios de distintos alcoholes vendidos en chile.'
 }
 
-export default function RootLayout ({ children }: { children: React.ReactNode }): React.ReactNode {
+interface RootLayoutProps {
+  children: JSX.Element
+}
+
+export default function RootLayout ({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang='es'>
       <body className={`${roboto.className} bg-page`}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <ApolloWrapper>
-            <NavigationV2 />
+        <ProgressProvider>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <Navigation />
             <div className='h-[72px]' />
             <main className='flex justify-center w-full'>
               <div className='px-2 sm:px-8 md:px-13 py-2 md:py-4 min-h-page-container max-w-page-container w-full'>
@@ -30,8 +34,8 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
               </div>
             </main>
             <Footer />
-          </ApolloWrapper>
-        </ThemeProvider>
+          </ThemeProvider>
+        </ProgressProvider>
       </body>
     </html>
   )

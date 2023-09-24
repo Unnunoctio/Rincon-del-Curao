@@ -1,14 +1,20 @@
-import { ProductsAverageList, ProductsDiscountList, SliderProducts } from '@/components/slider'
+import { Suspense } from 'react'
+import { AverageList, DiscountList, SliderBox, SliderLoader } from '@/components/slider'
 
-export default function HomePage (): React.ReactNode {
+export default function HomePage (): JSX.Element {
   return (
     <div className='flex flex-col h-full justify-evenly'>
-      <SliderProducts title='Ofertas del Día'>
-        <ProductsDiscountList />
-      </SliderProducts>
-      <SliderProducts title='Mejor valorados'>
-        <ProductsAverageList />
-      </SliderProducts>
+      <SliderBox title='Ofertas del Día'>
+        <Suspense fallback={<SliderLoader />}>
+          <DiscountList />
+        </Suspense>
+      </SliderBox>
+
+      <SliderBox title='Mejor Valorados'>
+        <Suspense fallback={<SliderLoader />}>
+          <AverageList />
+        </Suspense>
+      </SliderBox>
     </div>
   )
 }
