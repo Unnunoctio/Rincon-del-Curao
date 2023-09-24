@@ -3,6 +3,7 @@ import { OrderBySelect } from '@/components/order-by'
 import { Pagination } from '@/components/pagination'
 import { ProductList } from '@/components/products'
 import { ProductCount } from '@/components/products-count'
+import { ProductFilter } from '@/components/products-filter'
 import { getNavigateLink } from '@/helpers/path-helper'
 import { PathLink } from '@/types/path'
 import { Metadata } from 'next'
@@ -45,7 +46,7 @@ export default function ProductsPage ({ params }: Props): JSX.Element {
       {/* Filter & Products */}
       <section className='flex gap-4 mt-6'>
         <div className='hidden xl:block w-[274px]'>
-          {/* <FilterProducts /> */}
+          <ProductFilter />
         </div>
         <div className='flex flex-1 flex-col gap-y-8'>
           <ProductList />
