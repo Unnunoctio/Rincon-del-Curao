@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { Navigation } from '@/components/navigation'
 import { ThemeProvider } from '@/lib/provider/theme-provider'
+import { Footer } from '@/components/footer'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
               {children}
             </section>
           </main>
-          {/* Footer */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
