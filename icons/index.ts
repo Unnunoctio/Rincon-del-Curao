@@ -1,3 +1,6 @@
 export * from './gear-icon'
 export * from './logo-svg'
 export * from './menu-icon'
+export * from './moon-icon'
+export * from './sun-icon'
+export * from './system-icon'

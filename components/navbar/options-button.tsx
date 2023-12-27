@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+import { ThemeSwitch } from '../theme'
 import { GearIcon } from '@/icons'
 
 interface Props {
@@ -30,7 +31,7 @@ export const OptionsButton: React.FC<Props> = ({ close }) => {
           >
             <Popover.Panel className='absolute left-1/2 z-10 -translate-x-1/2 transform mt-1 px-4 sm:px-0'>
               <div className='overflow-hidden py-3 px-3 bg-primary rounded-lg border divider-primary shadow-lg'>
-                {/* <ThemeSwitch /> */}
+                <ThemeSwitch />
               </div>
             </Popover.Panel>
           </Transition>
