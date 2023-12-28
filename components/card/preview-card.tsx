@@ -3,16 +3,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AverageCard } from '../average'
 
-interface Props extends ProductPreview {}
+interface Props extends ProductPreview {
+  className?: string
+}
 
-export const PreviewCard: React.FC<Props> = ({ path, title, brand, price, bestPrice, discount, average, preview }) => {
+export const PreviewCard: React.FC<Props> = ({ path, title, brand, price, bestPrice, discount, average, preview, className = '' }) => {
   return (
-    <Link href={`productos/${path}`} className='min-w-[250px] max-w-[250px] h-fit'>
-      <article className='relative group flex flex-col items-center gap-3 p-3 bg-primary rounded-lg border divider-primary hover:border-hover transition-colors'>
+    <Link href={`productos/${path}`} className={`min-w-[250px] max-w-[250px] h-fit ${className}`}>
+      <article className='relative group flex flex-col items-center gap-3 p-3 bg-primary rounded-lg border divider-primary hover:border-hover'>
         <div className='w-[192px] h-[192px] overflow-hidden rounded'>
           <Image src={preview} alt={title} width={192} height={192} loading='lazy' className='aspect-square object-cover group-hover:scale-105 transition-transform' />
         </div>
-        {discount !== 0 && <span className='absolute left-0 top-[30px] text-primary bg-divider group-hover:bg-active/90 p-1.5 leading-none rounded-r-md transition-colors'>{discount}% desc.</span>}
+        {discount !== 0 && <span className='absolute left-0 top-[30px] text-primary bg-divider group-hover:bg-active/90 p-1.5 leading-none rounded-r-md'>{discount}% desc.</span>}
         {average !== 0 && <AverageCard average={average} className='absolute right-1' />}
         <div className='w-full flex flex-col gap-3'>
           <h3 className='font-medium text-[18px] text-primary text-center line-clamp-2 leading-6'>{title}</h3>

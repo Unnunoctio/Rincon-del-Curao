@@ -8,7 +8,7 @@ export const DiscountList = async (): Promise<JSX.Element> => {
   return (
     <Slider>
       {products.map((product, index) => (
-        <PreviewCard key={index} {...product} />
+        <PreviewCard key={index} {...product} className='snap-center sm:snap-start snap-always' />
       ))}
     </Slider>
   )
