@@ -10,7 +10,7 @@ interface Props {
 export const Logo: React.FC<Props> = ({ boxHeight, logoWidth, linkClass }) => {
   return (
     <div className={`${boxHeight} flex items-center`}>
-      <Link href='/' className={linkClass}>
+      <Link href='/' aria-label='Home' className={linkClass}>
         <LogoSVG className={`${logoWidth} h-auto aspect-[1078/342]`} />
       </Link>
     </div>
