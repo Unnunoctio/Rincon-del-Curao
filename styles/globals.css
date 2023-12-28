@@ -16,6 +16,9 @@
   .bg-selected {
     @apply bg-[#e2e8f0] dark:bg-[#282d33]
   }
+  .bg-divider {
+    @apply bg-[#e2e8f0] dark:bg-[#434548]
+  }
 
   /* Texts */
   .text-primary {
