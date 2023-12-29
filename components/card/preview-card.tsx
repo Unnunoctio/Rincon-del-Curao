@@ -9,7 +9,7 @@ interface Props extends ProductPreview {
 
 export const PreviewCard: React.FC<Props> = ({ path, title, brand, price, bestPrice, discount, average, preview, className = '' }) => {
   return (
-    <Link href={`productos/${path}`} className={`min-w-[250px] max-w-[250px] h-fit ${className}`}>
+    <Link href={`productos/${path}`} className={`min-w-[250px] max-w-[250px] h-fit select-none ${className}`}>
       <article className='relative group flex flex-col items-center gap-3 p-3 bg-primary rounded-lg border divider-primary hover:border-hover'>
         <div className='w-[192px] h-[192px] overflow-hidden rounded'>
           <Image src={preview} alt={title} width={192} height={192} loading='lazy' className='aspect-square object-cover group-hover:scale-105 transition-transform' />
