@@ -11,7 +11,10 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: 'Rincón del Curao',
+  title: {
+    default: 'Rincón del Curao',
+    template: '%s • Rincón del Curao'
+  },
   description: 'Recopilador de precios de distintos alcoholes vendidos en Chile.'
 }
 
