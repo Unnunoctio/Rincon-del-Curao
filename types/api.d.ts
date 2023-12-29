@@ -9,3 +9,8 @@ export interface ProductPreview {
   average: number
   preview: string
 }
+
+export interface IsProduct {
+  isExist: boolean
+  title: string | null
+}
