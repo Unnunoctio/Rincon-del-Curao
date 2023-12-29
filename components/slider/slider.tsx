@@ -2,7 +2,7 @@
 
 import { LeftIcon, RightIcon } from '@/icons'
 import '@/styles/slider.css'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
@@ -10,16 +10,17 @@ interface Props {
 
 export const Slider: React.FC<Props> = ({ children }) => {
   const ref = useRef<HTMLDivElement | null>(null)
+  const [leftBtn, setLeftBtn] = useState(false)
+  const [rightBtn, setRightBtn] = useState(true)
 
   const leftScroll = (): void => {
     if (ref.current !== null) {
-      const width = ref.current.scrollWidth
-      const left = ref.current.scrollLeft
+      ref.current.scrollLeft -= 250
+      setRightBtn(true)
 
-      if (left === 0) {
-        ref.current.scrollLeft = width
-      } else {
-        ref.current.scrollLeft -= 250
+      const left = ref.current.scrollLeft
+      if (left < 300) {
+        setLeftBtn(false)
       }
     }
   }
@@ -27,11 +28,12 @@ export const Slider: React.FC<Props> = ({ children }) => {
   const rightScroll = (): void => {
     if (ref.current !== null) {
       ref.current.scrollLeft += 250
+      setLeftBtn(true)
 
       const left = ref.current.scrollLeft
-      const width = ref.current.scrollWidth - ref.current.clientWidth
-      if (left === width) {
-        ref.current.scrollLeft = 0
+      const width = ref.current.scrollWidth - ref.current.clientWidth - 280
+      if (left >= width) {
+        setRightBtn(false)
       }
     }
   }
@@ -43,14 +45,14 @@ export const Slider: React.FC<Props> = ({ children }) => {
       </div>
       <button
         onClick={leftScroll}
-        className='group absolute bottom-1/2 -left-[24px] hidden sm:block'
+        className={`${leftBtn ? 'sm:block' : 'sm:hidden'} group absolute bottom-1/2 -left-[24px] hidden`}
         aria-label='scroll left'
       >
         <LeftIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>
       <button
         onClick={rightScroll}
-        className='group absolute bottom-1/2 -right-[24px] hidden sm:block'
+        className={`${rightBtn ? 'sm:block' : 'sm:hidden'} group absolute bottom-1/2 -right-[24px] hidden`}
         aria-label='scroll right'
       >
         <RightIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
