@@ -4,16 +4,16 @@ import { ThemeSwitch } from '../theme'
 import { GearIcon } from '@/icons'
 
 interface Props {
-  close: () => void
+  onClose: () => void
 }
 
-export const OptionsButton: React.FC<Props> = ({ close }) => {
+export const OptionsButton: React.FC<Props> = ({ onClose }) => {
   return (
     <Popover className='relative'>
       {({ open }) => (
         <>
           <Popover.Button
-            onClick={close}
+            onClick={onClose}
             className='group p-2 h-fit rounded-full focus:outline-none'
             aria-label='options'
           >

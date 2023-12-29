@@ -10,7 +10,7 @@ export const Navigation = (): JSX.Element => {
 
   return (
     <>
-      <Navbar isOpen={isNavOpen} open={() => setIsNavOpen(true)} close={() => setIsNavOpen(false)} sideOpen={() => setIsSideOpen(true)} />
+      <Navbar isOpen={isNavOpen} onOpen={() => setIsNavOpen(true)} onClose={() => setIsNavOpen(false)} sideOpen={() => setIsSideOpen(true)} />
     </>
   )
 }

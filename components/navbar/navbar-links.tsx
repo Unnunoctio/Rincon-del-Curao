@@ -3,12 +3,12 @@ import { navigateLinks } from '@/helpers/path'
 
 interface Props {
   isOpen: boolean
-  open: () => void
+  onOpen: () => void
 }
 
-export const NavbarLinks: React.FC<Props> = ({ isOpen, open }) => {
+export const NavbarLinks: React.FC<Props> = ({ isOpen, onOpen }) => {
   return (
-    <ul onMouseEnter={open} className={`hidden md:flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}>
+    <ul onMouseEnter={onOpen} className={`hidden md:flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}>
       {navigateLinks.map((link, index) => (
         <li key={index} className='flex flex-col pb-8'>
           <h4 className='flex items-center h-[71px] text-[18px] font-medium text-primary select-none'>{link.name}</h4>
