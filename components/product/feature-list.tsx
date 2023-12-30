@@ -8,8 +8,8 @@ interface Props extends Omit<Product, 'title' | 'image' | 'websites'> {}
 export const FeatureList: React.FC<Props> = ({ category, brand, subCategory, quantity, content, variety, strain, vineyard, alcoholicGrade, bitterness, package: packageProp, madeIn, temperature }) => {
   return (
     <section>
-      <h2 className='text-primary font-medium text-[20px]'>Características</h2>
-      <ul className='flex flex-col gap-2 w-[250px] mt-2'>
+      <h2 className='text-primary font-medium text-2xl'>Características</h2>
+      <ul className='flex flex-col gap-2 w-[230px] mt-2'>
         <FeatureItem title='Marca' value={brand}>
           <BrandIcon className='w-8 h-8 fill-transparent stroke-active' />
         </FeatureItem>

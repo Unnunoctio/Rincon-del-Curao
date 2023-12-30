@@ -33,7 +33,8 @@ const config: Config = {
         'product-list': 'repeat(auto-fit, minmax(250px, 1fr))'
       },
       screens: {
-        xs: '440px'
+        xs: '440px',
+        xm: '530px'
       }
     }
   },
