@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google'
 import { Navigation } from '@/components/navigation'
 import { ThemeProvider } from '@/lib/provider/theme-provider'
 import { Footer } from '@/components/footer'
+import NextTopLoader from 'nextjs-toploader'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -22,6 +23,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
   return (
     <html lang='es'>
       <body className={`${roboto.className} bg-page`}>
+        <NextTopLoader color='#d69e2e' showSpinner={false} />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Navigation />
           <div className='h-[72px]' />
