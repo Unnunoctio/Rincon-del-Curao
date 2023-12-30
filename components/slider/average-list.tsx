@@ -1,9 +1,11 @@
+import { getCookie } from '@/lib/cookies'
 import { getAverageProducts } from '@/lib/api'
 import { PreviewCard } from '../card/preview-card'
 import { Slider } from './slider'
 
 export const AverageList = async (): Promise<JSX.Element> => {
-  const products = await getAverageProducts()
+  const prefWebs = getCookie('prefWebs')
+  const products = await getAverageProducts((prefWebs === null) ? [] : prefWebs.split(','))
 
   return (
     <Slider>

@@ -1,9 +1,11 @@
+import { getCookie } from '@/lib/cookies'
 import { getDiscountProducts } from '@/lib/api'
 import { PreviewCard } from '../card/preview-card'
 import { Slider } from './slider'
 
 export const DiscountList = async (): Promise<JSX.Element> => {
-  const products = await getDiscountProducts()
+  const prefWebs = getCookie('prefWebs')
+  const products = await getDiscountProducts((prefWebs === null) ? [] : prefWebs.split(','))
 
   return (
     <Slider>
