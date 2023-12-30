@@ -2,7 +2,6 @@
 
 import { getAllWebs as getAllWebsApi } from '@/lib/api'
 import { Web } from '@/types/api'
-import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 
 export async function getAllWebs (): Promise<Web[]> {
@@ -23,5 +22,4 @@ export async function setPrefWebs (formData: FormData): Promise <void> {
   const prefWebs = formData.getAll('webs').join(',')
   const cookieStore = cookies()
   cookieStore.set('prefWebs', prefWebs)
-  revalidatePath('/', 'page')
 }
