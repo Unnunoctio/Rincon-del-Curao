@@ -48,3 +48,13 @@ export const isValidNavigateLink = (link: Route): boolean => {
   }
   return false
 }
+
+export const createBreadcrumbLinks = (titles: string[]): PathLink[] => {
+  return titles.map((title) => {
+    if (title === 'Home') return { name: title, route: '/' }
+    const link = getNavigateLinkByName(title)
+    if (link !== undefined) return link
+
+    return { name: title, route: '/#' }
+  })
+}
