@@ -1,4 +1,5 @@
 export * from './arrow-up-icon'
+export * from './exclamation-icon'
 export * from './gear-icon'
 export * from './left-icon'
 export * from './logo-svg'
