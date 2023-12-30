@@ -22,6 +22,13 @@ export interface Web {
   logo: string
 }
 
+export interface ProductLinked {
+  path: string
+  title: string
+  price: number
+  bestPrice: number
+}
+
 export interface Product {
   title: string
   brand: string
