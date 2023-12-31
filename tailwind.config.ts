@@ -19,7 +19,8 @@ const config: Config = {
         13: '3.25rem'
       },
       minHeight: {
-        'page-container': 'calc(100vh - 72px)'
+        'page-container': 'calc(100vh - 72px)',
+        'product-list': 'calc(100vh - 310px)'
       },
       maxWidth: {
         'nav-container': '1450px',
