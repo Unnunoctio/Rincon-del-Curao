@@ -19,10 +19,10 @@ interface Response {
   products: ProductPreview[]
 }
 
-export const getProducts = async (availableWebs: string[] = [], page: number, category: string): Promise<ProductPreview[]> => {
+export const getProducts = async (availableWebs: string[] = [], page: number, orderBy: string, category: string): Promise<ProductPreview[]> => {
   const variables = {
     availableWebs,
-    orderBy: 'SCORE_DESC',
+    orderBy,
     page,
     category
   }

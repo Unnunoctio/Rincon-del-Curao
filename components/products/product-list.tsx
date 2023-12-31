@@ -4,12 +4,13 @@ import { PreviewCard } from '../card/preview-card'
 
 interface Props {
   page: number
+  orderBy: string
   category: string
 }
 
-export const ProductList: React.FC<Props> = async ({ page, category }) => {
+export const ProductList: React.FC<Props> = async ({ page, orderBy, category }) => {
   const prefWebs = getCookie('prefWebs')
-  const products = await getProducts((prefWebs === null) ? [] : prefWebs.split(','), page, category)
+  const products = await getProducts((prefWebs === null) ? [] : prefWebs.split(','), page, orderBy, category)
 
   return (
     <div className='grid grid-cols-product-list justify-items-center gap-8 min-h-product-list'>
