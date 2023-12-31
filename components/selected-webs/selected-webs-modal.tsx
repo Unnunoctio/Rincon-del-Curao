@@ -1,20 +1,34 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
 
-import { getAllWebs, getCookie, setPrefWebs } from '@/app/actions'
-import { Web } from '@/types/api'
-import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { getAllWebs, getCookie, setPrefWebs } from '@/app/actions'
+import { Dialog, Transition } from '@headlessui/react'
 import { WebCheckbox } from './web-checkbox'
 import { RightIcon } from '@/icons'
+import { Web } from '@/types/api'
 
 export const SelectedWebsModal = (): JSX.Element => {
   const [allWebs, setAllWebs] = useState<Web[]>([])
   const [selectedWebs, setSelectedWebs] = useState<string[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
   const onOpen = (): void => setIsOpen(true)
   const onClose = (): void => setIsOpen(false)
+
+  const onAction = async (formData: FormData): Promise<void> => {
+    await setPrefWebs(formData)
+    if (pathname.split('/').length === 2) {
+      const params = new URLSearchParams(searchParams)
+      params.set('page', '1')
+      router.replace(`${pathname}?${params.toString()}`)
+    }
+  }
 
   return (
     <>
@@ -54,7 +68,7 @@ export const SelectedWebsModal = (): JSX.Element => {
           </Transition.Child>
 
           <div className='fixed inset-0'>
-            <form action={setPrefWebs} className='flex min-h-full items-center justify-center p-4 text-center'>
+            <form action={onAction} className='flex min-h-full items-center justify-center p-4 text-center'>
               <Transition.Child
                 as={Fragment}
                 enter='ease-out duration-300'
@@ -80,7 +94,7 @@ export const SelectedWebsModal = (): JSX.Element => {
                   <hr className='divider-primary' />
                   {/* Botones de guardar y cancelar */}
                   <div className='flex justify-end gap-4'>
-                    <button onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary hover:bg-selected hover:text-active hover:border-active'>
+                    <button type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary hover:bg-selected hover:text-active hover:border-active'>
                       Cancelar
                     </button>
                     <button type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary hover:bg-active'>
