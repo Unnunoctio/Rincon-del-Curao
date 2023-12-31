@@ -26,7 +26,7 @@ export const SelectedWebsModal = (): JSX.Element => {
     if (pathname.split('/').length === 2) {
       const params = new URLSearchParams(searchParams)
       params.set('page', '1')
-      router.replace(`${pathname}?${params.toString()}`)
+      router.push(`${pathname}?${params.toString()}`)
     }
   }
 
