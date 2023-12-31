@@ -43,7 +43,7 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
           </Suspense>
         </div>
 
-        <OrderBySelect />
+        <OrderBySelect orderBy={orderBy as OrderByEnum} />
       </header>
       {/* Filter & Product list */}
       <section className='flex gap-4 mt-6'>

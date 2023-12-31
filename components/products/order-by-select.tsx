@@ -1,20 +1,27 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 'use client'
 
-import { orderByItems } from '@/helpers/order-by'
-import { DownIcon } from '@/icons'
-import { OrderByEnum } from '@/types/enums'
-import { Listbox, Transition } from '@headlessui/react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { OrderByEnum } from '@/types/enums'
+import { orderByItems } from '@/helpers/order-by'
+import { Listbox, Transition } from '@headlessui/react'
+import { DownIcon } from '@/icons'
 
-export const OrderBySelect: React.FC = () => {
+interface Props {
+  orderBy: OrderByEnum
+}
+
+export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const orderBy = searchParams.get('order_by') ?? OrderByEnum.SCORE_DESC
 
   const [selected, setSelected] = useState(orderByItems.find(ob => ob.value === orderBy))
+
+  useEffect(() => {
+    setSelected(orderByItems.find(ob => ob.value === orderBy))
+  }, [orderBy])
 
   const createPageURL = (orderBy: string): string => {
     const params = new URLSearchParams(searchParams)
