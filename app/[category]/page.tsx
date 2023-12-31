@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { createBreadcrumbLinks, getNavigateLink } from '@/helpers/path'
-import { Breadcrumb } from '@/components/breadcrumb'
-import { ProductList } from '@/components/products'
 import { Suspense } from 'react'
 import { getCookie } from '@/lib/cookies'
-import { ProductCount } from '@/components/products/product-count'
+import { getTotalPages } from '@/lib/api'
+import { createBreadcrumbLinks, getNavigateLink } from '@/helpers/path'
+import { Breadcrumb } from '@/components/breadcrumb'
+import { ProductCount, ProductList, ProductListLoader } from '@/components/products'
+import { Pagination } from '@/components/pagination'
 
 interface Props {
   params: { category: string }
@@ -27,6 +28,7 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
   const prefWebs = getCookie('prefWebs')
   const link = getNavigateLink(`/${params.category}`)
   const page = Number(searchParams.page) || 1
+  const totalPages = await getTotalPages((prefWebs === null) ? [] : prefWebs.split(','), link?.name as string)
 
   return (
     <>
@@ -41,10 +43,10 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
       <section className='flex gap-4 mt-6'>
         <div className='hidden xl:block w-[280px]' />
         <div className='flex flex-1 flex-col gap-y-8'>
-          <Suspense key={`${prefWebs as string}${page}`} fallback={<span>Cargando...</span>}>
+          <Suspense key={`${prefWebs as string}${page}`} fallback={<ProductListLoader />}>
             <ProductList page={page} category={link?.name as string} />
           </Suspense>
-          {/* Pagination */}
+          <Pagination totalPages={totalPages} />
         </div>
       </section>
     </>
