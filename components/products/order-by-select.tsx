@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 'use client'
 
-import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Fragment, useEffect, useState } from 'react'
 import { OrderByEnum } from '@/types/enums'
 import { orderByItems } from '@/helpers/order-by'
 import { Listbox, Transition } from '@headlessui/react'
 import { DownIcon } from '@/icons'
+import { OrderBy } from '@/types/types'
+import Link from 'next/link'
 
 interface Props {
   orderBy: OrderByEnum
 }
 
 export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
+  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -30,8 +32,14 @@ export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
     return `${pathname}?${params.toString()}`
   }
 
+  const onChange = (value: OrderBy): void => {
+    console.log('click')
+    // setSelected(value)
+    router.push(createPageURL(value.value))
+  }
+
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={onChange}>
       {({ open }) => (
         <div className='relative w-[170px] sm:w-[200px]'>
           <Listbox.Button
@@ -59,6 +67,7 @@ export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
                 {orderByItems.map((item, idx) => (
                   <Link key={idx} href={createPageURL(item.value)}>
                     <Listbox.Option
+                      key={idx}
                       value={item}
                       className={({ selected }) => `relative cursor-pointer select-none py-1.5 pl-3 text-primary ${selected ? 'bg-selected' : ''} ${!selected ? 'hover:bg-hover active:bg-selected' : ''}`}
                     >
