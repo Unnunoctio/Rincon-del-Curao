@@ -1,16 +1,23 @@
+import { TotalOptions } from '@/types/api'
 import { FilterOptions } from '@/types/types'
 
 const query = `
-  query Query($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
-    totalPages(availableWebs: $availableWebs, category: $category, options: $options)
+  query TotalOptions($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
+    totalOptions(availableWebs: $availableWebs, category: $category, options: $options) {
+      brand {
+        label
+        count
+        value
+      }
+    }
   }
 `
 
 interface Response {
-  totalPages: number
+  totalOptions: TotalOptions
 }
 
-export const getTotalPages = async (availableWebs: string[], category: string, options: FilterOptions): Promise<number> => {
+export const getTotalOptions = async (availableWebs: string[], category: string, options: FilterOptions): Promise<TotalOptions> => {
   const variables = {
     availableWebs,
     category,
@@ -31,5 +38,5 @@ export const getTotalPages = async (availableWebs: string[], category: string, o
   })
 
   const { data }: { data: Response } = await res.json()
-  return data.totalPages
+  return data.totalOptions
 }

@@ -1,7 +1,8 @@
+import { FilterOptions } from '@/types/types'
 
 const query = `
-  query Query($availableWebs: [String]!, $category: Category!) {
-    totalProducts(availableWebs: $availableWebs, category: $category)
+  query Query($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
+    totalProducts(availableWebs: $availableWebs, category: $category, options: $options)
   }
 `
 
@@ -9,10 +10,11 @@ interface Response {
   totalProducts: number
 }
 
-export const getTotalProducts = async (availableWebs: string[], category: string): Promise<number> => {
+export const getTotalProducts = async (availableWebs: string[], category: string, options: FilterOptions): Promise<number> => {
   const variables = {
     availableWebs,
-    category
+    category,
+    options
   }
 
   const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {

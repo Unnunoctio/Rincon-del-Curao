@@ -10,6 +10,16 @@ export interface ProductPreview {
   preview: string
 }
 
+export interface OptionType {
+  label: string
+  count: number
+  value: string
+}
+
+export interface TotalOptions {
+  brand: OptionType[]
+}
+
 export interface IsProduct {
   isExist: boolean
   title: string | null
