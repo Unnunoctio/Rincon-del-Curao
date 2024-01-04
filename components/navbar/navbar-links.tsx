@@ -15,7 +15,7 @@ export const NavbarLinks: React.FC<Props> = ({ isOpen, onOpen }) => {
           <ul className='flex flex-col gap-3'>
             {link.categories.map((category, index) => (
               <li key={index}>
-                <Link href={`${link.route}?category=${category.query}`} className='w-fit text-secondary hover:underline'>
+                <Link href={`${link.route}?sub_category=${category.query}`} className='w-fit text-secondary hover:underline'>
                   {category.name}
                 </Link>
               </li>

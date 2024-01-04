@@ -14,7 +14,7 @@ export const SidebarLinks: React.FC<Props> = ({ onClose }) => {
           <ul className='flex flex-col gap-4 pl-4 border-l border-primary'>
             {link.categories.map((category, index) => (
               <li key={index}>
-                <Link href={`${link.route}?category=${category.query}`} onClick={onClose} className='text-secondary hover:underline'>
+                <Link href={`${link.route}?sub_category=${category.query}`} onClick={onClose} className='text-secondary hover:underline'>
                   {category.name}
                 </Link>
               </li>
