@@ -19,5 +19,6 @@ export const getFilterOptions = (searchParams: { [key: string]: string | string[
     Array.isArray(searchParams.package) ? (options.package = searchParams.package) : (options.package = [searchParams.package])
   }
 
+  console.log(options)
   return options
 }
