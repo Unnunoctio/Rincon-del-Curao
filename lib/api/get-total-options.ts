@@ -4,7 +4,27 @@ import { FilterOptions } from '@/types/types'
 const query = `
   query TotalOptions($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
     totalOptions(availableWebs: $availableWebs, category: $category, options: $options) {
+      subCategory {
+        label
+        count
+        value
+      }
       brand {
+        label
+        count
+        value
+      }
+      content {
+        label
+        count
+        value
+      }
+      quantity {
+        label
+        count
+        value
+      }
+      package {
         label
         count
         value

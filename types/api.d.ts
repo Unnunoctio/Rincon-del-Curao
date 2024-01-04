@@ -17,7 +17,11 @@ export interface OptionType {
 }
 
 export interface TotalOptions {
+  subCategory: OptionType[]
   brand: OptionType[]
+  content: OptionType[]
+  quantity: OptionType[]
+  package: OptionType[]
 }
 
 export interface IsProduct {

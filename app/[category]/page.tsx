@@ -52,8 +52,8 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
       <header className='flex flex-col xl:flex-row gap-2 justify-between xl:items-center py-4'>
         <div className='flex items-baseline gap-1.5'>
           <h1 className='my-2 text-3xl font-medium text-primary'>{link?.name}</h1>
-          <Suspense key={`${prefWebs as string}${JSON.stringify(filterOptions)}`} fallback={<span className='inline-block text-active'>Cargando...</span>}>
-            <ProductCount category={link?.name as string} filterOptions={filterOptions} className='inline-block text-active' />
+          <Suspense key={`${prefWebs as string}`} fallback={<span className='inline-block xl:hidden text-active'>Cargando...</span>}>
+            <ProductCount category={link?.name as string} filterOptions={filterOptions} className='inline-block xl:hidden text-active' />
           </Suspense>
         </div>
 
