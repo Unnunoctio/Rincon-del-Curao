@@ -1,25 +1,23 @@
 import { Product } from '@/types/api'
 
 const query = `
-  query Query($path: ID!) {
-    product(path: $path) {
+  query Product($path: ID!, $availableWebs: [String]!) {
+    product(path: $path, availableWebs: $availableWebs) {
       title
+      brand
       quantity
-      imageUrl
-      product {
-        name
-        brand
-        alcoholicGrade
-        content
-        package
-        category
-        subCategory
-        variety
-        bitterness
-        strain
-        vineyard
-        madeIn
-      }
+      alcoholicGrade
+      content
+      package
+      category
+      subCategory
+      madeIn
+      variety
+      bitterness
+      temperature
+      strain
+      vineyard
+      image
       websites {
         name
         logo
@@ -27,17 +25,23 @@ const query = `
         price
         bestPrice
         average
+        records {
+          price
+          date
+        }
       }
     }
   }
 `
+
 interface Response {
   product: Product
 }
 
-export const getProduct = async (path: string): Promise<Product | null> => {
+export const getProduct = async (path: string, availableWebs: string[] = []): Promise<Product> => {
   const variables = {
-    path
+    path,
+    availableWebs
   }
 
   const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
@@ -54,6 +58,5 @@ export const getProduct = async (path: string): Promise<Product | null> => {
   })
 
   const { data }: { data: Response } = await res.json()
-  if (data === null) return null
   return data.product
 }

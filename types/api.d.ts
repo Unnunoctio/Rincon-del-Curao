@@ -1,41 +1,65 @@
-import { OrderByEnum } from './enum'
 
-// Product
-export interface ProductSlider {
+export interface ProductPreview {
   path: string
   title: string
   brand: string
-  category: string
+  price: number
   bestPrice: number
-  imageUrl: string
-}
-
-export interface DiscountProduct extends ProductSlider {
   discount: number
-}
-
-export interface AverageProduct extends ProductSlider {
   average: number
+  preview: string
 }
 
-export interface ProductList extends Omit<ProductSlider, 'category'> {
-  alcoholicGrade: number
-  content: number
+export interface OptionType {
+  label: string
+  count: number
+  value: string
 }
 
-interface ProductUnit {
+export interface TotalOptions {
+  subCategory: OptionType[]
+  brand: OptionType[]
+  content: OptionType[]
+  quantity: OptionType[]
+  package: OptionType[]
+}
+
+export interface IsProduct {
+  isExist: boolean
+  title: string | null
+}
+
+export interface Web {
+  code: string
   name: string
+  url: string
+  logo: string
+}
+
+export interface ProductLinked {
+  path: string
+  title: string
+  price: number
+  bestPrice: number
+}
+
+export interface Product {
+  title: string
   brand: string
+  quantity: number
   alcoholicGrade: number
   content: number
   package: string
   category: string
   subCategory: string
-  madeIn?: string
-  variety?: string
-  bitterness?: string
-  strain?: string
-  vineyard: string
+  madeIn: string
+  variety: string | null
+  bitterness: number | null
+  temperature: string | null
+  strain: string | null
+  vineyard: string | null
+  image: string
+  websites: Website[]
 }
 
 export interface Website {
@@ -45,41 +69,10 @@ export interface Website {
   price: number
   bestPrice: number
   average: number
+  records: Record[]
 }
 
-export interface Product {
-  title: string
-  quantity: number
-  imageUrl: string
-  product: ProductUnit
-  websites: Website[]
-}
-
-// Order by
-export interface OrderByItem {
-  label: string
-  value: OrderByEnum
-}
-
-// Filter
-export interface Filter {
-  category: string
-  sub_category?: string[]
-  brand?: string[]
-  content?: number[]
-  quantity?: number[]
-  package?: string[]
-}
-
-export interface ObjectFilter {
-  label: string
-  value: string | number
-}
-
-export interface FilterOptions {
-  subCategory: ObjectFilter[]
-  brand: ObjectFilter[]
-  content: ObjectFilter[]
-  quantity: ObjectFilter[]
-  package: ObjectFilter[]
+export interface Record {
+  price: number
+  date: string
 }

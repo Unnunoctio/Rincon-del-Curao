@@ -1,18 +1,18 @@
-import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 import { SidebarLogo } from '../logo'
-import { CloseButton } from './close-button'
+import { SidebarCloseButton } from './sidebar-close-button'
 import { SidebarLinks } from './sidebar-links'
 
 interface Props {
-  isSideOpen: boolean
-  sideClose: () => void
+  isOpen: boolean
+  onClose: () => void
 }
 
-export const Sidebar: React.FC<Props> = ({ isSideOpen, sideClose }) => {
+export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
-    <Transition.Root show={isSideOpen} as={Fragment}>
-      <Dialog as='div' className='relative z-40' onClose={sideClose}>
+    <Transition.Root show={isOpen} as={Fragment}>
+      <Dialog as='div' className='relative z-40' onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter='ease-in-out duration-500'
@@ -41,12 +41,12 @@ export const Sidebar: React.FC<Props> = ({ isSideOpen, sideClose }) => {
                   <div className='flex h-full flex-col overflow-y-auto bg-primary shadow-xl border-r divider-primary'>
                     <div className='px-4'>
                       <Dialog.Title className='flex items-center justify-between'>
-                        <SidebarLogo boxHeight='h-[88px]' logoWidth='w-[140px]' sideClose={sideClose} linkClassName='transition-transform scale-95 hover:scale-100 sm:scale-100 sm:hover:scale-105' />
-                        <CloseButton sideClose={sideClose} />
+                        <SidebarLogo boxHeight='h-[88px]' logoWidth='w-[140px]' sideClose={onClose} linkClass='transition-transform scale-[0.97] hover:scale-100 sm:scale-100 sm:hover:scale-[1.03]' />
+                        <SidebarCloseButton sideClose={onClose} />
                       </Dialog.Title>
                     </div>
                     <div className='relative mt-6 flex-1 px-4 pb-10'>
-                      <SidebarLinks sideClose={sideClose} />
+                      <SidebarLinks onClose={onClose} />
                     </div>
                   </div>
                 </Dialog.Panel>

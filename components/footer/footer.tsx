@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
       <div className='flex flex-col px-4 md:px-8 max-w-nav-container w-full'>
         <div className='flex justify-between'>
           <div className='flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[300px]'>
-            <Logo boxHeight='h-[60px]' logoWidth='w-[120px]' linkClassName='transition-transform hover:scale-105' />
+            <Logo boxHeight='h-[60px]' logoWidth='w-[120px]' linkClass='transition-transform hover:scale-105' />
             <p className='italic text-center sm:text-left text-primary'>
               Nuestra misión es ayudar a los consumidores a escoger las mejores bebidas para sus presupuestos.
             </p>

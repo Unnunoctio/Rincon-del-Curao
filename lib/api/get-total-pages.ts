@@ -1,18 +1,20 @@
-import { getVariablesFilter } from '@/helpers/filter-helper'
-import { ReadonlyURLSearchParams } from 'next/navigation'
+import { FilterOptions } from '@/types/types'
 
 const query = `
-  query Query($filters: FilterInput!) {
-    totalPages(filters: $filters)
+  query Query($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
+    totalPages(availableWebs: $availableWebs, category: $category, options: $options)
   }
 `
+
 interface Response {
   totalPages: number
 }
 
-export const GetTotalPages = async (category: string, searchParams: ReadonlyURLSearchParams): Promise<number> => {
+export const getTotalPages = async (availableWebs: string[], category: string, options: FilterOptions): Promise<number> => {
   const variables = {
-    filters: getVariablesFilter(category, searchParams)
+    availableWebs,
+    category,
+    options
   }
 
   const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {

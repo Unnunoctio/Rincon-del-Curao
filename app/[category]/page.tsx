@@ -1,56 +1,74 @@
-import { Breadcrumb } from '@/components/breadcrumb'
-import { OrderBySelect } from '@/components/order-by'
-import { Pagination } from '@/components/pagination'
-import { ProductList } from '@/components/products'
-import { ProductCount } from '@/components/products-count'
-import { ProductFilter } from '@/components/products-filter'
-import { getNavigateLink } from '@/helpers/path-helper'
-import { PathLink } from '@/types/path'
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
+import { OrderByEnum } from '@/types/enums'
+import { getCookie } from '@/lib/cookies'
+import { getTotalOptions, getTotalPages } from '@/lib/api'
+import { createBreadcrumbLinks, getNavigateLink } from '@/helpers/path'
+import { Breadcrumb } from '@/components/breadcrumb'
+import { OrderBySelect, ProductCount, ProductList, ProductListFilter, ProductListLoader } from '@/components/products'
+import { Pagination } from '@/components/pagination'
+import { getFilterOptions } from '@/helpers/filter-options'
 
 interface Props {
   params: { category: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
-  const category = params.category
+  const { category } = params
   const link = getNavigateLink(`/${category}`)
-  if (link === undefined) return {}
+  if (link === undefined) return notFound()
+
   return {
-    title: `${link.name} | Rincón del Curao`
+    title: link.name
   }
 }
 
-export default function ProductsPage ({ params }: Props): JSX.Element {
+export default async function ProductsPage ({ params, searchParams }: Props): Promise<JSX.Element> {
+  // cookies
+  const prefWebs = getCookie('prefWebs')
+
+  // params
   const link = getNavigateLink(`/${params.category}`)
-  if (link === undefined) return notFound()
-  const breadcrumbLinks = [{ name: 'Home', route: '/' }, link] as PathLink[]
+
+  // searchparams
+  const page = Number(searchParams.page) || 1
+  const orderBy = searchParams.order_by ?? OrderByEnum.SCORE_DESC
+  const filterOptions = getFilterOptions(searchParams)
+
+  // api
+  const [totalPages, totalOptions] = await Promise.all([
+    getTotalPages((prefWebs === null) ? [] : prefWebs.split(','), link?.name as string, filterOptions),
+    getTotalOptions((prefWebs === null) ? [] : prefWebs.split(','), link?.name as string, filterOptions)
+  ])
+
+  // sanitizar la url
 
   return (
     <>
-      <Breadcrumb links={breadcrumbLinks} />
-      {/* Title & OrderBy */}
-      <header className='flex flex-col xl:flex-row gap-3 justify-between py-4'>
+      <Breadcrumb links={createBreadcrumbLinks(['Home', link?.name as string])} />
+      <header className='flex flex-col xl:flex-row gap-2 justify-between xl:items-center py-4'>
         <div className='flex items-baseline gap-1.5'>
-          <h2 className='text-3xl font-medium text-primary'>{link.name}</h2>
-          <ProductCount className='inline-block xl:hidden text-active' />
+          <h1 className='my-2 text-3xl font-medium text-primary'>{link?.name}</h1>
+          <Suspense key={`${prefWebs as string}`} fallback={<span className='inline-block xl:hidden text-active'>Cargando...</span>}>
+            <ProductCount category={link?.name as string} filterOptions={filterOptions} className='inline-block xl:hidden text-active' />
+          </Suspense>
         </div>
 
-        <div className='flex justify-between'>
-          <div className='block xl:hidden'>Filter</div>
-          <OrderBySelect />
-        </div>
+        <OrderBySelect orderBy={orderBy as OrderByEnum} />
       </header>
-
-      {/* Filter & Products */}
+      {/* Filter & Product list */}
       <section className='flex gap-4 mt-6'>
-        <div className='hidden xl:block w-[274px]'>
-          <ProductFilter />
+        <div className='hidden xl:block w-[280px]'>
+          <ProductListFilter category={link?.name as string} filterOptions={filterOptions} totalOptions={totalOptions} />
         </div>
         <div className='flex flex-1 flex-col gap-y-8'>
-          <ProductList />
-          <Pagination />
+          <Suspense key={`${prefWebs as string}${page}${orderBy as string}`} fallback={<ProductListLoader />}>
+            <ProductList page={page} orderBy={orderBy as string} category={link?.name as string} filterOptions={filterOptions} />
+          </Suspense>
+          <Pagination totalPages={totalPages} />
         </div>
       </section>
     </>

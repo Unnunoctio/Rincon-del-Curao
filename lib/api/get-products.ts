@@ -1,31 +1,32 @@
-import { getVariablesFilter } from '@/helpers/filter-helper'
-import { getDefaultOrderBy } from '@/helpers/order-by-helper'
-import { getDefaultPage } from '@/helpers/pagination-helper'
-import { ProductList } from '@/types/api'
-import { ReadonlyURLSearchParams } from 'next/navigation'
+import { ProductPreview } from '@/types/api'
+import { FilterOptions } from '@/types/types'
 
 const query = `
-  query Query($orderBy: OrderByEnum!, $page: Int!, $filters: FilterInput!) {
-    products(orderBy: $orderBy, page: $page, filters: $filters) {
+  query Products($orderBy: OrderBy!, $availableWebs: [String]!, $page: Int!, $category: Category!, $options: OptionsInput!) {
+    products(orderBy: $orderBy, availableWebs: $availableWebs, page: $page, category: $category, options: $options) {
       path
       title
       brand
-      alcoholicGrade
-      content
+      price
       bestPrice
-      imageUrl
+      discount
+      average
+      preview
     }
   }
 `
+
 interface Response {
-  products: ProductList[]
+  products: ProductPreview[]
 }
 
-export const getProducts = async (category: string, searchParams: ReadonlyURLSearchParams): Promise<ProductList[]> => {
+export const getProducts = async (availableWebs: string[] = [], page: number, orderBy: string, category: string, options: FilterOptions): Promise<ProductPreview[]> => {
   const variables = {
-    orderBy: getDefaultOrderBy(searchParams.get('order_by')).value,
-    page: getDefaultPage(searchParams.get('page')),
-    filters: getVariablesFilter(category, searchParams)
+    availableWebs,
+    orderBy,
+    page,
+    category,
+    options
   }
 
   const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {

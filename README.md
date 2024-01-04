@@ -1,2 +1,3 @@
-# Rincon-del-Curao-V2
+# Rincón del Curao
+
 A scraper of different types of alcohols sold in Chile.

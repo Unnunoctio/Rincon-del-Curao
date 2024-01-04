@@ -1,5 +1,5 @@
+import { navigateLinks } from '@/helpers/path'
 import Link from 'next/link'
-import { navigateLinks } from '@/helpers/path-helper'
 
 export const FooterNavigation: React.FC = () => {
   return (

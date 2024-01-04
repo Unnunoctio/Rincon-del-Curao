@@ -1,11 +1,11 @@
+import { MoonIcon, SunIcon, SystemIcon } from '@/icons'
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon, SystemIcon } from './icons'
 
 export const ThemeSwitch: React.FC = () => {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className='flex items-center gap-1 p-1 rounded-full border divider-primary'>
+    <div className='flex items-center gap-1 p-0.5 rounded-full border divider-primary'>
       <button
         onClick={() => setTheme('light')}
         className={`group ${theme === 'light' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}

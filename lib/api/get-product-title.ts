@@ -1,17 +1,19 @@
+import { IsProduct } from '@/types/api'
+
 const query = `
   query Query($path: ID!) {
-    product(path: $path) {
+    isProductPath(path: $path) {
+      isExist
       title
     }
   }
 `
+
 interface Response {
-  product: {
-    title: string
-  }
+  isProductPath: IsProduct
 }
 
-export const getProductTitle = async (path: string): Promise<string | null> => {
+export const getProductTitle = async (path: string): Promise<IsProduct> => {
   const variables = {
     path
   }
@@ -30,6 +32,5 @@ export const getProductTitle = async (path: string): Promise<string | null> => {
   })
 
   const { data }: { data: Response } = await res.json()
-  if (data === null) return null
-  return data.product.title
+  return data.isProductPath
 }

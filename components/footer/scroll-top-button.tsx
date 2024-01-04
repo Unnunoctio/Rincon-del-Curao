@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowUpIcon } from './icons/arrow-up-icon'
+import { ArrowUpIcon } from '@/icons'
 
 export const ScrollTopButton: React.FC = () => {
   const scrollToTop = (): void => {

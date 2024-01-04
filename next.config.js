@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'santaisabel.vtexassets.com',
-      'jumbo.vtexassets.com',
-      'assets.jumbo.cl',
-      'assets.santaisabel.cl'
+    remotePatterns: [
+      { protocol: 'https', hostname: 'santaisabel.vtexassets.com' },
+      { protocol: 'https', hostname: 'jumbo.vtexassets.com' },
+      { protocol: 'https', hostname: 'assets.jumbo.cl' },
+      { protocol: 'https', hostname: 'assets.santaisabel.cl' }
     ]
   }
 }

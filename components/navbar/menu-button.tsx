@@ -1,4 +1,4 @@
-import { MenuIcon } from './icons'
+import { MenuIcon } from '@/icons'
 
 interface Props {
   sideOpen: () => void

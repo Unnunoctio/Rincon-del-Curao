@@ -1,19 +1,20 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-import { GearIcon } from './icons'
 import { ThemeSwitch } from '../theme'
+import { GearIcon } from '@/icons'
+import { SelectedWebsModal } from '../selected-webs'
 
 interface Props {
-  navClose: () => void
+  onClose: () => void
 }
 
-export const OptionsButton: React.FC<Props> = ({ navClose }) => {
+export const OptionsButton: React.FC<Props> = ({ onClose }) => {
   return (
     <Popover className='relative'>
       {({ open }) => (
         <>
           <Popover.Button
-            onClick={navClose}
+            onClick={onClose}
             className='group p-2 h-fit rounded-full focus:outline-none'
             aria-label='options'
           >
@@ -30,8 +31,9 @@ export const OptionsButton: React.FC<Props> = ({ navClose }) => {
             leaveTo='opacity-0 translate-y-1'
           >
             <Popover.Panel className='absolute left-1/2 z-10 -translate-x-1/2 transform mt-1 px-4 sm:px-0'>
-              <div className='overflow-hidden py-3 px-3 bg-primary rounded-lg border divider-primary shadow-lg'>
+              <div className='overflow-hidden flex flex-col gap-2 py-3 px-3 bg-primary rounded-lg border divider-primary shadow-lg'>
                 <ThemeSwitch />
+                <SelectedWebsModal />
               </div>
             </Popover.Panel>
           </Transition>

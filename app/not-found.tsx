@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: '404 | Rincón del Curao'
+  title: '404'
 }
 
-export default function NotFound (): React.ReactNode {
+export default function NotFound (): JSX.Element {
   return (
     <div className='flex items-center justify-center h-full'>
       <div className='flex flex-col gap-6'>
