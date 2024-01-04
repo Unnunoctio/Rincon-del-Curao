@@ -26,7 +26,7 @@ export const ProductListFilter: React.FC<Props> = ({ category, filterOptions, to
       <div className='flex flex-col gap-2 py-3'>
         <article>
           <span className='text-primary text-[18px] font-medium'>Categoria</span>
-          <MultiSelect name='category' options={totalOptions.subCategory} />
+          <MultiSelect name='sub_category' options={totalOptions.subCategory} />
         </article>
         <article>
           <span className='text-primary text-[18px] font-medium'>Marca</span>

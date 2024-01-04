@@ -3,8 +3,8 @@ import { FilterOptions } from '@/types/types'
 export const getFilterOptions = (searchParams: { [key: string]: string | string[] | undefined }): FilterOptions => {
   const options: FilterOptions = {}
 
-  if (searchParams.category !== undefined) {
-    Array.isArray(searchParams.category) ? (options.subCategory = searchParams.category) : (options.subCategory = [searchParams.category])
+  if (searchParams.sub_category !== undefined) {
+    Array.isArray(searchParams.sub_category) ? (options.subCategory = searchParams.sub_category) : (options.subCategory = [searchParams.sub_category])
   }
   if (searchParams.brand !== undefined) {
     Array.isArray(searchParams.brand) ? (options.brand = searchParams.brand) : (options.brand = [searchParams.brand])
