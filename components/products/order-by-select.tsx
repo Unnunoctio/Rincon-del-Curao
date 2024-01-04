@@ -33,8 +33,6 @@ export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
   }
 
   const onChange = (value: OrderBy): void => {
-    console.log('click')
-    // setSelected(value)
     router.push(createPageURL(value.value))
   }
 

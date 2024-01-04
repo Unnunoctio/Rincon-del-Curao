@@ -3,7 +3,7 @@ import { FilterOptions } from '@/types/types'
 import { Suspense } from 'react'
 import { ProductCount } from '.'
 import { getCookie } from '@/lib/cookies'
-import { MultiSelect } from '../filter'
+import { MultiSelect, RemoveFilters } from '../filter'
 
 interface Props {
   category: string
@@ -20,6 +20,8 @@ export const ProductListFilter: React.FC<Props> = ({ category, filterOptions, to
         <Suspense key={prefWebs} fallback={<span className='inline-block text-active'>Cargando...</span>}>
           <ProductCount category={category} filterOptions={filterOptions} className='inline-block text-active' />
         </Suspense>
+
+        <RemoveFilters filterOptions={filterOptions} />
       </header>
       <div className='flex flex-col gap-2 py-3'>
         <article>
