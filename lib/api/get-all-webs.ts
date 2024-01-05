@@ -1,12 +1,11 @@
-import { InfoDB } from '@/types/models'
-import InfoModel from '../models/InfoModel'
-import { connectDB } from '../utils/mongoose'
 import { Web } from '@/types/api'
+import { connectDB } from '../utils'
+import { InfoModel } from '../models'
 
 export const getAllWebs = async (): Promise<Web[]> => {
   await connectDB()
 
-  const infos = await InfoModel.find<InfoDB>()
+  const infos = await InfoModel.find()
   infos.sort((a, b) => a.name.localeCompare(b.name))
 
   return infos.map(info => {
@@ -18,6 +17,7 @@ export const getAllWebs = async (): Promise<Web[]> => {
     }
   })
 }
+
 // ! Deprecated
 // import { Web } from '@/types/api'
 
