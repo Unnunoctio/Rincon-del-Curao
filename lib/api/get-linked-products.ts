@@ -18,8 +18,6 @@ export const getLinkedProducts = async (path: string, availableWebs: string[] = 
   const productPath = generatePath(product.drink, product.quantity, product.sku)
   if (productPath !== path) return []
 
-  // return []
-
   const linkedProducts = await ProductModel
     .find({ drink: product.drink, sku: { $ne: sku } })
     .populate({ path: 'drink', select: ['alcoholic_grade', 'brand', 'content', 'name', 'package'] })

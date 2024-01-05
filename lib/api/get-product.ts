@@ -40,7 +40,7 @@ export const getProduct = async (path: string, availableWebs: string[] = []): Pr
     image: product.images.large,
     websites: product.websites.map((website: any) => {
       return {
-        name: website.name,
+        name: website.info.name,
         logo: website.info.logo,
         url: `${website.info.url}${website.path}`,
         price: website.price,
