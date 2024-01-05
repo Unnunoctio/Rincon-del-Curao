@@ -1,3 +1,6 @@
+export * from './generateAverage'
+export * from './generatePath'
+export * from './generateTitle'
 export * from './getAvailableWebs'
 export * from './getDrinkMatch'
 export * from './mongoose'
