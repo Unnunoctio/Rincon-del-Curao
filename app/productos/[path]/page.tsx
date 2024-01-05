@@ -26,6 +26,7 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
     getProduct(params.path, (prefWebs === null) ? [] : prefWebs.split(',')),
     getLinkedProducts(params.path, (prefWebs === null) ? [] : prefWebs.split(','))
   ])
+  if (product == null) return notFound()
 
   return (
     <>

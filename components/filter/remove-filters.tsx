@@ -18,7 +18,7 @@ export const RemoveFilters: React.FC<Props> = ({ filterOptions }) => {
     const params = new URLSearchParams(searchParams)
     Object.keys(filterOptions).forEach(key => {
       if (key === 'subCategory') {
-        params.delete('category')
+        params.delete('sub_category')
       } else {
         params.delete(key)
       }

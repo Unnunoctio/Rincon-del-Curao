@@ -2,9 +2,9 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { Navigation } from '@/components/navigation'
-import { ThemeProvider } from '@/lib/provider/theme-provider'
 import { Footer } from '@/components/footer'
 import NextTopLoader from 'nextjs-toploader'
+import { ThemeProvider } from '@/provider/theme-provider'
 
 const roboto = Roboto({
   subsets: ['latin'],
