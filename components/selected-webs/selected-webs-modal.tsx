@@ -94,10 +94,10 @@ export const SelectedWebsModal = (): JSX.Element => {
                   <hr className='divider-primary' />
                   {/* Botones de guardar y cancelar */}
                   <div className='flex justify-end gap-4'>
-                    <button type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary hover:bg-selected hover:text-active hover:border-active'>
+                    <button type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary transition-colors hover:bg-selected hover:text-active hover:border-active'>
                       Cancelar
                     </button>
-                    <button type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary hover:bg-active'>
+                    <button type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
                       Guardar
                     </button>
                   </div>
