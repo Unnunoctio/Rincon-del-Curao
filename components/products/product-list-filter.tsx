@@ -23,7 +23,7 @@ export const ProductListFilter: React.FC<Props> = ({ category, filterOptions, to
 
         <RemoveFilters filterOptions={filterOptions} />
       </header>
-      <div className='flex flex-col gap-2 py-3'>
+      <div className='flex flex-col gap-4 py-3'>
         <article>
           <span className='text-primary text-[18px] font-medium'>Categoria</span>
           <MultiSelect name='sub_category' options={totalOptions.subCategory} />
