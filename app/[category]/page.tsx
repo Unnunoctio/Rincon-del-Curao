@@ -7,7 +7,7 @@ import { getCookie } from '@/lib/cookies'
 import { getTotalOptions, getTotalPages } from '@/lib/api'
 import { createBreadcrumbLinks, getNavigateLink } from '@/helpers/path'
 import { Breadcrumb } from '@/components/breadcrumb'
-import { OrderBySelect, ProductCount, ProductList, ProductListFilter, ProductListLoader } from '@/components/products'
+import { OrderBySelect, ProductCount, ProductList, ProductListFilter, ProductListFilterMobile, ProductListLoader } from '@/components/products'
 import { Pagination } from '@/components/pagination'
 import { getFilterOptions } from '@/helpers/filter-options'
 
@@ -57,7 +57,12 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
           </Suspense>
         </div>
 
-        <OrderBySelect orderBy={orderBy as OrderByEnum} />
+        <div className='flex justify-between gap-1'>
+          <ProductListFilterMobile>
+            <ProductListFilter category={link?.name as string} filterOptions={filterOptions} totalOptions={totalOptions} />
+          </ProductListFilterMobile>
+          <OrderBySelect orderBy={orderBy as OrderByEnum} />
+        </div>
       </header>
       {/* Filter & Product list */}
       <section className='flex gap-4 mt-6'>
