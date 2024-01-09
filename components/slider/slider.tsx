@@ -46,14 +46,14 @@ export const Slider: React.FC<Props> = ({ children }) => {
       <button
         onClick={leftScroll}
         className={`${leftBtn ? 'sm:block' : 'sm:hidden'} group absolute bottom-1/2 -left-[24px] hidden`}
-        aria-label='scroll left'
+        aria-label='producto anterior'
       >
         <LeftIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>
       <button
         onClick={rightScroll}
         className={`${rightBtn ? 'sm:block' : 'sm:hidden'} group absolute bottom-1/2 -right-[24px] hidden`}
-        aria-label='scroll right'
+        aria-label='producto siguiente'
       >
         <RightIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
       </button>

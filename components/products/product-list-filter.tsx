@@ -26,23 +26,23 @@ export const ProductListFilter: React.FC<Props> = ({ category, filterOptions, to
       <div className='flex flex-col gap-4 py-3'>
         <article>
           <span className='text-primary text-[18px] font-medium'>Categoria</span>
-          <MultiSelect name='sub_category' options={totalOptions.subCategory} />
+          <MultiSelect name='sub_category' options={totalOptions.subCategory} ariaLabel='seleccionar categoria' />
         </article>
         <article>
           <span className='text-primary text-[18px] font-medium'>Marca</span>
-          <MultiSelect name='brand' options={totalOptions.brand} />
+          <MultiSelect name='brand' options={totalOptions.brand} ariaLabel='seleccionar marca' />
         </article>
         <article>
           <span className='text-primary text-[18px] font-medium'>Contenido</span>
-          <MultiSelect name='content' options={totalOptions.content} />
+          <MultiSelect name='content' options={totalOptions.content} ariaLabel='seleccionar el contenido unitario' />
         </article>
         <article>
           <span className='text-primary text-[18px] font-medium'>Cantidad</span>
-          <MultiSelect name='quantity' options={totalOptions.quantity} />
+          <MultiSelect name='quantity' options={totalOptions.quantity} ariaLabel='seleccionar la cantidad' />
         </article>
         <article>
           <span className='text-primary text-[18px] font-medium'>Envase</span>
-          <MultiSelect name='package' options={totalOptions.package} />
+          <MultiSelect name='package' options={totalOptions.package} ariaLabel='seleccionar tipo de envase' />
         </article>
       </div>
     </section>

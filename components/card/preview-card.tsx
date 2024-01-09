@@ -17,7 +17,7 @@ export const PreviewCard: React.FC<Props> = ({ path, title, brand, price, bestPr
         {discount !== 0 && <span className='absolute left-0 top-[30px] text-primary bg-divider group-hover:bg-active/90 p-1.5 leading-none rounded-r-md'>{discount}% desc.</span>}
         {average !== 0 && <AverageCard average={average} className='absolute right-1' />}
         <div className='w-full flex flex-col gap-3'>
-          <h3 className='font-medium text-[18px] text-primary text-center line-clamp-2 leading-6 h-[48px]'>{title}</h3>
+          <h2 className='font-medium text-[18px] text-primary text-center line-clamp-2 leading-6 h-[48px]'>{title}</h2>
           <div className='flex justify-center gap-3 items-baseline'>
             {price !== bestPrice && <span className='text-[16px] text-secondary line-through leading-none'>${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>}
             <span className='font-medium text-[20px] text-active leading-none'>${bestPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</span>

@@ -25,7 +25,7 @@ export const getAllWebs = async (): Promise<Web[]> => {
     body: JSON.stringify({
       query
     }),
-    cache: 'no-store'
+    next: { revalidate: 300 } // revalidates every 5 minutes
   })
 
   const { data }: { data: Response } = await res.json()

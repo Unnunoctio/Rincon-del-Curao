@@ -9,21 +9,21 @@ export const ThemeSwitch: React.FC = () => {
       <button
         onClick={() => setTheme('light')}
         className={`group ${theme === 'light' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
-        aria-label='light mode'
+        aria-label='modo claro'
       >
         <SunIcon className={`w-5 h-5 fill-transparent ${theme === 'light' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
       </button>
       <button
         onClick={() => setTheme('system')}
         className={`group ${theme === 'system' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
-        aria-label='system mode'
+        aria-label='modo del sistema'
       >
         <SystemIcon className={`w-5 h-5 fill-transparent ${theme === 'system' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
       </button>
       <button
         onClick={() => setTheme('dark')}
         className={`group ${theme === 'dark' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
-        aria-label='dark mode'
+        aria-label='modo oscuro'
       >
         <MoonIcon className={`w-5 h-5 fill-transparent ${theme === 'dark' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
       </button>

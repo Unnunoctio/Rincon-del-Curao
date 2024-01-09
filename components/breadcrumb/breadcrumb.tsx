@@ -20,7 +20,7 @@ export const Breadcrumb: React.FC<Props> = ({ links = [] }) => {
               )
             : (
               <li key={index}>
-                <Link href={link.route} className='hover:underline'>
+                <Link href={link.route} aria-label={link.name.toLowerCase()} className='hover:underline'>
                   {link.name}
                 </Link>
                 <Separator />

@@ -42,11 +42,11 @@ export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
       {({ open }) => (
         <div className='relative w-[170px] sm:w-[200px]'>
           <Listbox.Button
-            id='Order by select'
+            id='order-by'
+            aria-label={`ordenar por ${selected?.label.toLowerCase() as string}`}
             className={`group relative flex items-center w-full rounded-md cursor-pointer transition-colors border hover:border-active ${open ? 'border-active' : 'border-primary'}`}
-            aria-label='Order by select'
           >
-            <span className={`absolute -top-3 left-2 px-1 bg-page text-[14px] ${open ? 'text-active' : 'text-secondary'} group-hover:text-active transition-text-colors`}>Ordernar por</span>
+            <span className={`absolute -top-3 left-2 px-1 bg-page text-[14px] ${open ? 'text-active' : 'text-secondary'} group-hover:text-active transition-text-colors`}>Ordenar por</span>
             <span className='block px-2 sm:px-4 py-1 sm:py-1.5 w-full text-left text-primary border-r border-primary'>{selected?.label}</span>
             <span className='block px-1.5 sm:px-3'>
               <DownIcon className={`icon-secondary transition-transform ${open ? 'rotate-180' : 'rotate-0'}`} />

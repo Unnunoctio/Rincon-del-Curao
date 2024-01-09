@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
 
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { getAllWebs, getCookie, setPrefWebs } from '@/app/actions'
+import { getCookie, setPrefWebs } from '@/app/actions'
 import { Dialog, Transition } from '@headlessui/react'
 import { WebCheckbox } from './web-checkbox'
 import { RightIcon } from '@/icons'
 import { Web } from '@/types/api'
 
-export const SelectedWebsModal = (): JSX.Element => {
-  const [allWebs, setAllWebs] = useState<Web[]>([])
+interface Props {
+  allWebs: Web[]
+}
+
+export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => {
   const [selectedWebs, setSelectedWebs] = useState<string[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
@@ -20,6 +23,16 @@ export const SelectedWebsModal = (): JSX.Element => {
 
   const onOpen = (): void => setIsOpen(true)
   const onClose = (): void => setIsOpen(false)
+
+  const handleClick = async (): Promise<void> => {
+    const prefWebs = await getCookie('prefWebs')
+    if (prefWebs !== undefined) {
+      setSelectedWebs(prefWebs.split(','))
+    } else {
+      setSelectedWebs(allWebs.map(web => web.code))
+    }
+    onOpen()
+  }
 
   const onAction = async (formData: FormData): Promise<void> => {
     await setPrefWebs(formData)
@@ -34,19 +47,9 @@ export const SelectedWebsModal = (): JSX.Element => {
     <>
       <div className='flex items-center p-0.5 rounded-full border divider-primary'>
         <button
-          onClick={async () => {
-            const allWebs = await getAllWebs()
-            const prefWebs = await getCookie('prefWebs')
-            if (prefWebs !== undefined) {
-              setSelectedWebs(prefWebs.split(','))
-            } else {
-              setSelectedWebs(allWebs.map(web => web.code))
-            }
-            setAllWebs(allWebs)
-            onOpen()
-          }}
+          onClick={handleClick}
           className='flex justify-between w-full py-1 pl-2 rounded-full hover:bg-page transition-colors'
-          aria-label='webs'
+          aria-label='tiendas'
         >
           Tiendas
           <RightIcon className='fill-transparent icon-stroke-primary' />
@@ -94,10 +97,10 @@ export const SelectedWebsModal = (): JSX.Element => {
                   <hr className='divider-primary' />
                   {/* Botones de guardar y cancelar */}
                   <div className='flex justify-end gap-4'>
-                    <button type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary transition-colors hover:bg-selected hover:text-active hover:border-active'>
+                    <button aria-label='cancelar tiendas seleccionadas' type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary transition-colors hover:bg-selected hover:text-active hover:border-active'>
                       Cancelar
                     </button>
-                    <button type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
+                    <button aria-label='guardar tiendas seleccionadas' type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
                       Guardar
                     </button>
                   </div>

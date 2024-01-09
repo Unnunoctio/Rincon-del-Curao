@@ -1,13 +1,6 @@
 'use server'
 
-import { getAllWebs as getAllWebsApi } from '@/lib/api'
-import { Web } from '@/types/api'
 import { cookies } from 'next/headers'
-
-export async function getAllWebs (): Promise<Web[]> {
-  const allWebs = await getAllWebsApi()
-  return allWebs
-}
 
 export async function getCookie (key: string): Promise <string | undefined> {
   const cookieStore = cookies()

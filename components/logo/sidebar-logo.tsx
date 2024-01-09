@@ -11,7 +11,7 @@ interface Props {
 export const SidebarLogo: React.FC<Props> = ({ boxHeight, logoWidth, linkClass, sideClose }) => {
   return (
     <div className={`${boxHeight} flex items-center`}>
-      <Link href='/' aria-label='Home' className={linkClass} onClick={sideClose}>
+      <Link href='/' aria-label='home' className={linkClass} onClick={sideClose}>
         <LogoSVG className={`${logoWidth} h-auto aspect-[1078/342]`} />
       </Link>
     </div>

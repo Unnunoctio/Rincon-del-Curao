@@ -1,15 +1,17 @@
+import { Web } from '@/types/api'
 import { Logo } from '../logo'
 import { NavbarButtons } from './navbar-buttons'
 import { NavbarLinks } from './navbar-links'
 
 interface Props {
+  webs: Web[]
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
   sideOpen: () => void
 }
 
-export const Navbar: React.FC<Props> = ({ isOpen, onOpen, onClose, sideOpen }) => {
+export const Navbar: React.FC<Props> = ({ webs, isOpen, onOpen, onClose, sideOpen }) => {
   return (
     <header
       className='fixed z-30 flex justify-center w-full bg-primary border-b divider-primary'
@@ -21,7 +23,7 @@ export const Navbar: React.FC<Props> = ({ isOpen, onOpen, onClose, sideOpen }) =
         {/* Items and Buttons */}
         <div className='flex'>
           <NavbarLinks isOpen={isOpen} onOpen={onOpen} />
-          <NavbarButtons onClose={onClose} sideOpen={sideOpen} />
+          <NavbarButtons webs={webs} onClose={onClose} sideOpen={sideOpen} />
         </div>
       </nav>
     </header>

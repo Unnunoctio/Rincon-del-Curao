@@ -34,6 +34,7 @@ export const RemoveFilters: React.FC<Props> = ({ filterOptions }) => {
   return (
     <button
       onClick={removeFilters}
+      aria-label='borrar filtros'
       className={`${isVisible ? 'visible' : 'invisible'} px-3 py-1.5 text-[14px] font-medium text-secondary transition-colors rounded-full hover:text-active hover:bg-selected`}
     >
       Borrar Filtros

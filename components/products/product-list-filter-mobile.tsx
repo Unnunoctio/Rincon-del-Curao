@@ -19,7 +19,7 @@ export const ProductListFilterMobile: React.FC<Props> = ({ children }) => {
       <button
         onClick={onOpen}
         className='group flex xl:hidden items-center gap-1 pl-1 sm:pl-2 pr-3 rounded-md cursor-pointer text-primary transition-colors border border-primary border-hover'
-        aria-label='Filter by'
+        aria-label='filtrar por'
       >
         <FilterIcon className='w-6 h-6 sm:w-7 sm:h-7 icon-stroke-secondary transition-colors group-hover:stroke-active' />
         Filtrar
@@ -57,7 +57,7 @@ export const ProductListFilterMobile: React.FC<Props> = ({ children }) => {
                         {children}
                       </div>
                       <div className='flex justify-end px-4 mt-2'>
-                        <button onClick={onClose} className='font-medium py-1.5 px-8 rounded-full border border-primary text-secondary hover:bg-selected transition-colors hover:text-active hover:border-active'>
+                        <button onClick={onClose} aria-label='cerrar filtros' className='font-medium py-1.5 px-8 rounded-full border border-primary text-secondary hover:bg-selected transition-colors hover:text-active hover:border-active'>
                           Cerrar
                         </button>
                       </div>
