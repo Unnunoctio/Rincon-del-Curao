@@ -49,7 +49,7 @@ export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => 
         <button
           onClick={handleClick}
           className='flex justify-between w-full py-1 pl-2 rounded-full hover:bg-page transition-colors'
-          aria-label='webs'
+          aria-label='stores'
         >
           Tiendas
           <RightIcon className='fill-transparent icon-stroke-primary' />
@@ -97,10 +97,10 @@ export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => 
                   <hr className='divider-primary' />
                   {/* Botones de guardar y cancelar */}
                   <div className='flex justify-end gap-4'>
-                    <button type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary transition-colors hover:bg-selected hover:text-active hover:border-active'>
+                    <button aria-label='close stores' type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary transition-colors hover:bg-selected hover:text-active hover:border-active'>
                       Cancelar
                     </button>
-                    <button type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
+                    <button aria-label='save stores' type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
                       Guardar
                     </button>
                   </div>
