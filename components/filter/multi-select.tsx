@@ -51,13 +51,13 @@ export const MultiSelect: React.FC<Props> = ({ name, options }) => {
               {selected.map(option => (
                 <li key={option.value} className='flex items-center gap-1 pl-2 pr-1 h-[25px] overflow-hidden rounded-full bg-active/60'>
                   <span className='block w-full truncate text-[14px]'>{option.label}</span>
-                  <button onClick={() => onRemove(option)} className='group'>
+                  <button onClick={() => onRemove(option)} className='group' aria-label={`remove ${option.label.toLowerCase()}`}>
                     <XIcon className='w-5 h-5 icon-stroke-primary-60 group-hover:icon-stroke-primary transition-colors' />
                   </button>
                 </li>
               ))}
             </ul>
-            <Listbox.Button id='multi select' className='flex items-center px-3 transition-colors hover:bg-selected' aria-label='Multi Select'>
+            <Listbox.Button id={`${name}-select`} aria-label={`${name} select`} className='flex items-center px-3 transition-colors hover:bg-selected'>
               <DownIcon className={`icon-secondary transition-transform ${open ? 'rotate-180' : 'rotate-0'}`} />
             </Listbox.Button>
           </div>
