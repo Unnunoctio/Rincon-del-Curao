@@ -16,6 +16,7 @@ export default function NotFound (): JSX.Element {
         </div>
         <Link
           href='/'
+          aria-label='ir al home'
           className='px-4 py-2 w-fit font-medium text-primary text-hover rounded-md border border-primary border-hover transition-colors'
         >
           Ir al Home

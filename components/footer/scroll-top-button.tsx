@@ -14,7 +14,7 @@ export const ScrollTopButton: React.FC = () => {
     <button
       onClick={scrollToTop}
       className='group absolute sm:static top-0 -left-10 p-2 h-fit rounded-full transition-colors hover:bg-page'
-      aria-label='scroll to top'
+      aria-label='volver al comienzo'
     >
       <ArrowUpIcon className='w-6 h-6 icon-primary transition-colors icon-group-hover' />
     </button>

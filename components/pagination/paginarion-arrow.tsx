@@ -15,7 +15,7 @@ export const PaginationArrow: React.FC<Props> = ({ href, direction, isDisabled }
     : <RightIcon className='w-8 h-8 fill-transparent icon-stroke-secondary transition-colors group-hover:icon-stroke-contrast' />
 
   return (
-    <Link href={href} aria-label={`${direction} page`} className='group flex justify-center items-center w-[34px] h-[34px] rounded-md transition-colors hover:bg-active/75'>
+    <Link href={href} aria-label={direction === 'left' ? 'página anterior' : 'página siguiente'} className='group flex justify-center items-center w-[34px] h-[34px] rounded-md transition-colors hover:bg-active/75'>
       {icon}
     </Link>
   )

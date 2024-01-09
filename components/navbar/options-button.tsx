@@ -18,7 +18,7 @@ export const OptionsButton: React.FC<Props> = ({ webs, onClose }) => {
           <Popover.Button
             onClick={onClose}
             className='group p-2 h-fit rounded-full focus:outline-none'
-            aria-label='options'
+            aria-label='opciones'
           >
             <GearIcon className={`w-7 h-7 fill-transparent transition-colors icon-group-stroke-hover ${open ? 'stroke-active' : 'icon-stroke-primary'}`} />
           </Popover.Button>

@@ -8,7 +8,7 @@ export const FooterNavigation: React.FC = () => {
       <ul className='flex flex-col gap-3 mt-3'>
         {navigateLinks.map((link) => (
           <li key={link.route}>
-            <Link href={link.route} className='w-fit text-secondary hover:underline'>
+            <Link href={link.route} aria-label={link.name.toLowerCase()} className='w-fit text-secondary hover:underline'>
               {link.name}
             </Link>
           </li>

@@ -9,7 +9,7 @@ export const SidebarCloseButton: React.FC<Props> = ({ sideClose }) => {
     <button
       onClick={sideClose}
       className='group block md:hidden p-2 h-fit rounded-full'
-      aria-label='close sidebar'
+      aria-label='cerrar sidebar'
     >
       <XIcon className='w-7 h-7 fill-transparent transition-colors icon-group-stroke-hover icon-stroke-primary' />
     </button>

@@ -15,13 +15,13 @@ export const NavbarLinks: React.FC<Props> = ({ isOpen, onOpen }) => {
           <ul className='flex flex-col gap-3'>
             {link.categories.map((category, index) => (
               <li key={index}>
-                <Link href={`${link.route}?sub_category=${category.query}`} className='w-fit text-secondary hover:underline'>
+                <Link href={`${link.route}?sub_category=${category.query}`} aria-label={category.name.toLowerCase()} className='w-fit text-secondary hover:underline'>
                   {category.name}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href={link.route} className='w-fit text-active hover:underline'>
+              <Link href={link.route} aria-label='ver todos' className='w-fit text-active hover:underline'>
                 Ver Todos
               </Link>
             </li>
