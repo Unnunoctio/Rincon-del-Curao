@@ -3,12 +3,14 @@ import { Popover, Transition } from '@headlessui/react'
 import { ThemeSwitch } from '../theme'
 import { GearIcon } from '@/icons'
 import { SelectedWebsModal } from '../selected-webs'
+import { Web } from '@/types/api'
 
 interface Props {
+  webs: Web[]
   onClose: () => void
 }
 
-export const OptionsButton: React.FC<Props> = ({ onClose }) => {
+export const OptionsButton: React.FC<Props> = ({ webs, onClose }) => {
   return (
     <Popover className='relative'>
       {({ open }) => (
@@ -33,7 +35,7 @@ export const OptionsButton: React.FC<Props> = ({ onClose }) => {
             <Popover.Panel className='absolute left-1/2 z-10 -translate-x-1/2 transform mt-1 px-4 sm:px-0'>
               <div className='overflow-hidden flex flex-col gap-2 py-3 px-3 bg-primary rounded-lg border divider-primary shadow-lg'>
                 <ThemeSwitch />
-                <SelectedWebsModal />
+                <SelectedWebsModal allWebs={webs} />
               </div>
             </Popover.Panel>
           </Transition>

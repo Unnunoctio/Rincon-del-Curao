@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client'
 
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { getAllWebs, getCookie, setPrefWebs } from '@/app/actions'
+import { getCookie, setPrefWebs } from '@/app/actions'
 import { Dialog, Transition } from '@headlessui/react'
 import { WebCheckbox } from './web-checkbox'
 import { RightIcon } from '@/icons'
 import { Web } from '@/types/api'
 
-export const SelectedWebsModal = (): JSX.Element => {
-  const [allWebs, setAllWebs] = useState<Web[]>([])
+interface Props {
+  allWebs: Web[]
+}
+
+export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => {
   const [selectedWebs, setSelectedWebs] = useState<string[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
@@ -20,6 +23,16 @@ export const SelectedWebsModal = (): JSX.Element => {
 
   const onOpen = (): void => setIsOpen(true)
   const onClose = (): void => setIsOpen(false)
+
+  const handleClick = async (): Promise<void> => {
+    const prefWebs = await getCookie('prefWebs')
+    if (prefWebs !== undefined) {
+      setSelectedWebs(prefWebs.split(','))
+    } else {
+      setSelectedWebs(allWebs.map(web => web.code))
+    }
+    onOpen()
+  }
 
   const onAction = async (formData: FormData): Promise<void> => {
     await setPrefWebs(formData)
@@ -34,17 +47,7 @@ export const SelectedWebsModal = (): JSX.Element => {
     <>
       <div className='flex items-center p-0.5 rounded-full border divider-primary'>
         <button
-          onClick={async () => {
-            const allWebs = await getAllWebs()
-            const prefWebs = await getCookie('prefWebs')
-            if (prefWebs !== undefined) {
-              setSelectedWebs(prefWebs.split(','))
-            } else {
-              setSelectedWebs(allWebs.map(web => web.code))
-            }
-            setAllWebs(allWebs)
-            onOpen()
-          }}
+          onClick={handleClick}
           className='flex justify-between w-full py-1 pl-2 rounded-full hover:bg-page transition-colors'
           aria-label='webs'
         >
