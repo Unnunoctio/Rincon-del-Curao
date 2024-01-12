@@ -4,6 +4,7 @@
 import React, { Fragment, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { getCookie, setPrefWebs } from '@/app/actions'
+import { getNavigateLink } from '@/helpers/path'
 import { Dialog, Transition } from '@headlessui/react'
 import { WebCheckbox } from './web-checkbox'
 import { RightIcon } from '@/icons'
@@ -36,7 +37,8 @@ export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => 
 
   const onAction = async (formData: FormData): Promise<void> => {
     await setPrefWebs(formData)
-    if (pathname.split('/').length === 2) {
+    const pathSplit = pathname.split('/')
+    if (getNavigateLink(`/${pathSplit[1]}`) !== undefined) {
       const params = new URLSearchParams(searchParams)
       params.set('page', '1')
       router.push(`${pathname}?${params.toString()}`)
