@@ -12,3 +12,10 @@ export interface FilterOptions {
   quantity?: string[]
   package?: string[]
 }
+
+export interface FormInput {
+  name: string
+  email: string
+  subject: string
+  message: string
+}

@@ -4,10 +4,12 @@
 import React, { Fragment, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { getCookie, setPrefWebs } from '@/app/actions'
+import { getNavigateLink } from '@/helpers/path'
 import { Dialog, Transition } from '@headlessui/react'
 import { WebCheckbox } from './web-checkbox'
 import { RightIcon } from '@/icons'
 import { Web } from '@/types/api'
+import { Slide, toast } from 'react-toastify'
 
 interface Props {
   allWebs: Web[]
@@ -34,12 +36,32 @@ export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => 
     onOpen()
   }
 
+  const successNotify = (): any => toast.success('Tiendas guardadas', {
+    containerId: 'notification',
+    autoClose: 3000,
+    theme: 'colored',
+    transition: Slide
+  })
+  const errorNotify = (): any => toast.error('Debes seleccionar al menos una tienda', {
+    containerId: 'notification',
+    autoClose: 3000,
+    theme: 'colored',
+    transition: Slide
+  })
+
   const onAction = async (formData: FormData): Promise<void> => {
-    await setPrefWebs(formData)
-    if (pathname.split('/').length === 2) {
-      const params = new URLSearchParams(searchParams)
-      params.set('page', '1')
-      router.push(`${pathname}?${params.toString()}`)
+    const success = await setPrefWebs(formData)
+    if (success) {
+      const pathSplit = pathname.split('/')
+      if (getNavigateLink(`/${pathSplit[1]}`) !== undefined) {
+        const params = new URLSearchParams(searchParams)
+        params.set('page', '1')
+        router.push(`${pathname}?${params.toString()}`)
+      }
+      successNotify()
+      onClose()
+    } else {
+      errorNotify()
     }
   }
 
@@ -100,7 +122,7 @@ export const SelectedWebsModal: React.FC<Props> = ({ allWebs }): JSX.Element => 
                     <button aria-label='cancelar tiendas seleccionadas' type='button' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full border border-primary text-secondary transition-colors hover:bg-selected hover:text-active hover:border-active'>
                       Cancelar
                     </button>
-                    <button aria-label='guardar tiendas seleccionadas' type='submit' onClick={onClose} className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
+                    <button aria-label='guardar tiendas seleccionadas' type='submit' className='font-medium py-1.5 px-3 rounded-full bg-active/75 border border-transparent text-primary transition-colors hover:bg-active'>
                       Guardar
                     </button>
                   </div>
