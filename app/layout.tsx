@@ -6,6 +6,8 @@ import { Footer } from '@/components/footer'
 import NextTopLoader from 'nextjs-toploader'
 import { ThemeProvider } from '@/provider/theme-provider'
 import { getAllWebs } from '@/lib/api'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -28,6 +30,7 @@ export default async function RootLayout ({ children }: { children: React.ReactN
       <body className={`${roboto.className} bg-page`}>
         <NextTopLoader color='#d69e2e' showSpinner={false} />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <ToastContainer containerId='notification' position='top-right' />
           <Navigation webs={webs} />
           <div className='h-[72px]' />
           <main className='flex justify-center w-full'>

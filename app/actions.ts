@@ -15,10 +15,13 @@ export async function getCookie (key: string): Promise <string | undefined> {
   return undefined
 }
 
-export async function setPrefWebs (formData: FormData): Promise <void> {
+export async function setPrefWebs (formData: FormData): Promise <boolean> {
   const prefWebs = formData.getAll('webs').join(',')
+  if (prefWebs === '') return false
+
   const cookieStore = cookies()
   cookieStore.set('prefWebs', prefWebs)
+  return true
 }
 
 // SEND EMAIL CONTACT --------------
