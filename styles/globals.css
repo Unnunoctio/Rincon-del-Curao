@@ -33,6 +33,9 @@
   .text-hover {
     @apply hover:text-active dark:hover:text-active
   }
+  .text-error {
+    @apply text-red-500 dark:text-red-500
+  }
 
   /* Borders & dividers */
   .border-primary {
@@ -43,6 +46,9 @@
   }
   .divider-primary {
     @apply border-[#e2e8f0] dark:border-[#434548]
+  }
+  .border-error {
+    @apply border-red-500 dark:border-red-500
   }
 
   /* icons/svg */

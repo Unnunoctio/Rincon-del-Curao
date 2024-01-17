@@ -6,17 +6,17 @@ export const FooterInfo: React.FC = () => {
       <h3 className='text-[18px] font-medium text-primary'>Centro de Ayuda</h3>
       <ul className='flex flex-col gap-2 sm:gap-3 mt-3'>
         <li>
-          <Link href='informaciones_legales?tab=terms' className='w-fit text-secondary hover:underline'>Términos y Condiciones</Link>
+          <Link href='/informaciones_legales?tab=terms' className='w-fit text-secondary hover:underline'>Términos y Condiciones</Link>
         </li>
         <li>
-          <Link href='informaciones_legales?tab=policies' className='w-fit text-secondary hover:underline'>Política de Privacidad</Link>
+          <Link href='/informaciones_legales?tab=policies' className='w-fit text-secondary hover:underline'>Política de Privacidad</Link>
         </li>
         <li>
-          <Link href='' className='w-fit text-secondary hover:underline'>Contacto</Link>
+          <Link href='/contacto' className='w-fit text-secondary hover:underline'>Contacto</Link>
         </li>
-        <li>
+        {/* <li>
           <Link href='' className='w-fit text-secondary hover:underline'>Roadmap</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   )
