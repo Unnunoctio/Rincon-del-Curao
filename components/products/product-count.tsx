@@ -9,6 +9,9 @@ interface Props {
 }
 
 export const ProductCount: React.FC<Props> = async ({ category, filterOptions, className }): Promise<JSX.Element> => {
+  // wait 100 miliseconds
+  await new Promise(resolve => setTimeout(resolve, 100))
+
   const prefWebs = getCookie('prefWebs')
   const count = await getTotalProducts((prefWebs === null) ? [] : prefWebs.split(','), category, filterOptions)
 

@@ -12,6 +12,9 @@ interface Props {
 }
 
 export const ProductList: React.FC<Props> = async ({ page, orderBy, category, filterOptions }) => {
+  // wait 150 miliseconds
+  await new Promise(resolve => setTimeout(resolve, 150))
+
   const prefWebs = getCookie('prefWebs')
   const products = await getProducts((prefWebs === null) ? [] : prefWebs.split(','), page, orderBy, category, filterOptions)
 
