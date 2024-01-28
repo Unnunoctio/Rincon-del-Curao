@@ -22,6 +22,7 @@ export const Emailfield: React.FC<Props> = ({ register, label, name, placeholder
             required: { value: required, message: '*Este campo es requerido' },
             pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: '*Este email no es válido' }
           })}
+          id={name}
           placeholder={placeholder}
           autoComplete='off'
           disabled={disabled}

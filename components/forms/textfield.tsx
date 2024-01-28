@@ -19,6 +19,7 @@ export const Textfield: React.FC<Props> = ({ register, label, name, placeholder,
         <span className={`text-primary ${error ? 'text-error' : ''} w-fit font-medium`}>{label}</span>
         <input
           {...register(name, { required: { value: required, message: '*Este campo es requerido' } })}
+          id={name}
           placeholder={placeholder}
           autoComplete='off'
           disabled={disabled}
