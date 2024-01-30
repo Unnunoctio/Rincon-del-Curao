@@ -43,7 +43,7 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
           <WebsiteList websites={product.websites} />
         </section>
       </div>
-      <HistoryPricies historyPricies={historyPricies} />
+      {historyPricies.length > 0 && <HistoryPricies historyPricies={historyPricies} />}
     </>
   )
 }
