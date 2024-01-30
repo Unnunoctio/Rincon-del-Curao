@@ -36,7 +36,7 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
   // searchparams
   const page = Number(searchParams.page) || 1
   const orderBy = searchParams.order_by ?? OrderByEnum.SCORE_DESC
-  const filterOptions = getFilterOptions(searchParams)
+  const [filterOptions, optionsText] = getFilterOptions(searchParams)
 
   // api
   const [totalPages, totalOptions] = await Promise.all([
@@ -52,14 +52,14 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
       <header className='flex flex-col xl:flex-row gap-2 justify-between xl:items-center py-4'>
         <div className='flex items-baseline gap-1.5'>
           <h1 className='my-2 text-3xl font-medium text-primary'>{link?.name}</h1>
-          <Suspense key={`${prefWebs as string}`} fallback={<span className='inline-block xl:hidden text-active'>Cargando...</span>}>
+          <Suspense key={`${prefWebs as string}${optionsText}`} fallback={<span className='inline-block xl:hidden text-active'>Cargando...</span>}>
             <ProductCount category={link?.name as string} filterOptions={filterOptions} className='inline-block xl:hidden text-active' />
           </Suspense>
         </div>
 
         <div className='flex justify-between gap-1'>
           <ProductListFilterMobile>
-            <ProductListFilter category={link?.name as string} filterOptions={filterOptions} totalOptions={totalOptions} />
+            <ProductListFilter category={link?.name as string} optionsText={optionsText} filterOptions={filterOptions} totalOptions={totalOptions} />
           </ProductListFilterMobile>
           <OrderBySelect orderBy={orderBy as OrderByEnum} />
         </div>
@@ -67,10 +67,10 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
       {/* Filter & Product list */}
       <section className='flex gap-4 mt-6'>
         <div className='hidden xl:block w-[280px]'>
-          <ProductListFilter category={link?.name as string} filterOptions={filterOptions} totalOptions={totalOptions} />
+          <ProductListFilter category={link?.name as string} optionsText={optionsText} filterOptions={filterOptions} totalOptions={totalOptions} />
         </div>
         <div className='flex flex-1 flex-col gap-y-8'>
-          <Suspense key={`${prefWebs as string}${page}${orderBy as string}`} fallback={<ProductListLoader />}>
+          <Suspense key={`${prefWebs as string}${page}${orderBy as string}${optionsText}`} fallback={<ProductListLoader />}>
             <ProductList page={page} orderBy={orderBy as string} category={link?.name as string} filterOptions={filterOptions} />
           </Suspense>
           <Pagination totalPages={totalPages} />

@@ -7,17 +7,18 @@ import { MultiSelect, RemoveFilters } from '../filter'
 
 interface Props {
   category: string
+  optionsText: string
   filterOptions: FilterOptions
   totalOptions: TotalOptions
 }
 
-export const ProductListFilter: React.FC<Props> = ({ category, filterOptions, totalOptions }) => {
+export const ProductListFilter: React.FC<Props> = ({ category, optionsText, filterOptions, totalOptions }) => {
   const prefWebs = getCookie('prefWebs')
 
   return (
     <section className='flex flex-col w-full h-full'>
       <header className='flex items-baseline justify-between pb-2 border-b divider-primary'>
-        <Suspense key={prefWebs} fallback={<span className='inline-block text-active'>Cargando...</span>}>
+        <Suspense key={`${prefWebs as string}${optionsText}`} fallback={<span className='inline-block text-active'>Cargando...</span>}>
           <ProductCount category={category} filterOptions={filterOptions} className='inline-block text-active' />
         </Suspense>
 

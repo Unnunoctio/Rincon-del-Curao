@@ -13,7 +13,7 @@ export default function ContactPage (): JSX.Element {
     <>
       <Breadcrumb links={createBreadcrumbLinks(['Home', 'Contacto'])} />
       <section className='my-10 flex justify-center items-center'>
-        <div className='flex flex-col w-full max-w-[750px] p-3 md:p-6 border rounded-lg divider-primary'>
+        <div className='flex flex-col w-full max-w-[750px] p-3 md:p-6 rounded-lg'>
           <h1 className='mb-3 text-3xl font-medium text-primary'>Contacto</h1>
           <span className='text-primary'>Considerar que:</span>
           <ul className='text-primary pl-6 list-disc'>

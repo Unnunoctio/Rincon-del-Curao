@@ -8,7 +8,6 @@ import { orderByItems } from '@/helpers/order-by'
 import { Listbox, Transition } from '@headlessui/react'
 import { DownIcon } from '@/icons'
 import { OrderBy } from '@/types/types'
-import Link from 'next/link'
 
 interface Props {
   orderBy: OrderByEnum
@@ -64,15 +63,13 @@ export const OrderBySelect: React.FC<Props> = ({ orderBy }) => {
             >
               <Listbox.Options className='absolute overflow-auto z-10 my-2 py-2 max-h-60 w-full bg-primary rounded-md border divider-primary shadow-md'>
                 {orderByItems.map((item, idx) => (
-                  <Link key={idx} href={createPageURL(item.value)}>
-                    <Listbox.Option
-                      key={idx}
-                      value={item}
-                      className={({ selected }) => `relative cursor-pointer select-none py-1.5 pl-3 text-primary ${selected ? 'bg-selected' : ''} ${!selected ? 'hover:bg-hover active:bg-selected' : ''}`}
-                    >
-                      {item.label}
-                    </Listbox.Option>
-                  </Link>
+                  <Listbox.Option
+                    key={idx}
+                    value={item}
+                    className={({ selected }) => `relative cursor-pointer select-none py-1.5 pl-3 text-primary ${selected ? 'bg-selected' : ''} ${!selected ? 'hover:bg-hover active:bg-selected' : ''}`}
+                  >
+                    {item.label}
+                  </Listbox.Option>
                 ))}
               </Listbox.Options>
             </Transition>

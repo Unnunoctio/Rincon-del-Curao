@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getLinkedProducts, getProduct, getProductTitle } from '@/lib/api'
+import { getHistoryPricies, getLinkedProducts, getProduct, getProductTitle } from '@/lib/api'
 import { getCookie } from '@/lib/cookies'
 import { createBreadcrumbLinks } from '@/helpers/path'
 import { Breadcrumb } from '@/components/breadcrumb'
-import { FeatureList, LinkedProductList, WebsiteList } from '@/components/product'
+import { FeatureList, HistoryPricies, LinkedProductList, WebsiteList } from '@/components/product'
 
 interface Props {
   params: { path: string }
@@ -22,9 +22,10 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 export default async function ProductPage ({ params }: Props): Promise<JSX.Element> {
   const prefWebs = getCookie('prefWebs')
-  const [product, linkedProducts] = await Promise.all([
+  const [product, linkedProducts, historyPricies] = await Promise.all([
     getProduct(params.path, (prefWebs === null) ? [] : prefWebs.split(',')),
-    getLinkedProducts(params.path, (prefWebs === null) ? [] : prefWebs.split(','))
+    getLinkedProducts(params.path, (prefWebs === null) ? [] : prefWebs.split(',')),
+    getHistoryPricies(params.path, (prefWebs === null) ? [] : prefWebs.split(','))
   ])
   if (product == null) return notFound()
 
@@ -42,6 +43,7 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
           <WebsiteList websites={product.websites} />
         </section>
       </div>
+      {historyPricies.length > 0 && <HistoryPricies historyPricies={historyPricies} />}
     </>
   )
 }
