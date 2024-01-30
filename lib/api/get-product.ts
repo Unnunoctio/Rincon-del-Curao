@@ -25,10 +25,6 @@ const query = `
         price
         bestPrice
         average
-        records {
-          price
-          date
-        }
       }
     }
   }

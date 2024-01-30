@@ -69,6 +69,10 @@ export interface Website {
   price: number
   bestPrice: number
   average: number
+}
+
+export interface HistoryPrice {
+  website: string
   records: Record[]
 }
 
