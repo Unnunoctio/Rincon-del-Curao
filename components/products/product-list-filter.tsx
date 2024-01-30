@@ -18,7 +18,7 @@ export const ProductListFilter: React.FC<Props> = ({ category, optionsText, filt
   return (
     <section className='flex flex-col w-full h-full'>
       <header className='flex items-baseline justify-between pb-2 border-b divider-primary'>
-        <Suspense key={`${prefWebs}${optionsText}`} fallback={<span className='inline-block text-active'>Cargando...</span>}>
+        <Suspense key={`${prefWebs as string}${optionsText}`} fallback={<span className='inline-block text-active'>Cargando...</span>}>
           <ProductCount category={category} filterOptions={filterOptions} className='inline-block text-active' />
         </Suspense>
 
