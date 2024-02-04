@@ -6,6 +6,7 @@ export interface OrderBy {
 }
 
 export interface FilterOptions {
+  search?: string
   subCategory?: string[]
   brand?: string[]
   content?: string[]

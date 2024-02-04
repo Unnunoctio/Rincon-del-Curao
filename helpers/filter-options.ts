@@ -4,9 +4,13 @@ export const getFilterOptions = (searchParams: { [key: string]: string | string[
   const options: FilterOptions = {}
   let optionsText = ''
 
+  if (searchParams.search !== undefined) {
+    options.search = searchParams.search.toString()
+    optionsText += `search=${searchParams.search.toString()}`
+  }
   if (searchParams.sub_category !== undefined) {
     Array.isArray(searchParams.sub_category) ? (options.subCategory = searchParams.sub_category) : (options.subCategory = [searchParams.sub_category])
-    optionsText += `sub_category=${searchParams.sub_category.toString()}`
+    optionsText += `&sub_category=${searchParams.sub_category.toString()}`
   }
   if (searchParams.brand !== undefined) {
     Array.isArray(searchParams.brand) ? (options.brand = searchParams.brand) : (options.brand = [searchParams.brand])

@@ -3,7 +3,7 @@ import { FilterOptions } from '@/types/types'
 import { Suspense } from 'react'
 import { ProductCount } from '.'
 import { getCookie } from '@/lib/cookies'
-import { MultiSelect, RemoveFilters } from '../filter'
+import { MultiSelect, RemoveFilters, SearchFilter } from '../filter'
 
 interface Props {
   category: string
@@ -25,6 +25,7 @@ export const ProductListFilter: React.FC<Props> = ({ category, optionsText, filt
         <RemoveFilters filterOptions={filterOptions} />
       </header>
       <div className='flex flex-col gap-4 py-3'>
+        <SearchFilter label='Palabras Clave' name='search' placeholder='Palabra clave...' value={filterOptions.search} aria='buscar por palabra clave' />
         <article>
           <span className='text-primary text-[18px] font-medium'>Categoria</span>
           <MultiSelect name='sub_category' options={totalOptions.subCategory} ariaLabel='seleccionar categoria' />
