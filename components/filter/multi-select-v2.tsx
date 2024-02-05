@@ -52,7 +52,7 @@ export const MultiSelectV2: React.FC<Props> = ({ label, name, options, aria }) =
         options={options.filter(o => (selected.find(s => s.value === o.value) === undefined) && o.count > 0)}
         aria-label={aria}
         classNames={{
-          control: (state) => `flex w-full min-h-[38px] transition-colors hover:bg-selected cursor-pointer border rounded-md ${state.isFocused ? 'border-active' : 'border-primary'}`,
+          control: (state) => `flex w-full min-h-[38px] transition-colors hover:bg-selected cursor-pointer border rounded-md ${state.isFocused ? 'border-active bg-selected' : 'border-primary'}`,
           valueContainer: () => 'flex flex-1 flex-wrap items-center justify-start overflow-hidden gap-1 px-2 py-1 ',
           multiValue: () => 'flex items-center gap-1 pl-2 h-[26px] overflow-hidden bg-active/60 rounded-md',
           multiValueLabel: () => 'text-[14px] truncate text-primary',
