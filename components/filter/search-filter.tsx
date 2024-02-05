@@ -37,13 +37,12 @@ export const SearchFilter: React.FC<Props> = ({ label, name, value, aria, placeh
 
   return (
     <div className='relative'>
-      <label htmlFor={name} className='text-primary text-[18px] font-medium'>
+      <span className='text-primary text-[18px] font-medium'>
         {label}
-      </label>
+      </span>
       <input
         value={defaultValue}
         onChange={(e) => handleSearch(e.target.value)}
-        id={name}
         name={name}
         type='text'
         placeholder={placeholder}
