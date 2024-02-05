@@ -40,7 +40,7 @@ export const MultiSelectV2: React.FC<Props> = ({ label, name, options, aria }) =
 
   return (
     <div className='relative'>
-      <label htmlFor={name} className='text-primary text-[18px] font-medium'>
+      <label className='text-primary text-[18px] font-medium'>
         {label}
       </label>
       <Select
@@ -62,7 +62,8 @@ export const MultiSelectV2: React.FC<Props> = ({ label, name, options, aria }) =
           dropdownIndicator: (state) => `px-3 text-secondary transition-transform ${state.isFocused ? 'rotate-180' : 'rotate-0'}`,
           menu: () => 'absolute overflow-hidden z-10 my-2 w-full bg-primary rounded-md border divider-primary shadow-md',
           menuList: () => 'overflow-auto py-2 max-h-60',
-          option: () => 'cursor-pointer selec-none py-1.5 pl-3 text-primary hover:bg-hover active:bg-selected'
+          option: () => 'cursor-pointer selec-none py-1.5 pl-3 text-primary hover:bg-hover active:bg-selected',
+          input: () => 'text-primary'
         }}
         styles={{
           control: () => { return {} },
@@ -79,7 +80,8 @@ export const MultiSelectV2: React.FC<Props> = ({ label, name, options, aria }) =
           placeholder: () => ({ display: 'none' }),
           input: (base) => ({
             ...base,
-            margin: 0
+            margin: 0,
+            color: 'none'
           })
         }}
         components={{

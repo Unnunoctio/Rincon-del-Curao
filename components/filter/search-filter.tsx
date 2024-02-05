@@ -48,7 +48,7 @@ export const SearchFilter: React.FC<Props> = ({ label, name, value, aria, placeh
         type='text'
         placeholder={placeholder}
         autoComplete='off'
-        className='appearance-none block px-2 py-1.5 w-full rounded-md bg-transparent border border-primary focus:ring-transparent focus:ring-offset-transparent focus:border-active'
+        className='appearance-none block px-2 py-1.5 w-full hover:bg-selected rounded-md bg-transparent border border-primary focus:ring-transparent focus:ring-offset-transparent focus:border-active'
         aria-label={aria}
       />
     </div>
