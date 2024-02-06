@@ -18,7 +18,7 @@ export const ProductListFilterMobile: React.FC<Props> = ({ children }) => {
     <>
       <button
         onClick={onOpen}
-        className='group flex xl:hidden items-center gap-1 pl-1 sm:pl-2 pr-3 rounded-md cursor-pointer text-primary transition-colors border border-primary border-hover'
+        className='group flex xl:hidden items-center gap-1 pl-1 sm:pl-2 pr-3 rounded-md cursor-pointer text-primary hover:bg-selected transition-colors border border-primary border-hover'
         aria-label='filtrar por'
       >
         <FilterIcon className='w-6 h-6 sm:w-7 sm:h-7 icon-stroke-secondary transition-colors group-hover:stroke-active' />
