@@ -3,7 +3,7 @@ import { FilterOptions } from '@/types/types'
 import { Suspense } from 'react'
 import { ProductCount } from '.'
 import { getCookie } from '@/lib/cookies'
-import { MultiSelectV2, RemoveFilters, SearchFilter } from '../filter'
+import { MultiSelectV2, RangeSlider, RemoveFilters, SearchFilter } from '../filter'
 
 interface Props {
   category: string
@@ -26,6 +26,7 @@ export const ProductListFilter: React.FC<Props> = ({ category, optionsText, filt
       </header>
       <div className='flex flex-col gap-4 py-3'>
         <SearchFilter label='Palabras Clave' name='search' placeholder='Palabra clave...' value={filterOptions.search} aria='buscar por palabra clave' />
+        <RangeSlider label='Precio Oferta' minName='price_min' maxName='price_max' min={totalOptions.priceMin} max={totalOptions.priceMax} step={1} />
         <MultiSelectV2 label='Categoria' name='sub_category' options={totalOptions.subCategory} aria='seleccionar categoria' />
         <MultiSelectV2 label='Marca' name='brand' options={totalOptions.brand} aria='seleccionar marca' />
         <MultiSelectV2 label='Contenido' name='content' options={totalOptions.content} aria='seleccionar contenido unitario' />
