@@ -7,6 +7,6 @@ export const getHistoryData = (records: Record[]): [number, Date, Date] => {
   const maxTimestamp = Math.max(...timestamps)
 
   const differenceInDays = (maxTimestamp - minTimestamp) / 86400000
-  const width = (differenceInDays > 1) ? differenceInDays * 53 : 46
+  const width = (differenceInDays > 1) ? differenceInDays * 60 : 46
   return [(width + 67), new Date(minTimestamp), new Date(maxTimestamp)]
 }
