@@ -4,6 +4,8 @@ import { FilterOptions } from '@/types/types'
 const query = `
   query TotalOptions($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
     totalOptions(availableWebs: $availableWebs, category: $category, options: $options) {
+      priceMin
+      priceMax
       subCategory {
         label
         count

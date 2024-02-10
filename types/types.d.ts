@@ -12,6 +12,8 @@ export interface FilterOptions {
   content?: string[]
   quantity?: string[]
   package?: string[]
+  priceMin?: number
+  priceMax?: number
 }
 
 export interface FormInput {
