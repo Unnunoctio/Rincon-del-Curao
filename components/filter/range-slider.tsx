@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Slider from 'react-slider'
 import '@/styles/range-slider.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { TextFormatEnum } from '@/types/enums'
 
 interface Props {
   label: string
@@ -12,9 +13,15 @@ interface Props {
   min: number
   max: number
   step: number
+  textFormat: TextFormatEnum
 }
 
-export const RangeSlider: React.FC<Props> = ({ label, minName, maxName, min, max, step }) => {
+const textFormats = {
+  price: (minValue: number, maxValue: number) => `$${minValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} - $${maxValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`,
+  grade: (minValue: number, maxValue: number) => `${minValue.toFixed(1)}° - ${maxValue.toFixed(1)}°`
+}
+
+export const RangeSlider: React.FC<Props> = ({ label, minName, maxName, min, max, step, textFormat }) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -51,7 +58,8 @@ export const RangeSlider: React.FC<Props> = ({ label, minName, maxName, min, max
           {label}
         </span>
         <span className='text-primary'>
-          ${values[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} - ${values[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+          {textFormat === TextFormatEnum.PRICE && textFormats.price(values[0], values[1])}
+          {textFormat === TextFormatEnum.GRADE && textFormats.grade(values[0], values[1])}
         </span>
       </div>
       <Slider
