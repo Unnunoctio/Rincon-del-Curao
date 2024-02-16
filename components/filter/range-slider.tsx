@@ -29,10 +29,10 @@ export const RangeSlider: React.FC<Props> = ({ label, minName, maxName, min, max
   const queryMin = Number(searchParams.get(minName) ?? undefined)
   const queryMax = Number(searchParams.get(maxName) ?? undefined)
 
-  const [values, setValues] = useState([!isNaN(queryMin) ? (queryMin >= min) ? queryMin : min : min, !isNaN(queryMax) ? (queryMax <= max) ? queryMax : max : max])
+  const [values, setValues] = useState([!isNaN(queryMin) ? (queryMin >= max) ? max : (queryMin >= min) ? queryMin : min : min, !isNaN(queryMax) ? (queryMax <= min) ? min : (queryMax <= max) ? queryMax : max : max])
 
   useEffect(() => {
-    setValues([!isNaN(queryMin) ? (queryMin >= min) ? queryMin : min : min, !isNaN(queryMax) ? (queryMax <= max) ? queryMax : max : max])
+    setValues([!isNaN(queryMin) ? (queryMin >= max) ? max : (queryMin >= min) ? queryMin : min : min, !isNaN(queryMax) ? (queryMax <= min) ? min : (queryMax <= max) ? queryMax : max : max])
   }, [min, max, queryMin, queryMax])
 
   const createURL = (newValues: number[]): string => {
