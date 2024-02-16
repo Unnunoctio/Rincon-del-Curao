@@ -89,7 +89,7 @@ export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
       <h2 className='text-primary font-medium text-2xl'>Historial de Precios</h2>
       <ul className='px-2 mt-4 mb-1 flex flex-wrap gap-x-6 gap-y-1'>
         {
-          historyPricies.map((historyPrice, index) => (
+          historyPricies.sort((a, b) => a.website.localeCompare(b.website)).map((historyPrice, index) => (
             <li key={index} className='flex gap-1 items-baseline'>
               <span className='inline-block w-3 h-3 rounded-full' style={{ backgroundColor: colorPalette[historyPrice.website] }} />
               <span className='text-primary font-medium text-[14px]'>{historyPrice.website}</span>
