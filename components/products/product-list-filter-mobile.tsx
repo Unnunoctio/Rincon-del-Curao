@@ -50,13 +50,13 @@ export const ProductListFilterMobile: React.FC<Props> = ({ children }) => {
                   leaveFrom='translate-x-0'
                   leaveTo='-translate-x-[300px]'
                 >
-                  <Dialog.Panel className='pointer-events-auto relative w-screen'>
+                  <Dialog.Panel className='flex flex-col pointer-events-auto relative w-screen'>
                     <div className='h-[72px]' />
                     <div className='flex h-full flex-col overflow-y-auto bg-primary shadow-xl border-r divider-primary'>
-                      <div className='px-4 mt-4'>
+                      <div className='px-3 mt-4'>
                         {children}
                       </div>
-                      <div className='flex justify-end px-4 mt-2'>
+                      <div className='flex justify-end px-3 mt-2 pb-10'>
                         <button onClick={onClose} aria-label='cerrar filtros' className='font-medium py-1.5 px-8 rounded-full border border-primary text-secondary hover:bg-selected transition-colors hover:text-active hover:border-active'>
                           Cerrar
                         </button>
