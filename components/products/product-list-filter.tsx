@@ -32,6 +32,7 @@ export const ProductListFilter: React.FC<Props> = ({ category, optionsText, filt
         <MultiSelectV2 label='Categoria' name='sub_category' options={totalOptions.subCategory} aria='seleccionar categoria' />
         <MultiSelectV2 label='Marca' name='brand' options={totalOptions.brand} aria='seleccionar marca' />
         <MultiSelectV2 label='Contenido' name='content' options={totalOptions.content} aria='seleccionar contenido unitario' />
+        <RangeSlider label='Graduación Alcohólica' minName='grade_min' maxName='grade_max' min={totalOptions.gradeMin} max={totalOptions.gradeMax} step={0.1} textFormat={TextFormatEnum.GRADE} />
         <MultiSelectV2 label='Cantidad' name='quantity' options={totalOptions.quantity} aria='seleccionar cantidad' />
         <MultiSelectV2 label='Envase' name='package' options={totalOptions.package} aria='seleccionar envase' />
       </div>

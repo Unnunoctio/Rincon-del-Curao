@@ -14,6 +14,8 @@ export interface FilterOptions {
   package?: string[]
   priceMin?: number
   priceMax?: number
+  gradeMin?: number
+  gradeMax?: number
 }
 
 export interface FormInput {

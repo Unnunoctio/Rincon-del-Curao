@@ -6,6 +6,8 @@ const query = `
     totalOptions(availableWebs: $availableWebs, category: $category, options: $options) {
       priceMin
       priceMax
+      gradeMin
+      gradeMax
       subCategory {
         label
         count

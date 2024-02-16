@@ -16,6 +16,14 @@ export const getFilterOptions = (searchParams: { [key: string]: string | string[
     options.priceMax = Number(searchParams.price_max)
     optionsText += `&price_max=${searchParams.price_max as string}`
   }
+  if (!isNaN(Number(searchParams.grade_min))) {
+    options.gradeMin = Number(searchParams.grade_min)
+    optionsText += `&grade_min=${searchParams.grade_min as string}`
+  }
+  if (!isNaN(Number(searchParams.grade_max))) {
+    options.gradeMax = Number(searchParams.grade_max)
+    optionsText += `&grade_max=${searchParams.grade_max as string}`
+  }
   if (searchParams.sub_category !== undefined) {
     Array.isArray(searchParams.sub_category) ? (options.subCategory = searchParams.sub_category) : (options.subCategory = [searchParams.sub_category])
     optionsText += `&sub_category=${searchParams.sub_category.toString()}`
