@@ -32,13 +32,15 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
   return (
     <>
       <Breadcrumb links={createBreadcrumbLinks(['Home', product.category, product.title])} />
-      <h1 className='my-4 text-2xl xs:text-3xl font-medium text-primary'>{product.title}</h1>
-      <div className='flex flex-col lg:flex-row justify-between gap-4'>
+      <header className='mt-6'>
+        <h1 className='text-2xl xs:text-3xl font-medium text-primary'>{product.title}</h1>
+      </header>
+      <div className='flex flex-col lx:flex-row justify-between gap-4 mt-6'>
         <section className='flex flex-col justify-start items-center gap-4 max-w-[600px]'>
           <Image src={product.image} alt={product.title} width={600} height={600} className='aspect-square object-cover rounded-lg' priority />
           <LinkedProductList linkedProducts={linkedProducts} />
         </section>
-        <section className='flex flex-1 flex-col-reverse xm:flex-row justify-evenly gap-4'>
+        <section className='flex flex-1 flex-col-reverse xm:flex-row justify-between gap-4 max-w-[650px]'>
           <FeatureList {...product} />
           <WebsiteList websites={product.websites} />
         </section>
