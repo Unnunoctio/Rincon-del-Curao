@@ -1,11 +1,11 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { AxisOptions, Chart, Series } from 'react-charts'
 import { HistoryPrice } from '@/types/api'
 import { HistoryContainer } from './history-container'
 import { useTheme } from 'next-themes'
-import { getHistoryWith } from '@/helpers/history'
+import { getHistoryData } from '@/helpers/history'
 
 interface Props {
   historyPricies: HistoryPrice[]
@@ -14,17 +14,16 @@ interface Props {
 interface MyDatum { date: Date, price: number }
 
 export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
+  const ref = useRef<HTMLDivElement | null>(null)
   const { theme, systemTheme } = useTheme()
-  const historyWidth = getHistoryWith(historyPricies.map(hp => hp.records).flat())
+  const [historyWidth, minDate, maxDate] = getHistoryData(historyPricies.map(hp => hp.records).flat())
 
-  const data = historyPricies.map((historyPrice) => {
+  const data = historyPricies.map((historyPrice): any => {
     return {
       label: historyPrice.website,
       data: historyPrice.records.map((record) => {
-        const date = new Date(record.date)
-
         return {
-          date,
+          date: new Date(record.date),
           price: record.price
         }
       })
@@ -33,24 +32,45 @@ export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
 
   const primaryAxis = useMemo((): AxisOptions<MyDatum> => ({
     getValue: datum => datum.date,
-    scaleType: 'time'
-  }), [])
+    scaleType: 'localTime',
+    min: minDate,
+    max: maxDate,
+    formatters: {
+      scale: (value) => {
+        if (value === null) return ''
+        let month = value.toLocaleDateString('es-ES', { month: 'short' })
+        month = month.charAt(0).toUpperCase() + month.slice(1)
+        return `${month} ${value.getDate()}`
+      },
+      tooltip: (value) => {
+        let month = value.toLocaleDateString('es-ES', { month: 'long' })
+        month = month.charAt(0).toUpperCase() + month.slice(1)
+        return `${value.getDate()} de ${month}`
+      }
+    }
+  }), [historyPricies])
 
   const secondaryAxes = useMemo((): Array<AxisOptions<MyDatum>> => [
     {
       getValue: datum => datum.price,
       elementType: 'line',
-      showDatumElements: true
+      showDatumElements: true,
+      formatters: {
+        scale: (value: number) => {
+          if (value === null) return ''
+          return `$${value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        }
+      }
     }
-  ], [])
+  ], [historyPricies])
+
+  const colorPalette: { [key: string]: string } = {
+    Jumbo: '#1FA02E',
+    Lider: '#0071DC',
+    'Santa Isabel': '#D91E18'
+  }
 
   const getSeriesStyle = useCallback((series: Series<MyDatum>) => {
-    const colorPalette: { [key: string]: string } = {
-      Jumbo: '#1FA02E',
-      Lider: '#0071DC',
-      'Santa Isabel': '#D91E18'
-    }
-
     return {
       fill: colorPalette[series.label],
       stroke: colorPalette[series.label],
@@ -58,10 +78,26 @@ export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (ref.current !== null) {
+      ref.current.scrollLeft = ref.current.scrollWidth
+    }
+  }, [])
+
   return (
     <section className='w-full mt-10'>
       <h2 className='text-primary font-medium text-2xl'>Historial de Precios</h2>
-      <div className='max-w-[1500px] overflow-x-auto'>
+      <ul className='px-2 mt-4 mb-1 flex flex-wrap gap-x-6 gap-y-1'>
+        {
+          historyPricies.sort((a, b) => a.website.localeCompare(b.website)).map((historyPrice, index) => (
+            <li key={index} className='flex gap-1 items-baseline'>
+              <span className='inline-block w-3 h-3 rounded-full' style={{ backgroundColor: colorPalette[historyPrice.website] }} />
+              <span className='text-primary font-medium text-[14px]'>{historyPrice.website}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div ref={ref} className='max-w-[1500px] overflow-x-auto'>
         <HistoryContainer width={historyWidth}>
           <Chart
             options={{

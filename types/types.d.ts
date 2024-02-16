@@ -6,11 +6,16 @@ export interface OrderBy {
 }
 
 export interface FilterOptions {
+  search?: string
   subCategory?: string[]
   brand?: string[]
   content?: string[]
   quantity?: string[]
   package?: string[]
+  priceMin?: number
+  priceMax?: number
+  gradeMin?: number
+  gradeMax?: number
 }
 
 export interface FormInput {

@@ -24,7 +24,7 @@ export const Areafield: React.FC<Props> = ({ register, label, name, placeholder,
           autoComplete='off'
           rows={5}
           disabled={disabled}
-          className={`appearance-none ${disabled ? 'cursor-not-allowed' : 'cursor-text'} block w-full rounded-md bg-transparent border border-primary ${error ? 'border-error' : ''} py-[9px] focus:ring-transparent focus:ring-offset-transparent focus:border-active`}
+          className={`appearance-none ${disabled ? 'cursor-not-allowed' : 'cursor-text'} block w-full rounded-md bg-transparent hover:bg-selected focus:bg-selected border border-primary ${error ? 'border-error' : ''} py-[9px] focus:ring-transparent focus:ring-offset-transparent focus:border-active`}
         />
       </label>
       {error && <span className='text-sm text-error'>{error.message}</span>}

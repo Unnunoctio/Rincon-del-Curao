@@ -77,3 +77,7 @@
     @apply group-hover:stroke-active dark:group-hover:stroke-active
   }
 }
+
+input[type='text']:focus {
+  --tw-ring-color: transparent;
+}

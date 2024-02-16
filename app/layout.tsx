@@ -11,7 +11,8 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['400', '500', '700']
+  weight: ['400', '500', '700'],
+  variable: '--font-roboto'
 })
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default async function RootLayout ({ children }: { children: React.ReactN
 
   return (
     <html lang='es'>
-      <body className={`${roboto.className} bg-page`}>
+      <body className={`${roboto.variable} bg-page font-roboto`}>
         <NextTopLoader color='#d69e2e' showSpinner={false} />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ToastContainer containerId='notification' position='top-right' />

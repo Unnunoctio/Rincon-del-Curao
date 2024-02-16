@@ -16,6 +16,6 @@ export const ProductCount: React.FC<Props> = async ({ category, filterOptions, c
   const count = await getTotalProducts((prefWebs === null) ? [] : prefWebs.split(','), category, filterOptions)
 
   return (
-    <span className={className}>{count} productos</span>
+    <span className={className}>{count} {count > 1 ? 'productos' : 'producto'}</span>
   )
 }

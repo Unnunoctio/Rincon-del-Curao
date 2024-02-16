@@ -17,11 +17,12 @@ export const RemoveFilters: React.FC<Props> = ({ filterOptions }) => {
   const createURL = (): string => {
     const params = new URLSearchParams(searchParams)
     Object.keys(filterOptions).forEach(key => {
-      if (key === 'subCategory') {
-        params.delete('sub_category')
-      } else {
-        params.delete(key)
-      }
+      if (key === 'subCategory') params.delete('sub_category')
+      else if (key === 'priceMin') params.delete('price_min')
+      else if (key === 'priceMax') params.delete('price_max')
+      else if (key === 'gradeMin') params.delete('grade_min')
+      else if (key === 'gradeMax') params.delete('grade_max')
+      else params.delete(key)
     })
     params.set('page', '1')
     return `${pathname}?${params.toString()}`

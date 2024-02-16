@@ -22,6 +22,10 @@ export interface TotalOptions {
   content: OptionType[]
   quantity: OptionType[]
   package: OptionType[]
+  priceMin: number
+  priceMax: number
+  gradeMin: number
+  gradeMax: number
 }
 
 export interface IsProduct {

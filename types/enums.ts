@@ -11,3 +11,8 @@ export enum OrderByEnum {
   NAME_ASC = 'NAME_ASC',
   NAME_DESC = 'NAME_DESC'
 }
+
+export enum TextFormatEnum {
+  PRICE = 'PRICE',
+  GRADE = 'GRADE'
+}

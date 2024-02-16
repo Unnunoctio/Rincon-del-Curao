@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ['var(--font-roboto)']
+      },
       colors: {
         active: '#d69e2e'
       },
@@ -35,7 +38,8 @@ const config: Config = {
       },
       screens: {
         xs: '440px',
-        xm: '530px'
+        xm: '530px',
+        lx: '1230px'
       }
     }
   },

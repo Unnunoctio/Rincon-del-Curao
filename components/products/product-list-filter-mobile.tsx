@@ -18,7 +18,7 @@ export const ProductListFilterMobile: React.FC<Props> = ({ children }) => {
     <>
       <button
         onClick={onOpen}
-        className='group flex xl:hidden items-center gap-1 pl-1 sm:pl-2 pr-3 rounded-md cursor-pointer text-primary transition-colors border border-primary border-hover'
+        className='group flex xl:hidden items-center gap-1 pl-1 sm:pl-2 pr-3 rounded-md cursor-pointer text-primary hover:bg-selected transition-colors border border-primary border-hover'
         aria-label='filtrar por'
       >
         <FilterIcon className='w-6 h-6 sm:w-7 sm:h-7 icon-stroke-secondary transition-colors group-hover:stroke-active' />
@@ -50,13 +50,13 @@ export const ProductListFilterMobile: React.FC<Props> = ({ children }) => {
                   leaveFrom='translate-x-0'
                   leaveTo='-translate-x-[300px]'
                 >
-                  <Dialog.Panel className='pointer-events-auto relative w-screen'>
+                  <Dialog.Panel className='flex flex-col pointer-events-auto relative w-screen'>
                     <div className='h-[72px]' />
                     <div className='flex h-full flex-col overflow-y-auto bg-primary shadow-xl border-r divider-primary'>
-                      <div className='px-4 mt-4'>
+                      <div className='px-3 mt-4'>
                         {children}
                       </div>
-                      <div className='flex justify-end px-4 mt-2'>
+                      <div className='flex justify-end px-3 mt-2 pb-10'>
                         <button onClick={onClose} aria-label='cerrar filtros' className='font-medium py-1.5 px-8 rounded-full border border-primary text-secondary hover:bg-selected transition-colors hover:text-active hover:border-active'>
                           Cerrar
                         </button>

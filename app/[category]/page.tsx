@@ -65,7 +65,7 @@ export default async function ProductsPage ({ params, searchParams }: Props): Pr
         </div>
       </header>
       {/* Filter & Product list */}
-      <section className='flex gap-4 mt-6'>
+      <section className='flex gap-12 mt-6'>
         <div className='hidden xl:block w-[280px]'>
           <ProductListFilter category={link?.name as string} optionsText={optionsText} filterOptions={filterOptions} totalOptions={totalOptions} />
         </div>
