@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { AxisOptions, Chart, Series } from 'react-charts'
 import { HistoryPrice } from '@/types/api'
 import { HistoryContainer } from './history-container'
@@ -14,6 +14,7 @@ interface Props {
 interface MyDatum { date: Date, price: number }
 
 export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
+  const ref = useRef<HTMLDivElement | null>(null)
   const { theme, systemTheme } = useTheme()
   const [historyWidth, minDate, maxDate] = getHistoryData(historyPricies.map(hp => hp.records).flat())
 
@@ -77,10 +78,16 @@ export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (ref.current !== null) {
+      ref.current.scrollLeft = ref.current.scrollWidth
+    }
+  }, [])
+
   return (
     <section className='w-full mt-10'>
       <h2 className='text-primary font-medium text-2xl'>Historial de Precios</h2>
-      <ul className='ml-2 mt-4 flex flex-wrap gap-x-6 gap-y-1'>
+      <ul className='px-2 mt-4 mb-1 flex flex-wrap gap-x-6 gap-y-1'>
         {
           historyPricies.map((historyPrice, index) => (
             <li key={index} className='flex gap-1 items-baseline'>
@@ -90,7 +97,7 @@ export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
           ))
         }
       </ul>
-      <div className='max-w-[1500px] overflow-x-auto'>
+      <div ref={ref} className='max-w-[1500px] overflow-x-auto'>
         <HistoryContainer width={historyWidth}>
           <Chart
             options={{
