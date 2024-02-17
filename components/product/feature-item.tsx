@@ -6,7 +6,7 @@ interface Props {
 
 export const FeatureItem: React.FC<Props> = ({ title, value, children }) => {
   return (
-    <li className='flex items-center gap-2 p-2'>
+    <li className='flex items-center gap-2 p-2 w-[230px]'>
       <div className='flex justify-center w-[36px]'>
         {children}
       </div>
