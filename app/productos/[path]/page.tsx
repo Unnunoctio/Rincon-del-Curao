@@ -35,16 +35,23 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
       <header className='mt-6'>
         <h1 className='text-2xl xs:text-3xl font-medium text-primary'>{product.title}</h1>
       </header>
-      <div className='flex flex-col lx:flex-row justify-between gap-4 mt-6'>
-        <section className='flex flex-col justify-start items-center gap-4 max-w-[600px]'>
+
+      <section className='mt-6 block lg:flex justify-between gap-6'>
+        <div className='flex flex-col items-center lg:items-start gap-6 w-full lg:min-w-[600px]'>
           <Image src={product.image} alt={product.title} width={600} height={600} className='aspect-square object-cover rounded-lg' priority />
           <LinkedProductList linkedProducts={linkedProducts} />
-        </section>
-        <section className='flex flex-1 flex-col-reverse xm:flex-row justify-between gap-4 max-w-[650px]'>
-          <FeatureList {...product} />
+        </div>
+        <div className='hidden lg:flex justify-end lx:justify-between gap-4 w-full max-w-[650px]'>
+          <FeatureList {...product} className='hidden lx:block max-w-[250px]' />
           <WebsiteList websites={product.websites} />
-        </section>
-      </div>
+        </div>
+      </section>
+
+      <section className='flex flex-col-reverse xm:flex-row lx:hidden mt-6 gap-x-4 gap-y-6 justify-between'>
+        <FeatureList {...product} className='max-w-[510px]' />
+        <WebsiteList websites={product.websites} className='lg:hidden' />
+      </section>
+
       {historyPricies.length > 0 && <HistoryPricies historyPricies={historyPricies} />}
     </>
   )

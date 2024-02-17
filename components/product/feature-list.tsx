@@ -3,13 +3,15 @@ import { Category } from '@/types/enums'
 import { FeatureItem } from './feature-item'
 import { AlcoholicIcon, BitternessIcon, BrandIcon, CategoryIcon, ContentIcon, MadeInIcon, PackageIcon, QuantityIcon, StrainIcon, TemperatureIcon, VarietyIcon, VineyardIcon } from '@/icons'
 
-interface Props extends Omit<Product, 'title' | 'image' | 'websites'> {}
+interface Props extends Omit<Product, 'title' | 'image' | 'websites'> {
+  className?: string
+}
 
-export const FeatureList: React.FC<Props> = ({ category, brand, subCategory, quantity, content, variety, strain, vineyard, alcoholicGrade, bitterness, package: packageProp, madeIn, temperature }) => {
+export const FeatureList: React.FC<Props> = ({ category, brand, subCategory, quantity, content, variety, strain, vineyard, alcoholicGrade, bitterness, package: packageProp, madeIn, temperature, className = '' }) => {
   return (
-    <section>
+    <section className={className}>
       <h2 className='text-primary font-medium text-2xl'>Características</h2>
-      <ul className='flex flex-col gap-2 w-[230px] mt-2'>
+      <ul className='flex flex-wrap gap-2 mt-2'>
         <FeatureItem title='Marca' value={brand}>
           <BrandIcon className='w-8 h-8 fill-transparent stroke-active' />
         </FeatureItem>
