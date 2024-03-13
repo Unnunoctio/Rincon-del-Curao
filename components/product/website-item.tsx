@@ -1,5 +1,4 @@
 import { Website } from '@/types/api'
-import Image from 'next/image'
 import { AverageWebsite } from '../average'
 
 interface Props extends Omit<Website, 'records'> {}
@@ -9,7 +8,7 @@ export const WebsiteItem: React.FC<Props> = ({ url, logo, name, average, bestPri
     <a href={url} target='_blank' rel='noopener noreferrer' className='w-full'>
       <article className='w-full group flex gap-2 p-2 bg-primary rounded-lg border divider-primary hover:border-hover'>
         <div className='min-w-[48px] flex items-center'>
-          <Image src={logo} alt={`${name} logo`} width={48} height={48} className='object-cover' />
+          <img src={logo} alt={`${name} logo`} loading='lazy' width={48} height={48} className='object-cover' />
         </div>
         <div className='w-full flex flex-col gap-3'>
           <div className='flex gap-2 justify-between'>

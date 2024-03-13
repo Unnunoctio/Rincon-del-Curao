@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getHistoryPricies, getLinkedProducts, getProduct, getProductTitle } from '@/lib/api'
@@ -38,7 +37,7 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
 
       <section className='mt-6 block lg:flex justify-between gap-6'>
         <div className='flex flex-col items-center lg:items-start gap-6 w-full lg:min-w-[600px]'>
-          <Image src={product.image} alt={product.title} width={600} height={600} className='aspect-square object-cover rounded-lg' priority />
+          <img src={product.image} alt={product.title} loading='lazy' width={600} height={600} className='aspect-square object-cover rounded-lg' fetchPriority='high' />
           <LinkedProductList linkedProducts={linkedProducts} />
         </div>
         <div className='hidden lg:flex justify-end lx:justify-between gap-4 w-full max-w-[650px]'>
