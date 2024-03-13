@@ -5,7 +5,6 @@ const query = `
     totalWebs {
       code
       name
-      url
       logo
     }
   }
