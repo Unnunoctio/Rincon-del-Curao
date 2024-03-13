@@ -36,7 +36,6 @@ export interface IsProduct {
 export interface Web {
   code: string
   name: string
-  url: string
   logo: string
 }
 
