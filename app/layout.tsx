@@ -7,6 +7,8 @@ import { ThemeProvider } from '@/provider/theme-provider'
 import { Navigation } from '@/components/navigation/navigation'
 import { PageLayout } from '@/components/page-layout'
 import { Footer } from '@/components/footer/footer'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -27,6 +29,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
     <html lang='es'>
       <body className={`${roboto.variable} font-roboto bg-page`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <ToastContainer containerId='notification' position='top-right' />
           <Navigation />
           <PageLayout>
             {children}
