@@ -1,3 +1,5 @@
+'use client'
+
 import { MoonIcon, SunIcon, SystemIcon } from '@/icons'
 import { useTheme } from 'next-themes'
 
@@ -5,27 +7,27 @@ export const ThemeSwitch: React.FC = () => {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className='flex items-center gap-1 p-0.5 rounded-full border divider-primary'>
+    <div className='flex items-center gap-1 p-0.5 w-fit rounded-full border divider-primary transition-theme'>
       <button
         onClick={() => setTheme('light')}
-        className={`group ${theme === 'light' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        className={`group ${theme === 'light' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-theme`}
         aria-label='modo claro'
       >
-        <SunIcon className={`w-5 h-5 fill-transparent ${theme === 'light' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
+        <SunIcon className={`w-5 h-5 fill-transparent ${theme === 'light' ? 'stroke-active' : 'icon-stroke-primary'} transition-theme`} />
       </button>
       <button
         onClick={() => setTheme('system')}
-        className={`group ${theme === 'system' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        className={`group ${theme === 'system' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-theme`}
         aria-label='modo del sistema'
       >
-        <SystemIcon className={`w-5 h-5 fill-transparent ${theme === 'system' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
+        <SystemIcon className={`w-5 h-5 fill-transparent ${theme === 'system' ? 'stroke-active' : 'icon-stroke-primary'} transition-theme`} />
       </button>
       <button
         onClick={() => setTheme('dark')}
-        className={`group ${theme === 'dark' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-colors`}
+        className={`group ${theme === 'dark' ? 'bg-page' : 'bg-transparent'} p-1.5 rounded-full hover:bg-page transition-theme`}
         aria-label='modo oscuro'
       >
-        <MoonIcon className={`w-5 h-5 fill-transparent ${theme === 'dark' ? 'stroke-active' : 'icon-stroke-primary'} transition-colors`} />
+        <MoonIcon className={`w-5 h-5 fill-transparent ${theme === 'dark' ? 'stroke-active' : 'icon-stroke-primary'} transition-theme`} />
       </button>
     </div>
   )
