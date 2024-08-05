@@ -97,7 +97,7 @@
     @apply hover:underline
   }
   .breadcrumb-item-active {
-    @apply text-active hover:underline
+    @apply text-active
   }
   .breadcrumb-separator {
     @apply mx-3 select-none
