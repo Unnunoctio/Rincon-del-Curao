@@ -8,7 +8,7 @@
     @apply transition-colors duration-[3000ms]
   }
   .layout-body {
-    @apply font-roboto bg-[#edf2f7] dark:bg-[#222629] transition-theme
+    @apply font-roboto bg-[#edf2f7] dark:bg-[#222629]
   }
   .layout-page {
     @apply flex justify-center w-full
@@ -40,16 +40,34 @@
     @apply flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[300px]
   }
   .footer-text-logo {
-    @apply italic text-center sm:text-left text-primary
+    @apply italic text-center sm:text-left text-[#1a202c] dark:text-[#FFFFFFEB]
   }
   .footer-container-items {
     @apply flex justify-center gap-8
+  }
+  .footer-container-info {
+    @apply text-center sm:text-start
+  }
+  .footer-container-navigation {
+    @apply hidden md:block
+  }
+  .footer-text-title {
+    @apply text-[18px] font-medium text-[#1a202c] dark:text-[#FFFFFFEB]
+  }
+  .footer-list-items {
+    @apply flex flex-col gap-2 sm:gap-3 mt-3
+  }
+  .footer-link-item {
+    @apply w-fit text-[#718096] dark:text-[#7b8aa1] hover:underline
+  }
+  .footer-button {
+    @apply absolute sm:static top-0 -right-0 p-2 h-fit rounded-full hover:bg-[#edf2f7] dark:hover:bg-[#222629]
   }
   .footer-divider {
     @apply my-6 border-[#e2e8f0] dark:border-[#434548]
   }
   .footer-text-year {
-    @apply text-center text-primary
+    @apply text-center text-[#1a202c] dark:text-[#FFFFFFEB]
   }
 }
 
@@ -63,10 +81,14 @@
   }
 }
 
+/* ICONS */
 @layer components {
-  
+  .icon-fill {
+    @apply w-6 h-6 fill-[#1a202c] dark:fill-[#FFFFFFEB] group-hover:fill-active dark:group-hover:fill-active
+  }
+}
 
-
+@layer components {
   /* -------------------------------------------------------------- */
   /* Backgrounds */
   .bg-page {

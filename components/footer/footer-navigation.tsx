@@ -3,12 +3,12 @@ import { navigateLinks } from '@/helpers/path'
 
 export const FooterNavigation: React.FC = () => {
   return (
-    <div className='hidden md:block'>
-      <h3 className='text-[18px] font-medium text-primary'>Navegación</h3>
-      <ul className='flex flex-col gap-3 mt-3'>
+    <div className='footer-container-navigation'>
+      <h3 className='footer-text-title'>Navegación</h3>
+      <ul className='footer-list-items'>
         {navigateLinks.map((link) => (
           <li key={link.route}>
-            <Link href={link.route} aria-label={link.name.toLowerCase()} className='w-fit text-secondary hover:underline'>
+            <Link href={link.route} aria-label={link.name.toLowerCase()} className='footer-link-item'>
               {link.name}
             </Link>
           </li>

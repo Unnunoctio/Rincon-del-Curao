@@ -1,4 +1,7 @@
 import { Logo } from '../logo'
+import { FooterInfo } from './footer-info'
+import { FooterNavigation } from './footer-navigation'
+import { FooterScroll } from './footer-scroll'
 
 export const Footer: React.FC = () => {
   return (
@@ -6,12 +9,16 @@ export const Footer: React.FC = () => {
       <div className='footer-container'>
         <section className='footer-section'>
           <div className='footer-container-logo'>
-            <Logo boxHeight='h-[60px' logoWidth='w-[120px]' linkClass='transition-transform hover:scale-105' />
+            <Logo boxHeight='h-[60px]' logoWidth='w-[120px]' linkClass='transition-transform hover:scale-105' />
             <p className='footer-text-logo'>
               Nuestra misión es ayudar a los consumidores a escoger las mejores bebidas para sus presupuestos.
             </p>
           </div>
-          <div className='footer-container-items' />
+          <div className='footer-container-items'>
+            <FooterInfo />
+            <FooterNavigation />
+            <FooterScroll />
+          </div>
         </section>
         <hr className='footer-divider' />
         <p className='footer-text-year'>&copy; {new Date().getFullYear()} Rincón del Curao. Todos los derechos reservados.</p>
