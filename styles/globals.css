@@ -157,6 +157,53 @@
   } 
 }
 
+/* CONTACT */
+@layer components {
+  .layout-contact {
+    @apply my-10 flex justify-center items-center
+  }
+  .contact-container {
+    @apply flex flex-col w-full max-w-[750px] p-3 md:p-6 rounded-lg
+  }
+  .contact-title {
+    @apply mb-3 text-3xl font-medium
+  }
+  .contact-list {
+    @apply pl-6 list-disc
+  }
+  .contact-form-container {
+    @apply mt-6 flex flex-col gap-3
+  }
+  .contact-form-button {
+    @apply mt-3 font-medium py-2 px-3 rounded-full bg-active/75 disabled:bg-active/50 border border-transparent hover:bg-active
+  }
+}
+
+/* FORMS */
+@layer components {
+  .textfield-label {
+    @apply relative flex flex-1 flex-col gap-1
+  }
+  .textfield-text {
+    @apply w-fit font-medium
+  }
+  .textfield-text-error {
+    @apply text-red-500 dark:text-red-500
+  }
+  .textfield-input {
+    @apply appearance-none cursor-text block w-full rounded-md bg-transparent hover:bg-[#e2e8f0] dark:hover:bg-[#282d33] focus:bg-[#e2e8f0] dark:focus:bg-[#282d33] border border-[#718096] dark:border-[#7b8aa1] py-[9px] focus:ring-transparent focus:ring-offset-transparent focus:border-active
+  }
+  .textfield-input-disabled {
+    @apply cursor-not-allowed
+  }
+  .textfield-input-error {
+    @apply border-red-500 dark:border-red-500
+  }
+  .textfield-span-error {
+    @apply text-sm text-red-500 dark:text-red-500
+  }
+}
+
 @layer components {
   /* -------------------------------------------------------------- */
   /* Backgrounds */
