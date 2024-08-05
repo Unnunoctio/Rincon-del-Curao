@@ -9,9 +9,9 @@ interface Props {
 
 export const Logo: React.FC<Props> = ({ boxHeight, logoWidth, linkClass }) => {
   return (
-    <div className={`${boxHeight} flex items-center`}>
+    <div className={`${boxHeight} logo-container`}>
       <Link href='/' aria-label='home' className={linkClass}>
-        <LogoIcon className={`${logoWidth} h-auto aspect-[1078/342]`} />
+        <LogoIcon className={`${logoWidth} logo`} />
       </Link>
     </div>
   )

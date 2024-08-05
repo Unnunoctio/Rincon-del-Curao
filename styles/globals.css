@@ -2,7 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+/* BODY */
 @layer components {
+  .transition-theme {
+    @apply transition-colors duration-[3000ms]
+  }
+  .layout-body {
+    @apply font-roboto bg-[#edf2f7] dark:bg-[#222629] transition-theme
+  }
+  .layout-page {
+    @apply flex justify-center w-full
+  }
+  .page-container {
+    @apply px-2 sm:px-8 md:px-12 py-2 sm:py-4 min-h-page-container max-w-page-container w-full
+  }
+}
+
+/* NAVBAR */
+@layer components {
+  .navbar-space {
+    @apply h-16
+  }
+}
+
+/* FOOTER */
+@layer components {
+  .footer {
+    @apply flex justify-center py-8 mt-15 w-full bg-[#fafafa] dark:bg-[#121212] border-t border-[#e2e8f0] dark:border-[#434548]
+  }
+  .footer-container {
+    @apply flex flex-col px-4 md:px-8 max-w-nav-container w-full
+  }
+  .footer-section {
+    @apply relative flex flex-col gap-4 sm:flex-row justify-between
+  }
+  .footer-container-logo {
+    @apply flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[300px]
+  }
+  .footer-text-logo {
+    @apply italic text-center sm:text-left text-primary
+  }
+  .footer-container-items {
+    @apply flex justify-center gap-8
+  }
+  .footer-divider {
+    @apply my-6 border-[#e2e8f0] dark:border-[#434548]
+  }
+  .footer-text-year {
+    @apply text-center text-primary
+  }
+}
+
+/* LOGO */
+@layer components {
+  .logo-container {
+    @apply flex items-center
+  }
+  .logo {
+    @apply h-auto aspect-[1078/342]
+  }
+}
+
+@layer components {
+  
+
+
+  /* -------------------------------------------------------------- */
   /* Backgrounds */
   .bg-page {
     @apply bg-[#edf2f7] dark:bg-[#222629]
