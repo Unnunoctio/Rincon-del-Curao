@@ -8,7 +8,7 @@
     @apply transition-colors duration-[3000ms]
   }
   .layout-body {
-    @apply font-roboto bg-[#edf2f7] dark:bg-[#222629]
+    @apply font-roboto bg-[#edf2f7] dark:bg-[#222629] text-[#1a202c] dark:text-[#FFFFFFEB]
   }
   .layout-page {
     @apply flex justify-center w-full
@@ -40,7 +40,7 @@
     @apply flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[300px]
   }
   .footer-text-logo {
-    @apply italic text-center sm:text-left text-[#1a202c] dark:text-[#FFFFFFEB]
+    @apply italic text-center sm:text-left
   }
   .footer-container-items {
     @apply flex justify-center gap-8
@@ -52,7 +52,7 @@
     @apply hidden md:block
   }
   .footer-text-title {
-    @apply text-[18px] font-medium text-[#1a202c] dark:text-[#FFFFFFEB]
+    @apply text-[18px] font-medium
   }
   .footer-list-items {
     @apply flex flex-col gap-2 sm:gap-3 mt-3
@@ -67,7 +67,7 @@
     @apply my-6 border-[#e2e8f0] dark:border-[#434548]
   }
   .footer-text-year {
-    @apply text-center text-[#1a202c] dark:text-[#FFFFFFEB]
+    @apply text-center
   }
 }
 
@@ -113,7 +113,7 @@
     @apply flex flex-row lg:flex-col gap-1 min-w-[200px] items-start h-auto
   }
   .legal-container {
-    @apply w-full max-w-[1000px] text-[#1a202c] dark:text-[#FFFFFFEB]
+    @apply w-full max-w-[1000px]
   }
   .legal-title {
     @apply mb-4 text-3xl font-medium
@@ -133,6 +133,28 @@
   .legal-tab {
     @apply appearance-none w-full max-w-[200px] h-fit text-center lg:text-left rounded-lg py-3 px-2 lg:pl-3 border-b-4 lg:border-l-4 lg:border-b-0 border-transparent hover:bg-[#e2e8f0] dark:hover:bg-[#282d33]
   }
+}
+
+/* NOT FOUND */
+@layer components {
+  .layout-notfound {
+    @apply flex items-center justify-center h-full 
+  }
+  .notfound-container {
+    @apply flex flex-col gap-6
+  }
+  .notfound-section {
+    @apply flex flex-col
+  }
+  .notfound-title {
+    @apply text-4xl font-bold
+  }
+  .notfound-span {
+    @apply pb-1 text-2xl font-medium text-active
+  }
+  .notfound-button {
+    @apply px-4 py-2 w-fit font-medium hover:text-active dark:hover:text-active rounded-md border border-[#718096] dark:border-[#7b8aa1] hover:border-active dark:hover:border-active
+  } 
 }
 
 @layer components {
