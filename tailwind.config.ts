@@ -22,16 +22,16 @@ const config: Config = {
         13: '3.25rem'
       },
       minHeight: {
-        'page-container': 'calc(100vh - 72px)',
+        'page-container': 'calc(100vh - 64px)',
         'product-list': 'calc(100vh - 310px)'
       },
       maxWidth: {
-        'nav-container': '1450px',
         'page-container': '1500px'
       },
       transitionProperty: {
         height: 'height',
-        'text-colors': 'color'
+        'text-colors': 'color',
+        popover: 'transform, opacity'
       },
       gridTemplateColumns: {
         'product-list': 'repeat(auto-fit, minmax(250px, 1fr))'

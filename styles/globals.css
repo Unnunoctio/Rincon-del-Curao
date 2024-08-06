@@ -23,6 +23,39 @@
   .navbar-space {
     @apply h-16
   }
+  .navbar {
+    @apply fixed z-10 flex justify-center w-full bg-[#fafafa] dark:bg-[#121212] border-b border-[#e2e8f0] dark:border-[#434548]
+  }
+  .navbar-container {
+    @apply flex justify-between px-2 sm:px-8 md:px-12 max-w-page-container w-full
+  }
+  .navbar-container-items {
+    @apply flex
+  }
+  .navbar-link-list {
+    @apply hidden md:flex items-start gap-6 overflow-hidden h-[63px] transition-height duration-300
+  }
+  .navbar-link-list-open {
+    @apply h-[263px]
+  }
+  .navbar-link-title {
+    @apply flex items-center h-[63px] text-[18px] font-medium select-none
+  }
+  .navbar-category-list {
+    @apply flex flex-col gap-3
+  }
+  .navbar-category {
+    @apply w-fit text-secondary hover:underline
+  }
+  .navbar-category-all {
+    @apply w-fit text-active hover:underline
+  }
+  .navbar-buttons-container {
+    @apply flex items-center gap-2 ml-0 md:ml-12 h-[63px]
+  }
+  .navbar-menu-button {
+    @apply block md:hidden p-2 h-fit rounded-full
+  }
 }
 
 /* FOOTER */
@@ -31,13 +64,13 @@
     @apply flex justify-center py-8 mt-15 w-full bg-[#fafafa] dark:bg-[#121212] border-t border-[#e2e8f0] dark:border-[#434548]
   }
   .footer-container {
-    @apply flex flex-col px-4 md:px-8 max-w-nav-container w-full
+    @apply flex flex-col px-2 sm:px-8 md:px-12 max-w-page-container w-full
   }
   .footer-section {
     @apply relative flex flex-col gap-4 sm:flex-row justify-between
   }
   .footer-container-logo {
-    @apply flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[300px]
+    @apply flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[270px]
   }
   .footer-text-logo {
     @apply italic text-center sm:text-left
@@ -85,6 +118,18 @@
 @layer components {
   .icon-fill {
     @apply w-6 h-6 fill-[#1a202c] dark:fill-[#FFFFFFEB] group-hover:fill-active dark:group-hover:fill-active
+  }
+  .icon-stroke {
+    @apply w-7 h-7 fill-transparent stroke-[#1a202c] dark:stroke-[#FFFFFFEB] group-hover:stroke-active dark:group-hover:stroke-active
+  }
+  .theme-icon-stroke {
+    @apply w-5 h-5 fill-transparent stroke-[#1a202c] dark:stroke-[#FFFFFFEB]
+  }
+  .theme-icon-stroke-active {
+    @apply stroke-active dark:stroke-active
+  }
+  .modal-button-icon-stroke {
+    @apply w-6 h-6 fill-transparent stroke-[#1a202c] dark:stroke-[#FFFFFFEB]
   }
 }
 
@@ -201,6 +246,103 @@
   }
   .textfield-span-error {
     @apply text-sm text-red-500 dark:text-red-500
+  }
+}
+
+/* POPOVER */
+@layer components {
+  .popover-button {
+    @apply p-2 h-fit rounded-full focus:outline-none
+  }
+  .popover-icon {
+    @apply group-data-[open]:stroke-active
+  }
+  .popover-backdrop {
+    @apply fixed inset-0
+  }
+  .popover-panel {
+    @apply z-10 mt-1 flex flex-col gap-2 p-3 bg-[#fafafa] dark:bg-[#121212] rounded-lg border border-[#e2e8f0] dark:border-[#434548] shadow-lg transition-popover duration-200 [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0
+  }
+}
+
+/* THEME SWITCH */
+@layer components {
+  .theme-container {
+    @apply flex items-center gap-1 p-0.5 w-fit rounded-full border border-[#e2e8f0] dark:border-[#434548]
+  }
+  .theme-button {
+    @apply p-1.5 rounded-full bg-transparent hover:bg-[#edf2f7] dark:hover:bg-[#222629]
+  }
+  .theme-button-active {
+    @apply bg-[#edf2f7] dark:bg-[#222629]
+  }
+}
+
+/* MODAL */
+@layer components {
+  .modal-button-container {
+    @apply flex items-center p-0.5 rounded-full border border-[#e2e8f0] dark:border-[#434548]
+  }
+  .modal-button {
+    @apply flex justify-between w-full py-1 pl-2 rounded-full hover:bg-[#edf2f7] dark:hover:bg-[#222629]
+  }
+  .modal {
+    @apply relative z-10
+  }
+  .modal-backdrop {
+    @apply fixed inset-0 bg-black/50 transition-opacity duration-300 ease-in-out data-[closed]:opacity-0
+  }
+  .modal-container {
+    @apply fixed inset-0
+  }
+  .modal-container-center {
+    @apply flex min-h-full items-center justify-center p-4
+  }
+  .modal-panel {
+    @apply flex flex-col gap-4 w-full max-w-6xl overflow-hidden rounded-lg bg-[#edf2f7] dark:bg-[#222629] p-4 text-left align-middle shadow-xl transition-opacity duration-300 ease-in-out data-[closed]:opacity-0
+  }
+  .modal-title {
+    @apply text-2xl font-medium
+  }
+  .modal-divider {
+    @apply border-[#e2e8f0] dark:border-[#434548]
+  }
+  .modal-bottom-buttons-container {
+    @apply flex justify-end gap-4
+  }
+  .modal-button-submit {
+    @apply font-medium py-1.5 px-3 rounded-full bg-active/70 border border-transparent hover:bg-active
+  }
+  .modal-button-cancel {
+    @apply font-medium py-1.5 px-3 rounded-full border border-[#718096] dark:border-[#7b8aa1] text-[#718096] dark:text-[#7b8aa1] hover:bg-[#e2e8f0] dark:hover:bg-[#282d33] hover:text-active dark:hover:text-active hover:border-active dark:hover:border-active
+  }
+}
+
+/* WEBS */
+@layer components {
+  .web-list {
+    @apply min-h-[50vh] max-h-[65vh] overflow-y-auto flex flex-wrap content-start gap-3
+  }
+  .web-list-container {
+    @apply min-h-[50vh] max-h-[65vh] flex justify-center items-center
+  }
+  .web-error-container {
+    @apply flex flex-col justify-center items-center gap-4
+  }
+  .web-error-icon {
+    @apply w-[100px] h-[100px] fill-[#718096] dark:fill-[#7b8aa1]
+  }
+  .web-error-text {
+    @apply text-center text-2xl text-[#718096] dark:text-[#7b8aa1]
+  }
+  .web-item {
+    @apply w-full max-w-[200px]
+  }
+  .web-checkbox-label {
+    @apply flex items-center font-medium p-3 w-fit h-fit select-none cursor-pointer
+  }
+  .web-checkbox-input {
+    @apply appearance-none cursor-pointer w-5 h-5 mr-2 text-active bg-transparent border-[#718096] dark:border-[#7b8aa1] rounded focus:ring-transparent focus:ring-offset-transparent checked:border-active dark:checked:border-active
   }
 }
 
