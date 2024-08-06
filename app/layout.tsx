@@ -4,10 +4,11 @@ import { Roboto } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/provider/theme-provider'
+import { Navigation } from '@/components/navigation'
 import { PageLayout } from '@/components/page-layout'
+import { Footer } from '@/components/footer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { Footer } from '@/components/footer'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -29,8 +30,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
       <body className={`${roboto.variable} layout-body`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ToastContainer containerId='notification' position='top-right' />
-          {/* <Navigation /> */}
-          {/* <ThemeSwitch /> */}
+          <Navigation />
           <PageLayout>
             {children}
           </PageLayout>
