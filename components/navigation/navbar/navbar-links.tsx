@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { navigateLinks } from '@/helpers/path'
+import { CategoryQuery } from '@/types/path'
 
 interface Props {
   isOpen: boolean
@@ -8,26 +9,38 @@ interface Props {
 
 export const NavbarLinks: React.FC<Props> = ({ isOpen, onOpen }) => {
   return (
-    <ul onMouseEnter={onOpen} className={`hidden md:flex items-start gap-6 overflow-hidden ${isOpen ? 'h-[271px]' : 'h-[71px]'} transition-height duration-300`}>
+    <ul onMouseEnter={onOpen} className={`navbar-link-list ${isOpen ? 'navbar-link-list-open' : ''}`}>
       {navigateLinks.map((link, index) => (
-        <li key={index} className='flex flex-col pb-8'>
-          <span className='flex items-center h-[71px] text-[18px] font-medium text-primary select-none'>{link.name}</span>
-          <ul className='flex flex-col gap-3'>
-            {link.categories.map((category, index) => (
-              <li key={index}>
-                <Link href={`${link.route}?sub_category=${category.query}`} aria-label={category.name.toLowerCase()} className='w-fit text-secondary hover:underline'>
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href={link.route} aria-label='ver todos' className='w-fit text-active hover:underline'>
-                Ver Todos
-              </Link>
-            </li>
-          </ul>
-        </li>
+        <NavbarLinkItem key={index} {...link} />
       ))}
     </ul>
+  )
+}
+
+interface PropsItem {
+  name: string
+  route: string
+  categories: CategoryQuery[]
+}
+
+const NavbarLinkItem: React.FC<PropsItem> = ({ name, route, categories }) => {
+  return (
+    <li>
+      <span className='navbar-link-title'>{name}</span>
+      <ul className='navbar-category-list'>
+        {categories.map((category, index) => (
+          <li key={index}>
+            <Link href={`${route}?sub_category=${category.query}`} aria-label={category.name.toLowerCase()} className='navbar-category'>
+              {category.name}
+            </Link>
+          </li>
+        ))}
+        <li>
+          <Link href={route} aria-label='ver todos' className='navbar-category-all'>
+            Ver Todos
+          </Link>
+        </li>
+      </ul>
+    </li>
   )
 }

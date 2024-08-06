@@ -8,7 +8,7 @@ interface Props {
 
 export const NavbarButtons: React.FC<Props> = ({ onClose, sideOpen }) => {
   return (
-    <div className='flex items-center gap-2 ml-0 md:ml-12 h-[71px]'>
+    <div className='navbar-buttons-container'>
       <OptionsButton onClose={onClose} />
       <MenuButton sideOpen={sideOpen} />
     </div>

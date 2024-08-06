@@ -1,6 +1,6 @@
-import { Logo } from '../../logo/logo'
-import { NavbarButtons } from './navbar-buttons'
+import { Logo } from '@/components/logo'
 import { NavbarLinks } from './navbar-links'
+import { NavbarButtons } from './navbar-buttons'
 
 interface Props {
   isOpen: boolean
@@ -12,14 +12,13 @@ interface Props {
 export const Navbar: React.FC<Props> = ({ isOpen, onOpen, onClose, sideOpen }): JSX.Element => {
   return (
     <header
-      className='fixed z-30 flex justify-center w-full bg-primary border-b divider-primary'
+      className='navbar'
       onMouseLeave={onClose}
     >
-      <nav className='flex justify-between px-2 sm:px-8 md:px-13 max-w-nav-container w-full'>
-        <Logo boxHeight='h-[71px]' logoWidth='w-[140px]' linkClass='transition-transform scale-[0.97] hover:scale-100 sm:scale-100 sm:hover:scale-[1.03]' />
+      <nav className='navbar-container'>
+        <Logo boxHeight='h-[63px]' logoWidth='w-[140px]' linkClass='transition-transform scale-[0.97] hover:scale-100 sm:scale-100 sm:hover:scale-[1.03]' />
 
-        {/* Items and Buttons */}
-        <div className='flex'>
+        <div className='navbar-container-items'>
           <NavbarLinks isOpen={isOpen} onOpen={onOpen} />
           <NavbarButtons onClose={onClose} sideOpen={sideOpen} />
         </div>
