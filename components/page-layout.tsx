@@ -1,4 +1,4 @@
-import { NavbarSpace } from './navbar'
+import { NavbarSpace } from './navigation'
 
 interface Props {
   children: React.ReactNode
