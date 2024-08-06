@@ -1,7 +1,25 @@
 'use server'
 
 import { FormInput } from '@/types/types'
+import { cookies } from 'next/headers'
 import { Resend } from 'resend'
+
+// COOKIES -------------------------
+export async function getCookie (key: string): Promise <string | undefined> {
+  const cookieStore = cookies()
+  const cookie = cookieStore.get(key)
+  if (cookie !== undefined) {
+    return cookie.value
+  }
+  return undefined
+}
+
+export async function setCookie (key: string, value: string): Promise <boolean> {
+  if (value === '') return false
+  const cookieStore = cookies()
+  cookieStore.set(key, value)
+  return true
+}
 
 // SEND EMAIL CONTACT ---------------------------
 const resend = new Resend(process.env.RESEND_API_KEY)
