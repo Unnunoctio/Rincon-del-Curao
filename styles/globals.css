@@ -398,6 +398,101 @@
   }
 }
 
+/* PRODUCT LIST PAGE */
+@layer components {
+  .product-list-header {
+    @apply flex flex-col xl:flex-row gap-2 justify-between xl:items-center py-4
+  }
+  .product-list-title-container {
+    @apply flex items-baseline gap-1.5
+  }
+  .product-list-title {
+    @apply my-2 text-3xl font-medium
+  }
+  .product-list-count {
+    @apply inline-block xl:hidden text-active
+  }
+  .product-list-section {
+    @apply flex gap-12 mt-6
+  }
+  .product-list-filter-container {
+    @apply hidden xl:block w-[280px]
+  }
+  .product-list-container {
+    @apply flex flex-1 flex-col gap-y-8
+  }
+  .product-list-grid {
+    @apply grid grid-cols-product-list justify-items-center gap-6 min-h-product-list
+  }
+  .product-list-loader-container {
+    @apply flex justify-center items-center min-h-product-list
+  }
+  .product-list-error-container {
+    @apply flex justify-center items-center min-h-product-list
+  }
+  .product-list-error {
+    @apply flex flex-col lg:flex-row justify-center items-center gap-4
+  }
+  .product-list-error-icon {
+    @apply w-[100px] h-[100px] fill-[#718096] dark:fill-[#7b8aa1]
+  }
+  .product-list-error-text-container {
+    @apply flex flex-col text-[#718096] dark:text-[#7b8aa1] text-2xl gap-2
+  }
+  .product-list-error-text {
+    @apply text-center lg:text-start
+  }
+  .product-list-error-text-hidden {
+    @apply text-center lg:text-start hidden sm:block
+  }
+}
+
+/* PRODUCT CARD */
+@layer components {
+  .preview-card-container {
+    @apply min-w-[250px] max-w-[250px] h-fit select-none
+  }
+  .preview-card {
+    @apply relative flex flex-col items-center gap-3 p-3 bg-[#fafafa] dark:bg-[#121212] rounded-lg border border-[#e2e8f0] dark:border-[#434548] hover:border-active dark:hover:border-active
+  }
+  .preview-card-image-container {
+    @apply w-[192px] h-[192px] overflow-hidden rounded
+  }
+  .preview-card-image {
+    @apply aspect-square object-cover group-hover:scale-105 transition-transform
+  }
+  .preview-card-discount {
+    @apply absolute left-0 top-[30px] bg-[#e2e8f0] dark:bg-[#434548] group-hover:bg-active/90 p-1.5 leading-none rounded-r-md
+  }
+  .preview-card-average {
+    @apply absolute right-1 flex flex-col items-center
+  }
+  .average-text {
+    @apply font-medium text-[14px] text-[#718096] dark:text-[#7b8aa1]
+  }
+  .average-icon-star {
+    @apply w-4 h-4 fill-[#718096] dark:fill-[#7b8aa1]
+  }
+  .average-icon-star-active {
+    @apply w-4 h-4 fill-active
+  }
+  .preview-card-text-container {
+    @apply w-full flex flex-col gap-3
+  }
+  .preview-card-title {
+    @apply font-medium text-[18px] text-center line-clamp-2 leading-6 h-[48px]
+  }
+  .preview-card-price-container {
+    @apply flex justify-center gap-3 items-baseline
+  }
+  .preview-card-best-price {
+    @apply text-[16px] text-[#718096] dark:text-[#7b8aa1] line-through leading-none
+  }
+  .preview-card-price {
+    @apply font-medium text-[20px] text-active leading-none
+  }
+}
+
 @layer components {
   /* -------------------------------------------------------------- */
   /* Backgrounds */
