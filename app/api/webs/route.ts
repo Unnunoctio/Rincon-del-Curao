@@ -24,7 +24,8 @@ export async function GET () {
     },
     body: JSON.stringify({
       query
-    })
+    }),
+    cache: 'no-store'
   })
 
   const { data }: { data: QueryResponse } = await res.json()
