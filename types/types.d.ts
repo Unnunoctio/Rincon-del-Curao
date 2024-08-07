@@ -1,5 +1,9 @@
 import { OrderByEnum } from './enums'
 
+export interface SearchParams {
+  [key: string]: string | string[]
+}
+
 export interface OrderBy {
   label: string
   value: OrderByEnum
