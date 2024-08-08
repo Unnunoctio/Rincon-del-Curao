@@ -11,3 +11,9 @@ export const generateHash = (category: string, searchParams: SearchParams): stri
   if (searchParams.sub_category !== undefined) hash += '-' + searchParams.sub_category.toString()
   return hash.toLowerCase().replaceAll(' ', '-')
 }
+
+export const generateWebsHash = (): string => {
+  const cookieStore = cookies()
+  const webs = cookieStore.get('prefWebs')?.value
+  return (webs !== undefined) ? webs.toString() : ''
+}
