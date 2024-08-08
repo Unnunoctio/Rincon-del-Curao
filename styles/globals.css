@@ -519,6 +519,21 @@
 }
 
 @layer components {
+  .pagination {
+    @apply flex w-full justify-center gap-1 xs:gap-2 text-[#718096] dark:text-[#7b8aa1]
+  }
+  .pagination-more {
+    @apply flex justify-evenly min-w-[24px] h-[34px] font-bold
+  }
+  .pagination-number {
+    @apply flex justify-center items-center min-w-[34px] h-[34px] font-bold rounded-md border hover:text-active dark:hover:text-active border-[#718096] dark:border-[#7b8aa1] hover:border-active dark:hover:border-active hover:bg-[#e2e8f0] dark:hover:bg-[#282d33]
+  }
+  .pagination-number-active {
+    @apply flex justify-center items-center min-w-[34px] h-[34px] font-bold rounded-md border text-[#1a202c] dark:text-[#1a202c] bg-active/75 border-transparent
+  }
+}
+
+@layer components {
   /* -------------------------------------------------------------- */
   /* Backgrounds */
   .bg-page {
