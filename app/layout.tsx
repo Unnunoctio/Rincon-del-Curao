@@ -9,6 +9,7 @@ import { PageLayout } from '@/components/page-layout'
 import { Footer } from '@/components/footer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import NextTopLoader from 'nextjs-toploader'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
   return (
     <html lang='es'>
       <body className={`${roboto.variable} layout-body`}>
+        <NextTopLoader color='#d69e2e' showSpinner={false} />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ToastContainer containerId='notification' position='top-right' />
           <Navigation />
