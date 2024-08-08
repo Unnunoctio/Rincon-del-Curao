@@ -1,6 +1,8 @@
 import { Breadcrumb } from '@/components/breadcrumb'
 import { FeatureList } from '@/components/features'
+import { ProductHistory } from '@/components/history/product-history'
 import { WebsiteList } from '@/components/websites'
+import { generateWebsHash } from '@/helpers/hash'
 import { createBreadcrumbLinks } from '@/helpers/path'
 import { getProduct } from '@/lib/api/get-product'
 import { getProductTitle } from '@/lib/api/get-product-title'
@@ -23,6 +25,8 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 export default async function ProductPage ({ params }: Props): Promise<JSX.Element> {
   const product = await getProduct(params.path)
 
+  const hash = generateWebsHash()
+
   return (
     <>
       <Breadcrumb links={createBreadcrumbLinks(['Home', product.category, product.title])} />
@@ -33,7 +37,6 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
       <section className='product-desktop-container'>
         <div className='product-img-container'>
           <img src={product.image} alt={product.title} loading='lazy' width={600} height={600} className='product-img' fetchPriority='high' />
-          {/* <LinkedProductList linkedProducts={linkedProducts} /> */}
         </div>
         <div className='product-desktop-list-container'>
           <FeatureList {...product} className='feature-list-desktop' />
@@ -44,6 +47,11 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
       <section className='product-mobile-container'>
         <FeatureList {...product} className='feature-list-mobile' />
         <WebsiteList websites={product.websites} className='website-list-mobile' />
+      </section>
+
+      <section className='history-container'>
+        <h2 className='history-title'>Historial de Precios</h2>
+        <ProductHistory path={params.path} hash={hash} />
       </section>
     </>
   )

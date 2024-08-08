@@ -620,6 +620,49 @@
   }
 }
 
+/* HISTORY */
+@layer components {
+  .history-container {
+    @apply w-full mt-10
+  }
+  .history-loader-container {
+    @apply w-full h-[367px] flex justify-center items-center
+  }
+  .history-error-container {
+    @apply w-full h-[367px] flex justify-center items-center
+  }
+  .history-error-section {
+    @apply flex flex-col md:flex-row items-center gap-4
+  }
+  .history-error-icon {
+    @apply w-[76px] h-[76px] fill-[#718096] dark:fill-[#7b8aa1]
+  }
+  .history-error-text {
+    @apply text-center md:text-start text-[#718096] dark:text-[#7b8aa1] text-xl md:text-2xl max-w-[500px]
+  }
+  .history-title {
+    @apply font-medium text-2xl
+  }
+  .history-legend-container {
+    @apply px-2 mt-4 mb-1 flex flex-wrap gap-x-6 gap-y-1
+  }
+  .history-legend-item {
+    @apply flex gap-1 items-baseline
+  }
+  .history-legend-item-color {
+    @apply inline-block w-3 h-3 rounded-full
+  }
+  .history-legend-item-text {
+    @apply font-medium text-[14px]
+  }
+  .history-chart-container {
+    @apply max-w-[1500px] overflow-x-auto
+  }
+  .history-chart-section {
+    @apply inline-block w-auto mt-1
+  }
+}
+
 /* ORDER BY SELECT */
 @layer components {
   .order-by-button-container {
