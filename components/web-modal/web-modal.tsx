@@ -3,19 +3,13 @@ import { RightIcon } from '@/icons'
 import { Button, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useState } from 'react'
 import { WebList } from './web-list'
-import { getCookie, setCookie } from '@/app/actions'
+import { setCookie } from '@/app/actions'
 import { Slide, toast } from 'react-toastify'
 
 export const WebModal: React.FC = () => {
-  const [websCookie, setWebsCookie] = useState<string[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
-  const onOpen = async (): Promise<void> => {
-    const webs = await getCookie('prefWebs')
-    if (webs !== undefined) setWebsCookie(webs.split(','))
-    else setWebsCookie([])
-    setIsOpen(true)
-  }
+  const onOpen = (): void => setIsOpen(true)
   const onClose = (): void => setIsOpen(false)
 
   const successNotify = (): any => toast.success('Tiendas guardadas', {
@@ -68,7 +62,7 @@ export const WebModal: React.FC = () => {
                 Tiendas
               </DialogTitle>
               <hr className='modal-divider' />
-              <WebList websCookie={websCookie} />
+              <WebList />
               <hr className='modal-divider' />
               <div className='modal-bottom-buttons-container'>
                 <button aria-label='cancelar tiendas seleccionadas' type='button' onClick={onClose} className='modal-button-cancel'>

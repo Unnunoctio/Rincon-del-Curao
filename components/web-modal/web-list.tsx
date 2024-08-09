@@ -1,26 +1,38 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import useSWR from 'swr'
 import { Web } from '@/types/api'
-import { fetcher } from '@/helpers/fetcher'
 import { WebCheckbox } from './web-checkbox'
 import { WebListLoader } from './web-list-loader'
 import { WebListError } from './web-list-error'
+import { useEffect, useState } from 'react'
 
-interface Props {
-  websCookie: string[]
+interface WebCheck extends Web {
+  checked: boolean
 }
 
-export const WebList: React.FC<Props> = ({ websCookie }) => {
-  const { data, error, isLoading } = useSWR<Web[], Error>('/api/webs', fetcher)
+export const WebList: React.FC = () => {
+  const [webs, setWebs] = useState<WebCheck[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  // const { data, error, isLoading } = useSWR<WebCheck[], Error>('/api/webs', fetcher)
 
-  if (error) return <WebListError />
+  useEffect(() => {
+    const fetchWebs = async (): Promise<void> => {
+      setIsLoading(true)
+      const response = await fetch('/api/webs')
+      const data = await response.json()
+      setWebs(data)
+      setIsLoading(false)
+    }
+    void fetchWebs()
+  }, [])
+
   if (isLoading) return <WebListLoader />
+  if (webs.length === 0) return <WebListError />
 
   return (
     <ul className='web-list'>
-      {data?.map((web, index) => (
+      {webs?.map((web, index) => (
         <li key={index} className='web-item'>
-          <WebCheckbox value={web.code} label={web.name} checked={websCookie.includes(web.code) || websCookie.length === 0} />
+          <WebCheckbox value={web.code} label={web.name} checked={web.checked} />
         </li>
       ))}
     </ul>
