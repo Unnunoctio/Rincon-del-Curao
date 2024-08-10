@@ -213,6 +213,49 @@
   }
 }
 
+/* HOME PAGE */
+@layer components {
+  .sliders-container {
+    @apply flex flex-col gap-10 h-full justify-between pt-10
+  }
+  .slider-box {
+    @apply w-full h-[376px]
+  }
+  .slider-box-title {
+    @apply text-[24px] sm:text-[28px] font-medium
+  }
+  .slider-box-container {
+    @apply relative px-0 sm:px-4 md:px-6 lg:px-8
+  }
+  .slider-loader-container {
+    @apply flex justify-center items-center w-full min-h-[334px]
+  }
+  .slider-error-container {
+    @apply flex flex-col sm:flex-row justify-center items-center gap-4 w-full min-h-[334px]
+  }
+  .slider-error-icon {
+    @apply w-16 h-16 fill-[#718096] dark:fill-[#7b8aa1]
+  }
+  .slider-error-text {
+    @apply text-[#718096] dark:text-[#7b8aa1] text-3xl text-center
+  }
+  .slider-preview-card {
+    @apply snap-center sm:snap-start snap-always
+  }
+  .slider-container {
+    @apply flex gap-8 py-3 px-2 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory
+  }
+  .slider-left-button {
+    @apply absolute bottom-1/2 -left-[24px] hidden
+  }
+  .slider-right-button {
+    @apply absolute bottom-1/2 -right-[24px] hidden
+  }
+  .slider-button-icon {
+    @apply w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors
+  }
+}
+
 /* LEGAL INFORMATION */
 @layer components {
   .layout-legal {
