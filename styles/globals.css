@@ -465,7 +465,7 @@
     @apply my-2 text-3xl font-medium
   }
   .product-list-count {
-    @apply inline-block xl:hidden text-active
+    @apply inline-block text-active
   }
   .product-list-section {
     @apply flex gap-12 mt-6

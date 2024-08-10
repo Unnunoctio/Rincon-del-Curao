@@ -7,9 +7,10 @@ interface Props {
   category: string
   searchParams: SearchParams
   hash: string
+  className?: string
 }
 
-export const ProductCount: React.FC<Props> = ({ category, searchParams, hash }) => {
+export const ProductCount: React.FC<Props> = ({ category, searchParams, hash, className = '' }) => {
   const [totalProducts, setTotalProducts] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -24,9 +25,9 @@ export const ProductCount: React.FC<Props> = ({ category, searchParams, hash }) 
     void fetchTotalProducts()
   }, [hash])
 
-  if (isLoading) return <span className='product-list-count'>Cargando...</span>
+  if (isLoading) return <span className={`product-list-count ${className}`}>Cargando...</span>
 
   return (
-    <span className='product-list-count'>{totalProducts} {totalProducts !== 1 ? 'productos' : 'producto'}</span>
+    <span className={`product-list-count ${className}`}>{totalProducts} {totalProducts !== 1 ? 'productos' : 'producto'}</span>
   )
 }
