@@ -394,7 +394,7 @@
     @apply flex justify-between w-full py-1 pl-2 rounded-full hover:bg-[#edf2f7] dark:hover:bg-[#222629]
   }
   .modal {
-    @apply relative z-10
+    @apply relative z-50
   }
   .modal-backdrop {
     @apply fixed inset-0 bg-black/50 transition-opacity duration-300 ease-in-out data-[closed]:opacity-0
