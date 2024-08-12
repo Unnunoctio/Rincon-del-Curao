@@ -721,10 +721,10 @@
     @apply block px-1.5 sm:px-3
   }
   .order-by-button-icon {
-    @apply fill-[#718096] dark:fill-[#7b8aa1] transition-transform duration-200 rotate-0 group-data-[open]:rotate-180
+    @apply fill-[#718096] dark:fill-[#7b8aa1] transition-transform rotate-0 group-data-[open]:rotate-180
   }
   .order-by-options {
-    @apply absolute overflow-auto z-10 my-2 py-2 max-h-60 w-[var(--button-width)] bg-[#fafafa] dark:bg-[#121212] rounded-md border border-[#e2e8f0] dark:border-[#434548] shadow-md [--anchor-gap:var(--spacing-1)] transition-popover duration-200 data-[closed]:-translate-y-1 data-[closed]:opacity-0
+    @apply absolute overflow-auto z-10 my-2 py-2 max-h-60 w-[var(--button-width)] bg-[#fafafa] dark:bg-[#121212] rounded-md border border-[#e2e8f0] dark:border-[#434548] shadow-md [--anchor-gap:var(--spacing-1)]
   }
   .order-by-option {
     @apply relative cursor-pointer select-none py-1.5 pl-3 data-[selected]:bg-[#e2e8f0] dark:data-[selected]:bg-[#282d33] hover:bg-[#edf2f7] dark:hover:bg-[#222629] active:bg-[#e2e8f0] dark:active:bg-[#282d33]
@@ -791,7 +791,48 @@
 
 /* FILTER SELECT */
 @layer components {
-  
+  .select-control {
+    @apply flex w-full min-h-[38px] hover:bg-selected cursor-pointer border rounded-md border-primary
+  }
+  .select-control-open {
+    @apply flex w-full min-h-[38px] cursor-pointer border rounded-md border-active bg-selected
+  }
+  .select-value-container {
+    @apply flex flex-1 flex-wrap items-center justify-start overflow-hidden gap-1 px-2 py-1
+  }
+  .select-multi-value {
+    @apply flex items-center gap-1 pl-2 h-[26px] overflow-hidden bg-active/60 rounded-md
+  }
+  .select-multi-value-label {
+    @apply text-[14px] truncate
+  }
+  .select-multi-value-remove {
+    @apply flex items-center justify-center w-[26px] h-[26px] hover:bg-red-300/50
+  }
+  .select-multi-value-icon-remove {
+    @apply w-5 h-5 icon-stroke-primary-60 group-hover:stroke-red-600
+  }
+  .select-clear-indicator {
+    @apply hidden
+  }
+  .select-separator {
+    @apply h-full border-l border-primary
+  }
+  .select-dropdown {
+    @apply px-3 text-secondary transition-transform rotate-0
+  }
+  .select-dropdown-open {
+    @apply px-3 text-secondary transition-transform rotate-180
+  }
+  .select-menu {
+    @apply absolute overflow-hidden z-10 my-2 w-full bg-primary rounded-md border divider-primary shadow-md
+  }
+  .select-menu-list {
+    @apply overflow-auto py-2 max-h-60
+  }
+  .select-menu-option {
+    @apply cursor-pointer py-1.5 pl-3 hover:bg-hover active:bg-selected
+  }
 }
 
 @layer components {
