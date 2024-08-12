@@ -1,10 +1,13 @@
+import { Breadcrumb } from '@/components/breadcrumb'
+import { FeatureList } from '@/components/features'
+import { ProductHistory } from '@/components/history/product-history'
+import { WebsiteList } from '@/components/websites'
+import { generateWebsHash } from '@/helpers/hash'
+import { createBreadcrumbLinks } from '@/helpers/path'
+import { getProduct } from '@/lib/api/get-product'
+import { getProductTitle } from '@/lib/api/get-product-title'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getHistoryPricies, getLinkedProducts, getProduct, getProductTitle } from '@/lib/api'
-import { getCookie } from '@/lib/cookies'
-import { createBreadcrumbLinks } from '@/helpers/path'
-import { Breadcrumb } from '@/components/breadcrumb'
-import { FeatureList, HistoryPricies, LinkedProductList, WebsiteList } from '@/components/product'
 
 interface Props {
   params: { path: string }
@@ -20,38 +23,36 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 }
 
 export default async function ProductPage ({ params }: Props): Promise<JSX.Element> {
-  const prefWebs = getCookie('prefWebs')
-  const [product, linkedProducts, historyPricies] = await Promise.all([
-    getProduct(params.path, (prefWebs === null) ? [] : prefWebs.split(',')),
-    getLinkedProducts(params.path, (prefWebs === null) ? [] : prefWebs.split(',')),
-    getHistoryPricies(params.path, (prefWebs === null) ? [] : prefWebs.split(','))
-  ])
-  if (product == null) return notFound()
+  const product = await getProduct(params.path)
+
+  const hash = generateWebsHash()
 
   return (
     <>
       <Breadcrumb links={createBreadcrumbLinks(['Home', product.category, product.title])} />
-      <header className='mt-6'>
-        <h1 className='text-2xl xs:text-3xl font-medium text-primary'>{product.title}</h1>
+      <header className='product-header'>
+        <h1 className='product-title'>{product.title}</h1>
       </header>
 
-      <section className='mt-6 block lg:flex justify-between gap-6'>
-        <div className='flex flex-col items-center lg:items-start gap-6 w-full lg:min-w-[600px]'>
-          <img src={product.image} alt={product.title} loading='lazy' width={600} height={600} className='aspect-square object-cover rounded-lg' fetchPriority='high' />
-          <LinkedProductList linkedProducts={linkedProducts} />
+      <section className='product-desktop-container'>
+        <div className='product-img-container'>
+          <img src={product.image} alt={product.title} loading='lazy' width={600} height={600} className='product-img' fetchPriority='high' />
         </div>
-        <div className='hidden lg:flex justify-end lx:justify-between gap-4 w-full max-w-[650px]'>
-          <FeatureList {...product} className='hidden lx:block max-w-[250px]' />
+        <div className='product-desktop-list-container'>
+          <FeatureList {...product} className='feature-list-desktop' />
           <WebsiteList websites={product.websites} />
         </div>
       </section>
 
-      <section className='flex flex-col-reverse xm:flex-row lx:hidden mt-6 gap-x-4 gap-y-6 justify-between'>
-        <FeatureList {...product} className='max-w-[510px]' />
-        <WebsiteList websites={product.websites} className='lg:hidden' />
+      <section className='product-mobile-container'>
+        <FeatureList {...product} className='feature-list-mobile' />
+        <WebsiteList websites={product.websites} className='website-list-mobile' />
       </section>
 
-      {historyPricies.filter(h => h.records.length > 0).length > 0 && <HistoryPricies historyPricies={historyPricies.filter(h => h.records.length > 0)} />}
+      <section className='history-container'>
+        <h2 className='history-title'>Historial de Precios</h2>
+        <ProductHistory path={params.path} hash={hash} />
+      </section>
     </>
   )
 }

@@ -40,22 +40,22 @@ export const Slider: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <div ref={ref} className='slider flex gap-8 py-3 px-2 w-full overflow-x-auto scroll-smooth snap-x snap-mandatory'>
+      <div ref={ref} className='slider slider-container'>
         {children}
       </div>
       <button
         onClick={leftScroll}
-        className={`${leftBtn ? 'sm:block' : 'sm:hidden'} group absolute bottom-1/2 -left-[24px] hidden`}
+        className={`${leftBtn ? 'sm:block' : 'sm:hidden'} group slider-left-button`}
         aria-label='producto anterior'
       >
-        <LeftIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
+        <LeftIcon className='slider-button-icon' />
       </button>
       <button
         onClick={rightScroll}
-        className={`${rightBtn ? 'sm:block' : 'sm:hidden'} group absolute bottom-1/2 -right-[24px] hidden`}
+        className={`${rightBtn ? 'sm:block' : 'sm:hidden'} group slider-right-button`}
         aria-label='producto siguiente'
       >
-        <RightIcon className='w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors' />
+        <RightIcon className='slider-button-icon' />
       </button>
     </>
   )

@@ -1,7 +1,6 @@
-'use client'
-
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 interface Props {
   label: string
@@ -16,15 +15,18 @@ export const SearchFilter: React.FC<Props> = ({ label, name, value, aria, placeh
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const [defaultValue, setDefaultValue] = useState(value ?? '')
+  const [searchValue, setSearchValue] = useState(value ?? '')
 
   useEffect(() => {
-    setDefaultValue(value ?? '')
+    setSearchValue(value ?? '')
   }, [value])
 
-  const handleSearch = (term: string): void => {
-    setDefaultValue(term)
+  const onChange = (term: string): void => {
+    setSearchValue(term)
+    handleSearch(term)
+  }
 
+  const handleSearch = useDebouncedCallback((term: string): void => {
     const params = new URLSearchParams(searchParams)
     if (term !== '') {
       params.set('search', term)
@@ -32,22 +34,22 @@ export const SearchFilter: React.FC<Props> = ({ label, name, value, aria, placeh
       params.delete('search')
     }
     params.set('page', '1')
-    router.replace(`${pathname}?${params.toString()}`)
-  }
+    router.push(`${pathname}?${params.toString()}`)
+  }, 750)
 
   return (
-    <div className='relative'>
-      <span className='text-primary text-[18px] font-medium'>
+    <div className='filter-input-container'>
+      <span className='filter-input-label'>
         {label}
       </span>
       <input
-        value={defaultValue}
-        onChange={(e) => handleSearch(e.target.value)}
+        value={searchValue}
+        onChange={(e) => onChange(e.target.value)}
         name={name}
-        type='text'
         placeholder={placeholder}
         autoComplete='off'
-        className='appearance-none block px-2 py-1.5 w-full hover:bg-selected rounded-md bg-transparent border border-primary focus:bg-selected focus:ring-transparent focus:ring-offset-transparent focus:border-active'
+        autoFocus={false}
+        className='search-input-container'
         aria-label={aria}
       />
     </div>

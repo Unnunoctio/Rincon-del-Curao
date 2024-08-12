@@ -1,12 +1,10 @@
-import { getCookie } from '@/lib/cookies'
-import { getAverageProducts } from '@/lib/api'
-import { PreviewCard } from '../card/preview-card'
+import { getAverageProducts } from '@/lib/api/get-average-products'
 import { Slider } from './slider'
 import { SliderNotFound } from './slider-not-found'
+import { PreviewCard } from '../preview-card'
 
 export const AverageList = async (): Promise<JSX.Element> => {
-  const prefWebs = getCookie('prefWebs')
-  const products = await getAverageProducts((prefWebs === null) ? [] : prefWebs.split(','))
+  const products = await getAverageProducts()
 
   if (products.length === 0) {
     return <SliderNotFound text='Productos sin valoración' />
@@ -15,7 +13,7 @@ export const AverageList = async (): Promise<JSX.Element> => {
   return (
     <Slider>
       {products.map((product, index) => (
-        <PreviewCard key={index} {...product} className='snap-center sm:snap-start snap-always' />
+        <PreviewCard key={index} {...product} className='slider-preview-card' />
       ))}
     </Slider>
   )

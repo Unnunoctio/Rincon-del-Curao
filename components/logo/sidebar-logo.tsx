@@ -1,4 +1,4 @@
-import { LogoSVG } from '@/icons'
+import { LogoIcon } from '@/icons'
 import Link from 'next/link'
 
 interface Props {
@@ -10,9 +10,9 @@ interface Props {
 
 export const SidebarLogo: React.FC<Props> = ({ boxHeight, logoWidth, linkClass, sideClose }) => {
   return (
-    <div className={`${boxHeight} flex items-center`}>
+    <div className={`${boxHeight} logo-container`}>
       <Link href='/' aria-label='home' className={linkClass} onClick={sideClose}>
-        <LogoSVG className={`${logoWidth} h-auto aspect-[1078/342]`} />
+        <LogoIcon className={`${logoWidth} logo`} />
       </Link>
     </div>
   )

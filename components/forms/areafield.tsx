@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { FormInput } from '@/types/types'
 import { Path, UseFormRegister } from 'react-hook-form'
+import { FormInput } from '@/types/types'
 
 interface Props {
   register: UseFormRegister<FormInput>
@@ -15,8 +15,8 @@ interface Props {
 export const Areafield: React.FC<Props> = ({ register, label, name, placeholder, required = false, disabled = false, error }) => {
   return (
     <div>
-      <label htmlFor={name} className='relative flex flex-1 flex-col gap-1'>
-        <span className={`text-primary ${error ? 'text-error' : ''} w-fit font-medium`}>{label}</span>
+      <label htmlFor={name} className='textfield-label'>
+        <span className={`textfield-text ${error ? 'textfield-text-error' : ''}`}>{label}</span>
         <textarea
           {...register(name, { required: { value: required, message: '*Este campo es requerido' } })}
           id={name}
@@ -24,10 +24,10 @@ export const Areafield: React.FC<Props> = ({ register, label, name, placeholder,
           autoComplete='off'
           rows={5}
           disabled={disabled}
-          className={`appearance-none ${disabled ? 'cursor-not-allowed' : 'cursor-text'} block w-full rounded-md bg-transparent hover:bg-selected focus:bg-selected border border-primary ${error ? 'border-error' : ''} py-[9px] focus:ring-transparent focus:ring-offset-transparent focus:border-active`}
+          className={`textfield-input ${disabled ? 'textfield-input-disabled' : ''} ${error ? 'textfield-input-error' : ''}`}
         />
       </label>
-      {error && <span className='text-sm text-error'>{error.message}</span>}
+      {error && <span className='textfield-span-error'>{error.message}</span>}
     </div>
   )
 }

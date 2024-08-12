@@ -1,12 +1,10 @@
-import { getCookie } from '@/lib/cookies'
-import { getDiscountProducts } from '@/lib/api'
-import { PreviewCard } from '../card/preview-card'
-import { Slider } from './slider'
+import { getDiscountProducts } from '@/lib/api/get-discount-products'
 import { SliderNotFound } from './slider-not-found'
+import { Slider } from './slider'
+import { PreviewCard } from '../preview-card'
 
 export const DiscountList = async (): Promise<JSX.Element> => {
-  const prefWebs = getCookie('prefWebs')
-  const products = await getDiscountProducts((prefWebs === null) ? [] : prefWebs.split(','))
+  const products = await getDiscountProducts()
 
   if (products.length === 0) {
     return <SliderNotFound text='Productos sin oferta' />
@@ -15,7 +13,7 @@ export const DiscountList = async (): Promise<JSX.Element> => {
   return (
     <Slider>
       {products.map((product, index) => (
-        <PreviewCard key={index} {...product} className='snap-center sm:snap-start snap-always' />
+        <PreviewCard key={index} {...product} className='slider-preview-card' />
       ))}
     </Slider>
   )

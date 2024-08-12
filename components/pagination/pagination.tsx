@@ -1,37 +1,39 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 'use client'
 
-import { usePathname, useSearchParams } from 'next/navigation'
 import { generatePagination } from '@/helpers/pagination'
+import { SearchParams } from '@/types/types'
 import { PaginationNumber } from './pagination-number'
-import { PaginationArrow } from './paginarion-arrow'
+import { useEffect, useState } from 'react'
 
 interface Props {
-  totalPages: number
+  currentPage: number
+  category: string
+  searchParams: SearchParams
+  hash: string
 }
 
-export const Pagination: React.FC<Props> = ({ totalPages }) => {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const currentPage = Number(searchParams.get('page')) || 1
+export const Pagination: React.FC<Props> = ({ currentPage, category, searchParams, hash }) => {
+  const [totalPages, setTotalPages] = useState<number | undefined>(undefined)
 
-  const allPages = generatePagination(currentPage, totalPages)
+  useEffect(() => {
+    setTotalPages(undefined)
+    const fetchTotalPages = async (): Promise<void> => {
+      const response = await fetch(`/api/total-pages?category=${category}&options=${JSON.stringify(searchParams)}`)
+      const data = await response.json()
+      setTotalPages(data)
+    }
+    void fetchTotalPages()
+  }, [hash])
 
-  const createPageURL = (page: string | number): string => {
-    const params = new URLSearchParams(searchParams)
-    params.set('page', page.toString())
-    return `${pathname}?${params.toString()}`
-  }
+  if (totalPages === undefined || totalPages <= 1) return <></>
 
-  if (totalPages <= 1) return null
+  const pages = generatePagination(currentPage, totalPages)
 
   return (
-    <div className='flex w-full justify-center gap-1 xs:gap-2'>
-      <PaginationArrow direction='left' href={createPageURL(currentPage - 1)} isDisabled={currentPage <= 1} />
-      {allPages.map((page: any) => (
-        <PaginationNumber key={page} href={createPageURL(page)} page={page} isActive={currentPage === page} />
+    <div className='pagination'>
+      {pages.map((page: any, index) => (
+        <PaginationNumber key={index} page={page} isActive={currentPage === page} />
       ))}
-      <PaginationArrow direction='right' href={createPageURL(currentPage + 1)} isDisabled={currentPage >= totalPages} />
     </div>
   )
 }

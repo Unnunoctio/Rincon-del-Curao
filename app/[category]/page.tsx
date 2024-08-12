@@ -2,78 +2,63 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { OrderByEnum } from '@/types/enums'
-import { getCookie } from '@/lib/cookies'
-import { getTotalOptions, getTotalPages } from '@/lib/api'
+import { SearchParams } from '@/types/types'
 import { createBreadcrumbLinks, getNavigateLink } from '@/helpers/path'
 import { Breadcrumb } from '@/components/breadcrumb'
-import { OrderBySelect, ProductCount, ProductList, ProductListFilter, ProductListFilterMobile, ProductListLoader } from '@/components/products'
+import { OrderByEnum } from '@/types/enums'
+import { ProductList, ProductListLoader } from '@/components/product-list'
+import { OrderBySelect } from '@/components/order-by-select'
 import { Pagination } from '@/components/pagination'
-import { getFilterOptions } from '@/helpers/filter-options'
+import { generateHash } from '@/helpers/hash'
+import { ProductCount } from '@/components/product-count'
+import { Filter, FilterMobile } from '@/components/filter'
 
 interface Props {
   params: { category: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: SearchParams
 }
 
 export async function generateMetadata ({ params }: Props): Promise<Metadata> {
   const { category } = params
   const link = getNavigateLink(`/${category}`)
   if (link === undefined) return notFound()
-
   return {
     title: link.name
   }
 }
 
-export default async function ProductsPage ({ params, searchParams }: Props): Promise<JSX.Element> {
-  // cookies
-  const prefWebs = getCookie('prefWebs')
-
-  // params
+export default function CategoryPage ({ params, searchParams }: Props): JSX.Element {
   const link = getNavigateLink(`/${params.category}`)
 
-  // searchparams
   const page = Number(searchParams.page) || 1
   const orderBy = searchParams.order_by ?? OrderByEnum.SCORE_DESC
-  const [filterOptions, optionsText] = getFilterOptions(searchParams)
 
-  // api
-  const [totalPages, totalOptions] = await Promise.all([
-    getTotalPages((prefWebs === null) ? [] : prefWebs.split(','), link?.name as string, filterOptions),
-    getTotalOptions((prefWebs === null) ? [] : prefWebs.split(','), link?.name as string, filterOptions)
-  ])
-
-  // sanitizar la url
+  const hash = generateHash(link?.name as string, searchParams)
 
   return (
     <>
       <Breadcrumb links={createBreadcrumbLinks(['Home', link?.name as string])} />
-      <header className='flex flex-col xl:flex-row gap-2 justify-between xl:items-center py-4'>
-        <div className='flex items-baseline gap-1.5'>
-          <h1 className='my-2 text-3xl font-medium text-primary'>{link?.name}</h1>
-          <Suspense key={`${prefWebs as string}${optionsText}`} fallback={<span className='inline-block xl:hidden text-active'>Cargando...</span>}>
-            <ProductCount category={link?.name as string} filterOptions={filterOptions} className='inline-block xl:hidden text-active' />
-          </Suspense>
+      <header className='product-list-header'>
+        <div className='product-list-title-container'>
+          <h1 className='product-list-title'>{link?.name}</h1>
+          <ProductCount category={link?.name as string} searchParams={searchParams} hash={hash} className='xl:hidden' />
         </div>
-
-        <div className='flex justify-between gap-1'>
-          <ProductListFilterMobile>
-            <ProductListFilter category={link?.name as string} optionsText={optionsText} filterOptions={filterOptions} totalOptions={totalOptions} />
-          </ProductListFilterMobile>
+        <div className='product-list-header-buttons'>
+          <FilterMobile>
+            <Filter category={link?.name as string} searchParams={searchParams} hash={hash} />
+          </FilterMobile>
           <OrderBySelect orderBy={orderBy as OrderByEnum} />
         </div>
       </header>
-      {/* Filter & Product list */}
-      <section className='flex gap-12 mt-6'>
-        <div className='hidden xl:block w-[280px]'>
-          <ProductListFilter category={link?.name as string} optionsText={optionsText} filterOptions={filterOptions} totalOptions={totalOptions} />
+      <section className='product-list-section'>
+        <div className='product-list-filter-container'>
+          <Filter category={link?.name as string} searchParams={searchParams} hash={hash} />
         </div>
-        <div className='flex flex-1 flex-col gap-y-8'>
-          <Suspense key={`${prefWebs as string}${page}${orderBy as string}${optionsText}`} fallback={<ProductListLoader />}>
-            <ProductList page={page} orderBy={orderBy as string} category={link?.name as string} filterOptions={filterOptions} />
+        <div className='product-list-container'>
+          <Suspense key={new Date().getTime()} fallback={<ProductListLoader />}>
+            <ProductList page={page} orderBy={orderBy as string} category={link?.name as string} searchParams={searchParams} />
           </Suspense>
-          <Pagination totalPages={totalPages} />
+          <Pagination currentPage={page} category={link?.name as string} searchParams={searchParams} hash={hash} />
         </div>
       </section>
     </>

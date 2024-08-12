@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react'
 import Slider from 'react-slider'
 import '@/styles/range-slider.css'
@@ -52,12 +50,12 @@ export const RangeSlider: React.FC<Props> = ({ label, minName, maxName, min, max
   }
 
   return (
-    <div className='relative'>
-      <div className='flex justify-between items-baseline'>
-        <span className='text-primary text-[18px] font-medium'>
+    <div className='filter-input-container'>
+      <div className='range-slider-label-container'>
+        <span className='filter-input-label'>
           {label}
         </span>
-        <span className='text-primary'>
+        <span>
           {textFormat === TextFormatEnum.PRICE && textFormats.price(values[0], values[1])}
           {textFormat === TextFormatEnum.GRADE && textFormats.grade(values[0], values[1])}
         </span>
@@ -69,9 +67,9 @@ export const RangeSlider: React.FC<Props> = ({ label, minName, maxName, min, max
         min={min}
         max={max}
         step={step}
-        className='flex items-center w-full h-4 mt-3 mb-2 cursor-pointer'
-        thumbClassName='w-[14px] h-[14px] bg-active rounded-full transition active:ring-[10px] focus:ring-[6px] focus:ring-active/30 focus:ring-offset-0 thumb'
-        trackClassName='h-[3px] bg-active/30 rounded track'
+        className='range-slider-container'
+        thumbClassName='range-slider-thumb thumb'
+        trackClassName='range-slider-track track'
       />
     </div>
   )

@@ -1,3 +1,4 @@
+import { getCookie } from '@/app/actions'
 import { ProductPreview } from '@/types/api'
 
 const query = `
@@ -19,16 +20,17 @@ interface Response {
   averageProducts: ProductPreview[]
 }
 
-export const getAverageProducts = async (availableWebs: string[] = []): Promise<ProductPreview[]> => {
+export const getAverageProducts = async (): Promise<ProductPreview[]> => {
+  const webs = await getCookie('prefWebs')
   const variables = {
-    availableWebs
+    availableWebs: (webs === undefined) ? [] : webs.split(',')
   }
 
-  const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
+  const res = await fetch(process.env.API_ENDPOINT as string, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': process.env.NEXT_PUBLIC_API_KEY as string
+      'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
       query,

@@ -1,5 +1,7 @@
+import { getCookie } from '@/app/actions'
+import { getOptions } from '@/helpers/options'
 import { ProductPreview } from '@/types/api'
-import { FilterOptions } from '@/types/types'
+import { SearchParams } from '@/types/types'
 
 const query = `
   query Products($orderBy: OrderBy!, $availableWebs: [String]!, $page: Int!, $category: Category!, $options: OptionsInput!) {
@@ -20,20 +22,21 @@ interface Response {
   products: ProductPreview[]
 }
 
-export const getProducts = async (availableWebs: string[] = [], page: number, orderBy: string, category: string, options: FilterOptions): Promise<ProductPreview[]> => {
+export const getProducts = async (page: number, orderBy: string, category: string, searchParams: SearchParams): Promise<ProductPreview[]> => {
+  const webs = await getCookie('prefWebs')
   const variables = {
-    availableWebs,
+    availableWebs: (webs === undefined) ? [] : webs.split(','),
     orderBy,
     page,
     category,
-    options
+    options: getOptions(searchParams)
   }
 
-  const res = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
+  const res = await fetch(process.env.API_ENDPOINT as string, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': process.env.NEXT_PUBLIC_API_KEY as string
+      'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
       query,
@@ -43,5 +46,6 @@ export const getProducts = async (availableWebs: string[] = [], page: number, or
   })
 
   const { data }: { data: Response } = await res.json()
+
   return data.products
 }

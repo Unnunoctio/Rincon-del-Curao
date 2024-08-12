@@ -2,20 +2,20 @@ import Link from 'next/link'
 
 export const FooterInfo: React.FC = () => {
   return (
-    <div className='text-center sm:text-start'>
-      <h3 className='text-[18px] font-medium text-primary'>Centro de Ayuda</h3>
-      <ul className='flex flex-col gap-2 sm:gap-3 mt-3'>
+    <div className='footer-container-info'>
+      <h3 className='footer-text-title'>Centro de Ayuda</h3>
+      <ul className='footer-list-items'>
         <li>
-          <Link href='/informacion-legal/terminos-y-condiciones' className='w-fit text-secondary hover:underline'>Términos y Condiciones</Link>
+          <Link href='/informacion-legal/terminos-y-condiciones' className='footer-link-item'>Términos y Condiciones</Link>
         </li>
         <li>
-          <Link href='/informacion-legal/politica-de-privacidad' className='w-fit text-secondary hover:underline'>Política de Privacidad</Link>
+          <Link href='/informacion-legal/politica-de-privacidad' className='footer-link-item'>Política de Privacidad</Link>
         </li>
         <li>
-          <Link href='/contacto' className='w-fit text-secondary hover:underline'>Contacto</Link>
+          <Link href='/contacto' className='footer-link-item'>Contacto</Link>
         </li>
         {/* <li>
-          <Link href='' className='w-fit text-secondary hover:underline'>Roadmap</Link>
+          <Link href='' className='footer-link-item'>Roadmap</Link>
         </li> */}
       </ul>
     </div>

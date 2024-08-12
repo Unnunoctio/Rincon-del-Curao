@@ -1,15 +1,34 @@
 import Link from 'next/link'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 interface Props {
-  href: string
   page: number
   isActive: boolean
   className?: string
 }
 
-export const PaginationNumber: React.FC<Props> = ({ href, page, isActive, className = '' }) => {
+export const PaginationNumber: React.FC<Props> = ({ page, isActive }) => {
+  if (page === null) {
+    return (
+      <div className='pagination-more'>
+        <span>.</span>
+        <span>.</span>
+        <span>.</span>
+      </div>
+    )
+  }
+
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const createURL = (page: string | number): string => {
+    const params = new URLSearchParams(searchParams)
+    params.set('page', page.toString())
+    return `${pathname}?${params.toString()}`
+  }
+
   return (
-    <Link href={href} aria-label={`página ${page}`} className={`${className} flex justify-center items-center min-w-[34px] h-[34px] font-bold rounded-md border transition-colors ${isActive ? 'text-contrast bg-active/75 border-transparent' : 'text-secondary text-hover border-primary border-hover hover:bg-selected'}`}>
+    <Link href={createURL(page)} aria-label={`página ${page}`} className={`${isActive ? 'pagination-number-active' : 'pagination-number'}`}>
       {page}
     </Link>
   )

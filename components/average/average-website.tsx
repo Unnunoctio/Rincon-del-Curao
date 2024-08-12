@@ -6,10 +6,10 @@ interface Props {
 
 export const AverageWebsite: React.FC<Props> = ({ average }) => {
   return (
-    <div className='flex h-fit gap-0.5'>
-      {average !== null && <StarIcon className='w-4 h-4 fill-active' />}
-      {average === null && <StarBorderIcon className='w-4 h-4 icon-secondary' />}
-      <span className='font-medium text-[14px] text-secondary align-super'>
+    <div className='average-website-container'>
+      {average !== null && <StarIcon className='average-icon-star-active' />}
+      {average === null && <StarBorderIcon className='average-icon-star' />}
+      <span className='average-text'>
         {average !== null ? average.toFixed(1) : 0}
       </span>
     </div>
