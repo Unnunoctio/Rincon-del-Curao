@@ -9,6 +9,7 @@ import { TextFormatEnum } from '@/types/enums'
 import { MultiSelect } from './multi-select'
 import { RemoveFilters } from './remove-filters'
 import { getOptions } from '@/helpers/options'
+import { SearchFilter } from './search-filter'
 
 interface Props {
   category: string
@@ -38,6 +39,7 @@ export const Filter: React.FC<Props> = ({ category, searchParams, hash }) => {
         <RemoveFilters filterOptions={getOptions(searchParams)} />
       </header>
       <div className='filter-inputs-container'>
+        <SearchFilter label='Palabras Clave' name='search' placeholder='Palabra clave...' value={getOptions(searchParams).search} aria='buscar por palabra clave' />
         <RangeSlider label='Precio Oferta' minName='price_min' maxName='price_max' min={totalOptions?.priceMin ?? 0} max={totalOptions?.priceMax ?? 0} step={1} textFormat={TextFormatEnum.PRICE} />
         <hr className='filter-divider' />
         <MultiSelect label='Categoria' name='sub_category' options={totalOptions?.subCategory ?? []} aria='seleccionar categoria' />

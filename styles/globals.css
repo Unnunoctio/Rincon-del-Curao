@@ -866,6 +866,13 @@
   }
 }
 
+/* SEARCH INPUT */
+@layer components {
+  .search-input-container {
+    @apply appearance-none block px-2 py-1.5 w-full hover:bg-[#e2e8f0] dark:hover:bg-[#282d33] rounded-md bg-transparent border border-[#718096] dark:border-[#7b8aa1] focus:bg-[#e2e8f0] dark:focus:bg-[#282d33] focus:ring-transparent focus:ring-offset-transparent focus:border-active dark:focus:border-active
+  }
+}
+
 @layer components {
   /* -------------------------------------------------------------- */
   /* Backgrounds */

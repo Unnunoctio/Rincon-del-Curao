@@ -8,6 +8,7 @@ export const generateHash = (category: string, searchParams: SearchParams): stri
   const webs = cookieStore.get('prefWebs')?.value
   if (webs !== undefined) hash += '-' + webs.toString()
 
+  if (searchParams.search !== undefined) hash += '-' + searchParams.search.toString()
   if (!isNaN(Number(searchParams.price_min))) hash += '-' + searchParams.price_min.toString()
   if (!isNaN(Number(searchParams.price_max))) hash += '-' + searchParams.price_max.toString()
   if (!isNaN(Number(searchParams.grade_min))) hash += '-' + searchParams.grade_min.toString()
