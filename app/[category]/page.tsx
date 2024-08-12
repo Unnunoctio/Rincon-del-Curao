@@ -11,6 +11,7 @@ import { OrderBySelect } from '@/components/order-by-select'
 import { Pagination } from '@/components/pagination'
 import { generateHash } from '@/helpers/hash'
 import { ProductCount } from '@/components/product-count'
+import { Filter } from '@/components/filter/filter'
 
 interface Props {
   params: { category: string }
@@ -40,14 +41,16 @@ export default function CategoryPage ({ params, searchParams }: Props): JSX.Elem
       <header className='product-list-header'>
         <div className='product-list-title-container'>
           <h1 className='product-list-title'>{link?.name}</h1>
-          <ProductCount category={link?.name as string} searchParams={searchParams} hash={hash} />
+          <ProductCount category={link?.name as string} searchParams={searchParams} hash={hash} className='xl:hidden' />
         </div>
         <div className='flex justify-between gap-1'>
           <OrderBySelect orderBy={orderBy as OrderByEnum} />
         </div>
       </header>
       <section className='product-list-section'>
-        <div className='product-list-filter-container' />
+        <div className='product-list-filter-container'>
+          <Filter category={link?.name as string} searchParams={searchParams} hash={hash} />
+        </div>
         <div className='product-list-container'>
           <Suspense key={new Date().getTime()} fallback={<ProductListLoader />}>
             <ProductList page={page} orderBy={orderBy as string} category={link?.name as string} searchParams={searchParams} />
