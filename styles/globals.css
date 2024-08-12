@@ -252,7 +252,7 @@
     @apply absolute bottom-1/2 -right-[24px] hidden
   }
   .slider-button-icon {
-    @apply w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover transition-colors
+    @apply w-10 h-10 fill-transparent icon-stroke-secondary icon-group-stroke-hover
   }
 }
 
@@ -760,6 +760,12 @@
   }
   .filter-divider {
     @apply divider-primary mb-3
+  }
+  .filter-remove {
+    @apply visible px-3 py-1.5 text-[14px] font-medium text-secondary rounded-full hover:text-active hover:bg-selected
+  }
+  .filter-remove-invisible {
+    @apply invisible px-3 py-1.5 text-[14px] font-medium
   }
 }
 
