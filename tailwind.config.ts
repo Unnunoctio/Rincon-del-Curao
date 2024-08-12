@@ -31,7 +31,8 @@ const config: Config = {
       transitionProperty: {
         height: 'height',
         'text-colors': 'color',
-        popover: 'transform, opacity'
+        popover: 'transform, opacity',
+        'box-shadow': 'box-shadow'
       },
       gridTemplateColumns: {
         'product-list': 'repeat(auto-fit, minmax(250px, 1fr))'
