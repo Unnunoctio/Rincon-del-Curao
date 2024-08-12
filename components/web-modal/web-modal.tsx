@@ -5,9 +5,15 @@ import { useState } from 'react'
 import { WebList } from './web-list'
 import { setCookie } from '@/app/actions'
 import { Slide, toast } from 'react-toastify'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { getNavigateLink } from '@/helpers/path'
 
 export const WebModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const onOpen = (): void => setIsOpen(true)
   const onClose = (): void => setIsOpen(false)
@@ -29,8 +35,13 @@ export const WebModal: React.FC = () => {
     const newPrefWebs = formData.getAll('webs').join(',')
     const success = await setCookie('prefWebs', newPrefWebs)
     if (success) {
+      const pathSplit = pathname.split('/')
+      if (getNavigateLink(`/${pathSplit[1]}`) !== undefined) {
+        const params = new URLSearchParams(searchParams)
+        params.set('page', '1')
+        router.push(`${pathname}?${params.toString()}`)
+      }
       onClose()
-      // reload page
       successNotify()
     } else {
       errorNotify()
