@@ -58,6 +58,11 @@ export async function GET (request: NextRequest) {
     options: getOptions(JSON.parse(options as string))
   }
 
+  variables.options.brand = variables.options.brand?.map(b => {
+    if (b === ' 56') return '+56'
+    return b
+  })
+
   const res = await fetch(process.env.API_ENDPOINT as string, {
     method: 'POST',
     headers: {
