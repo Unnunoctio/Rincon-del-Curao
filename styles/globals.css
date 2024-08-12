@@ -24,7 +24,7 @@
     @apply h-16
   }
   .navbar {
-    @apply fixed z-20 flex justify-center w-full bg-[#fafafa] dark:bg-[#121212] border-b border-[#e2e8f0] dark:border-[#434548]
+    @apply fixed z-40 flex justify-center w-full bg-[#fafafa] dark:bg-[#121212] border-b border-[#e2e8f0] dark:border-[#434548]
   }
   .navbar-container {
     @apply flex justify-between px-2 sm:px-8 md:px-12 max-w-page-container w-full
@@ -61,7 +61,7 @@
 /* SIDEBAR */
 @layer components {
   .sidebar {
-    @apply relative z-20
+    @apply relative z-40
   }
   .sidebar-backdrop {
     @apply fixed inset-0 bg-black/50 transition-opacity duration-300 ease-in-out data-[closed]:opacity-0
@@ -368,7 +368,7 @@
     @apply fixed inset-0
   }
   .popover-panel {
-    @apply z-20 mt-1 flex flex-col gap-2 p-3 bg-[#fafafa] dark:bg-[#121212] rounded-lg border border-[#e2e8f0] dark:border-[#434548] shadow-lg transition-popover duration-200 [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0
+    @apply z-40 mt-1 flex flex-col gap-2 p-3 bg-[#fafafa] dark:bg-[#121212] rounded-lg border border-[#e2e8f0] dark:border-[#434548] shadow-lg transition-popover duration-200 [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0
   }
 }
 
