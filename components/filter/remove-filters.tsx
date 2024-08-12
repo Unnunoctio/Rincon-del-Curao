@@ -1,5 +1,3 @@
-'use client'
-
 import { FilterOptions } from '@/types/types'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
