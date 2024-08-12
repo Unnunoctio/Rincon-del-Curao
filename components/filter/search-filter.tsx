@@ -1,4 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 interface Props {
@@ -13,6 +14,17 @@ export const SearchFilter: React.FC<Props> = ({ label, name, value, aria, placeh
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  const [searchValue, setSearchValue] = useState(value ?? '')
+
+  useEffect(() => {
+    setSearchValue(value ?? '')
+  }, [value])
+
+  const onChange = (term: string): void => {
+    setSearchValue(term)
+    handleSearch(term)
+  }
 
   const handleSearch = useDebouncedCallback((term: string): void => {
     const params = new URLSearchParams(searchParams)
@@ -31,8 +43,8 @@ export const SearchFilter: React.FC<Props> = ({ label, name, value, aria, placeh
         {label}
       </span>
       <input
-        defaultValue={value}
-        onChange={(e) => handleSearch(e.target.value)}
+        value={searchValue}
+        onChange={(e) => onChange(e.target.value)}
         name={name}
         placeholder={placeholder}
         autoComplete='off'
