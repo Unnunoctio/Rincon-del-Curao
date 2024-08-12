@@ -24,7 +24,7 @@
     @apply h-16
   }
   .navbar {
-    @apply fixed z-10 flex justify-center w-full bg-[#fafafa] dark:bg-[#121212] border-b border-[#e2e8f0] dark:border-[#434548]
+    @apply fixed z-20 flex justify-center w-full bg-[#fafafa] dark:bg-[#121212] border-b border-[#e2e8f0] dark:border-[#434548]
   }
   .navbar-container {
     @apply flex justify-between px-2 sm:px-8 md:px-12 max-w-page-container w-full
@@ -61,7 +61,7 @@
 /* SIDEBAR */
 @layer components {
   .sidebar {
-    @apply relative z-10
+    @apply relative z-20
   }
   .sidebar-backdrop {
     @apply fixed inset-0 bg-black/50 transition-opacity duration-300 ease-in-out data-[closed]:opacity-0
@@ -368,7 +368,7 @@
     @apply fixed inset-0
   }
   .popover-panel {
-    @apply z-10 mt-1 flex flex-col gap-2 p-3 bg-[#fafafa] dark:bg-[#121212] rounded-lg border border-[#e2e8f0] dark:border-[#434548] shadow-lg transition-popover duration-200 [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0
+    @apply z-20 mt-1 flex flex-col gap-2 p-3 bg-[#fafafa] dark:bg-[#121212] rounded-lg border border-[#e2e8f0] dark:border-[#434548] shadow-lg transition-popover duration-200 [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0
   }
 }
 
@@ -724,7 +724,7 @@
     @apply fill-[#718096] dark:fill-[#7b8aa1] transition-transform duration-200 rotate-0 group-data-[open]:rotate-180
   }
   .order-by-options {
-    @apply absolute overflow-auto my-2 py-2 max-h-60 w-[var(--button-width)] bg-[#fafafa] dark:bg-[#121212] rounded-md border border-[#e2e8f0] dark:border-[#434548] shadow-md [--anchor-gap:var(--spacing-1)] transition-popover duration-200 data-[closed]:-translate-y-1 data-[closed]:opacity-0
+    @apply absolute overflow-auto z-10 my-2 py-2 max-h-60 w-[var(--button-width)] bg-[#fafafa] dark:bg-[#121212] rounded-md border border-[#e2e8f0] dark:border-[#434548] shadow-md [--anchor-gap:var(--spacing-1)] transition-popover duration-200 data-[closed]:-translate-y-1 data-[closed]:opacity-0
   }
   .order-by-option {
     @apply relative cursor-pointer select-none py-1.5 pl-3 data-[selected]:bg-[#e2e8f0] dark:data-[selected]:bg-[#282d33] hover:bg-[#edf2f7] dark:hover:bg-[#222629] active:bg-[#e2e8f0] dark:active:bg-[#282d33]
@@ -745,6 +745,53 @@
   .pagination-number-active {
     @apply flex justify-center items-center min-w-[34px] h-[34px] font-bold rounded-md border text-[#1a202c] dark:text-[#1a202c] bg-active/75 border-transparent
   }
+}
+
+/* FILTER */
+@layer components {
+  .filter-container {
+    @apply flex flex-col w-full h-full
+  }
+  .filter-container-header {
+    @apply flex items-baseline justify-between pb-2 border-b divider-primary
+  }
+  .filter-inputs-container {
+    @apply flex flex-col gap-4 py-4
+  }
+  .filter-divider {
+    @apply divider-primary mb-3
+  }
+}
+
+/* FILTER INPUT */
+@layer components {
+  .filter-input-container {
+    @apply relative
+  }
+  .filter-input-label {
+    @apply text-[18px] font-medium
+  }
+}
+
+/* RANGE SLIDER */
+@layer components {
+  .range-slider-label-container {
+    @apply flex justify-between items-baseline
+  }
+  .range-slider-container {
+    @apply flex items-center w-full h-4 mt-3 mb-2 cursor-pointer
+  }
+  .range-slider-thumb {
+    @apply w-[14px] h-[14px] bg-active rounded-full transition-box-shadow active:ring-[10px] focus:ring-[6px] focus:ring-active/30 focus:ring-offset-0
+  }
+  .range-slider-track {
+    @apply h-[3px] bg-active/30 rounded
+  }
+}
+
+/* FILTER SELECT */
+@layer components {
+  
 }
 
 @layer components {
