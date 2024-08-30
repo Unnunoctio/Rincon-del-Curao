@@ -7,7 +7,11 @@ import { useEffect, useState } from 'react'
 import { ProductPreview } from '@/types/api'
 import { SliderLoader } from './slider-loader'
 
-export const AverageList: React.FC = () => {
+interface Props {
+  hash: string
+}
+
+export const AverageList: React.FC<Props> = ({ hash }) => {
   const [products, setProducts] = useState<ProductPreview[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -20,7 +24,7 @@ export const AverageList: React.FC = () => {
       setIsLoading(false)
     }
     void fetchProducts()
-  }, [])
+  }, [hash])
 
   if (isLoading) return <SliderLoader />
   if (products.length === 0) return <SliderNotFound text='Productos sin valoración' />
