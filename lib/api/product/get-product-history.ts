@@ -17,7 +17,7 @@ interface Response {
   productHistory: PriceHistory[]
 }
 
-export const getHistoryProduct = async (path: string): Promise<PriceHistory[]> => {
+export const getProductHistory = async (path: string): Promise<PriceHistory[]> => {
   const webs = await getCookie('prefWebs')
 
   const variables = {
