@@ -1,27 +1,28 @@
-import { getCookie } from '@/app/actions'
 import { ProductPreview } from '@/types/api'
+import { cookies } from 'next/headers'
 
 const query = `
   query DiscountProducts($availableWebs: [String]!) {
     discountProducts(availableWebs: $availableWebs) {
       path
       title
-      brand
       price
       bestPrice
       discount
       average
-      preview
+      image
     }
   }
 `
 
-interface Response {
+interface QueryResponse {
   discountProducts: ProductPreview[]
 }
 
-export const getDiscountProducts = async (): Promise<ProductPreview[]> => {
-  const webs = await getCookie('prefWebs')
+export async function GET (): Promise<Response> {
+  const cookieStore = cookies()
+  const webs = cookieStore.get('prefWebs')?.value
+
   const variables = {
     availableWebs: (webs === undefined) ? [] : webs.split(',')
   }
@@ -33,12 +34,13 @@ export const getDiscountProducts = async (): Promise<ProductPreview[]> => {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'DiscountProducts',
       query,
       variables
     }),
     cache: 'no-store'
   })
 
-  const { data }: { data: Response } = await res.json()
-  return data.discountProducts
+  const { data }: { data: QueryResponse } = await res.json()
+  return Response.json(data.discountProducts)
 }

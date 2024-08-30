@@ -1,14 +1,29 @@
-import { getDiscountProducts } from '@/lib/api/get-discount-products'
-import { SliderNotFound } from './slider-not-found'
+'use client'
+
 import { Slider } from './slider'
+import { SliderNotFound } from './slider-not-found'
 import { PreviewCard } from '../preview-card'
+import { useEffect, useState } from 'react'
+import { ProductPreview } from '@/types/api'
+import { SliderLoader } from './slider-loader'
 
-export const DiscountList = async (): Promise<JSX.Element> => {
-  const products = await getDiscountProducts()
+export const DiscountList: React.FC = () => {
+  const [products, setProducts] = useState<ProductPreview[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  if (products.length === 0) {
-    return <SliderNotFound text='Productos sin oferta' />
-  }
+  useEffect(() => {
+    const fetchProducts = async (): Promise<void> => {
+      setIsLoading(true)
+      const response = await fetch('/api/discount-products')
+      const data = await response.json()
+      setProducts(data)
+      setIsLoading(false)
+    }
+    void fetchProducts()
+  }, [])
+
+  if (isLoading) return <SliderLoader />
+  if (products.length === 0) return <SliderNotFound text='Productos sin oferta' />
 
   return (
     <Slider>
