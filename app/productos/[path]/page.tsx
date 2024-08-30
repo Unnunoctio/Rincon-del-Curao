@@ -1,10 +1,14 @@
 import { Breadcrumb } from '@/components/breadcrumb'
 import { FeatureList } from '@/components/features'
+import { HistoryLoader } from '@/components/history/history-loader'
+import { ProductHistory } from '@/components/history/product-history'
+import { generateWebsHash } from '@/helpers/hash'
 import { createBreadcrumbLinks } from '@/helpers/path'
-import { getIsPath } from '@/lib/api/get-is-path'
-import { getProduct } from '@/lib/api/get-product'
+import { getIsPath } from '@/lib/api/product/get-is-path'
+import { getProduct } from '@/lib/api/product/get-product'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
 interface Props {
   params: { path: string }
@@ -21,7 +25,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 export default async function ProductPage ({ params }: Props): Promise<JSX.Element> {
   const product = await getProduct(params.path)
-  // const hash = generateWebsHash()
+  const hash = generateWebsHash()
 
   return (
     <>
@@ -45,10 +49,12 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
         {/* <WebsiteList websites={product.websites} className='website-list-mobile' /> */}
       </section>
 
-      {/* <section className='history-container'>
+      <section className='history-container'>
         <h2 className='history-title'>Historial de Precios</h2>
-        <ProductHistory path={params.path} hash={hash} />
-      </section> */}
+        <Suspense key={hash} fallback={<HistoryLoader />}>
+          <ProductHistory path={params.path} />
+        </Suspense>
+      </section>
     </>
   )
 }

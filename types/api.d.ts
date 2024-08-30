@@ -72,12 +72,12 @@ export interface Website {
   average: number
 }
 
-export interface HistoryPrice {
+export interface PriceHistory {
   website: string
-  records: Record[]
+  priceLogs: PriceLog[]
 }
 
-export interface Record {
+export interface PriceLog {
   price: number
   date: string
 }

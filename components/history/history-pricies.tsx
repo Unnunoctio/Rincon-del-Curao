@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
+'use client'
 
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { AxisOptions, Chart, Series } from 'react-charts'
-import { HistoryPrice } from '@/types/api'
+import { PriceHistory } from '@/types/api'
 import { HistoryContainer } from './history-container'
 import { useTheme } from 'next-themes'
 import { getHistoryData } from '@/helpers/history'
 
 interface Props {
-  historyPricies: HistoryPrice[]
+  historyPricies: PriceHistory[]
 }
 
 interface MyDatum { date: Date, price: number }
@@ -17,15 +18,24 @@ interface MyDatum { date: Date, price: number }
 export const HistoryPricies: React.FC<Props> = ({ historyPricies }) => {
   const ref = useRef<HTMLDivElement | null>(null)
   const { theme, systemTheme } = useTheme()
-  const [historyWidth, minDate, maxDate] = getHistoryData(historyPricies.map(hp => hp.records).flat())
+  const [historyWidth, minDate, maxDate] = getHistoryData(historyPricies.map(hp => hp.priceLogs).flat())
 
   const data = historyPricies.map((historyPrice): any => {
     return {
       label: historyPrice.website,
-      data: historyPrice.records.map((record) => {
+      data: historyPrice.priceLogs.map((log) => {
+        const date = new Date(log.date)
+        let localDate = date
+
+        if (date.getTimezoneOffset() < 0) {
+          localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
+        } else if (date.getTimezoneOffset() > 0) {
+          localDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000))
+        }
+
         return {
-          date: new Date(record.date),
-          price: record.price
+          date: localDate,
+          price: log.price
         }
       })
     }
