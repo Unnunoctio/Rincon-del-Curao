@@ -1,26 +1,23 @@
-import { Website } from '@/types/api'
 import { WebsiteItem } from './website-item'
+import { getProductWebsites } from '@/lib/api/product'
 import { WebsiteNotFound } from './website-not-found'
 
 interface Props {
-  websites: Website[]
-  className?: string
+  path: string
 }
 
-export const WebsiteList: React.FC<Props> = ({ websites, className = '' }) => {
+export const WebsiteList: React.FC<Props> = async ({ path }): Promise<JSX.Element> => {
+  const websites = await getProductWebsites(path)
+
+  if (websites.length === 0) return <WebsiteNotFound />
+
   return (
-    <section className={`${className} website-list-container`}>
-      <h2 className='website-list-title'>Tiendas</h2>
-      {websites.length === 0 && <WebsiteNotFound />}
-      {websites.length > 0 && (
-        <ul className='website-item-list'>
-          {websites.map((website, index) => (
-            <li key={index}>
-              <WebsiteItem {...website} />
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+    <ul className='website-item-list'>
+      {websites.map((website, index) => (
+        <li key={index}>
+          <WebsiteItem {...website} />
+        </li>
+      ))}
+    </ul>
   )
 }

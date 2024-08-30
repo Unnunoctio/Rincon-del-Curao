@@ -2,10 +2,10 @@ import { Breadcrumb } from '@/components/breadcrumb'
 import { FeatureList } from '@/components/features'
 import { HistoryLoader } from '@/components/history/history-loader'
 import { ProductHistory } from '@/components/history/product-history'
+import { WebsiteContainer } from '@/components/websites'
 import { generateWebsHash } from '@/helpers/hash'
 import { createBreadcrumbLinks } from '@/helpers/path'
-import { getIsPath } from '@/lib/api/product/get-is-path'
-import { getProduct } from '@/lib/api/product/get-product'
+import { getIsPath, getProduct } from '@/lib/api/product'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -40,13 +40,13 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
         </div>
         <div className='product-desktop-list-container'>
           <FeatureList {...product} className='feature-list-desktop' />
-          {/* <WebsiteList websites={product.websites} /> */}
+          <WebsiteContainer path={params.path} hash={hash} />
         </div>
       </section>
 
       <section className='product-mobile-container'>
         <FeatureList {...product} className='feature-list-mobile' />
-        {/* <WebsiteList websites={product.websites} className='website-list-mobile' /> */}
+        <WebsiteContainer path={params.path} hash={hash} className='website-list-mobile' />
       </section>
 
       <section className='history-container'>

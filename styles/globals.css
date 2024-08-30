@@ -664,6 +664,9 @@
   .website-item-best-price {
     @apply font-medium text-[20px] text-active leading-none
   }
+  .website-loader-container {
+    @apply mt-10 w-full flex justify-center
+  }
 }
 
 /* HISTORY */

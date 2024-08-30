@@ -65,11 +65,12 @@ export interface Product {
 
 export interface Website {
   name: string
-  logo: string
   url: string
   price: number
   bestPrice: number
+  discount: number
   average: number
+  logo: string
 }
 
 export interface PriceHistory {
