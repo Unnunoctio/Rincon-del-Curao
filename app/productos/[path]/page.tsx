@@ -1,11 +1,8 @@
 import { Breadcrumb } from '@/components/breadcrumb'
 import { FeatureList } from '@/components/features'
-import { ProductHistory } from '@/components/history/product-history'
-import { WebsiteList } from '@/components/websites'
-import { generateWebsHash } from '@/helpers/hash'
 import { createBreadcrumbLinks } from '@/helpers/path'
+import { getIsPath } from '@/lib/api/get-is-path'
 import { getProduct } from '@/lib/api/get-product'
-import { getProductTitle } from '@/lib/api/get-product-title'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -14,18 +11,17 @@ interface Props {
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const isProduct = await getProductTitle(params.path)
-  if (!isProduct.isExist) return notFound()
+  const isPath = await getIsPath(params.path)
+  if (!isPath.isExist) return notFound()
 
   return {
-    title: isProduct.title
+    title: isPath.title
   }
 }
 
 export default async function ProductPage ({ params }: Props): Promise<JSX.Element> {
   const product = await getProduct(params.path)
-
-  const hash = generateWebsHash()
+  // const hash = generateWebsHash()
 
   return (
     <>
@@ -40,19 +36,19 @@ export default async function ProductPage ({ params }: Props): Promise<JSX.Eleme
         </div>
         <div className='product-desktop-list-container'>
           <FeatureList {...product} className='feature-list-desktop' />
-          <WebsiteList websites={product.websites} />
+          {/* <WebsiteList websites={product.websites} /> */}
         </div>
       </section>
 
       <section className='product-mobile-container'>
         <FeatureList {...product} className='feature-list-mobile' />
-        <WebsiteList websites={product.websites} className='website-list-mobile' />
+        {/* <WebsiteList websites={product.websites} className='website-list-mobile' /> */}
       </section>
 
-      <section className='history-container'>
+      {/* <section className='history-container'>
         <h2 className='history-title'>Historial de Precios</h2>
         <ProductHistory path={params.path} hash={hash} />
-      </section>
+      </section> */}
     </>
   )
 }

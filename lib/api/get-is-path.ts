@@ -1,8 +1,8 @@
 import { IsProduct } from '@/types/api'
 
 const query = `
-  query Query($path: ID!) {
-    isProductPath(path: $path) {
+  query IsPath($path: ID!) {
+    isPath(path: $path) {
       isExist
       title
     }
@@ -10,10 +10,10 @@ const query = `
 `
 
 interface Response {
-  isProductPath: IsProduct
+  isPath: IsProduct
 }
 
-export const getProductTitle = async (path: string): Promise<IsProduct> => {
+export const getIsPath = async (path: string): Promise<IsProduct> => {
   const variables = {
     path
   }
@@ -25,6 +25,7 @@ export const getProductTitle = async (path: string): Promise<IsProduct> => {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'IsPath',
       query,
       variables
     }),
@@ -32,5 +33,5 @@ export const getProductTitle = async (path: string): Promise<IsProduct> => {
   })
 
   const { data }: { data: Response } = await res.json()
-  return data.isProductPath
+  return data.isPath
 }

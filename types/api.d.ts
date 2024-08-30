@@ -49,19 +49,18 @@ export interface Product {
   title: string
   brand: string
   quantity: number
-  alcoholicGrade: number
-  content: number
-  package: string
+  abv: number
+  volume: number
+  packaging: string
   category: string
   subCategory: string
-  madeIn: string
+  origin: string
   variety: string | null
-  bitterness: number | null
-  temperature: string | null
+  ibu: number | null
+  servingTemp: string | null
   strain: string | null
   vineyard: string | null
   image: string
-  websites: Website[]
 }
 
 export interface Website {
