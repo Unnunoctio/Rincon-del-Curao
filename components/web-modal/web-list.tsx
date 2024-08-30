@@ -12,12 +12,11 @@ interface WebCheck extends Web {
 export const WebList: React.FC = () => {
   const [webs, setWebs] = useState<WebCheck[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  // const { data, error, isLoading } = useSWR<WebCheck[], Error>('/api/webs', fetcher)
 
   useEffect(() => {
     const fetchWebs = async (): Promise<void> => {
       setIsLoading(true)
-      const response = await fetch('/api/webs')
+      const response = await fetch('/api/all-webs')
       const data = await response.json()
       setWebs(data)
       setIsLoading(false)

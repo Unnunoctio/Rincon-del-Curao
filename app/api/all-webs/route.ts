@@ -2,8 +2,8 @@ import { Web } from '@/types/api'
 import { cookies } from 'next/headers'
 
 const query = `
-  query TotalWebs {
-    totalWebs {
+  query AllWebs {
+    allWebs {
       code
       name
       logo
@@ -12,11 +12,10 @@ const query = `
 `
 
 interface QueryResponse {
-  totalWebs: Web[]
+  allWebs: Web[]
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export async function GET () {
+export async function GET (): Promise<Response> {
   const cookieStore = cookies()
   const webs = (cookieStore.get('prefWebs')?.value)?.split(',')
 
@@ -27,13 +26,14 @@ export async function GET () {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'AllWebs',
       query
     }),
     cache: 'no-store'
   })
 
   const { data }: { data: QueryResponse } = await res.json()
-  return Response.json(data.totalWebs.map(w => {
+  return Response.json(data.allWebs.map(w => {
     return {
       code: w.code,
       name: w.name,
