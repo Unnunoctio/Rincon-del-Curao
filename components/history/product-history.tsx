@@ -1,6 +1,6 @@
+import { getHistoryProduct } from '@/lib/api/product'
 import { HistoryNotFound } from './history-not-found'
 import { HistoryPricies } from './history-pricies'
-import { getHistoryProduct } from '@/lib/api/product/get-history-product'
 
 interface Props {
   path: string

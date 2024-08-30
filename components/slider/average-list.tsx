@@ -1,7 +1,7 @@
 import { Slider } from './slider'
 import { SliderNotFound } from './slider-not-found'
 import { PreviewCard } from '../preview-card'
-import { getAverageProducts } from '@/lib/api/home/get-average-products'
+import { getAverageProducts } from '@/lib/api/home'
 
 export const AverageList = async (): Promise<JSX.Element> => {
   const products = await getAverageProducts()
