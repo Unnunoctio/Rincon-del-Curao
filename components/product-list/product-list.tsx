@@ -1,17 +1,17 @@
-import { getProducts } from '@/lib/api/get-products'
-import { SearchParams } from '@/types/types'
+
+import { Filter } from '@/types/types'
 import { PreviewCard } from '../preview-card'
 import { ProductListNotFound } from './product-list-not-found'
+import { getProducts } from '@/lib/api/category/get-products'
 
 interface Props {
   page: number
   orderBy: string
-  category: string
-  searchParams: SearchParams
+  filter: Filter
 }
 
-export const ProductList: React.FC<Props> = async ({ page, orderBy, category, searchParams }) => {
-  const products = await getProducts(page, orderBy, category, searchParams)
+export const ProductList: React.FC<Props> = async ({ page, orderBy, filter }) => {
+  const products = await getProducts(page, orderBy, filter)
 
   if (products.length === 0) return <ProductListNotFound />
 

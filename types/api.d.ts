@@ -15,16 +15,17 @@ export interface OptionType {
   value: string
 }
 
-export interface TotalOptions {
+export interface FilterOptions {
+  category?: OptionType[]
   subCategory: OptionType[]
   brand: OptionType[]
-  content: OptionType[]
+  volume: OptionType[]
   quantity: OptionType[]
-  package: OptionType[]
+  packaging: OptionType[]
   priceMin: number
   priceMax: number
-  gradeMin: number
-  gradeMax: number
+  abvMin: number
+  abvMax: number
 }
 
 export interface IsProduct {
@@ -81,4 +82,10 @@ export interface PriceHistory {
 export interface PriceLog {
   price: number
   date: string
+}
+
+export interface ProductsProps {
+  totalCount: number
+  totalPages: number
+  filterOptions: FilterOptions
 }

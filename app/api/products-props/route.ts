@@ -1,15 +1,12 @@
+import { ProductsProps } from '@/types/api'
 import { cookies } from 'next/headers'
 import { NextRequest } from 'next/server'
-import { getOptions } from '@/helpers/options'
-import { TotalOptions } from '@/types/api'
 
 const query = `
-  query TotalOptions($availableWebs: [String]!, $category: Category!, $options: OptionsInput!) {
-    totalOptions(availableWebs: $availableWebs, category: $category, options: $options) {
-      priceMin
-      priceMax
-      gradeMin
-      gradeMax
+  query ProductsProps($availableWebs: [String]!, $filter: Filter!) {
+    totalCount(availableWebs: $availableWebs, filter: $filter)
+    totalPages(availableWebs: $availableWebs, filter: $filter)
+    filterOptions(availableWebs: $availableWebs, filter: $filter) {
       subCategory {
         label
         count
@@ -20,7 +17,7 @@ const query = `
         count
         value
       }
-      content {
+      volume {
         label
         count
         value
@@ -30,35 +27,34 @@ const query = `
         count
         value
       }
-      package {
+      packaging {
         label
         count
         value
       }
+      priceMin
+      priceMax
+      abvMin
+      abvMax
     }
   }
 `
 
-interface QueryResponse {
-  totalOptions: TotalOptions
-}
+interface QueryResponse extends ProductsProps {}
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export async function GET (request: NextRequest) {
+export async function GET (request: NextRequest): Promise<Response> {
   const cookieStore = cookies()
   const webs = cookieStore.get('prefWebs')?.value
 
   const searchParams = request.nextUrl.searchParams
-  const category = searchParams.get('category')
-  const options = searchParams.get('options')
+  const filter = searchParams.get('filter')
 
   const variables = {
     availableWebs: (webs === undefined) ? [] : webs.split(','),
-    category,
-    options: getOptions(JSON.parse(options as string))
+    filter: JSON.parse(filter as string)
   }
 
-  variables.options.brand = variables.options.brand?.map(b => {
+  variables.filter.brand = variables.filter.brand?.map((b: any) => {
     if (b === ' 56') return '+56'
     return b
   })
@@ -70,6 +66,7 @@ export async function GET (request: NextRequest) {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'ProductsProps',
       query,
       variables
     }),
@@ -77,5 +74,5 @@ export async function GET (request: NextRequest) {
   })
 
   const { data }: { data: QueryResponse } = await res.json()
-  return Response.json(data.totalOptions)
+  return Response.json(data)
 }

@@ -9,17 +9,18 @@ export interface OrderBy {
   value: OrderByEnum
 }
 
-export interface FilterOptions {
+export interface Filter {
   search?: string
+  category?: string
   subCategory?: string[]
   brand?: string[]
-  content?: string[]
+  volume?: string[]
   quantity?: string[]
-  package?: string[]
+  packaging?: string[]
   priceMin?: number
   priceMax?: number
-  gradeMin?: number
-  gradeMax?: number
+  abvMin?: number
+  abvMax?: number
 }
 
 export interface FormInput {
