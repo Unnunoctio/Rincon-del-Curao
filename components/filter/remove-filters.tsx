@@ -1,25 +1,25 @@
-import { FilterOptions } from '@/types/types'
+import { Filter } from '@/types/types'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 interface Props {
-  filterOptions: FilterOptions
+  filter: Filter
   className?: string
 }
 
-export const RemoveFilters: React.FC<Props> = ({ filterOptions }) => {
+export const RemoveFilters: React.FC<Props> = ({ filter }) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const isVisible = Object.entries(filterOptions).length > 0
+  const isVisible = Object.entries(filter).length > 1
 
   const createURL = (): string => {
     const params = new URLSearchParams(searchParams)
-    Object.keys(filterOptions).forEach(key => {
+    Object.keys(filter).forEach(key => {
       if (key === 'subCategory') params.delete('sub_category')
       else if (key === 'priceMin') params.delete('price_min')
       else if (key === 'priceMax') params.delete('price_max')
-      else if (key === 'gradeMin') params.delete('grade_min')
-      else if (key === 'gradeMax') params.delete('grade_max')
+      else if (key === 'abvMin') params.delete('abv_min')
+      else if (key === 'abvMax') params.delete('abv_max')
       else params.delete(key)
     })
     params.set('page', '1')

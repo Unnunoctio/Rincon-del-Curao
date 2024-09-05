@@ -4,7 +4,6 @@ import { Suspense } from 'react'
 
 export default function Home (): JSX.Element {
   const hash = generateWebsHash()
-
   return (
     <div className='sliders-container'>
       <SliderBox title='Ofertas del Día'>

@@ -1,29 +1,30 @@
 import { getCookie } from '@/app/actions'
-import { ProductPreview } from '@/types/api'
+import { Website } from '@/types/api'
 
 const query = `
-  query DiscountProducts($availableWebs: [String]!) {
-    discountProducts(availableWebs: $availableWebs) {
-      path
-      title
-      brand
+  query ProductWebs($availableWebs: [String]!, $path: ID!) {
+    productWebs(availableWebs: $availableWebs, path: $path) {
+      name
+      url
       price
       bestPrice
       discount
       average
-      preview
+      logo
     }
   }
 `
 
 interface Response {
-  discountProducts: ProductPreview[]
+  productWebs: Website[]
 }
 
-export const getDiscountProducts = async (): Promise<ProductPreview[]> => {
+export const getProductWebsites = async (path: string): Promise<Website[]> => {
   const webs = await getCookie('prefWebs')
+
   const variables = {
-    availableWebs: (webs === undefined) ? [] : webs.split(',')
+    availableWebs: (webs === undefined) ? [] : webs.split(','),
+    path
   }
 
   const res = await fetch(process.env.API_ENDPOINT as string, {
@@ -33,6 +34,7 @@ export const getDiscountProducts = async (): Promise<ProductPreview[]> => {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'ProductWebs',
       query,
       variables
     }),
@@ -40,5 +42,5 @@ export const getDiscountProducts = async (): Promise<ProductPreview[]> => {
   })
 
   const { data }: { data: Response } = await res.json()
-  return data.discountProducts
+  return data.productWebs
 }

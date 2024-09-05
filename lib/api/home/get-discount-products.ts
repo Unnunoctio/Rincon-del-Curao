@@ -2,26 +2,26 @@ import { getCookie } from '@/app/actions'
 import { ProductPreview } from '@/types/api'
 
 const query = `
-  query AverageProducts($availableWebs: [String]!) {
-    averageProducts(availableWebs: $availableWebs) {
+  query DiscountProducts($availableWebs: [String]!) {
+    discountProducts(availableWebs: $availableWebs) {
       path
       title
-      brand
       price
       bestPrice
       discount
       average
-      preview
+      image
     }
   }
 `
 
 interface Response {
-  averageProducts: ProductPreview[]
+  discountProducts: ProductPreview[]
 }
 
-export const getAverageProducts = async (): Promise<ProductPreview[]> => {
+export const getDiscountProducts = async (): Promise<ProductPreview[]> => {
   const webs = await getCookie('prefWebs')
+
   const variables = {
     availableWebs: (webs === undefined) ? [] : webs.split(',')
   }
@@ -33,6 +33,7 @@ export const getAverageProducts = async (): Promise<ProductPreview[]> => {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'DiscountProducts',
       query,
       variables
     }),
@@ -40,5 +41,5 @@ export const getAverageProducts = async (): Promise<ProductPreview[]> => {
   })
 
   const { data }: { data: Response } = await res.json()
-  return data.averageProducts
+  return data.discountProducts
 }

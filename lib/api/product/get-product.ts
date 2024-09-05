@@ -1,32 +1,23 @@
-import { getCookie } from '@/app/actions'
 import { Product } from '@/types/api'
 
 const query = `
-  query Product($path: ID!, $availableWebs: [String]!) {
-    product(path: $path, availableWebs: $availableWebs) {
+  query Product($path: ID!) {
+    product(path: $path) {
       title
       brand
       quantity
-      alcoholicGrade
-      content
-      package
+      abv
+      volume
+      packaging
       category
       subCategory
-      madeIn
+      origin
       variety
-      bitterness
-      temperature
+      ibu
+      servingTemp
       strain
       vineyard
       image
-      websites {
-        name
-        logo
-        url
-        price
-        bestPrice
-        average
-      }
     }
   }
 `
@@ -36,10 +27,8 @@ interface Response {
 }
 
 export const getProduct = async (path: string): Promise<Product> => {
-  const webs = await getCookie('prefWebs')
   const variables = {
-    path,
-    availableWebs: (webs === undefined) ? [] : webs.split(',')
+    path
   }
 
   const res = await fetch(process.env.API_ENDPOINT as string, {
@@ -49,6 +38,7 @@ export const getProduct = async (path: string): Promise<Product> => {
       'x-api-key': process.env.API_KEY as string
     },
     body: JSON.stringify({
+      operationName: 'Product',
       query,
       variables
     }),

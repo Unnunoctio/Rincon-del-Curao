@@ -2,12 +2,11 @@
 export interface ProductPreview {
   path: string
   title: string
-  brand: string
   price: number
   bestPrice: number
   discount: number
   average: number
-  preview: string
+  image: string
 }
 
 export interface OptionType {
@@ -16,16 +15,17 @@ export interface OptionType {
   value: string
 }
 
-export interface TotalOptions {
+export interface FilterOptions {
+  category?: OptionType[]
   subCategory: OptionType[]
   brand: OptionType[]
-  content: OptionType[]
+  volume: OptionType[]
   quantity: OptionType[]
-  package: OptionType[]
+  packaging: OptionType[]
   priceMin: number
   priceMax: number
-  gradeMin: number
-  gradeMax: number
+  abvMin: number
+  abvMax: number
 }
 
 export interface IsProduct {
@@ -50,36 +50,42 @@ export interface Product {
   title: string
   brand: string
   quantity: number
-  alcoholicGrade: number
-  content: number
-  package: string
+  abv: number
+  volume: number
+  packaging: string
   category: string
   subCategory: string
-  madeIn: string
+  origin: string
   variety: string | null
-  bitterness: number | null
-  temperature: string | null
+  ibu: number | null
+  servingTemp: string | null
   strain: string | null
   vineyard: string | null
   image: string
-  websites: Website[]
 }
 
 export interface Website {
   name: string
-  logo: string
   url: string
   price: number
   bestPrice: number
+  discount: number
   average: number
+  logo: string
 }
 
-export interface HistoryPrice {
+export interface PriceHistory {
   website: string
-  records: Record[]
+  priceLogs: PriceLog[]
 }
 
-export interface Record {
+export interface PriceLog {
   price: number
   date: string
+}
+
+export interface ProductsProps {
+  totalCount: number
+  totalPages: number
+  filterOptions: FilterOptions
 }
