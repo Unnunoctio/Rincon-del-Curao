@@ -4,10 +4,10 @@ import { Filter as FilterType } from '@/types/types'
 import { useEffect, useState } from 'react'
 import { OrderBySelect } from './order-by-select'
 import { OrderByEnum } from '@/types/enums'
-import { ProductsProps } from '@/types/api'
 import { ProductCount } from './product-count'
 import { Pagination } from './pagination'
 import { Filter, FilterMobile } from './filter'
+import { useProductsPropsStore } from '@/stores'
 
 interface Props {
   hash: string
@@ -19,18 +19,20 @@ interface Props {
 }
 
 export const CategoryClientLayout: React.FC<Props> = ({ hash, title, page, orderBy, filter, children }) => {
-  const [data, setData] = useState<ProductsProps | undefined>(undefined)
-  const [isLoading, setIsLoading] = useState(true)
+  const { totalCount, totalPages, filterOptions, setData, setLastHash, sameHash } = useProductsPropsStore((state) => state)
+  const [isLoading, setIsLoading] = useState(!sameHash(hash))
 
   useEffect(() => {
     const fetchProductsProps = async (): Promise<void> => {
       setIsLoading(true)
       const response = await fetch(`/api/products-props?filter=${JSON.stringify(filter)}`)
       const data = await response.json()
-      setData(data)
+      setData(data.totalCount, data.totalPages, data.filterOptions)
+      setLastHash(hash)
       setIsLoading(false)
     }
-    void fetchProductsProps()
+
+    if (!sameHash(hash)) void fetchProductsProps()
   }, [hash])
 
   return (
@@ -38,22 +40,22 @@ export const CategoryClientLayout: React.FC<Props> = ({ hash, title, page, order
       <header className='product-list-header'>
         <div className='product-list-title-container'>
           <h1 className='product-list-title'>{title}</h1>
-          <ProductCount isLoading={isLoading} totalCount={data?.totalCount} className='xl:hidden' />
+          <ProductCount isLoading={isLoading} totalCount={totalCount} className='xl:hidden' />
         </div>
         <div className='product-list-header-buttons'>
           <FilterMobile>
-            <Filter isLoading={isLoading} totalCount={data?.totalCount} filterOptions={data?.filterOptions} filter={filter} />
+            <Filter isLoading={isLoading} totalCount={totalCount} filterOptions={filterOptions} filter={filter} />
           </FilterMobile>
           <OrderBySelect orderBy={orderBy} />
         </div>
       </header>
       <section className='product-list-section'>
         <div className='product-list-filter-container'>
-          <Filter isLoading={isLoading} totalCount={data?.totalCount} filterOptions={data?.filterOptions} filter={filter} />
+          <Filter isLoading={isLoading} totalCount={totalCount} filterOptions={filterOptions} filter={filter} />
         </div>
         <div className='product-list-container'>
           {children}
-          <Pagination currentPage={page} totalPages={data?.totalPages} />
+          <Pagination isLoading={isLoading} currentPage={page} totalPages={totalPages} />
         </div>
       </section>
     </>
