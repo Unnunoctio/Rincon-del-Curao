@@ -17,6 +17,9 @@ interface UIState {
   closeFilterSidebar: () => void
 
   // WEB MODAL
+  isWebModalOpen: boolean
+  openWebModal: () => void
+  closeWebModal: () => void
 }
 
 export const useUIStore = create<UIState>()((set) => ({
@@ -33,5 +36,10 @@ export const useUIStore = create<UIState>()((set) => ({
   // Filter Sidebar State
   isFilterSidebarOpen: false,
   openFilterSidebar: () => set({ isFilterSidebarOpen: true }),
-  closeFilterSidebar: () => set({ isFilterSidebarOpen: false })
+  closeFilterSidebar: () => set({ isFilterSidebarOpen: false }),
+
+  // Web Modal State
+  isWebModalOpen: false,
+  openWebModal: () => set({ isWebModalOpen: true }),
+  closeWebModal: () => set({ isWebModalOpen: false })
 }))
