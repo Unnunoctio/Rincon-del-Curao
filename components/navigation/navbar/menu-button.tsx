@@ -1,13 +1,12 @@
 import { MenuIcon } from '@/icons'
+import { useUIStore } from '@/stores'
 
-interface Props {
-  sideOpen: () => void
-}
+export const MenuButton: React.FC = () => {
+  const { openSidebar } = useUIStore((state) => state)
 
-export const MenuButton: React.FC<Props> = ({ sideOpen }) => {
   return (
     <button
-      onClick={sideOpen}
+      onClick={openSidebar}
       className='group navbar-menu-button'
       aria-label='menu'
     >

@@ -6,10 +6,9 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
-  sideOpen: () => void
 }
 
-export const Navbar: React.FC<Props> = ({ isOpen, onOpen, onClose, sideOpen }): JSX.Element => {
+export const Navbar: React.FC<Props> = ({ isOpen, onOpen, onClose }): JSX.Element => {
   return (
     <header
       className='navbar'
@@ -20,7 +19,7 @@ export const Navbar: React.FC<Props> = ({ isOpen, onOpen, onClose, sideOpen }): 
 
         <div className='navbar-container-items'>
           <NavbarLinks isOpen={isOpen} onOpen={onOpen} />
-          <NavbarButtons onClose={onClose} sideOpen={sideOpen} />
+          <NavbarButtons onClose={onClose} />
         </div>
       </nav>
     </header>

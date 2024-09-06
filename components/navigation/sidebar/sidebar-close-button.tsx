@@ -1,13 +1,12 @@
 import { XIcon } from '@/icons'
+import { useUIStore } from '@/stores'
 
-interface Props {
-  sideClose: () => void
-}
+export const SidebarCloseButton: React.FC = () => {
+  const { closeSidebar } = useUIStore((state) => state)
 
-export const SidebarCloseButton: React.FC<Props> = ({ sideClose }) => {
   return (
     <button
-      onClick={sideClose}
+      onClick={closeSidebar}
       className='group sidebar-button-close'
       aria-label='cerrar sidebar'
     >
