@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { Web } from '@/types/api'
-import { WebCheckbox } from './web-checkbox'
 import { WebListLoader } from './web-list-loader'
 import { WebListError } from './web-list-error'
 import { useEffect, useState } from 'react'
-
-interface WebCheck extends Web {
-  checked: boolean
-}
+import { useWebsStore } from '@/stores'
+import { useCookies } from 'next-client-cookies'
+import { WebCheckbox } from './web-checkbox'
 
 export const WebList: React.FC = () => {
-  const [webs, setWebs] = useState<WebCheck[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const prefWebsCookie = useCookies().get('prefWebs')
+  const websId = (prefWebsCookie === undefined) ? [] : prefWebsCookie.split(',')
+
+  const { allWebs, setWebs, inTime } = useWebsStore((state) => state)
+  const [isLoading, setIsLoading] = useState(!inTime())
 
   useEffect(() => {
     const fetchWebs = async (): Promise<void> => {
@@ -21,17 +20,18 @@ export const WebList: React.FC = () => {
       setWebs(data)
       setIsLoading(false)
     }
-    void fetchWebs()
+
+    if (!inTime()) void fetchWebs()
   }, [])
 
   if (isLoading) return <WebListLoader />
-  if (webs.length === 0) return <WebListError />
+  if (allWebs.length === 0) return <WebListError />
 
   return (
     <ul className='web-list'>
-      {webs?.map((web, index) => (
+      {allWebs?.map((web, index) => (
         <li key={index} className='web-item'>
-          <WebCheckbox value={web.code} label={web.name} checked={web.checked} />
+          <WebCheckbox value={web.code} label={web.name} checked={websId.includes(web.code) || websId.length === 0} />
         </li>
       ))}
     </ul>
