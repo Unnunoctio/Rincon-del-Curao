@@ -10,6 +10,13 @@ interface UIState {
   isSidebarOpen: boolean
   openSidebar: () => void
   closeSidebar: () => void
+
+  // FILTER SIDEBAR
+  isFilterSidebarOpen: boolean
+  openFilterSidebar: () => void
+  closeFilterSidebar: () => void
+
+  // WEB MODAL
 }
 
 export const useUIStore = create<UIState>()((set) => ({
@@ -21,5 +28,10 @@ export const useUIStore = create<UIState>()((set) => ({
   // Sidebar State
   isSidebarOpen: false,
   openSidebar: () => set({ isSidebarOpen: true }),
-  closeSidebar: () => set({ isSidebarOpen: false })
+  closeSidebar: () => set({ isSidebarOpen: false }),
+
+  // Filter Sidebar State
+  isFilterSidebarOpen: false,
+  openFilterSidebar: () => set({ isFilterSidebarOpen: true }),
+  closeFilterSidebar: () => set({ isFilterSidebarOpen: false })
 }))
