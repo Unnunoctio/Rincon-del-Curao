@@ -1,11 +1,10 @@
 import { navigateLinks } from '@/helpers/path'
+import { useUIStore } from '@/stores'
 import Link from 'next/link'
 
-interface Props {
-  onClose: () => void
-}
+export const SidebarLinks: React.FC = () => {
+  const { closeSidebar } = useUIStore((state) => state)
 
-export const SidebarLinks: React.FC<Props> = ({ onClose }) => {
   return (
     <ul className='sidebar-link-list'>
       {navigateLinks.map((link, index) => (
@@ -14,13 +13,13 @@ export const SidebarLinks: React.FC<Props> = ({ onClose }) => {
           <ul className='sidebar-category-list'>
             {link.categories.map((category, index) => (
               <li key={index}>
-                <Link href={`${link.route}?sub_category=${category.query}`} onClick={onClose} aria-label={category.name.toLowerCase()} className='sidebar-category'>
+                <Link href={`${link.route}?sub_category=${category.query}`} onClick={closeSidebar} aria-label={category.name.toLowerCase()} className='sidebar-category'>
                   {category.name}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href={link.route} onClick={onClose} aria-label='ver todos' className='sidebar-category-all'>
+              <Link href={link.route} onClick={closeSidebar} aria-label='ver todos' className='sidebar-category-all'>
                 Ver Todos
               </Link>
             </li>

@@ -1,15 +1,13 @@
 import Link from 'next/link'
 import { navigateLinks } from '@/helpers/path'
 import { CategoryQuery } from '@/types/path'
+import { useUIStore } from '@/stores'
 
-interface Props {
-  isOpen: boolean
-  onOpen: () => void
-}
+export const NavbarLinks: React.FC = () => {
+  const { isNavbarOpen, openNavbar } = useUIStore((state) => state)
 
-export const NavbarLinks: React.FC<Props> = ({ isOpen, onOpen }) => {
   return (
-    <ul onMouseEnter={onOpen} className={`navbar-link-list ${isOpen ? 'navbar-link-list-open' : ''}`}>
+    <ul onMouseEnter={openNavbar} className={`navbar-link-list ${isNavbarOpen ? 'navbar-link-list-open' : ''}`}>
       {navigateLinks.map((link, index) => (
         <NavbarLinkItem key={index} {...link} />
       ))}

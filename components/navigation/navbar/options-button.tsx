@@ -2,16 +2,15 @@ import { GearIcon } from '@/icons'
 import { Popover, PopoverBackdrop, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { ThemeSwitch } from './theme-switch'
 import { WebModal } from '@/components/web-modal'
+import { useUIStore } from '@/stores'
 
-interface Props {
-  onClose: () => void
-}
+export const OptionsButton: React.FC = () => {
+  const { closeNavbar } = useUIStore((state) => state)
 
-export const OptionsButton: React.FC<Props> = ({ onClose }) => {
   return (
     <Popover className='group'>
       <PopoverButton
-        onClick={onClose}
+        onClick={closeNavbar}
         className='group popover-button'
         aria-label='opciones'
       >

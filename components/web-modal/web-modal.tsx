@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { RightIcon } from '@/icons'
 import { Button, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useState } from 'react'
 import { WebList } from './web-list'
 import { setCookie } from '@/app/actions'
 import { Slide, toast } from 'react-toastify'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { getNavigateLink } from '@/helpers/path'
+import { useUIStore } from '@/stores'
 
 export const WebModal: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const { isWebModalOpen, openWebModal, closeWebModal } = useUIStore((state) => state)
 
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-
-  const onOpen = (): void => setIsOpen(true)
-  const onClose = (): void => setIsOpen(false)
 
   const successNotify = (): any => toast.success('Tiendas guardadas', {
     containerId: 'notification',
@@ -41,7 +38,7 @@ export const WebModal: React.FC = () => {
         params.set('page', '1')
         router.push(`${pathname}?${params.toString()}`)
       }
-      onClose()
+      closeWebModal()
       successNotify()
     } else {
       errorNotify()
@@ -52,7 +49,7 @@ export const WebModal: React.FC = () => {
     <>
       <div className='modal-button-container'>
         <Button
-          onClick={onOpen}
+          onClick={openWebModal}
           className='modal-button'
           aria-label='tiendas'
         >
@@ -61,7 +58,7 @@ export const WebModal: React.FC = () => {
         </Button>
       </div>
 
-      <Dialog open={isOpen} as='div' className='modal' onClose={onClose}>
+      <Dialog open={isWebModalOpen} as='div' className='modal' onClose={closeWebModal}>
         <DialogBackdrop transition className='modal-backdrop' />
         <div className='modal-container'>
           <form action={onAction} className='modal-container-center'>
@@ -76,7 +73,7 @@ export const WebModal: React.FC = () => {
               <WebList />
               <hr className='modal-divider' />
               <div className='modal-bottom-buttons-container'>
-                <button aria-label='cancelar tiendas seleccionadas' type='button' onClick={onClose} className='modal-button-cancel'>
+                <button aria-label='cancelar tiendas seleccionadas' type='button' onClick={closeWebModal} className='modal-button-cancel'>
                   Cancelar
                 </button>
                 <button aria-label='guardar tiendas seleccionadas' type='submit' className='modal-button-submit'>
