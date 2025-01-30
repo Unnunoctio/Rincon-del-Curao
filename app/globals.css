@@ -1,42 +1,52 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-light-bg-primary: #edf2f7;
+  --color-light-bg-secondary: #fafafa;
+  --color-light-bg-tertiary: #e2e8f0;
+
+  --color-dark-bg-primary: #222629;
+  --color-dark-bg-secondary: #121212;
+  --color-dark-bg-tertiary: #282d33;
+  --color-accent-bg: #d69e2e;
+
+  --color-light-text-primary: #1a202c;
+  --color-dark-text-primary: #ffffffeb;
+  --color-accent-text: #d69e2e;
+  --color-light-text-link: #718096;
+  --color-dark-text-link: #7b8aa1;
+
+  --color-light-icon-primary: #1a202c;
+  --color-dark-icon-primary: #ffffffeb;
+  --color-accent-icon: #d69e2e;
+
+  --color-light-border-primary: #e2e8f0;
+  --color-light-border-secondary: #718096;
+
+  --color-dark-border-primary: #434548;
+  --color-dark-border-secondary: #7b8aa1;
+  --color-accent-border: #d69e2e;
+
+  --spacing-page-content: 1500px;
+
+  --font-roboto: 'Roboto', sans-serif;
+
+  --transition-popover: translate, opacity;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/*! PAGE LAYOUT */
+@layer components {
+  body {
+    @apply font-roboto bg-light-bg-primary dark:bg-dark-bg-primary text-light-text-primary dark:text-dark-text-primary;
+  
+    .p-container {
+      @apply flex justify-center w-full;
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+      .page {
+        @apply px-2 sm:px-8 md:px-12 py-2 sm:py-4 min-h-svh max-w-page-content w-full;
+      }
+    }
   }
 }
