@@ -51,6 +51,161 @@
   }
 }
 
+/*! NAVBAR */
+@layer components {
+  .n-space {
+    @apply h-16;
+  }
+
+  .n-container {
+    @apply fixed z-40 flex justify-center w-full bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-border-primary dark:border-dark-border-primary;
+  
+    .navbar {
+      @apply flex justify-between px-2 sm:px-8 md:px-12 max-w-page-content w-full;
+      
+      .n-logo-box-height {
+        @apply h-[63px];
+      }
+
+      .n-logo-width {
+        @apply w-[140px];
+      }
+
+      .n-sections-container {
+        @apply flex gap-x-0 md:gap-x-12;
+
+        .n-routes-container-open {
+          @apply h-[263px];
+        }
+
+        .n-routes-container-closed {
+          @apply h-[63px];
+        }
+
+        .n-routes-container {
+          @apply hidden md:grid auto-cols-auto grid-flow-col gap-6 overflow-hidden transition-[height] duration-300;
+
+          .n-route-name {
+            @apply flex items-center h-[63px] text-[18px] font-medium select-none;
+          }
+
+          .n-route-categories-container {
+            @apply flex flex-col gap-3;
+
+            .n-route-item {
+              @apply w-fit text-light-text-link dark:text-dark-text-link hover:underline;
+            }
+
+            .n-route-item-all {
+              @apply w-fit text-accent-text dark:text-accent-text hover:underline;
+            }
+          }
+        }
+
+        .n-buttons-container {
+          @apply flex items-center gap-2 h-[63px];
+
+          .n-popover-button {
+            @apply p-2 h-fit rounded-full cursor-pointer focus:outline-none;
+
+            .n-popover-icon {
+              @apply w-7 h-7 fill-transparent stroke-light-icon-primary dark:stroke-dark-icon-primary group-hover:stroke-accent-icon dark:group-hover:stroke-accent-icon group-data-[open]:stroke-accent-icon 
+            }
+          }
+
+          .n-popover-backdrop {
+            @apply fixed inset-0;
+          }
+
+          .n-sidebar-button {
+            @apply block md:hidden p-2 h-fit rounded-full cursor-pointer;
+
+            .n-sidebar-icon {
+              @apply w-7 h-7 fill-transparent stroke-light-icon-primary dark:stroke-dark-icon-primary group-hover:stroke-accent-icon dark:group-hover:stroke-accent-icon;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .n-popover-panel {
+    @apply z-40 fixed mt-1 flex flex-col gap-2 p-2 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-lg border border-light-border-primary dark:border-dark-border-primary shadow-lg transition-(--transition-popover) duration-200 [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0;
+  
+    .n-theme-container {
+      @apply flex items-center gap-1 p-1 w-fit rounded-full border border-light-border-primary dark:border-dark-border-primary;
+    
+      .n-theme-button {
+        @apply p-1.5 rounded-full cursor-pointer bg-transparent hover:bg-light-bg-primary dark:hover:bg-dark-bg-primary;
+      
+        .n-theme-icon {
+          @apply w-5 h-5 fill-transparent stroke-light-icon-primary dark:stroke-dark-icon-primary;
+        }
+
+        .n-theme-icon-active {
+          @apply stroke-accent-icon dark:stroke-accent-icon;
+        }
+      }
+
+      .n-theme-button-active {
+        @apply bg-light-bg-primary dark:bg-dark-bg-primary;
+      }
+    }
+
+    .n-modal-button {
+      @apply flex justify-between w-full py-2 pl-3 pr-1.5 cursor-pointer rounded-full hover:bg-light-bg-primary dark:hover:bg-dark-bg-primary border border-light-border-primary dark:border-dark-border-primary;
+      
+      .n-modal-icon {
+        @apply w-6 h-6 fill-transparent stroke-light-icon-primary dark:stroke-dark-icon-primary;
+      }
+    }
+  }
+
+  .n-modal-container {
+    @apply relative z-50;
+  
+    .n-modal-backdrop {
+      @apply fixed inset-0 bg-black/40 transition-opacity duration-300 ease-in-out data-[closed]:opacity-0;
+    }
+
+    .n-modal-container {
+      @apply fixed inset-0;
+
+      .n-modal-content {
+        @apply flex min-h-full items-center justify-center p-4;
+
+        .n-modal-panel {
+          @apply flex flex-col gap-4 w-full max-w-6xl overflow-hidden rounded-lg bg-light-bg-primary dark:bg-dark-bg-primary p-4 text-left align-middle shadow-xl transition-opacity duration-300 ease-in-out data-[closed]:opacity-0;
+        
+          .n-modal-title {
+            @apply text-2xl font-medium;
+          }
+
+          .n-modal-divider {
+            @apply border-light-border-primary dark:border-dark-border-primary;
+          }
+
+          .n-modal-bottom-buttons-container {
+            @apply flex justify-end gap-4;
+
+            .n-modal-bottom-button {
+              @apply font-medium py-1.5 px-3 rounded-full cursor-pointer;
+            }
+
+            .n-modal-button-cancel {
+              @apply border border-light-border-secondary dark:border-dark-border-secondary text-light-text-link dark:text-dark-text-link hover:bg-light-bg-tertiary dark:hover:bg-dark-bg-tertiary hover:text-accent-text dark:hover:text-accent-text hover:border-accent-border dark:hover:border-accent-border; 
+            }
+
+            .n-modal-button-save {
+              @apply bg-accent-bg/70 border border-transparent hover:bg-accent-bg
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /*! FOOTER */
 @layer components {
   .f-container {

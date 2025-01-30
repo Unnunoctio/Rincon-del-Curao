@@ -1,5 +1,7 @@
 import '@/app/globals.css'
 import { Footer } from '@/components/layout/footer'
+import { Navbar } from '@/components/layout/navbar'
+import { AmplifyProvider } from '@/providers/amplify-provider'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Roboto } from 'next/font/google'
@@ -24,8 +26,9 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
   return (
     <html lang='es' suppressHydrationWarning>
       <body className={`${roboto.variable}`}>
+        <AmplifyProvider />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          {/* NAVBAR */}
+          <Navbar />
           {/* SIDEBAR */}
           <div className='n-space' />
           <main className='p-container'>
