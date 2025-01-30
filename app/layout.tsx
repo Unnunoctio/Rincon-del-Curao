@@ -1,4 +1,5 @@
 import '@/app/globals.css'
+import { Footer } from '@/components/layout/footer'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Roboto } from 'next/font/google'
@@ -32,7 +33,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
               {children}
             </section>
           </main>
-          {/* FOOTER */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

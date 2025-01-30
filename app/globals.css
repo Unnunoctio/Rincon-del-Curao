@@ -50,3 +50,89 @@
     }
   }
 }
+
+/*! FOOTER */
+@layer components {
+  .f-container {
+    @apply flex justify-center py-8 mt-14 w-full bg-light-bg-secondary dark:bg-dark-bg-secondary border-t border-light-border-primary dark:border-dark-border-primary;
+  
+    .footer {
+      @apply flex flex-col px-2 sm:px-8 md:px-12 max-w-page-content w-full;
+
+      .f-content {
+        @apply relative flex flex-col gap-4 sm:flex-row justify-between;
+
+        .f-logo-container {
+          @apply flex flex-col items-center sm:items-start gap-2 max-w-full sm:max-w-[270px];
+          
+          .f-logo-box-height {
+            @apply h-[60px];
+          }
+
+          .f-logo-width {
+            @apply w-[120px];
+          }
+    
+          .f-logo-text {
+            @apply italic text-balance text-center sm:text-left;
+          }
+        }
+
+        .f-routes-container {
+          @apply flex justify-center gap-8;
+
+          .f-routes-hidden {
+            @apply hidden md:block;
+          }
+
+          .f-routes-section {
+            @apply text-center sm:text-start;
+
+            h3 {
+              @apply text-[18px] font-medium;
+            }
+
+            ul {
+              @apply flex flex-col gap-2 sm:gap-3 mt-3;
+
+              .f-route-item {
+                @apply w-fit text-light-text-link dark:text-dark-text-link hover:underline;
+              }
+            }
+          }
+
+          .f-scroll-top-button {
+            @apply absolute sm:static top-0 -right-0 p-2 h-fit rounded-full hover:bg-light-bg-primary dark:hover:bg-dark-bg-primary cursor-pointer;
+            
+            .icon {
+              @apply w-6 h-6 fill-light-icon-primary dark:fill-dark-icon-primary group-hover:fill-accent-icon dark:group-hover:fill-accent-icon;
+            }
+          }
+        }
+      }
+
+      .f-divider {
+        @apply my-6 border-light-border-primary dark:border-dark-border-primary;
+      }
+
+      .f-year-text {
+        @apply text-center text-balance;
+      }
+    }
+  }
+}
+
+/*! LOGO */
+@layer components {
+  .logo-container {
+    @apply flex items-center;
+
+    .logo-link {
+      @apply transition-transform hover:scale-105;
+
+      .logo {
+        @apply h-auto aspect-[1078/342];
+      }
+    }
+  }
+}
