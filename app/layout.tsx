@@ -1,8 +1,8 @@
+import '@/app/globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Roboto } from 'next/font/google'
 import { JSX } from 'react'
-import './globals.css'
 
 const roboto = Roboto({
   variable: '--font-roboto',
