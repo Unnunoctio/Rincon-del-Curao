@@ -1,11 +1,13 @@
-import '@/app/globals.css'
 import { Footer } from '@/components/layout/footer'
 import { Navbar } from '@/components/layout/navbar'
 import { AmplifyProvider } from '@/providers/amplify-provider'
+import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Roboto } from 'next/font/google'
 import { JSX } from 'react'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -28,6 +30,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
       <body className={`${roboto.variable}`}>
         <AmplifyProvider />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
           <Navbar />
           {/* SIDEBAR */}
           <div className='n-space' />
