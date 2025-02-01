@@ -21,7 +21,12 @@ export const metadata: Metadata = {
     default: 'Rincón del Curao',
     template: '%s - Rincón del Curao'
   },
-  description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile'
+  description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rincón del Curao',
+    description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile'
+  }
 }
 
 export default function RootLayout ({ children }: Readonly<{ children: React.ReactNode }>): JSX.Element {
