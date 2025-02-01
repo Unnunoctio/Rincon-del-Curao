@@ -1,10 +1,35 @@
+import { setCookie } from '@/app/actions'
 import { RightIcon } from '@/icons/ui/right-icon'
 import { useUIStore } from '@/stores/ui-store'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Slide, toast } from 'react-toastify'
 import { WebList } from './web-list'
 
 export const WebModal: React.FC = () => {
   const { isWebModalOpen, openWebModal, closeWebModal } = useUIStore((state) => state)
+
+  const successNotify = (): any => toast.success('Tiendas guardadas', {
+    containerId: 'notification',
+    theme: 'colored',
+    transition: Slide
+  })
+
+  const errorNotify = (): any => toast.error('Debes seleccionar al menos una tienda', {
+    containerId: 'notification',
+    theme: 'colored',
+    transition: Slide
+  })
+
+  const onAction = async (formData: FormData): Promise<void> => {
+    const newPrefersWebs = formData.getAll('prefer-web').join(',')
+    const success = await setCookie('prefers-webs', newPrefersWebs)
+    if (success) {
+      closeWebModal()
+      successNotify()
+    } else {
+      errorNotify()
+    }
+  }
 
   return (
     <>
@@ -20,7 +45,7 @@ export const WebModal: React.FC = () => {
       <Dialog open={isWebModalOpen} as='div' className='n-modal-container' onClose={closeWebModal}>
         <DialogBackdrop transition className='n-modal-backdrop' />
         <div className='n-modal-container'>
-          <form className='n-modal-content'>
+          <form action={onAction} className='n-modal-content'>
             <DialogPanel
               transition
               className='n-modal-panel'
