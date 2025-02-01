@@ -1,6 +1,6 @@
-import '@/app/globals.css'
 import { FooterScrollTop } from '@/components/layout/footer-scroll-top'
 import { Logo } from '@/components/ui/logo'
+import '@/styles/globals.css'
 import { INFO_ROUTES, ROUTES } from '@/utils/router-paths'
 import Link from 'next/link'
 import { JSX } from 'react'

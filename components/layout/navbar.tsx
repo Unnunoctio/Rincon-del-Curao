@@ -1,12 +1,12 @@
 'use client'
 
-import '@/app/globals.css'
 import { ThemeSwitch } from '@/components/layout/theme-switch'
 import { WebModal } from '@/components/layout/web-modal'
 import { Logo } from '@/components/ui/logo'
 import { GearIcon } from '@/icons/layout/gear-icon'
 import { MenuIcon } from '@/icons/layout/menu-icon'
 import { useUIStore } from '@/stores/ui-store'
+import '@/styles/globals.css'
 import { ROUTES } from '@/utils/router-paths'
 import { Popover, PopoverBackdrop, PopoverButton, PopoverPanel } from '@headlessui/react'
 import Link from 'next/link'

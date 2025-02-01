@@ -1,5 +1,5 @@
-import '@/app/globals.css'
 import { LogoIcon } from '@/icons/ui/logo-icon'
+import '@/styles/globals.css'
 import Link from 'next/link'
 
 interface Props {
