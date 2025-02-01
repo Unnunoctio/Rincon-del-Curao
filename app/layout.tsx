@@ -25,7 +25,17 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Rincón del Curao',
-    description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile'
+    description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
+    images: ['https://rincon-del-curao.s3.sa-east-1.amazonaws.com/cervezas/%2B56/82537599/82537599.webp']
+  },
+  openGraph: {
+    title: 'Rincón del Curao',
+    description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
+    url: 'https:rincondelcurao.com',
+    siteName: 'Rincón del Curao',
+    images: ['https://rincon-del-curao.s3.sa-east-1.amazonaws.com/cervezas/%2B56/82537599/82537599.webp'],
+    locale: 'es_ES',
+    type: 'website'
   }
 }
 
