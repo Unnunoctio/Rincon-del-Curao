@@ -1,11 +1,16 @@
-import { GET_ALL_WEBS } from '@/graphql/queries'
-import { generateClient } from '@aws-amplify/api'
+import { getAllWebs } from '@/graphql/requests'
+import { WebInfo } from '@/graphql/types'
+import { ExclamationIcon } from '@/icons/ui/exclamation-icon'
+import { useCookies } from 'next-client-cookies'
 import { JSX, useEffect, useState } from 'react'
-
-const API = generateClient()
+import { Loader } from '../ui/loader'
+import { WebCheckbox } from './web-checkbox'
 
 export const WebList: React.FC = (): JSX.Element => {
-  const [allWebs, setAllWebs] = useState([])
+  const prefersWebsCookie = useCookies().get('prefers-webs')
+  const prefersWebsId = (prefersWebsCookie === undefined) ? [] : prefersWebsCookie.split(',')
+
+  const [allWebs, setAllWebs] = useState<WebInfo[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -14,10 +19,8 @@ export const WebList: React.FC = (): JSX.Element => {
 
   const fetchAllWebs = async (): Promise<void> => {
     try {
-      const response: any = await API.graphql({
-        query: GET_ALL_WEBS
-      })
-      setAllWebs(response.data.allWebs)
+      const data = await getAllWebs()
+      setAllWebs(data)
     } catch (error) {
       console.error('Error:', error)
     } finally {
@@ -25,12 +28,31 @@ export const WebList: React.FC = (): JSX.Element => {
     }
   }
 
-  if (loading) return <p>Cargando...</p>
+  if (loading) {
+    return (
+      <div className='n-modal-websites-loading-container'>
+        <Loader />
+      </div>
+    )
+  }
+
+  if (allWebs.length === 0) {
+    return (
+      <div className='n-modal-websites-error-container'>
+        <div className='n-modal-websites-error-content'>
+          <ExclamationIcon className='n-modal-websites-error-icon' />
+          <span className='n-modal-websites-error-text'>Lo sentimos, tenemos problemas para obtener las tiendas.</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <ul>
-      {allWebs.map((web: any, index) => (
-        <li key={index}>{web.name}</li>
+    <ul className='n-modal-websites-container'>
+      {allWebs.map((web, index) => (
+        <li key={index} className='n-modal-website-item'>
+          <WebCheckbox value={web.code} label={web.name} checked={prefersWebsId.includes(web.code) || prefersWebsId.length === 0} />
+        </li>
       ))}
     </ul>
   )
