@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rincón del Curao',
     description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
-    images: ['https://rincon-del-curao.s3.sa-east-1.amazonaws.com/image-og.png']
+    images: ['https://assets.rincondelcurao.com/image-og.png']
   },
   openGraph: {
     title: 'Rincón del Curao',
     description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
     url: 'https:rincondelcurao.com',
     siteName: 'Rincón del Curao',
-    images: ['https://rincon-del-curao.s3.sa-east-1.amazonaws.com/image-og.png'],
+    images: ['https://assets.rincondelcurao.com/image-og.png'],
     locale: 'es_ES',
     type: 'website'
   }
