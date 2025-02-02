@@ -1,6 +1,6 @@
 import { getAllWebs } from '@/graphql/requests'
-import { WebInfo } from '@/graphql/types'
 import { ExclamationIcon } from '@/icons/ui/exclamation-icon'
+import { useAllWebsStore } from '@/stores/all-webs-store'
 import { useCookies } from 'next-client-cookies'
 import { JSX, useEffect, useState } from 'react'
 import { Loader } from '../ui/loader'
@@ -10,11 +10,11 @@ export const WebList: React.FC = (): JSX.Element => {
   const prefersWebsCookie = useCookies().get('prefers-webs')
   const prefersWebsId = (prefersWebsCookie === undefined) ? [] : prefersWebsCookie.split(',')
 
-  const [allWebs, setAllWebs] = useState<WebInfo[]>([])
-  const [loading, setLoading] = useState(true)
+  const { allWebs, setAllWebs, inTime } = useAllWebsStore((state) => state)
+  const [isLoading, setIsLoading] = useState(!inTime())
 
   useEffect(() => {
-    void fetchAllWebs()
+    if (!inTime()) void fetchAllWebs()
   }, [])
 
   const fetchAllWebs = async (): Promise<void> => {
@@ -24,11 +24,11 @@ export const WebList: React.FC = (): JSX.Element => {
     } catch (error) {
       console.error('Error:', error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className='n-modal-websites-loading-container'>
         <Loader />
