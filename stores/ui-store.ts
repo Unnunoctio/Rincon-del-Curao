@@ -6,6 +6,11 @@ interface UIState {
   openNavbar: () => void
   closeNavbar: () => void
 
+  // SIDEBAR
+  isSidebarOpen: boolean
+  openSidebar: () => void
+  closeSidebar: () => void
+
   // WEB MODAL
   isWebModalOpen: boolean
   openWebModal: () => void
@@ -17,6 +22,11 @@ export const useUIStore = create<UIState>((set) => ({
   isNavbarOpen: false,
   openNavbar: () => set({ isNavbarOpen: true }),
   closeNavbar: () => set({ isNavbarOpen: false }),
+
+  // SIDEBAR STATE
+  isSidebarOpen: false,
+  openSidebar: () => set({ isSidebarOpen: true }),
+  closeSidebar: () => set({ isSidebarOpen: false }),
 
   // WEB MODAL STATE
   isWebModalOpen: false,

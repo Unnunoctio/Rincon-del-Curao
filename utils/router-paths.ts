@@ -3,6 +3,7 @@ export const ROUTES = [
   {
     name: 'Cervezas',
     route: '/cervezas',
+    icon: 'beer-icon',
     categories: [
       { name: 'Cervezas Artesanales', query: 'Cervezas Artesanales' },
       { name: 'Cervezas Tradicionales', query: 'Cervezas Tradicionales' },
@@ -13,6 +14,7 @@ export const ROUTES = [
   {
     name: 'Vinos',
     route: '/vinos',
+    icon: 'wine-icon',
     categories: [
       { name: 'Vinos Tintos', query: 'Vinos Tintos' },
       { name: 'Vinos Blancos', query: 'Vinos Blancos' },
@@ -23,6 +25,7 @@ export const ROUTES = [
   {
     name: 'Destilados',
     route: '/destilados',
+    icon: 'spirit-icon',
     categories: [
       { name: 'Ron', query: 'Ron' },
       { name: 'Pisco', query: 'Pisco' },

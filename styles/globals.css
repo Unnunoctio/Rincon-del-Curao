@@ -90,11 +90,11 @@
           .n-route-categories-container {
             @apply flex flex-col gap-3;
 
-            .n-route-item {
+            .n-route-category {
               @apply w-fit text-lead-blue dark:text-ash-blue hover:underline;
             }
 
-            .n-route-item-all {
+            .n-route-category-all {
               @apply w-fit text-old-gold dark:text-old-gold hover:underline;
             }
           }
@@ -240,6 +240,81 @@
 
             .n-modal-button-save {
               @apply bg-old-gold/70 border border-transparent hover:bg-old-gold
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*! SIDEBAR */
+@layer components {
+  .s-container {
+    @apply relative z-40;
+
+    .s-backdrop {
+      @apply fixed inset-0 bg-black/40 transition-opacity duration-300 ease-in-out data-[closed]:opacity-0;
+    }
+
+    .sidebar {
+      @apply fixed pointer-events-none inset-y-0 left-0 flex max-w-[300px];
+
+      .s-panel {
+        @apply flex flex-col gap-6 pointer-events-auto overflow-y-auto px-4 pb-18 w-screen bg-soft-white dark:bg-abyss-black shadow-xl border-r border-mist-gray dark:border-forest-gray transform transition-transform duration-300 ease-in-out data-[closed]:-translate-x-full;
+      
+        .s-title-container {
+          @apply flex items-center justify-between;
+
+          .s-logo-box-height {
+            @apply h-[88px];
+          }
+    
+          .s-logo-width {
+            @apply w-[140px];
+          }
+
+          .s-close-button {
+            @apply p-2 h-fit rounded-full cursor-pointer hover:bg-smoky-white dark:hover:bg-onyx-black;
+
+            .s-close-button-icon {
+              @apply w-7 h-7 fill-transparent stroke-midnight-blue dark:stroke-ivory-white group-hover:stroke-old-gold dark:group-hover:stroke-old-gold;
+            }
+          }
+        }
+
+        .s-routes-container {
+          @apply flex flex-col gap-8;
+
+          .s-route-content {
+            @apply flex items-baseline gap-2 mb-3;
+
+            .s-route-icon {
+              @apply w-8 h-8 fill-midnight-blue dark:fill-ivory-white;
+            }
+
+            .s-route-name {
+              @apply block text-[20px] font-medium;
+            }
+          }
+
+          .s-route-categories-container {
+            @apply flex flex-col gap-4 ml-4 pl-4 border-l border-lead-blue dark:border-ash-blue;
+
+            .s-route-category-content {
+              @apply relative;
+
+              .s-route-category-dot {
+                @apply absolute -left-6 w-[15px] fill-lead-blue dark:fill-ash-blue;
+              }
+
+              .s-route-category {
+                @apply text-lead-blue dark:text-ash-blue hover:underline;
+              }
+
+              .s-route-category-all {
+                @apply text-old-gold dark:text-old-gold hover:underline;
+              }
             }
           }
         }

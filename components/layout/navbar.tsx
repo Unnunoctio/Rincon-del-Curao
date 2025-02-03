@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { JSX } from 'react'
 
 export const Navbar: React.FC = (): JSX.Element => {
-  const { isNavbarOpen, openNavbar, closeNavbar } = useUIStore((state) => state)
+  const { isNavbarOpen, openNavbar, closeNavbar, openSidebar } = useUIStore((state) => state)
 
   return (
     <header className='n-container' onMouseLeave={closeNavbar}>
@@ -27,13 +27,13 @@ export const Navbar: React.FC = (): JSX.Element => {
                 <ul className='n-route-categories-container'>
                   {item.categories.map((category, index) => (
                     <li key={index}>
-                      <Link href={`${item.route}?sub_category=${category.query}`} className='n-route-item'>
+                      <Link href={`${item.route}?sub_category=${category.query}`} className='n-route-category'>
                         {category.name}
                       </Link>
                     </li>
                   ))}
                   <li>
-                    <Link href={`${item.route}`} className='n-route-item-all'>
+                    <Link href={`${item.route}`} className='n-route-category-all'>
                       Ver Todos
                     </Link>
                   </li>
@@ -61,6 +61,7 @@ export const Navbar: React.FC = (): JSX.Element => {
               </PopoverPanel>
             </Popover>
             <button
+              onClick={openSidebar}
               className='group n-sidebar-button'
               aria-label='Abrir/Cerrar Menu'
             >

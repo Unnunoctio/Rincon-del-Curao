@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/footer'
 import { Navbar } from '@/components/layout/navbar'
+import { Sidebar } from '@/components/layout/sidebar'
 import { AmplifyProvider } from '@/providers/amplify-provider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
@@ -19,7 +20,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: {
     default: 'Rincón del Curao',
-    template: '%s - Rincón del Curao'
+    template: '%s • Rincón del Curao'
   },
   description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
   twitter: {
@@ -47,7 +48,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
           <Navbar />
-          {/* SIDEBAR */}
+          <Sidebar />
           <div className='n-space' />
           <main className='p-container'>
             <section className='page'>
