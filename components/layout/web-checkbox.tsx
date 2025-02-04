@@ -7,9 +7,10 @@ interface Props {
   value: string
   label: string
   checked: boolean
+  disabled?: boolean
 }
 
-export const WebCheckbox: React.FC<Props> = ({ value, label, checked }): JSX.Element => {
+export const WebCheckbox: React.FC<Props> = ({ value, label, checked, disabled = false }): JSX.Element => {
   const [isChecked, setIsChecked] = useState(checked)
 
   const handleChange = (): void => {
@@ -17,14 +18,15 @@ export const WebCheckbox: React.FC<Props> = ({ value, label, checked }): JSX.Ele
   }
 
   return (
-    <label className='n-modal-website-checkbox-label'>
-      <div className='group n-modal-website-checkbox-item-container' aria-checked={isChecked}>
+    <label aria-disabled={disabled} className='n-modal-website-checkbox-label'>
+      <div aria-checked={isChecked} className='group n-modal-website-checkbox-item-container'>
         <input
           name='prefer-web'
           type='checkbox'
           defaultChecked={isChecked}
           onChange={handleChange}
           value={value}
+          disabled={disabled}
           className='n-modal-website-checkbox-input'
         />
         <CheckIcon className='n-modal-website-checkbox-icon' />

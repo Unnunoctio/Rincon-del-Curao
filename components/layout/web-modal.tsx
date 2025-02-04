@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { setCookie } from '@/app/actions'
 import { RightIcon } from '@/icons/ui/right-icon'
 import { useUIStore } from '@/stores/ui-store'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { useState } from 'react'
 import { Slide, toast } from 'react-toastify'
+import { InlineLoader } from '../ui/inline-loader'
 import { WebList } from './web-list'
 
 export const WebModal: React.FC = () => {
   const { isWebModalOpen, openWebModal, closeWebModal } = useUIStore((state) => state)
+  const [isActionLoading, setIsActionLoading] = useState(false)
 
   const successNotify = (): any => toast.success('Tiendas guardadas', {
     containerId: 'notification',
@@ -20,15 +24,20 @@ export const WebModal: React.FC = () => {
     transition: Slide
   })
 
-  const onAction = async (formData: FormData): Promise<void> => {
-    const newPrefersWebs = formData.getAll('prefer-web').join(',')
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
+    setIsActionLoading(true)
+
+    const newPrefersWebs = new FormData(e.target as HTMLFormElement).getAll('prefer-web').join(',')
     const success = await setCookie('prefers-webs', newPrefersWebs)
     if (success) {
       closeWebModal()
       successNotify()
+      await new Promise((resolve) => setTimeout(resolve, 300))
     } else {
       errorNotify()
     }
+    setIsActionLoading(false)
   }
 
   return (
@@ -45,7 +54,7 @@ export const WebModal: React.FC = () => {
       <Dialog open={isWebModalOpen} as='div' className='n-modal-container' onClose={closeWebModal}>
         <DialogBackdrop transition className='n-modal-backdrop' />
         <div className='n-modal-container'>
-          <form action={onAction} className='n-modal-content'>
+          <form onSubmit={onSubmit} className='n-modal-content'>
             <DialogPanel
               transition
               className='n-modal-panel'
@@ -55,25 +64,37 @@ export const WebModal: React.FC = () => {
               </DialogTitle>
               <hr className='n-modal-divider' />
 
-              <WebList />
+              <WebList isDisabled={isActionLoading} />
 
               <hr className='n-modal-divider' />
+
               <section className='n-modal-bottom-buttons-container'>
-                <button
-                  onClick={closeWebModal}
-                  className='n-modal-bottom-button n-modal-button-cancel'
-                  aria-label='Cancelar tiendas seleccionadas'
-                  type='button'
-                >
-                  Cancelar
-                </button>
-                <button
-                  className='n-modal-bottom-button n-modal-button-save'
-                  aria-label='Guardar tiendas seleccionadas'
-                  type='submit'
-                >
-                  Guardar
-                </button>
+                {
+                  !isActionLoading &&
+                    <>
+                      <button
+                        onClick={closeWebModal}
+                        className='n-modal-bottom-button n-modal-button-cancel'
+                        aria-label='Cancelar tiendas seleccionadas'
+                        type='button'
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        className='n-modal-bottom-button n-modal-button-save'
+                        aria-label='Guardar tiendas seleccionadas'
+                        type='submit'
+                      >
+                        Guardar
+                      </button>
+                    </>
+                }
+                {
+                  isActionLoading &&
+                    <div className='n-modal-inline-loader-container'>
+                      <InlineLoader />
+                    </div>
+                }
               </section>
             </DialogPanel>
           </form>

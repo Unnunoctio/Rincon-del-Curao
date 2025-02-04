@@ -6,7 +6,11 @@ import { JSX, useEffect, useState } from 'react'
 import { Loader } from '../ui/loader'
 import { WebCheckbox } from './web-checkbox'
 
-export const WebList: React.FC = (): JSX.Element => {
+interface Props {
+  isDisabled?: boolean
+}
+
+export const WebList: React.FC<Props> = ({ isDisabled }): JSX.Element => {
   const prefersWebsCookie = useCookies().get('prefers-webs')
   const prefersWebsId = (prefersWebsCookie === undefined) ? [] : prefersWebsCookie.split(',')
 
@@ -51,7 +55,7 @@ export const WebList: React.FC = (): JSX.Element => {
     <ul className='n-modal-websites-container'>
       {allWebs.map((web, index) => (
         <li key={index} className='n-modal-website-item'>
-          <WebCheckbox value={web.code} label={web.name} checked={prefersWebsId.includes(web.code) || prefersWebsId.length === 0} />
+          <WebCheckbox value={web.code} label={web.name} checked={prefersWebsId.includes(web.code) || prefersWebsId.length === 0} disabled={isDisabled} />
         </li>
       ))}
     </ul>
