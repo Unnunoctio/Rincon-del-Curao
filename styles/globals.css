@@ -32,6 +32,9 @@
 
   /* TRANSITIONS */
   --transition-popover: translate, opacity;
+
+  /* BREAKPOINTS */
+  --breakpoint-b880: 880px;
 }
 
 /*! PAGE LAYOUT */
@@ -81,21 +84,37 @@
         }
 
         .n-routes-container {
-          @apply hidden md:grid auto-cols-auto grid-flow-col gap-6 overflow-hidden transition-[height] duration-300;
+          @apply hidden b880:grid auto-cols-auto grid-flow-col gap-6 overflow-hidden transition-[height] duration-300;
 
-          .n-route-name {
-            @apply flex items-center h-[63px] text-[18px] font-medium select-none;
+          .n-route-content {
+            @apply flex items-center gap-2 h-[63px];
+
+            .n-route-icon {
+              @apply w-10 h-10 fill-midnight-blue dark:fill-ivory-white;
+            }
+
+            .n-route-name {
+              @apply block text-[20px] font-medium;
+            }
           }
 
           .n-route-categories-container {
-            @apply flex flex-col gap-3;
+            @apply flex flex-col gap-3 ml-[17px] pl-4 border-l border-lead-blue dark:border-ash-blue;
 
-            .n-route-category {
-              @apply w-fit text-lead-blue dark:text-ash-blue hover:underline;
-            }
+            .n-route-category-content {
+              @apply relative;
 
-            .n-route-category-all {
-              @apply w-fit text-old-gold dark:text-old-gold hover:underline;
+              .n-route-category-dot {
+                @apply absolute -left-6 w-[15px] fill-lead-blue dark:fill-ash-blue;
+              }
+              
+              .n-route-category {
+                @apply w-fit text-lead-blue dark:text-ash-blue hover:underline;
+              }
+  
+              .n-route-category-all {
+                @apply w-fit text-old-gold dark:text-old-gold hover:underline;
+              }
             }
           }
         }
@@ -116,7 +135,7 @@
           }
 
           .n-sidebar-button {
-            @apply block md:hidden p-2 h-fit rounded-full cursor-pointer;
+            @apply block b880:hidden p-2 h-fit rounded-full cursor-pointer;
 
             .n-sidebar-icon {
               @apply w-7 h-7 fill-transparent stroke-midnight-blue dark:stroke-ivory-white group-hover:stroke-old-gold dark:group-hover:stroke-old-gold;
@@ -190,7 +209,7 @@
               @apply w-full max-w-[200px];
 
               .n-modal-website-checkbox-label {
-                @apply flex items-center font-medium p-3 w-fit h-fit select-none cursor-pointer;
+                @apply flex items-center font-medium p-3 w-fit h-fit select-none cursor-pointer aria-disabled:cursor-not-allowed;
                 
                 .n-modal-website-checkbox-item-container {
                   @apply relative flex;
@@ -241,6 +260,10 @@
             .n-modal-button-save {
               @apply bg-old-gold/70 border border-transparent hover:bg-old-gold
             }
+
+            .n-modal-inline-loader-container {
+              @apply flex items-center justify-center w-[83px] h-[38px]
+            }
           }
         }
       }
@@ -261,7 +284,7 @@
       @apply fixed pointer-events-none inset-y-0 left-0 flex max-w-[300px];
 
       .s-panel {
-        @apply flex flex-col gap-6 pointer-events-auto overflow-y-auto px-4 pb-18 w-screen bg-soft-white dark:bg-abyss-black shadow-xl border-r border-mist-gray dark:border-forest-gray transform transition-transform duration-300 ease-in-out data-[closed]:-translate-x-full;
+        @apply flex flex-col gap-6 pointer-events-auto overflow-y-auto px-4 pb-13 w-screen bg-soft-white dark:bg-abyss-black shadow-xl border-r border-mist-gray dark:border-forest-gray transform transition-transform duration-300 ease-in-out data-[closed]:-translate-x-full;
       
         .s-title-container {
           @apply flex items-center justify-between;
@@ -290,7 +313,7 @@
             @apply flex items-baseline gap-2 mb-3;
 
             .s-route-icon {
-              @apply w-8 h-8 fill-midnight-blue dark:fill-ivory-white;
+              @apply w-10 h-10 fill-midnight-blue dark:fill-ivory-white;
             }
 
             .s-route-name {
@@ -299,7 +322,7 @@
           }
 
           .s-route-categories-container {
-            @apply flex flex-col gap-4 ml-4 pl-4 border-l border-lead-blue dark:border-ash-blue;
+            @apply flex flex-col gap-4 ml-[15px] pl-4 border-l border-lead-blue dark:border-ash-blue;
 
             .s-route-category-content {
               @apply relative;

@@ -3,8 +3,12 @@
 import { ThemeSwitch } from '@/components/layout/theme-switch'
 import { WebModal } from '@/components/layout/web-modal'
 import { Logo } from '@/components/ui/logo'
+import { BeerIcon } from '@/icons/layout/beer-icon'
+import { DotIcon } from '@/icons/layout/dot-icon'
 import { GearIcon } from '@/icons/layout/gear-icon'
 import { MenuIcon } from '@/icons/layout/menu-icon'
+import { SpiritIcon } from '@/icons/layout/spirit-icon'
+import { WineIcon } from '@/icons/layout/wine-icon'
 import { useUIStore } from '@/stores/ui-store'
 import '@/styles/globals.css'
 import { ROUTES } from '@/utils/router-paths'
@@ -23,16 +27,23 @@ export const Navbar: React.FC = (): JSX.Element => {
           <ul className={`n-routes-container ${isNavbarOpen ? 'n-routes-container-open' : 'n-routes-container-closed'}`} onMouseEnter={openNavbar}>
             {ROUTES.map((item, index) => (
               <li key={index}>
-                <span className='n-route-name'>{item.name}</span>
+                <div className='n-route-content'>
+                  {item.icon === 'beer-icon' && <BeerIcon className='n-route-icon' />}
+                  {item.icon === 'wine-icon' && <WineIcon className='n-route-icon' />}
+                  {item.icon === 'spirit-icon' && <SpiritIcon className='n-route-icon' />}
+                  <span className='n-route-name'>{item.name}</span>
+                </div>
                 <ul className='n-route-categories-container'>
                   {item.categories.map((category, index) => (
-                    <li key={index}>
+                    <li key={index} className='n-route-category-content'>
+                      <DotIcon className='n-route-category-dot' />
                       <Link href={`${item.route}?sub_category=${category.query}`} className='n-route-category'>
                         {category.name}
                       </Link>
                     </li>
                   ))}
-                  <li>
+                  <li className='n-route-category-content'>
+                    <DotIcon className='n-route-category-dot' />
                     <Link href={`${item.route}`} className='n-route-category-all'>
                       Ver Todos
                     </Link>
