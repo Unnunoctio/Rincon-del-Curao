@@ -4,6 +4,7 @@ import { Sidebar } from '@/components/layout/sidebar'
 import { AmplifyProvider } from '@/providers/amplify-provider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
+import { CookiesProvider } from 'next-client-cookies/server'
 import { ThemeProvider } from 'next-themes'
 import { Roboto } from 'next/font/google'
 import { JSX } from 'react'
@@ -46,16 +47,18 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
       <body className={`${roboto.variable}`}>
         <AmplifyProvider />
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
-          <Navbar />
-          <Sidebar />
-          <div className='n-space' />
-          <main className='p-container'>
-            <section className='page'>
-              {children}
-            </section>
-          </main>
-          <Footer />
+          <CookiesProvider>
+            <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
+            <Navbar />
+            <Sidebar />
+            <div className='n-space' />
+            <main className='p-container'>
+              <section className='page'>
+                {children}
+              </section>
+            </main>
+            <Footer />
+          </CookiesProvider>
         </ThemeProvider>
       </body>
     </html>
