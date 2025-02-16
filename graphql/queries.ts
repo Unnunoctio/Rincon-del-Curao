@@ -35,3 +35,34 @@ export const GET_AVERAGE_PRODUCTS = `
     }
   }
 `
+
+export const GET_IS_SLUG_EXIST = `
+  query IsSlugExist($slug: ID!) {
+    isSlugExist(slug: $slug) {
+      isExist
+      title
+    }
+  }
+`
+
+export const GET_PRODUCT_DETAIL = `
+  query ProductDetail($slug: ID!) {
+    productDetail(slug: $slug) {
+      title
+      brand
+      quantity
+      abv
+      volume
+      packaging
+      category
+      subCategory
+      origin
+      image
+      variety
+      ibu
+      servingTemp
+      strain
+      vineyard
+    }
+  }
+`
