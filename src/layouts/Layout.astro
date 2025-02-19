@@ -1,6 +1,7 @@
 ---
 // Supports weights 100-900
 import Footer from '@/components/Footer.astro';
+import Sidebar from '@/components/Sidebar.astro';
 import '@/styles/global.css';
 import '@fontsource-variable/geist';
 import { ClientRouter } from 'astro:transitions';
@@ -39,7 +40,7 @@ const { title } = Astro.props;
 	</head>
 	<body class="flex xl:flex-row flex-col bg-c-onix-black font-geist text-c-snow-white">
 		<!-- TOAST -->
-		<!-- SIDEBAR -->
+		<Sidebar />
 		<!-- NAVBAR -->
 		<section class="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
 			<main class="bg-c-lead-gray p-4 rounded-2xl h-content-height">
