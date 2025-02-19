@@ -1,8 +1,9 @@
+import { WebCheckbox } from "@/components/client/WebCheckbox";
 import type { WebInfo } from "@/graphql/types";
 import { StoreIcon } from "@/icons/client/StoreIcon";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState } from "react";
-import { WebCheckbox } from "./WebCheckbox";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
 interface Props {
   allWebs: WebInfo[]
@@ -11,6 +12,11 @@ interface Props {
 export const WebInfoModal: React.FC<Props> = ({ allWebs }) => {
   const [prefersWebs, setPreferesWebs] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const cookie = Cookies.get("prefersWebs");
+    setPreferesWebs(cookie === undefined ? [] : cookie.split(","));
+  }, [])
 
   const openModal = () => {
     setIsOpen(true);
@@ -23,15 +29,15 @@ export const WebInfoModal: React.FC<Props> = ({ allWebs }) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const newPrefersWebs = new FormData(e.target as HTMLFormElement).getAll("prefer-web");
-    // if (newPrefersWebs.length > 0) {
-    //   Cookies.set("prefersWebs", newPrefersWebs.join(","), { expires: 365, sameSite: "strict" });
-    //   setPreferesWebs(newPrefersWebs as string[]);
-    //   successNotify();
-    //   closeModal();
-    // } else {
-    //   errorNotify();
-    // }
+    const newPrefersWebs = new FormData(e.target as HTMLFormElement).getAll("prefer-web");
+    if (newPrefersWebs.length > 0) {
+      Cookies.set("prefersWebs", newPrefersWebs.join(","), { expires: 365, sameSite: "strict" });
+      setPreferesWebs(newPrefersWebs as string[]);
+      // successNotify();
+      closeModal();
+    } else {
+      // errorNotify();
+    }
   }
 
   return (
