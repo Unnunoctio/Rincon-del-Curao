@@ -1,0 +1,19 @@
+---
+import SearchIcon from "@/icons/SearchIcon.astro";
+
+const q = Astro.url.searchParams.get("q");
+---
+
+<form action="/search" method="get" class="w-full max-w-[244px]">
+  <label class="group flex gap-2 px-3 py-2 border border-c-steel-gray focus-within:border-c-snow-white rounded-full w-full cursor-text">
+    <SearchIcon className="stroke-c-steel-gray min-w-6 h-6" />
+    <input
+      name="q"
+      type="search"
+      value={q}
+      class="[&::-ms-clear]:hidden [&::-ms-reveal]:hidden [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden outline-none w-full text-c-snow-white"
+      placeholder="Buscar"
+      autocomplete="off"
+    />
+  </label>
+</form>

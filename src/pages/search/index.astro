@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const q = Astro.url.searchParams.get("q");
+---
+
+<Layout title={`${q} • Búsqueda • Rincón del Curao`}>
+	<h1>Búsqueda: {q}</h1>
+</Layout>

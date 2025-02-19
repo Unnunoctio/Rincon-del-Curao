@@ -1,6 +1,7 @@
 ---
-import Logo from "@/components/Logo.astro";
 import { Navigation } from "@/components/client/Navigation";
+import Logo from "@/components/Logo.astro";
+import Search from "@/components/Search.astro";
 
 const { category } = Astro.params;
 const subCategories = Astro.url.searchParams.getAll("sub_category");
@@ -19,7 +20,7 @@ if (category !== undefined) {
     <a href="/" class="group w-fit">
       <Logo className="w-[147px] h-[44px] group-hover:scale-105 transition-[scale] duration-300" />
     </a>
-    <!-- <Search /> -->
+    <Search />
     <section class="flex flex-col gap-3">
       <Navigation client:load routeModule={routeModule} />
       <hr class="border-c-steel-gray" />
