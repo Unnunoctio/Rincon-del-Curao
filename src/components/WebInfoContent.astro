@@ -1,0 +1,9 @@
+---
+import { getCollection } from "astro:content";
+import { WebInfoModal } from "./client/WebInfoModal";
+
+const data = await getCollection('webInfo');
+const allWebs = data.map((data) => data.data);
+---
+
+<WebInfoModal allWebs={allWebs} client:load />
