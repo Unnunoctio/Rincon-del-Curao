@@ -1,5 +1,6 @@
 ---
 // Supports weights 100-900
+import Footer from '@/components/Footer.astro';
 import '@/styles/global.css';
 import '@fontsource-variable/geist';
 import { ClientRouter } from 'astro:transitions';
@@ -44,7 +45,7 @@ const { title } = Astro.props;
 			<main class="bg-c-lead-gray p-4 rounded-2xl h-content-height">
 				<slot />
 			</main>
-			<!-- FOOTER -->
+			<Footer />
 		</section>
 	</body>
 </html>
