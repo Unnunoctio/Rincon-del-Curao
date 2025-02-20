@@ -26,7 +26,7 @@ export const ROUTES = [
   {
     name: 'Destilados',
     route: 'distillates',
-    icon: 'distillates-icon',
+    icon: 'distillate-icon',
     section: 'distillates',
     queries: [
       { name: 'Ron', query: 'Ron' },
