@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "5.0.1",
+    "@tailwindcss/postcss": "4.0.7",
     "next": "14.2.24",
+    "postcss": "8.5.3",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "tailwindcss": "4.0.7"
   },
   "devDependencies": {
     "@types/node": "20.17.19",
