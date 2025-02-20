@@ -17,7 +17,7 @@ export const Footer = () => {
         </div>
         <div className="flex justify-center sm:justify-start gap-10">
           <div className="flex flex-col items-center sm:items-start gap-3">
-            <p className="w-fit font-medium text-[18px]">Centro de Ayuda</p>
+            <p className="w-fit text-[18px]">Centro de Ayuda</p>
             {
               INFO_ROUTES.map((route, index) => (
                 <Link href={route.route} key={index} className="w-fit text-c-steel-gray hover:text-c-snow-white cursor-pointer">
