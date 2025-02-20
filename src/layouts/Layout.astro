@@ -2,6 +2,7 @@
 // Supports weights 100-900
 import Footer from '@/components/Footer.astro';
 import Sidebar from '@/components/Sidebar.astro';
+import Navbar from '@/components/Navbar.astro';
 import '@/styles/global.css';
 import '@fontsource-variable/geist';
 import { ClientRouter } from 'astro:transitions';
@@ -16,7 +17,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" transition:animate="initial">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -43,7 +44,7 @@ const { title } = Astro.props;
 	<body class="flex xl:flex-row flex-col bg-c-onix-black font-geist text-c-snow-white">
 		<ToastContainer client:visible containerId="notification" position="top-right" autoClose={2000} />
 		<Sidebar />
-		<!-- NAVBAR -->
+		<Navbar />
 		<section class="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
 			<main class="bg-c-lead-gray p-4 rounded-2xl h-content-height">
 				<slot />

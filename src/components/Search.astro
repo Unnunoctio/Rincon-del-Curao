@@ -5,7 +5,7 @@ const q = Astro.url.searchParams.get("q");
 ---
 
 <form action="/search" method="get" class="w-full max-w-[244px]">
-  <label class="group flex gap-2 px-3 py-2 border border-c-steel-gray focus-within:border-c-snow-white rounded-full w-full cursor-text">
+  <label class="group flex gap-2 px-3 py-2 border border-c-steel-gray focus-within:border-c-snow-white rounded-full w-full cursor-text" aria-label="Buscar">
     <SearchIcon className="stroke-c-steel-gray min-w-6 h-6" />
     <input
       name="q"

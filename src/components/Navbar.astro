@@ -1,0 +1,19 @@
+---
+import Logo from "@/components/Logo.astro";
+import Search from "@/components/Search.astro";
+import WebInfoContent from "@/components/WebInfoContent.astro";
+import { MenuButton } from "@/components/client/MenuButton";
+---
+<div class="xl:hidden h-[68px]" />
+
+<nav class="xl:hidden fixed flex justify-between bg-c-onix-black px-7 py-3 w-full">
+  <a href="/" class="group w-fit" aria-label="Ir al inicio">
+    <Logo className="w-[147px] h-[44px] group-hover:scale-105 transition-[scale] duration-300" />
+  </a>
+
+  <section class="flex items-center gap-6">
+    <Search />
+    <WebInfoContent />
+    <MenuButton client:visible />
+  </section>
+</nav>
