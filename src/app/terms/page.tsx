@@ -1,3 +1,8 @@
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Términos y Condiciones"
+}
 
 export default function Terms() {
   return (
