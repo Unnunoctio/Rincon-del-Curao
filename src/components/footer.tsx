@@ -1,9 +1,9 @@
+import { ScrollTop } from "@/components/scroll-top";
 import { INFO_ROUTES } from "@/config/router-paths";
-import Logo from "@/icons/logo";
+import { Logo } from "@/icons/logo";
 import Link from "next/link";
-import { ScrollTop } from "./scroll-top";
 
-export default function Footer() {
+export const Footer = () => {
   return (
     <footer className="flex flex-col gap-6 px-4 py-6">
       <section className="relative flex sm:flex-row flex-col justify-between gap-6">

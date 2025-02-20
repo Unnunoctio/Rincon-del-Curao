@@ -1,4 +1,4 @@
-import Footer from "@/components/footer";
+import { Footer } from "@/components/footer";
 import "@/styles/globals.css";
 import "@fontsource-variable/geist";
 import type { Metadata } from "next";
