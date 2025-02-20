@@ -1,7 +1,9 @@
 import { Footer } from "@/components/footer";
+import { Sidebar } from "@/components/sidebar";
 import "@/styles/globals.css";
 import "@fontsource-variable/geist";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -37,7 +39,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="es">
       <body className="flex xl:flex-row flex-col bg-c-onix-black font-geist text-c-snow-white">
         {/* TOAST */}
-        {/* SIDEBAR */}
+        <Suspense>
+          <Sidebar />
+        </Suspense>
         {/* NAVBAR */}
         <main className="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
           <section className="bg-c-lead-gray p-4 rounded-2xl h-content-height">
