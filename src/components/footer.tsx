@@ -8,7 +8,7 @@ export const Footer = () => {
     <footer className="flex flex-col gap-6 px-4 py-6">
       <section className="relative flex sm:flex-row flex-col justify-between gap-6">
         <div className="flex flex-col items-center sm:items-start gap-6 sm:gap-3">
-          <Link href="/" className="group">
+          <Link href="/" className="group" aria-label="Ir al inicio">
             <Logo className="w-[133px] h-[40px] group-hover:scale-105 transition-[scale] duration-300" />
           </Link>
           <p className="sm:max-w-[260px] text-center sm:text-start italic text-balance">
