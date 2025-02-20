@@ -4,6 +4,7 @@ import { StoreIcon } from "@/icons/client/StoreIcon";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { Slide, toast } from "react-toastify";
 
 interface Props {
   allWebs: WebInfo[]
@@ -26,6 +27,18 @@ export const WebInfoModal: React.FC<Props> = ({ allWebs }) => {
     setIsOpen(false);
   }
 
+  const successNotify = (): any => toast.success('Tiendas guardadas', {
+    containerId: 'notification',
+    theme: 'colored',
+    transition: Slide
+  })
+
+  const errorNotify = (): any => toast.error('Debes seleccionar al menos una tienda', {
+    containerId: 'notification',
+    theme: 'colored',
+    transition: Slide
+  })
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -33,10 +46,10 @@ export const WebInfoModal: React.FC<Props> = ({ allWebs }) => {
     if (newPrefersWebs.length > 0) {
       Cookies.set("prefersWebs", newPrefersWebs.join(","), { expires: 365, sameSite: "strict" });
       setPreferesWebs(newPrefersWebs as string[]);
-      // successNotify();
+      successNotify();
       closeModal();
     } else {
-      // errorNotify();
+      errorNotify();
     }
   }
 
