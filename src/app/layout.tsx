@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import "@/styles/globals.css";
 import "@fontsource-variable/geist";
 import type { Metadata } from "next";
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <section className="bg-c-lead-gray p-4 rounded-2xl h-content-height">
             {children}
           </section>
-          {/* FOOTER */}
+          <Footer />
         </main>
       </body>
     </html>
