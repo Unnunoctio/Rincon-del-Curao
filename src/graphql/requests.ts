@@ -7,11 +7,11 @@ export const getAllWebs = async (): Promise<WebInfo[]> => {
     allWebs: WebInfo[]
   }
 
-  const response = await fetch(process.env.APPSYNC_ENDPOINT as string, {
+  const response = await fetch(process.env.NEXT_PUBLIC_APPSYNC_ENDPOINT as string, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": process.env.APPSYNC_API_KEY as string
+      "x-api-key": process.env.NEXT_PUBLIC_APPSYNC_API_KEY as string
     },
     body: JSON.stringify({
       query: GET_ALL_WEBS
