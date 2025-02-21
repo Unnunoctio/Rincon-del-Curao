@@ -1,7 +1,8 @@
+import { Navigation } from "@/components/navigation"
+import { Search } from "@/components/search"
 import { Logo } from "@/icons/logo"
 import Link from "next/link"
 import { Suspense } from "react"
-import { Navigation } from "./navigation"
 
 export const Sidebar = () => {
   return (
@@ -11,11 +12,11 @@ export const Sidebar = () => {
           <Logo className="w-[147px] h-[44px] group-hover:scale-105 transition-[scale] duration-300" />
         </Link>
         <Suspense>
-          {/* <Search /> */}
+          <Search />
           <section className="flex flex-col gap-3">
             <Navigation />
             <hr className="border-c-steel-gray" />
-            {/* WEBS MODAL */}
+            {/* <WebsModal /> */}
           </section>
         </Suspense>
       </aside>
