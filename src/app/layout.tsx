@@ -4,6 +4,7 @@ import { getAllWebs } from "@/graphql/requests";
 import { WebsProvider } from "@/providers/webs-provider";
 import "@/styles/globals.css";
 import "@fontsource-variable/geist";
+import HolyLoader from "holy-loader";
 import type { Metadata } from "next";
 import { CookiesProvider } from "next-client-cookies/server";
 import { ToastContainer } from "react-toastify";
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="es">
       <body className="flex xl:flex-row flex-col bg-c-onix-black font-geist text-c-snow-white">
+        <HolyLoader color="#d69e2e" height={2} />
         <CookiesProvider>
           <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
           <WebsProvider webs={allWebs}>
