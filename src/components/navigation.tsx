@@ -6,17 +6,32 @@ import { ChevronRightIcon } from "@/icons/chevron-right"
 import { DistillateIcon } from "@/icons/distillate"
 import { WineIcon } from "@/icons/wine"
 import Link from "next/link"
-import { useState } from "react"
+import { useParams, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
-interface Props {
-  routeModule: {
-    route: string
-    query: string | undefined
-  } | undefined
+interface RouteModule {
+  route: string
+  query: string | undefined
 }
 
-export const Navigation = ({ routeModule }: Props) => {
+export const Navigation = () => {
+  const [ routeModule, setRouteModule ] = useState<RouteModule | undefined>(undefined)
   const [ sidebarSection, setSidebarSection ] = useState<string | undefined>(undefined)
+
+  const params = useParams<{ category: string }>()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (params?.category) {
+      const subCategories = searchParams.getAll("sub_category")
+      setRouteModule({
+        route: params.category,
+        query: subCategories.length === 1 ? subCategories[0] : undefined
+      })
+    } else {
+      setRouteModule(undefined)
+    }
+  }, [params, searchParams])
 
   const toggleSidebarSection = (section: string) => {
     if (sidebarSection === section) setSidebarSection(undefined)
