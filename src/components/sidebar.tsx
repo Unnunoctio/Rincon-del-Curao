@@ -3,6 +3,7 @@ import { Search } from "@/components/search"
 import { Logo } from "@/icons/logo"
 import Link from "next/link"
 import { Suspense } from "react"
+import { WebsModal } from "./webs-modal"
 
 export const Sidebar = () => {
   return (
@@ -16,7 +17,7 @@ export const Sidebar = () => {
           <section className="flex flex-col gap-3">
             <Navigation />
             <hr className="border-c-steel-gray" />
-            {/* <WebsModal /> */}
+            <WebsModal />
           </section>
         </Suspense>
       </aside>
