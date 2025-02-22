@@ -8,6 +8,9 @@ interface UIState {
   openSidebar: () => void;
   closeSidebar: () => void;
 
+  isNavbarOpen: boolean;
+  toogleNavbar: () => void;
+
   isWebsModalOpen: boolean;
   openWebsModal: () => void;
   closeWebsModal: () => void;
@@ -23,6 +26,9 @@ export const useUIStore = create<UIState>((set, get) => ({
   isSidebarOpen: false,
   openSidebar: () => set({ isSidebarOpen: true }),
   closeSidebar: () => set({ isSidebarOpen: false }),
+
+  isNavbarOpen: false,
+  toogleNavbar: () => set({ isNavbarOpen: !get().isNavbarOpen }),
 
   isWebsModalOpen: false,
   openWebsModal: () => set({ isWebsModalOpen: true }),
