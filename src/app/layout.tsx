@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { Sidebar } from "@/components/sidebar";
+import { WebsModal } from "@/components/webs-modal";
 import { getAllWebs } from "@/graphql/requests";
 import { WebsProvider } from "@/providers/webs-provider";
 import "@/styles/globals.css";
@@ -48,8 +49,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <CookiesProvider>
           <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
           <WebsProvider webs={allWebs}>
+            {/* <SidebarMobile /> */}
             <Sidebar />
-            {/* NAVBAR */}
+            {/* <Navbar /> */}
+            <WebsModal />
           </WebsProvider>
           <main className="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
             <section className="bg-c-lead-gray p-4 rounded-2xl h-content-height">
