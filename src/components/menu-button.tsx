@@ -1,10 +1,10 @@
 'use client'
 
 import { MenuIcon } from "@/icons/menu"
-import { useUIStore } from "@/store/ui-store"
+import { useUI } from "@/providers/ui-provider"
 
 export const MenuButton = () => {
-  const { isSidebarOpen, openSidebar } = useUIStore((state) => state)
+  const { isSidebarOpen, openSidebar } = useUI()
 
   return (
     <button

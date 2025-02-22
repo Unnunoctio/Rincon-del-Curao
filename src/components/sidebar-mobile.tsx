@@ -2,12 +2,12 @@
 
 import { Navigation } from "@/components/navigation"
 import { Logo } from "@/icons/logo"
-import { useUIStore } from "@/store/ui-store"
+import { useUI } from "@/providers/ui-provider"
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react"
 import Link from "next/link"
 
 export const SidebarMobile = () => {
-  const { isSidebarOpen, closeSidebar } = useUIStore((state) => state)
+  const { isSidebarOpen, closeSidebar } = useUI()
 
   return (
     <Dialog open={isSidebarOpen} onClose={closeSidebar} className="xl:hidden z-50 relative">

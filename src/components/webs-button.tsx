@@ -1,10 +1,10 @@
 'use client'
 
 import { StoreIcon } from "@/icons/store"
-import { useUIStore } from "@/store/ui-store"
+import { useUI } from "@/providers/ui-provider"
 
 export const WebsButton = () => {
-  const { isWebsModalOpen, openWebsModal } = useUIStore((state) => state)
+  const { isWebsModalOpen, openWebsModal } = useUI()
 
   return (
     <button

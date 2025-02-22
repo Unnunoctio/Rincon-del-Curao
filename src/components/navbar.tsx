@@ -6,11 +6,11 @@ import { SearchButton } from "@/components/search-button"
 import { WebsButton } from "@/components/webs-button"
 import { Logo } from "@/icons/logo"
 import { LogoCompressed } from "@/icons/logo-compressed"
-import { useUIStore } from "@/store/ui-store"
+import { useUI } from "@/providers/ui-provider"
 
 
 export const Navbar = () => {
-  const { isNavbarOpen } = useUIStore((state) => state)
+  const { isNavbarOpen } = useUI()
 
   return (
     <>

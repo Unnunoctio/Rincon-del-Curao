@@ -5,7 +5,7 @@ import { BeerIcon } from "@/icons/beer"
 import { ChevronRightIcon } from "@/icons/chevron-right"
 import { DistillateIcon } from "@/icons/distillate"
 import { WineIcon } from "@/icons/wine"
-import { useUIStore } from "@/store/ui-store"
+import { useUI } from "@/providers/ui-provider"
 import Link from "next/link"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -19,7 +19,7 @@ export const Navigation = () => {
   const params = useParams<{ category: string }>()
   const searchParams = useSearchParams()
 
-  const { sidebarSection, toggleSidebarSection } = useUIStore((state) => state)
+  const { sidebarSection, toggleSidebarSection } = useUI()
   const [ routeModule, setRouteModule ] = useState<RouteModule | undefined>(undefined)
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 'use client'
 
 import { WebCheckbox } from "@/components/web-checkbox";
+import { useUI } from "@/providers/ui-provider";
 import { useWebs } from "@/providers/webs-provider";
-import { useUIStore } from "@/store/ui-store";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ export const WebsModal = () => {
   const cookiesStore = useCookies()
 
   const [prefersWebs, setPreferesWebs] = useState<string[]>([]);
-  const { isWebsModalOpen, closeWebsModal } = useUIStore((state) => state)
+  const { isWebsModalOpen, closeWebsModal } = useUI()
 
   useEffect(() => {
     const cookie = cookiesStore.get("prefersWebs")

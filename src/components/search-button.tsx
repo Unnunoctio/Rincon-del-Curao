@@ -1,10 +1,10 @@
 'use client'
 
 import { SearchIcon } from "@/icons/search"
-import { useUIStore } from "@/store/ui-store"
+import { useUI } from "@/providers/ui-provider"
 
 export const SearchButton = () => {
-  const { isNavbarOpen, toogleNavbar } = useUIStore((state) => state)
+  const { isNavbarOpen, toogleNavbar } = useUI()
 
   return (
     <button
