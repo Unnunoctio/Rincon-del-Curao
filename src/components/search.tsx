@@ -23,7 +23,7 @@ export const Search = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} method="get" className="w-full max-w-[244px]">
+    <form onSubmit={handleSubmit} method="get" className="w-full max-w-full sm:max-w-[244px]">
       <label className="group flex gap-2 px-3 py-2 border border-c-steel-gray focus-within:border-c-snow-white rounded-full w-full cursor-text">
         <SearchIcon className="stroke-c-steel-gray min-w-6 h-6" />
         <input
