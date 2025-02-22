@@ -3,7 +3,6 @@ import { Search } from "@/components/search"
 import { WebsButton } from "@/components/webs-button"
 import { Logo } from "@/icons/logo"
 import Link from "next/link"
-import { Suspense } from "react"
 
 export const Sidebar = () => {
   return (
@@ -12,14 +11,12 @@ export const Sidebar = () => {
         <Link href="/" className="group w-fit" aria-label="Ir al inicio">
           <Logo className="w-[147px] h-[44px] group-hover:scale-105 transition-[scale] duration-300" />
         </Link>
-        <Suspense>
-          <Search />
-          <section className="flex flex-col gap-3">
-            <Navigation />
-            <hr className="border-c-steel-gray" />
-            <WebsButton />
-          </section>
-        </Suspense>
+        <Search />
+        <section className="flex flex-col gap-3">
+          <Navigation />
+          <hr className="border-c-steel-gray" />
+          <WebsButton />
+        </section>
       </aside>
     </section>
   )
