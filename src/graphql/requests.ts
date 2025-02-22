@@ -1,7 +1,6 @@
 import { GET_ALL_WEBS } from "@/graphql/queries";
 import type { WebInfo } from "@/graphql/types";
 
-
 export const getAllWebs = async (): Promise<WebInfo[]> => {
   interface QueryResponse {
     allWebs: WebInfo[]

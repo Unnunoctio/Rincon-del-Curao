@@ -1,4 +1,5 @@
 'use client'
+
 import { WebInfo } from '@/graphql/types'
 import { createContext, useContext } from 'react'
 

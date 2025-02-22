@@ -8,7 +8,6 @@ import { Logo } from "@/icons/logo"
 import { LogoCompressed } from "@/icons/logo-compressed"
 import { useUI } from "@/providers/ui-provider"
 
-
 export const Navbar = () => {
   const { isNavbarOpen } = useUI()
 
