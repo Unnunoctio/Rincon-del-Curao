@@ -10,4 +10,6 @@
   --color-c-old-gold: #d69e2e;
 
   --spacing-content-height: calc(100vh - 24px);
+
+  --breakpoint-xs: 400px;
 }
