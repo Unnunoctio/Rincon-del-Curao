@@ -1,10 +1,10 @@
 'use client'
 
+import { Navigation } from "@/components/navigation"
 import { Logo } from "@/icons/logo"
 import { useUIStore } from "@/store/ui-store"
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react"
 import Link from "next/link"
-import { Navigation } from "./navigation"
 
 export const SidebarMobile = () => {
   const { isSidebarOpen, closeSidebar } = useUIStore((state) => state)
