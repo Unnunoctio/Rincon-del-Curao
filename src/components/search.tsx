@@ -1,18 +1,14 @@
 'use client'
 
 import { SearchIcon } from "@/icons/search"
-import { useRouter, useSearchParams } from "next/navigation"
-import { FormEvent, useEffect, useState } from "react"
+import { useSearch } from "@/providers/search-provider"
+import { useRouter } from "next/navigation"
+import { FormEvent } from "react"
 
 export const Search = () => {
-  const searchParams = useSearchParams()
   const router = useRouter()
 
-  const [query, setQuery] = useState(searchParams.get("q")?.trim() || "")
-
-  useEffect(() => {
-    setQuery(searchParams.get("q")?.trim() || "")
-  }, [searchParams])
+  const { query, setQuery } = useSearch()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()

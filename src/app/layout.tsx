@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/sidebar";
 import { SidebarMobile } from "@/components/sidebar-mobile";
 import { WebsModal } from "@/components/webs-modal";
 import { getAllWebs } from "@/graphql/requests";
+import { SearchProvider } from "@/providers/search-provider";
 import { UIProvider } from "@/providers/ui-provider";
 import { WebsProvider } from "@/providers/webs-provider";
 import "@/styles/globals.css";
@@ -53,8 +54,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
           <UIProvider>
             <SidebarMobile />
-            <Sidebar />
-            <Navbar />
+            <SearchProvider>
+              <Sidebar />
+              <Navbar />
+            </SearchProvider>
             <WebsProvider webs={allWebs}>
               <WebsModal />
             </WebsProvider>
