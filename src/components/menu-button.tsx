@@ -11,6 +11,7 @@ export const MenuButton = () => {
       onClick={openSidebar}
       className="group flex items-center p-1 w-fit h-fit cursor-pointer"
       aria-current={isSidebarOpen}
+      aria-label="Abrir barra lateral"
     >
       <MenuIcon className="stroke-c-steel-gray group-aria-current:stroke-c-snow-white group-hover:stroke-c-snow-white w-8 h-8" />
     </button>
