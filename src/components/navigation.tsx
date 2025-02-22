@@ -5,6 +5,7 @@ import { BeerIcon } from "@/icons/beer"
 import { ChevronRightIcon } from "@/icons/chevron-right"
 import { DistillateIcon } from "@/icons/distillate"
 import { WineIcon } from "@/icons/wine"
+import { useUIStore } from "@/store/ui-store"
 import Link from "next/link"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -15,11 +16,11 @@ interface RouteModule {
 }
 
 export const Navigation = () => {
-  const [ routeModule, setRouteModule ] = useState<RouteModule | undefined>(undefined)
-  const [ sidebarSection, setSidebarSection ] = useState<string | undefined>(undefined)
-
   const params = useParams<{ category: string }>()
   const searchParams = useSearchParams()
+
+  const { sidebarSection, toggleSidebarSection } = useUIStore((state) => state)
+  const [ routeModule, setRouteModule ] = useState<RouteModule | undefined>(undefined)
 
   useEffect(() => {
     if (params?.category) {
@@ -32,11 +33,6 @@ export const Navigation = () => {
       setRouteModule(undefined)
     }
   }, [params, searchParams])
-
-  const toggleSidebarSection = (section: string) => {
-    if (sidebarSection === section) setSidebarSection(undefined)
-    else setSidebarSection(section)
-  }
 
   return (
     <ul className="flex flex-col gap-3 text-c-steel-gray">
