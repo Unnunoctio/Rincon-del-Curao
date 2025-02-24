@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Política de Privacidad"
@@ -11,7 +12,7 @@ export default function Privacy() {
 
       <section className="flex flex-col gap-2">
         <h2 className="font-medium text-2xl">1. Introducción</h2>
-        <p className="text-pretty">En Rincón del Curao nos comprometemos a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos su información cuando utiliza nuestro sitio web <a href="https://rincondelcurao.com" className="text-c-steel-gray hover:text-c-old-gold underline">https://rincondelcurao.com</a>.</p>
+        <p className="text-pretty">En Rincón del Curao nos comprometemos a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos su información cuando utiliza nuestro sitio web <Link href="/" className="text-c-steel-gray hover:text-c-old-gold underline">https://rincondelcurao.com</Link>.</p>
       </section>
 
       <section className="flex flex-col gap-4">

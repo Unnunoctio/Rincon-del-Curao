@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Términos y Condiciones de Uso"
@@ -11,7 +12,7 @@ export default function Terms() {
 
       <section className="flex flex-col gap-2">
         <h2 className="font-medium text-2xl">1. Aceptación de los Términos</h2>
-        <p className="text-pretty">Al acceder y utilizar el sitio web de Rincón del Curao (en adelante, <a href="https://rincondelcurao.com" className="text-c-steel-gray hover:text-c-old-gold underline">https://rincondelcurao.com</a>), usted acepta quedar vinculado por estos Términos y Condiciones de Uso, nuestra Política de Privacidad y todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de estos términos, queda prohibido usar o acceder a este sitio.</p>
+        <p className="text-pretty">Al acceder y utilizar el sitio web de Rincón del Curao (en adelante, <Link href="/" className="text-c-steel-gray hover:text-c-old-gold underline">https://rincondelcurao.com</Link>), usted acepta quedar vinculado por estos Términos y Condiciones de Uso, nuestra Política de Privacidad y todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de estos términos, queda prohibido usar o acceder a este sitio.</p>
       </section>
 
       <section className="flex flex-col gap-2">

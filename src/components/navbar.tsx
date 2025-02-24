@@ -7,6 +7,7 @@ import { WebsButton } from "@/components/webs-button"
 import { Logo } from "@/icons/logo"
 import { LogoCompressed } from "@/icons/logo-compressed"
 import { useUI } from "@/providers/ui-provider"
+import Link from "next/link"
 
 export const Navbar = () => {
   const { isNavbarOpen } = useUI()
@@ -18,10 +19,10 @@ export const Navbar = () => {
 
       <nav className="xl:hidden fixed gap-y-3 grid grid-cols-3 bg-c-onix-black px-4 sm:px-7 py-3 w-full">
         <div className="flex justify-start">
-          <a href="/" className="group w-fit" aria-label="Ir al inicio">
+          <Link href="/" className="group w-fit" aria-label="Ir al inicio">
             <Logo className="hidden xs:block w-[147px] h-[44px] group-hover:scale-105 transition-[scale] duration-300" />
             <LogoCompressed className="xs:hidden block w-11 h-11 group-hover:scale-105 transition-[scale] duration-300" />
-          </a>
+          </Link>
         </div>
         <div className="flex justify-end items-center gap-4 col-span-2">
           <div className="hidden sm:block">
