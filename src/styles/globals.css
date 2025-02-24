@@ -12,5 +12,7 @@
   --spacing-content-height: calc(100vh - 24px);
   --spacing-mobile-content-height: calc(100vh - 68px - 12px);
 
+  --spacing-page-width: 1088px;
+
   --breakpoint-xs: 400px;
 }
