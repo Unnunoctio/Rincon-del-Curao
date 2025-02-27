@@ -11,7 +11,7 @@ import "@/styles/globals.css";
 import "@fontsource-variable/geist";
 import HolyLoader from "holy-loader";
 import type { Metadata } from "next";
-import { CookiesProvider } from "next-client-cookies/server";
+import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
@@ -50,25 +50,25 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang="es">
       <body className="flex xl:flex-row flex-col bg-c-onix-black font-geist text-c-snow-white">
         <HolyLoader color="#d69e2e" height={2} />
-        <CookiesProvider>
-          <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
-          <UIProvider>
-            <SidebarMobile />
+        <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
+        <UIProvider>
+          <SidebarMobile />
+          <Suspense>
             <SearchProvider>
               <Sidebar />
               <Navbar />
             </SearchProvider>
-            <WebsProvider webs={allWebs}>
-              <WebsModal />
-            </WebsProvider>
-          </UIProvider>
-          <main className="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
-            <section className="flex justify-center bg-c-lead-gray p-6 rounded-2xl min-h-mobile-content-height xl:min-h-content-height">
-              {children}
-            </section>
-            <Footer />
-          </main>
-        </CookiesProvider>
+          </Suspense>
+          <WebsProvider webs={allWebs}>
+            <WebsModal />
+          </WebsProvider>
+        </UIProvider>
+        <main className="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
+          <section className="flex justify-center bg-c-lead-gray p-6 rounded-2xl min-h-mobile-content-height xl:min-h-content-height">
+            {children}
+          </section>
+          <Footer />
+        </main>
       </body>
     </html>
   );

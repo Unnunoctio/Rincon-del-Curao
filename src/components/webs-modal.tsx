@@ -1,22 +1,22 @@
 'use client'
 
+import { setCookie } from "@/app/actions";
 import { WebCheckbox } from "@/components/web-checkbox";
 import { useUI } from "@/providers/ui-provider";
 import { useWebs } from "@/providers/webs-provider";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useCookies } from "next-client-cookies";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
 
 export const WebsModal = () => {
   const { webs } = useWebs()
-  const cookiesStore = useCookies()
 
   const [prefersWebs, setPreferesWebs] = useState<string[]>([]);
   const { isWebsModalOpen, closeWebsModal } = useUI()
 
   useEffect(() => {
-    const cookie = cookiesStore.get("prefersWebs")
+    const cookie = Cookies.get('prefersWebs')
     setPreferesWebs(cookie === undefined ? [] : cookie.split(','))
   }, [])
 
@@ -35,14 +35,14 @@ export const WebsModal = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const newPrefersWebs = new FormData(e.target as HTMLFormElement).getAll("prefer-web");
-    if (newPrefersWebs.length > 0) {
-      cookiesStore.set("prefersWebs", newPrefersWebs.join(","), { expires: 365, sameSite: "strict" });
-      setPreferesWebs(newPrefersWebs as string[]);
-      successNotify();
-      closeWebsModal();
+    const newPrefersWebs = new FormData(e.target as HTMLFormElement).getAll("prefer-web")
+    const success = await setCookie('prefersWebs', newPrefersWebs.join(','))
+    if (success) {
+      setPreferesWebs(newPrefersWebs as string[])
+      successNotify()
+      closeWebsModal()
     } else {
-      errorNotify();
+      errorNotify()
     }
   }
 
