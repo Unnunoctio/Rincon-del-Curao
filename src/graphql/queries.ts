@@ -6,3 +6,20 @@ export const GET_ALL_WEBS = `
     }
   }
 `
+
+export const GET_PRODUCTS = `
+  query Products($category: CategoryEnum) {
+    products(category: $category) {
+      slug
+      title
+      image
+      websites {
+        code
+        price
+        bestPrice
+        discount
+        average
+      }
+    }
+  }
+`
