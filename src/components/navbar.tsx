@@ -17,7 +17,7 @@ export const Navbar = () => {
       <div className="hidden xl:hidden sm:block h-[68px]" />
       <div className={`block sm:hidden ${ isNavbarOpen ? "h-[122px]" : "h-[68px]"}`} />
 
-      <nav className="xl:hidden fixed gap-y-3 grid grid-cols-3 bg-c-onix-black px-4 sm:px-7 py-3 w-full">
+      <nav className="xl:hidden z-10 fixed gap-y-3 grid grid-cols-3 bg-c-onix-black px-4 sm:px-7 py-3 w-full">
         <div className="flex justify-start">
           <Link href="/" className="group w-fit" aria-label="Ir al inicio">
             <Logo className="hidden xs:block w-[147px] h-[44px] group-hover:scale-105 transition-[scale] duration-300" />
