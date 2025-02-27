@@ -20,12 +20,12 @@ importers:
       holy-loader:
         specifier: 2.3.13
         version: 2.3.13(react@18.3.1)
+      js-cookie:
+        specifier: 3.0.5
+        version: 3.0.5
       next:
         specifier: 14.2.24
         version: 14.2.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      next-client-cookies:
-        specifier: 2.0.1
-        version: 2.0.1(next@14.2.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       postcss:
         specifier: 8.5.3
         version: 8.5.3
@@ -42,6 +42,9 @@ importers:
         specifier: 4.0.7
         version: 4.0.7
     devDependencies:
+      '@types/js-cookie':
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/node':
         specifier: 20.17.19
         version: 20.17.19
@@ -274,6 +277,9 @@ packages:
   '@tanstack/virtual-core@3.13.0':
     resolution: {integrity: sha512-NBKJP3OIdmZY3COJdWkSonr50FMVIi+aj5ZJ7hI/DTpEKg2RMfo/KvP8A3B/zOSpMgIe52B5E2yn7rryULzA6g==}
 
+  '@types/js-cookie@3.0.6':
+    resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
+
   '@types/node@20.17.19':
     resolution: {integrity: sha512-LEwC7o1ifqg/6r2gn9Dns0f1rhK+fPFDoMiceTJ6kWmVk6bgXBI/9IOWfVan4WiAavK9pIVWdX0/e3J+eEUh5A==}
 
@@ -405,12 +411,6 @@ packages:
     resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-
-  next-client-cookies@2.0.1:
-    resolution: {integrity: sha512-iut6Q+vc+2dfnaFVgAvb2Hsch872JO2r08LNoJ/bF8Gqi+zANoGqOL+TJLBq163GqEwjtGGEcm6DUzo5+5Za8g==}
-    peerDependencies:
-      next: '>= 15.0.0'
-      react: '>= 16.8.0'
 
   next@14.2.24:
     resolution: {integrity: sha512-En8VEexSJ0Py2FfVnRRh8gtERwDRaJGNvsvad47ShkC2Yi8AXQPXEA2vKoDJlGFSj5WE5SyF21zNi4M5gyi+SQ==}
@@ -690,6 +690,8 @@ snapshots:
 
   '@tanstack/virtual-core@3.13.0': {}
 
+  '@types/js-cookie@3.0.6': {}
+
   '@types/node@20.17.19':
     dependencies:
       undici-types: 6.19.8
@@ -786,12 +788,6 @@ snapshots:
       js-tokens: 4.0.0
 
   nanoid@3.3.8: {}
-
-  next-client-cookies@2.0.1(next@14.2.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
-    dependencies:
-      js-cookie: 3.0.5
-      next: 14.2.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
 
   next@14.2.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
