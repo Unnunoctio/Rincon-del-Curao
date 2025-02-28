@@ -1,6 +1,10 @@
+import { ProductList } from "@/components/product-list"
 import { ROUTES } from "@/config/router-paths"
+import { getProducts } from "@/graphql/requests"
+import { ProductsProvider } from "@/providers/products-provider"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { getCookie } from "../actions"
 
 export async function generateStaticParams() {
   return ROUTES.map((route) => ({
@@ -19,10 +23,19 @@ export async function generateMetadata({ params }: { params: { category: string 
   }
 }
 
-export default function Category({ params }: { params: { category: string } }) {
+export default async function Category({ params }: { params: { category: string } }) {
+  const { category } = params
+
+  const route = ROUTES.find((route) => route.route === category)
+  const products = await getProducts(route?.name ?? null)
+  const prefersWebs = await getCookie('prefersWebs')
+
   return (
-    <>
-      <h1 className="text-3xl">CATEGORIA {params.category}</h1>
-    </>
+    <div className="flex flex-col gap-6 w-full max-w-page-width">
+      <ProductsProvider products={products} prefersWebs={prefersWebs === undefined ? [] : prefersWebs.split(',')}>
+        <h1 className="text-3xl">CATEGORIA {route?.name}</h1>
+        <ProductList />
+      </ProductsProvider>
+    </div>
   )
 }
