@@ -11,7 +11,7 @@ export const ProductCard = ({ slug, title, image, price, bestPrice, discount, av
   return (
     <Link href={`/product/${slug}`} className="group block relative bg-c-onix-black p-3 rounded-xl w-[248px] h-[324px] overflow-hidden">
       <section className="flex flex-col items-center gap-y-1 group-hover:opacity-0 w-full h-full transition-opacity duration-400">
-        <Image src={image} alt={title} width={188} height={188} className="rounded-lg w-[188px] h-[188px] object-cover" />
+        <Image src={image.replaceAll('+', '%2B')} alt={title} width={188} height={188} className="rounded-lg w-[188px] h-[188px] object-cover" />
         <h3 className="h-[54px] font-medium text-[18px] text-center line-clamp-2">{title}</h3>
         <div className="flex justify-between items-center gap-2 w-full h-[50px]">
           <div className="flex flex-col">
@@ -34,7 +34,7 @@ export const ProductCard = ({ slug, title, image, price, bestPrice, discount, av
         </div>
       </section>
       <section className="top-0 left-0 absolute flex justify-center items-center opacity-0 group-hover:opacity-100 w-full h-full transition-opacity duration-400">
-        <Image src={image} alt={title} width={188} height={188} className="rounded-lg w-[188px] h-[188px] object-cover group-hover:scale-125 duration-400 tranistion-transform" />
+        <Image src={image.replaceAll('+', '%2B')} alt={title} width={188} height={188} className="rounded-lg w-[188px] h-[188px] object-cover group-hover:scale-125 duration-400 tranistion-transform" />
       </section>
     </Link>
   )
