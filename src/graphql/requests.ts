@@ -15,7 +15,8 @@ export const getAllWebs = async (): Promise<WebInfo[]> => {
     body: JSON.stringify({
       query: GET_ALL_WEBS
     }),
-    cache: "force-cache"
+    cache: "force-cache",
+    next: { revalidate: false }
   })
 
   const { data }: { data: QueryResponse } = await response.json()
@@ -39,7 +40,8 @@ export const getProducts = async (category: string | null): Promise<ProductPrevi
         category
       }
     }),
-    cache: "force-cache"
+    cache: "force-cache",
+    next: { revalidate: false }
   })
 
   const { data }: { data: QueryResponse } = await response.json()
