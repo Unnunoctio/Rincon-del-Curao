@@ -8,12 +8,19 @@ interface WebPreview {
   price: number;
   bestPrice: number;
   discount: number;
-  average: number;
 }
 
 export interface ProductPreview {
   slug: string;
   title: string;
+  brand: string;
+  category: string;
+  subCategory: string;
+  quantity: number;
+  abv: number;
+  volume: number;
+  packaging: string;
+  average: number;
   image: string;
   websites: WebPreview[];
 }

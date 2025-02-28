@@ -12,13 +12,20 @@ export const GET_PRODUCTS = `
     products(category: $category) {
       slug
       title
+      brand
+      category
+      subCategory
+      quantity
+      abv
+      volume
+      packaging
+      average
       image
       websites {
         code
         price
         bestPrice
         discount
-        average
       }
     }
   }
