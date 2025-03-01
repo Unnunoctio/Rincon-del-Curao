@@ -21,7 +21,6 @@ export const useProducts = () => {
   return context
 }
 
-// export const ProductsProvider = ({ children, products, prefersWebs }: { children: React.ReactNode, products: ProductPreview[], prefersWebs: string[] }) => {
 export const ProductsProvider = ({ children, products }: { children: React.ReactNode, products: ProductPreview[] }) => {
   const searchParams = useSearchParams()
 
@@ -83,7 +82,6 @@ export const ProductsProvider = ({ children, products }: { children: React.React
 
   useEffect(() => {
     generateProductsInView()
-  // }, [searchParams, prefersWebs])
   }, [searchParams])
 
   const value = {

@@ -1,4 +1,3 @@
-// import { getCookie } from "../actions"
 import { ProductList } from "@/components/product-list"
 import { ROUTES } from "@/config/router-paths"
 import { getProducts } from "@/graphql/requests"
@@ -7,7 +6,6 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 export const dynamicParams = false
-export const dynamic = "force-static"
 
 export async function generateStaticParams() {
   return ROUTES.map((route) => ({
@@ -31,11 +29,9 @@ export default async function Category({ params }: { params: { category: string 
 
   const route = ROUTES.find((route) => route.route === category)
   const products = await getProducts(route?.name ?? null)
-  // const prefersWebs = await getCookie('prefersWebs')
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-page-width">
-      {/* <ProductsProvider products={products} prefersWebs={prefersWebs === undefined ? [] : prefersWebs.split(',')}> */}
       <ProductsProvider products={products}>
         <h1 className="text-3xl">CATEGORIA {route?.name}</h1>
         <ProductList />
