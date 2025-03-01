@@ -21,27 +21,29 @@ export const useProducts = () => {
   return context
 }
 
-export const ProductsProvider = ({ children, products, prefersWebs }: { children: React.ReactNode, products: ProductPreview[], prefersWebs: string[] }) => {
+// export const ProductsProvider = ({ children, products, prefersWebs }: { children: React.ReactNode, products: ProductPreview[], prefersWebs: string[] }) => {
+export const ProductsProvider = ({ children, products }: { children: React.ReactNode, products: ProductPreview[] }) => {
   const searchParams = useSearchParams()
 
   const [productsInView, setProductsInView] = useState<ProductView[]>([])
   const [totalPages, setTotalPages] = useState(0)
 
   const generateProductsInView = () => {
-    let fp: any[] = []
+    // let fp: any[] = []
+    let fp = products
 
-    // APLICAR WEBSITES ACTIVOS
-    if (prefersWebs.length > 0) {
-      fp = products.map(p => {
-        return {
-          ...p,
-          websites: p.websites.filter(w => prefersWebs.includes(w.code))
-        }
-      })
-      fp = fp.filter(p => p.websites.length > 0)
-    } else {
-      fp = products
-    }
+    // // APLICAR WEBSITES ACTIVOS
+    // if (prefersWebs.length > 0) {
+    //   fp = products.map(p => {
+    //     return {
+    //       ...p,
+    //       websites: p.websites.filter(w => prefersWebs.includes(w.code))
+    //     }
+    //   })
+    //   fp = fp.filter(p => p.websites.length > 0)
+    // } else {
+    //   fp = products
+    // }
 
     // APLICAR ORDENAMENTO
 
@@ -63,7 +65,7 @@ export const ProductsProvider = ({ children, products, prefersWebs }: { children
     fp = fp.slice((page - 1) * PRODUCTS_PER_PAGE, page * PRODUCTS_PER_PAGE)
 
     // GENERAR EL PRODUCT VIEW
-    fp = fp.map(p => {
+    const sp = fp.map(p => {
       return {
         slug: p.slug,
         title: p.title,
@@ -75,13 +77,14 @@ export const ProductsProvider = ({ children, products, prefersWebs }: { children
       }
     })
 
-    setProductsInView(fp)
+    setProductsInView(sp)
   }
 
 
   useEffect(() => {
     generateProductsInView()
-  }, [searchParams, prefersWebs])
+  // }, [searchParams, prefersWebs])
+  }, [searchParams])
 
   const value = {
     products,
