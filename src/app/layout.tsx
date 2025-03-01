@@ -3,7 +3,8 @@ import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { SidebarMobile } from "@/components/sidebar-mobile";
 import { WebsModal } from "@/components/webs-modal";
-import { getAllWebs } from "@/graphql/requests";
+import { getAllWebs, getProducts } from "@/graphql/requests";
+import { ProductsProvider } from "@/providers/products-provider";
 import { SearchProvider } from "@/providers/search-provider";
 import { UIProvider } from "@/providers/ui-provider";
 import { WebsProvider } from "@/providers/webs-provider";
@@ -44,7 +45,9 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // LOAD DATA
   const allWebs = await getAllWebs()
+  const allProducts = await getProducts(null)
 
   return (
     <html lang="es">
@@ -64,9 +67,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           </WebsProvider>
         </UIProvider>
         <main className="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
-          <section className="flex justify-center bg-c-lead-gray p-6 rounded-2xl min-h-mobile-content-height xl:min-h-content-height">
-            {children}
-          </section>
+          <Suspense>
+            <ProductsProvider products={allProducts}>
+              <section className="flex justify-center bg-c-lead-gray p-6 rounded-2xl min-h-mobile-content-height xl:min-h-content-height">
+                {children}
+              </section>
+            </ProductsProvider>
+          </Suspense>
           <Footer />
         </main>
       </body>

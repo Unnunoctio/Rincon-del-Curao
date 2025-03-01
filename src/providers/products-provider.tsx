@@ -1,11 +1,13 @@
 'use client'
 
+import { ROUTES } from "@/config/router-paths";
 import { ProductPreview } from "@/graphql/types";
 import { ProductView } from "@/types";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface ProductsContextType {
+  isLoading: boolean;
   products: ProductPreview[];
   productsInView: ProductView[];
   totalPages: number;
@@ -22,14 +24,23 @@ export const useProducts = () => {
 }
 
 export const ProductsProvider = ({ children, products }: { children: React.ReactNode, products: ProductPreview[] }) => {
+  const params = useParams()
   const searchParams = useSearchParams()
 
+  const [isLoading, setIsLoading] = useState(true)
   const [productsInView, setProductsInView] = useState<ProductView[]>([])
   const [totalPages, setTotalPages] = useState(0)
 
   const generateProductsInView = () => {
-    // let fp: any[] = []
     let fp = products
+
+    // APLICAR CATEGORIA
+    if (params.category !== undefined) {
+      const route = ROUTES.find(r => r.route === params.category)
+      if (route !== undefined) {
+        fp = fp.filter(p => p.category === route.name)
+      }
+    }
 
     // // APLICAR WEBSITES ACTIVOS
     // if (prefersWebs.length > 0) {
@@ -81,10 +92,13 @@ export const ProductsProvider = ({ children, products }: { children: React.React
 
 
   useEffect(() => {
+    setIsLoading(true)
     generateProductsInView()
+    setIsLoading(false)
   }, [searchParams])
 
   const value = {
+    isLoading,
     products,
     productsInView,
     totalPages
