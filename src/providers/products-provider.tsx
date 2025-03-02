@@ -8,7 +8,6 @@ import { useParams, useSearchParams } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface ProductsContextType {
-  isLoading: boolean;
   products: ProductPreview[];
   productsInView: ProductView[];
   totalPages: number;
@@ -29,7 +28,6 @@ export const ProductsProvider = ({ children, products }: { children: React.React
   const searchParams = useSearchParams()
   const { selectedWebs } = useCookies()
 
-  const [isLoading, setIsLoading] = useState(true)
   const [productsInView, setProductsInView] = useState<ProductView[]>([])
   const [totalPages, setTotalPages] = useState(0)
 
@@ -90,15 +88,11 @@ export const ProductsProvider = ({ children, products }: { children: React.React
     setProductsInView(sp)
   }
 
-
   useEffect(() => {
-    setIsLoading(true)
     generateProductsInView()
-    setIsLoading(false)
   }, [searchParams, selectedWebs])
 
   const value = {
-    isLoading,
     products,
     productsInView,
     totalPages
