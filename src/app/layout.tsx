@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ToastContainer containerId='notification' position='top-right' autoClose={2000} />
           <UIProvider>
             <SidebarMobile />
-            <Suspense>
+            <Suspense fallback={<div className="w-full xl:w-[280px] h-[68px] xl:h-0" />}>
               <SearchProvider>
                 <Sidebar />
                 <Navbar />
@@ -69,13 +69,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             </WebsProvider>
           </UIProvider>
           <main className="flex flex-col flex-1 gap-3 xl:pt-3 pr-3 pb-3 pl-3">
-            <Suspense>
-              <ProductsProvider products={allProducts}>
-                <section className="flex justify-center bg-c-lead-gray p-6 rounded-2xl min-h-mobile-content-height xl:min-h-content-height">
+            <section className="flex justify-center bg-c-lead-gray p-6 rounded-2xl min-h-mobile-content-height xl:min-h-content-height">
+              <Suspense>
+                <ProductsProvider products={allProducts}>
                   {children}
-                </section>
-              </ProductsProvider>
-            </Suspense>
+                </ProductsProvider>
+              </Suspense>
+            </section>
             <Footer />
           </main>
         </CookiesProvider>
