@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Category({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const { category } = params
   const route = ROUTES.find((route) => route.route === category)
 

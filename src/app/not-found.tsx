@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Página no encontrada",
 }
 
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
     <div className="flex sm:flex-row flex-col-reverse justify-center items-center gap-x-8 gap-y-6">
       <NotFoundIcon className="hidden sm:block w-[196px] h-[196px]" />

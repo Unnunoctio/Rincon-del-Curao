@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Política de Privacidad"
 }
 
-export default function Privacy() {
+export default function PrivacyPage() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-page-width">
       <h1 className="font-medium text-3xl">Política de Privacidad</h1>

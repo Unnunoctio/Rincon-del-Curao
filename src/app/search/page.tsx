@@ -15,7 +15,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   }
 }
 
-export default async function Search({ searchParams }: Props) {
+export default async function SearchPage({ searchParams }: Props) {
   const { q } = searchParams
 
   return (

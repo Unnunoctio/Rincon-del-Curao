@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Términos y Condiciones de Uso"
 }
 
-export default function Terms() {
+export default function TermsPage() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-page-width">
       <h1 className="font-medium text-3xl">Términos y Condiciones de Uso</h1>
