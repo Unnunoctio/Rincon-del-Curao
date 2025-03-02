@@ -1,24 +1,17 @@
 'use client'
 
-import { setCookie } from "@/app/actions";
 import { WebCheckbox } from "@/components/web-checkbox";
+import { useCookies } from "@/providers/cookies-provider";
 import { useUI } from "@/providers/ui-provider";
 import { useWebs } from "@/providers/webs-provider";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
 
 export const WebsModal = () => {
   const { webs } = useWebs()
-
-  const [prefersWebs, setPreferesWebs] = useState<string[]>([]);
+  const { selectedWebs, setSelectedWebs } = useCookies()
   const { isWebsModalOpen, closeWebsModal } = useUI()
-
-  useEffect(() => {
-    const cookie = Cookies.get('prefersWebs')
-    setPreferesWebs(cookie === undefined ? [] : cookie.split(','))
-  }, [])
 
   const successNotify = (): any => toast.success('Tiendas guardadas', {
     containerId: 'notification',
@@ -36,9 +29,9 @@ export const WebsModal = () => {
     e.preventDefault();
 
     const newPrefersWebs = new FormData(e.target as HTMLFormElement).getAll("prefer-web")
-    const success = await setCookie('prefersWebs', newPrefersWebs.join(','))
-    if (success) {
-      setPreferesWebs(newPrefersWebs as string[])
+    if (newPrefersWebs.length > 0) {
+      Cookies.set('selectedWebs', newPrefersWebs.join(','))
+      setSelectedWebs(newPrefersWebs as string[])
       successNotify()
       closeWebsModal()
     } else {
@@ -59,7 +52,7 @@ export const WebsModal = () => {
             <ul className="flex flex-wrap content-start gap-3 min-h-[50vh] max-h-[65vh] overflow-y-auto">
               {webs.map((web, index) => (
                 <li key={index} className="w-full max-w-[200px]">
-                  <WebCheckbox value={web.code} label={web.name} checked={prefersWebs.includes(web.code) || prefersWebs.length === 0} />
+                  <WebCheckbox value={web.code} label={web.name} checked={selectedWebs.includes(web.code) || selectedWebs.length === 0} />
                 </li>
               ))}
             </ul>
