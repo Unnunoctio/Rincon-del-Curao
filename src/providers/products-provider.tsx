@@ -2,6 +2,7 @@
 
 import { ROUTES } from "@/config/router-paths";
 import { ProductPreview } from "@/graphql/types";
+import { useCookies } from "@/providers/cookies-provider";
 import { ProductView } from "@/types";
 import { useParams, useSearchParams } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -26,6 +27,7 @@ export const useProducts = () => {
 export const ProductsProvider = ({ children, products }: { children: React.ReactNode, products: ProductPreview[] }) => {
   const params = useParams()
   const searchParams = useSearchParams()
+  const { selectedWebs } = useCookies()
 
   const [isLoading, setIsLoading] = useState(true)
   const [productsInView, setProductsInView] = useState<ProductView[]>([])
@@ -42,18 +44,16 @@ export const ProductsProvider = ({ children, products }: { children: React.React
       }
     }
 
-    // // APLICAR WEBSITES ACTIVOS
-    // if (prefersWebs.length > 0) {
-    //   fp = products.map(p => {
-    //     return {
-    //       ...p,
-    //       websites: p.websites.filter(w => prefersWebs.includes(w.code))
-    //     }
-    //   })
-    //   fp = fp.filter(p => p.websites.length > 0)
-    // } else {
-    //   fp = products
-    // }
+    // APLICAR WEBSITES ACTIVOS
+    if (selectedWebs.length > 0) {
+      fp = fp.map(p => {
+        return {
+          ...p,
+          websites: p.websites.filter(w => selectedWebs.includes(w.code))
+        }
+      })
+      fp = fp.filter(p => p.websites.length > 0)
+    }
 
     // APLICAR ORDENAMENTO
 
@@ -95,7 +95,7 @@ export const ProductsProvider = ({ children, products }: { children: React.React
     setIsLoading(true)
     generateProductsInView()
     setIsLoading(false)
-  }, [searchParams])
+  }, [searchParams, selectedWebs])
 
   const value = {
     isLoading,
