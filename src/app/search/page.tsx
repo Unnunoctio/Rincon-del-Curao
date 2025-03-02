@@ -1,3 +1,4 @@
+import { Pagination } from "@/components/pagination";
 import { ProductList } from "@/components/product-list";
 import { Metadata } from "next";
 
@@ -21,7 +22,10 @@ export default async function SearchPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6 w-full max-w-page-width">
       <h1 className="text-3xl">Búsqueda: {q}</h1>
-      <ProductList />
+      <section className="flex-grow">
+        <ProductList />
+      </section>
+      <Pagination />
     </div>
   )
 }
