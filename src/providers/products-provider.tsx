@@ -11,6 +11,7 @@ interface ProductsContextType {
   products: ProductPreview[];
   productsInView: ProductView[];
   totalPages: number;
+  currentPage: number;
 }
 
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined)
@@ -30,6 +31,7 @@ export const ProductsProvider = ({ children, products }: { children: React.React
 
   const [productsInView, setProductsInView] = useState<ProductView[]>([])
   const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
 
   const generateProductsInView = () => {
     let fp = products
@@ -71,6 +73,7 @@ export const ProductsProvider = ({ children, products }: { children: React.React
     if (page > total) page = total
 
     fp = fp.slice((page - 1) * PRODUCTS_PER_PAGE, page * PRODUCTS_PER_PAGE)
+    setCurrentPage(page)
 
     // GENERAR EL PRODUCT VIEW
     const sp = fp.map(p => {
@@ -95,7 +98,8 @@ export const ProductsProvider = ({ children, products }: { children: React.React
   const value = {
     products,
     productsInView,
-    totalPages
+    totalPages,
+    currentPage
   }
 
   return (
