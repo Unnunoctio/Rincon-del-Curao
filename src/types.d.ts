@@ -8,3 +8,8 @@ export interface ProductView {
   discount: number;
   average: number;
 }
+
+export interface BreadcrumbLink {
+  name: string;
+  href: string;
+}

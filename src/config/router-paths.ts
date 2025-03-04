@@ -1,3 +1,5 @@
+import { BreadcrumbLink } from "@/types"
+
 export const ROUTES = [
   {
     name: 'Cervezas',
@@ -51,3 +53,14 @@ export const INFO_ROUTES = [
     route: '/contact'
   }
 ]
+
+export const createBreadcrumb = (titles: string[]): BreadcrumbLink[] => {
+  return titles.map(title => {
+    if (title === 'Home') return { name: 'Inicio', href: '/' }
+
+    const link = ROUTES.find(route => route.name === title)
+    if (link !== undefined) return { name: link.name, href: `/${link.route}` }
+
+    return { name: title, href: '/#' }
+  })
+}
