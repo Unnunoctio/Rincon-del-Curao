@@ -1,5 +1,7 @@
+import { Breadcrumb } from "@/components/breadcrumb";
 import { Pagination } from "@/components/pagination";
 import { ProductList } from "@/components/product-list";
+import { createBreadcrumb } from "@/config/router-paths";
 import { Metadata } from "next";
 
 interface Props {
@@ -21,7 +23,11 @@ export default async function SearchPage({ searchParams }: Props) {
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-page-width">
-      <h1 className="text-3xl">Búsqueda: {q}</h1>
+      <Breadcrumb links={createBreadcrumb(['Home', 'Búsqueda'])} />
+      <section className="flex flex-col">
+        <h1 className="font-medium text-3xl">Búsqueda</h1>
+        <span className="text-c-silver-gray">Palabras clave: {q}</span>
+      </section>
       <section className="flex-grow">
         <ProductList />
       </section>

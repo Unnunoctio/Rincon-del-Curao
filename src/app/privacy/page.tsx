@@ -1,3 +1,5 @@
+import { Breadcrumb } from "@/components/breadcrumb"
+import { createBreadcrumb } from "@/config/router-paths"
 import { Metadata } from "next"
 import Link from "next/link"
 
@@ -8,6 +10,8 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-page-width">
+      <Breadcrumb links={createBreadcrumb(['Home', 'Política de Privacidad'])} />
+
       <h1 className="font-medium text-3xl">Política de Privacidad</h1>
 
       <section className="flex flex-col gap-2">

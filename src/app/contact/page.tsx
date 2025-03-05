@@ -1,3 +1,5 @@
+import { Breadcrumb } from "@/components/breadcrumb"
+import { createBreadcrumb } from "@/config/router-paths"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -6,8 +8,9 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <>
-      <h1 className="text-3xl">CONTACTO</h1>
-    </>
+    <div className="flex flex-col gap-6 w-full max-w-page-width">
+      <Breadcrumb links={createBreadcrumb(['Home', 'Contacto'])} />
+      <h1 className="font-medium text-3xl">Contacto</h1>
+    </div>
   )
 }
