@@ -10,6 +10,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 interface ProductsContextType {
   products: ProductPreview[];
   productsInView: ProductView[];
+  totalProducts: number;
   totalPages: number;
   currentPage: number;
 }
@@ -30,6 +31,7 @@ export const ProductsProvider = ({ children, products }: { children: React.React
   const { selectedWebs } = useCookies()
 
   const [productsInView, setProductsInView] = useState<ProductView[]>([])
+  const [totalProducts, setTotalProducts] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
 
@@ -62,6 +64,9 @@ export const ProductsProvider = ({ children, products }: { children: React.React
     // APLICAR FILTROS
     if (searchParams.get('q')) fp = fp.filter(p => p.title.toLowerCase().includes(searchParams.get('q')?.toLowerCase() ?? ''))
     if (searchParams.get('sub_category')) fp = fp.filter(p => p.subCategory === searchParams.get('sub_category'))
+
+    // SET TOTAL PRODUCTS
+    setTotalProducts(fp.length)
 
     // APLICAR PAGINACION
     const PRODUCTS_PER_PAGE = 24
@@ -98,6 +103,7 @@ export const ProductsProvider = ({ children, products }: { children: React.React
   const value = {
     products,
     productsInView,
+    totalProducts,
     totalPages,
     currentPage
   }
