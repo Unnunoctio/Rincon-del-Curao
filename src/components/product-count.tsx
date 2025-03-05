@@ -1,9 +1,9 @@
 'use client'
 
-import { useProducts } from "@/providers/products-provider"
+import { useProductsFilter } from "@/providers/products-filter-provider"
 
 export const ProductCount = () => {
-  const { totalProducts } = useProducts()
+  const { totalProducts } = useProductsFilter()
 
   return (
     <span className="text-c-old-gold">

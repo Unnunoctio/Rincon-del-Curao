@@ -1,6 +1,6 @@
 'use client'
 
-import { useProducts } from "@/providers/products-provider"
+import { useProductsFilter } from "@/providers/products-filter-provider"
 import { useEffect, useState } from "react"
 import { PaginationNumber } from "./pagination-number"
 
@@ -21,16 +21,8 @@ export const generatePagination = (currentPage: number, totalPages: number): Arr
 }
 
 export const Pagination = () => {
-  const { totalPages, currentPage } = useProducts()
+  const { isLoading, totalPages, currentPage } = useProductsFilter()
   const [pagination, setPagination] = useState<Array<number | null>>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 100)
-  }, [])
 
   useEffect(() => {
     setPagination(generatePagination(currentPage, totalPages))

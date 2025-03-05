@@ -1,19 +1,10 @@
 'use client'
 
-import { useProducts } from "@/providers/products-provider";
-import { useEffect, useState } from "react";
+import { useProductsFilter } from "@/providers/products-filter-provider";
 import { ProductCard } from "./product-card";
 
 export const ProductList = () => {
-  const { productsInView } = useProducts()
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 100)
-  }, [])
+  const { isLoading, productsInView } = useProductsFilter()
 
   if (isLoading) {
     return (
