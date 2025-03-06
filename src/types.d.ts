@@ -1,3 +1,4 @@
+import { OrderByEnum } from "./config/order-by";
 
 export interface ProductView {
   slug: string;
@@ -12,4 +13,9 @@ export interface ProductView {
 export interface BreadcrumbLink {
   name: string;
   href: string;
+}
+
+export interface OrderBy {
+  label: string;
+  value: OrderByEnum;
 }

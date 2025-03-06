@@ -1,5 +1,6 @@
 'use client'
 
+import { findOrderBy, OrderByEnum } from "@/config/order-by";
 import { ROUTES } from "@/config/router-paths";
 import { useCookies } from "@/providers/cookies-provider";
 import { useProducts } from "@/providers/products-provider";
@@ -13,6 +14,7 @@ interface ProductsFilterContextType {
   totalProducts: number;
   totalPages: number;
   currentPage: number;
+  orderByProducts: OrderByEnum;
 }
 
 const ProductsFilterContext = createContext<ProductsFilterContextType | undefined>(undefined)
@@ -37,6 +39,7 @@ export const ProductsFilterProvider = ({ children }: { children: React.ReactNode
   const [totalProducts, setTotalProducts] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
+  const [orderByProducts, setOrderByProducts] = useState(findOrderBy(searchParams.get('order_by') as OrderByEnum || OrderByEnum.SCORE_DESC).value)
 
   const generateProductsInView = () => {
     let fp = products
@@ -61,8 +64,60 @@ export const ProductsFilterProvider = ({ children }: { children: React.ReactNode
     }
 
     // APLICAR ORDENAMIENTO
-
-    // SIMPLIFICAR LOS WEBS
+    const orderBy = searchParams.get('order_by')
+    switch (orderBy) {
+      case OrderByEnum.NAME_ASC:
+        setOrderByProducts(OrderByEnum.NAME_ASC)
+        fp.sort((a, b) => a.title.localeCompare(b.title))
+        break
+      case OrderByEnum.NAME_DESC:
+        setOrderByProducts(OrderByEnum.NAME_DESC)
+        fp.sort((a, b) => b.title.localeCompare(a.title))
+        break
+      case OrderByEnum.PRICE_ASC:
+        setOrderByProducts(OrderByEnum.PRICE_ASC)
+        fp = fp.map(p => {
+          return {
+            ...p,
+            websites: p.websites.sort((a, b) => a.bestPrice - b.bestPrice)
+          }
+        })
+        fp.sort((a, b) => {
+          if (a.websites[0].bestPrice !== b.websites[0].bestPrice) return a.websites[0].bestPrice - b.websites[0].bestPrice
+          if (a.websites[0].price !== b.websites[0].price) return a.websites[0].price - b.websites[0].price
+          return a.title.localeCompare(b.title)
+        })
+        break
+      case OrderByEnum.PRICE_DESC:
+        setOrderByProducts(OrderByEnum.PRICE_DESC)
+        fp = fp.map(p => {
+          return {
+            ...p,
+            websites: p.websites.sort((a, b) => b.bestPrice - a.bestPrice)
+          }
+        })
+        fp.sort((a, b) => {
+          if (a.websites[0].bestPrice !== b.websites[0].bestPrice) return b.websites[0].bestPrice - a.websites[0].bestPrice
+          if (a.websites[0].price !== b.websites[0].price) return b.websites[0].price - a.websites[0].price
+          return a.title.localeCompare(b.title)
+        })
+        break
+      default:
+        setOrderByProducts(OrderByEnum.SCORE_DESC)
+        fp = fp.map(p => {
+          return {
+            ...p,
+            websites: p.websites.sort((a, b) => b.discount - a.discount)
+          }
+        })
+        fp.sort((a, b) => {
+          if (a.websites[0].discount !== b.websites[0].discount) return b.websites[0].discount - a.websites[0].discount
+          if (a.average !== b.average) return b.average - a.average
+          if (a.websites[0].price !== b.websites[0].price) return b.websites[0].price - a.websites[0].price
+          return a.title.localeCompare(b.title)
+        })
+        break
+    }
 
     // APLICAR FILTROS
     if (searchParams.get('q')) fp = fp.filter(p => p.title.toLowerCase().includes(searchParams.get('q')?.toLowerCase() ?? ''))
@@ -112,7 +167,8 @@ export const ProductsFilterProvider = ({ children }: { children: React.ReactNode
     productsInView,
     totalProducts,
     totalPages,
-    currentPage
+    currentPage,
+    orderByProducts
   }
 
   return (
