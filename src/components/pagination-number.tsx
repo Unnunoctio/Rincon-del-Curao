@@ -30,7 +30,7 @@ export const PaginationNumber = ({ page, isCurrent }: Props) => {
     <Link
       href={createURL(page)}
       aria-current={isCurrent}
-      className="flex justify-center items-center aria-current:bg-c-old-gold border border-c-silver-gray aria-current:border-c-old-gold hover:border-c-old-gold rounded-md min-w-[34px] h-[34px] font-medium aria-current:font-bold text-c-silver-gray aria-current:text-c-lead-gray hover:text-c-old-gold"
+      className="flex justify-center items-center aria-current:bg-c-old-gold border border-c-silver-gray aria-current:border-c-old-gold hover:border-c-snow-white rounded-md min-w-[34px] h-[34px] font-medium aria-current:font-bold text-c-silver-gray aria-current:text-c-lead-gray hover:text-c-snow-white"
     >
       {page}
     </Link>
