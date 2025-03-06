@@ -41,7 +41,7 @@ export const WebsModal = () => {
 
   return (
     <Dialog as="div" open={isWebsModalOpen} onClose={closeWebsModal} className="z-50 relative">
-      <DialogBackdrop transition className="fixed inset-0 bg-black/40 data-[closed]:opacity-0 transition-opacity duration-300 ease-in-out" />
+      <DialogBackdrop transition className="fixed inset-0 bg-c-onix-black/40 data-[closed]:opacity-0 transition-opacity duration-300 ease-in-out" />
       <div className="fixed inset-0">
         <form onSubmit={onSubmit} className="flex justify-center items-center p-4 min-h-full">
           <DialogPanel transition className="flex flex-col gap-4 bg-c-onix-black data-[closed]:opacity-0 shadow-xl p-4 rounded-xl w-full max-w-6xl overflow-hidden text-left align-middle transition-opacity duration-300 ease-in-out">
