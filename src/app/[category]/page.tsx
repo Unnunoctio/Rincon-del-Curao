@@ -1,4 +1,5 @@
 import { Breadcrumb } from "@/components/breadcrumb"
+import { OrderBy } from "@/components/order-by"
 import { Pagination } from "@/components/pagination"
 import { ProductCount } from "@/components/product-count"
 import { ProductList } from "@/components/product-list"
@@ -37,9 +38,12 @@ export default async function CategoryPage({ params }: Props) {
     <ProductsFilterProvider>
       <div className="flex flex-col gap-6 w-full max-w-page-width">
         <Breadcrumb links={createBreadcrumb(['Home', route?.name as string])} />
-        <section className="flex flex-col">
-          <h1 className="font-medium text-3xl">{route?.name}</h1>
-          <ProductCount />
+        <section className="flex justify-between">
+          <div className="flex flex-col">
+            <h1 className="font-medium text-3xl">{route?.name}</h1>
+            <ProductCount />
+          </div>
+          <OrderBy />
         </section>
         <section className="flex-grow">
           <ProductList />
