@@ -3,7 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { SidebarMobile } from "@/components/sidebar-mobile";
 import { WebsModal } from "@/components/webs-modal";
-import { getAllWebs, getProducts } from "@/graphql/requests";
+import { getAllProducts, getAllWebs } from "@/graphql/requests";
 import { CookiesProvider } from "@/providers/cookies-provider";
 import { ProductsProvider } from "@/providers/products-provider";
 import { SearchProvider } from "@/providers/search-provider";
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     },
     description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
     card: 'summary_large_image',
-    images: ['https://assets.rincondelcurao.com/image-og.png']
+    images: ['https://assets.rincondelcurao.cl/image-og.png']
   },
   openGraph: {
     title: {
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
       template: '%s • Rincón del Curao'
     },
     description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
-    url: 'https://rincondelcurao.com',
+    url: 'https://rincondelcurao.cl',
     siteName: 'Rincón del Curao',
-    images: ['https://assets.rincondelcurao.com/image-og.png'],
+    images: ['https://assets.rincondelcurao.cl/image-og.png'],
     locale: 'es_ES',
     type: 'website'
   }
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // LOAD DATA
   const allWebs = await getAllWebs()
-  const allProducts = await getProducts(null)
+  const allProducts = await getAllProducts()
 
   return (
     <html lang="es">

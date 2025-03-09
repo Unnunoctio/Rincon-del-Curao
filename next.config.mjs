@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'assets.rincondelcurao.com',
+        hostname: 'assets.rincondelcurao.cl',
       }
     ]
   }

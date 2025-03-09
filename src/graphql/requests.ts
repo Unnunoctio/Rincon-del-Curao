@@ -1,4 +1,4 @@
-import { GET_ALL_WEBS, GET_PRODUCTS } from "@/graphql/queries";
+import { GET_ALL_WEBS, GET_ALL_PRODUCTS } from "@/graphql/queries";
 import type { ProductPreview, WebInfo } from "@/graphql/types";
 
 export const getAllWebs = async (): Promise<WebInfo[]> => {
@@ -22,9 +22,9 @@ export const getAllWebs = async (): Promise<WebInfo[]> => {
   return data.allWebs
 }
 
-export const getProducts = async (category: string | null): Promise<ProductPreview[]> => {
+export const getAllProducts = async (): Promise<ProductPreview[]> => {
   interface QueryResponse {
-    products: ProductPreview[]
+    allProducts: ProductPreview[]
   }
 
   const response = await fetch(process.env.NEXT_PUBLIC_APPSYNC_ENDPOINT as string, {
@@ -34,14 +34,11 @@ export const getProducts = async (category: string | null): Promise<ProductPrevi
       "x-api-key": process.env.NEXT_PUBLIC_APPSYNC_API_KEY as string
     },
     body: JSON.stringify({
-      query: GET_PRODUCTS,
-      variables: {
-        category
-      }
+      query: GET_ALL_PRODUCTS
     }),
     cache: "force-cache"
   })
 
   const { data }: { data: QueryResponse } = await response.json()
-  return data.products
+  return data.allProducts
 }

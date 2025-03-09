@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
       <section className="flex flex-col gap-2">
         <h2 className="font-medium text-2xl">1. Introducción</h2>
-        <p className="text-pretty">En Rincón del Curao nos comprometemos a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos su información cuando utiliza nuestro sitio web <Link href="/" className="text-c-silver-gray hover:text-c-old-gold underline">https://rincondelcurao.com</Link>.</p>
+        <p className="text-pretty">En Rincón del Curao nos comprometemos a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos su información cuando utiliza nuestro sitio web <Link href="/" className="text-c-silver-gray hover:text-c-old-gold underline">https://rincondelcurao.cl</Link>.</p>
       </section>
 
       <section className="flex flex-col gap-4">

@@ -7,9 +7,9 @@ export const GET_ALL_WEBS = `
   }
 `
 
-export const GET_PRODUCTS = `
-  query Products($category: CategoryEnum) {
-    products(category: $category) {
+export const GET_ALL_PRODUCTS = `
+  query AllProducts {
+    allProducts {
       slug
       title
       brand

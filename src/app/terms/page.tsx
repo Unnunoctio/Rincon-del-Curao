@@ -16,7 +16,7 @@ export default function TermsPage() {
 
       <section className="flex flex-col gap-2">
         <h2 className="font-medium text-2xl">1. Aceptación de los Términos</h2>
-        <p className="text-pretty">Al acceder y utilizar el sitio web de Rincón del Curao (en adelante, <Link href="/" className="text-c-silver-gray hover:text-c-old-gold underline">https://rincondelcurao.com</Link>), usted acepta quedar vinculado por estos Términos y Condiciones de Uso, nuestra Política de Privacidad y todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de estos términos, queda prohibido usar o acceder a este sitio.</p>
+        <p className="text-pretty">Al acceder y utilizar el sitio web de Rincón del Curao (<Link href="/" className="text-c-silver-gray hover:text-c-old-gold underline">https://rincondelcurao.cl</Link>), usted acepta quedar vinculado por estos Términos y Condiciones de Uso, nuestra Política de Privacidad y todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de estos términos, queda prohibido usar o acceder a este sitio.</p>
       </section>
 
       <section className="flex flex-col gap-2">
