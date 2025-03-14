@@ -50,6 +50,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const allWebs = await getAllWebs()
   const allProducts = await getAllProducts()
 
+  console.log("All webs: ", allWebs.length)
+  console.log("All products: ", allProducts.length)
+
   return (
     <html lang="es">
       <body className="flex xl:flex-row flex-col bg-c-onix-black font-geist text-c-snow-white">
