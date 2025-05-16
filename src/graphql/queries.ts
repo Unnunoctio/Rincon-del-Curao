@@ -30,3 +30,15 @@ export const GET_ALL_PRODUCTS = `
     }
   }
 `
+
+export const GET_ALL_SLUGS = `
+  query AllSlugs {
+    allSlugs
+  }
+`
+
+export const GET_PRODUCT_TITLE = `
+  query ProductTitle($slug: ID!) {
+    productTitle(slug: $slug)
+  }
+`
