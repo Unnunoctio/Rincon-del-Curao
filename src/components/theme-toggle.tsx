@@ -17,7 +17,7 @@ function useIsMounted() {
     return useSyncExternalStore(
         emptySubscribe,
         () => true,
-        () => false,
+        () => false
     )
 }
 
@@ -34,9 +34,7 @@ export function ThemeToggle() {
                     aria-label={value}
                     className={cn(
                         'flex items-center justify-center rounded-full p-1.5 transition-colors cursor-pointer',
-                        mounted && theme === value
-                            ? 'bg-background text-foreground shadow-sm'
-                            : 'text-muted-foreground hover:text-foreground',
+                        mounted && theme === value ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
                     )}
                 >
                     <Icon className="h-4 w-4" />

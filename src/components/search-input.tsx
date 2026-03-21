@@ -42,12 +42,12 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
                     autoFocus={autoFocus}
                     className={cn(
                         'flex h-8 w-full border border-input bg-transparent px-3 py-1 pl-9 text-sm shadow-xs outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/20 disabled:cursor-not-allowed disabled:opacity-50',
-                        pill ? 'rounded-full' : 'rounded-md',
+                        pill ? 'rounded-full' : 'rounded-md'
                     )}
                 />
             </div>
         )
-    },
+    }
 )
 
 SearchInput.displayName = 'SearchInput'

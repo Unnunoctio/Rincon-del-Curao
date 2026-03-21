@@ -23,11 +23,7 @@ export function AppFooter() {
                     <div className="flex flex-col items-center sm:items-start gap-3">
                         <p className="text-base font-medium">Centro de Ayuda</p>
                         {INFO_LINKS.map((link) => (
-                            <a
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                            >
+                            <a key={link.href} href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                                 {link.name}
                             </a>
                         ))}

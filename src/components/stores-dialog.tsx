@@ -1,12 +1,6 @@
 'use client'
 
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 interface StoresDialogProps {
     open: boolean
@@ -19,9 +13,7 @@ export function StoresDialog({ open, onOpenChange }: StoresDialogProps) {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Tiendas activas</DialogTitle>
-                    <DialogDescription>
-                        Selecciona las tiendas que quieres incluir en las comparaciones de precios.
-                    </DialogDescription>
+                    <DialogDescription>Selecciona las tiendas que quieres incluir en las comparaciones de precios.</DialogDescription>
                 </DialogHeader>
                 {/* Contenido futuro: listado de tiendas con toggles */}
             </DialogContent>
