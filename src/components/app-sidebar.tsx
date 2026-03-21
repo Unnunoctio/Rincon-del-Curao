@@ -23,45 +23,45 @@ import Link from 'next/link'
 
 const navMain = [
     { title: 'Inicio', icon: Home, href: '/' },
-    { title: 'Comparar precios', icon: ChartBar, href: '/comparar' },
-    { title: 'Ofertas', icon: Tag, href: '/ofertas' },
+    { title: 'Comparar precios', icon: ChartBar, href: '/compare' },
+    { title: 'Ofertas', icon: Tag, href: '/deals' },
 ]
 
 const navCategories = [
     {
         title: 'Cervezas',
         icon: Beer,
-        href: '/categoria/cervezas',
+        href: '/category/beers',
         items: [
-            { title: 'Lager', href: '/categoria/cervezas/lager' },
-            { title: 'Ale', href: '/categoria/cervezas/ale' },
-            { title: 'IPA', href: '/categoria/cervezas/ipa' },
-            { title: 'Sin alcohol', href: '/categoria/cervezas/sin-alcohol' },
-            { title: 'Ver todas', href: '/categoria/cervezas' },
+            { title: 'Lager', href: '/category/beers/lager' },
+            { title: 'Ale', href: '/category/beers/ale' },
+            { title: 'IPA', href: '/category/beers/ipa' },
+            { title: 'Sin alcohol', href: '/category/beers/non-alcoholic' },
+            { title: 'Ver todas', href: '/category/beers' },
         ],
     },
     {
         title: 'Vinos',
         icon: Wine,
-        href: '/categoria/vinos',
+        href: '/category/wines',
         items: [
-            { title: 'Tinto', href: '/categoria/vinos/tinto' },
-            { title: 'Blanco', href: '/categoria/vinos/blanco' },
-            { title: 'Rosé', href: '/categoria/vinos/rose' },
-            { title: 'Espumante', href: '/categoria/vinos/espumante' },
-            { title: 'Ver todos', href: '/categoria/vinos' },
+            { title: 'Tinto', href: '/category/wines/red' },
+            { title: 'Blanco', href: '/category/wines/white' },
+            { title: 'Rosé', href: '/category/wines/rose' },
+            { title: 'Espumante', href: '/category/wines/sparkling' },
+            { title: 'Ver todos', href: '/category/wines' },
         ],
     },
     {
         title: 'Destilados',
         icon: GlassWater,
-        href: '/categoria/destilados',
+        href: '/category/spirits',
         items: [
-            { title: 'Whisky', href: '/categoria/destilados/whisky' },
-            { title: 'Vodka', href: '/categoria/destilados/vodka' },
-            { title: 'Ron', href: '/categoria/destilados/ron' },
-            { title: 'Pisco', href: '/categoria/destilados/pisco' },
-            { title: 'Ver todos', href: '/categoria/destilados' },
+            { title: 'Whisky', href: '/category/spirits/whisky' },
+            { title: 'Vodka', href: '/category/spirits/vodka' },
+            { title: 'Ron', href: '/category/spirits/rum' },
+            { title: 'Pisco', href: '/category/spirits/pisco' },
+            { title: 'Ver todos', href: '/category/spirits' },
         ],
     },
 ]
