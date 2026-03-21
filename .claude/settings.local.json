@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm create:*)",
+      "Bash(printf \"n\\\\nn\\\\n\")",
+      "Bash(yes n:*)",
+      "Bash(pnpm dlx:*)"
+    ]
+  }
+}
