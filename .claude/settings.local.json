@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm create:*)",
+      "Bash(printf \"no\\\\nno\\\\n\")",
+      "Bash(npx --yes create-next-app@latest temp-project --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-pnpm --turbopack --skip-install 2)",
+      "Bash(1:*)",
+      "Bash(npx create-next-app@latest --help)",
+      "Bash(cp -r temp-project/src temp-project/public temp-project/package.json temp-project/tsconfig.json temp-project/next.config.ts temp-project/postcss.config.mjs temp-project/eslint.config.mjs temp-project/next-env.d.ts .)",
+      "Bash(ls -la temp-project/.*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm dlx:*)"
+    ]
+  }
+}
