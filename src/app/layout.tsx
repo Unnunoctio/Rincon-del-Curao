@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                                 <SidebarInset>
                                     <AppNavbar />
                                     <main className="flex flex-col flex-1 gap-3 p-3 pt-0 xl:pt-3 xl:pl-1">
-                                        <section className="flex flex-col flex-1 rounded-2xl bg-sidebar p-6 min-h-[calc(100svh-3.5rem-1.5rem)] xl:min-h-[calc(100svh-1.5rem)]">
+                                        <section className="flex flex-col flex-1 rounded-2xl bg-sidebar p-3 sm:p-6 min-h-[calc(100svh-3.5rem-1.5rem)] xl:min-h-[calc(100svh-1.5rem)]">
                                             {children}
                                         </section>
                                         <AppFooter />
