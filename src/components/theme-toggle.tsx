@@ -1,25 +1,15 @@
 'use client'
 
+import { useIsMounted } from '@/hooks/use-is-mounted'
 import { cn } from '@/lib/utils'
 import { Monitor, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useSyncExternalStore } from 'react'
 
 const options = [
     { value: 'light', icon: Sun },
     { value: 'system', icon: Monitor },
     { value: 'dark', icon: Moon },
 ] as const
-
-const emptySubscribe = () => () => {}
-
-function useIsMounted() {
-    return useSyncExternalStore(
-        emptySubscribe,
-        () => true,
-        () => false
-    )
-}
 
 export function ThemeToggle() {
     const { theme, setTheme } = useTheme()

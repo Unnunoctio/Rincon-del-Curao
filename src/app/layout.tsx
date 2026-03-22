@@ -3,6 +3,7 @@ import { AppNavbar } from '@/components/app-navbar'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { MOCK_STORES } from '@/data/stores'
 import { StoresProvider } from '@/providers/stores-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import '@/styles/globals.css'
@@ -27,13 +28,22 @@ export const metadata: Metadata = {
     description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+async function fetchStores() {
+    // TODO: reemplazar con fetch real cuando el backend esté operativo
+    // const data = await gql<{ allWebs: StoreInfo[] }>(GET_ALL_WEBS)
+    // return data.allWebs
+    return MOCK_STORES
+}
+
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    const stores = await fetchStores()
+
     return (
         <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
             <body className="min-h-dvh antialiased">
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
                     <TooltipProvider>
-                        <StoresProvider>
+                        <StoresProvider stores={stores}>
                             <SidebarProvider>
                                 <AppSidebar />
                                 <SidebarInset>

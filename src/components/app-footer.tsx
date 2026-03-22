@@ -1,12 +1,7 @@
 import { LogoFull } from '@/components/logo'
 import { ScrollTop } from '@/components/scroll-top'
 import { ThemeToggle } from '@/components/theme-toggle'
-
-const INFO_LINKS = [
-    { name: 'Términos y Condiciones', href: '/terms' },
-    { name: 'Política de Privacidad', href: '/privacy' },
-    { name: 'Contacto', href: '/contact' },
-]
+import { navInfo } from '@/config/nav'
 
 export function AppFooter() {
     return (
@@ -22,7 +17,7 @@ export function AppFooter() {
                 <div className="flex justify-center sm:justify-start gap-10">
                     <div className="flex flex-col items-center sm:items-start gap-3">
                         <p className="text-base font-medium">Centro de Ayuda</p>
-                        {INFO_LINKS.map((link) => (
+                        {navInfo.map((link) => (
                             <a key={link.href} href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                                 {link.name}
                             </a>
