@@ -1,19 +1,12 @@
 'use client'
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import type { ProductView } from '@/types'
+import { clp } from '@/helpers/currency'
 import { cn } from '@/lib/utils'
+import type { ProductView } from '@/types'
 import { Flame, ShoppingBag, TrendingDown } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-/* ─── helpers ─────────────────────────────────────────────── */
-
-function clp(value: number) {
-    return value.toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 })
-}
-
-/* ─── ProductCard ─────────────────────────────────────────── */
 
 export function ProductCard({ product }: { product: ProductView }) {
     const saved = product.average - product.bestPrice
@@ -37,9 +30,7 @@ export function ProductCard({ product }: { product: ProductView }) {
                     <ShoppingBag className="absolute inset-0 m-auto size-14 text-muted-foreground/15" />
                 )}
 
-                {product.image && (
-                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/14 to-transparent" />
-                )}
+                {product.image && <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/14 to-transparent" />}
 
                 {/* badge descuento — top left */}
                 {product.discount > 0 && (
