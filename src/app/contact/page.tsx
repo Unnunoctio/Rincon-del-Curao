@@ -47,9 +47,9 @@ export default function ContactPage() {
             {/* Topics */}
             <div className="mb-12 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {TOPICS.map((topic) => (
-                    <div key={topic.title} className="flex items-start gap-4 rounded-xl border border-border bg-muted/20 px-4 py-4">
+                    <div key={topic.title} className="flex items-start gap-4 rounded-lg border border-border bg-muted/20 px-4 py-4">
                         <div className="flex items-center h-full">
-                            <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                            <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary/10">
                                 <topic.icon className="size-4 text-primary" />
                             </div>
                         </div>

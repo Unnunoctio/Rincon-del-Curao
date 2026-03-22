@@ -82,7 +82,7 @@ export default function TermsPage() {
             </div>
 
             {/* Footer note */}
-            <div className="mt-10 rounded-xl border border-border bg-muted/30 px-6 py-5">
+            <div className="mt-10 rounded-lg border border-border bg-muted/30 px-6 py-5">
                 <p className="text-sm text-muted-foreground">
                     Si tienes preguntas sobre estos Términos y Condiciones, puedes contactarnos a través de la sección{' '}
                     <a href="/contact" className="font-medium text-foreground underline underline-offset-4 hover:text-primary transition-colors">
