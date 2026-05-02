@@ -7,7 +7,7 @@ export async function gql<T>(query: string, variables?: Record<string, unknown>)
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query, variables }),
-        next: { revalidate: 3600 },
+        next: { revalidate: false, tags: ['stores'] },
     })
 
     if (!res.ok) throw new Error(`GraphQL request failed: ${res.status}`)

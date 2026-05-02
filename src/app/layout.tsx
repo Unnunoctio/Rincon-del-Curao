@@ -3,8 +3,11 @@ import { AppNavbar } from '@/components/app-navbar'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import { MOCK_STORES } from '@/data/stores'
+import { GET_ALL_WEBS } from '@/graphql/queries'
+import { gql } from '@/lib/graphql'
 import { StoresProvider } from '@/providers/stores-provider'
+import type { StoreInfo } from '@/types'
+import { MOCK_STORES_INITIAL } from '@/data/stores'
 import { ThemeProvider } from '@/providers/theme-provider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
@@ -28,11 +31,15 @@ export const metadata: Metadata = {
     description: 'Recopilador de precios de distintas bebidas alcohólicas, vendidas en Chile',
 }
 
-async function fetchStores() {
-    // TODO: reemplazar con fetch real cuando el backend esté operativo
-    // const data = await gql<{ allWebs: StoreInfo[] }>(GET_ALL_WEBS)
-    // return data.allWebs
-    return MOCK_STORES
+async function fetchStores(): Promise<StoreInfo[]> {
+    try {
+        const data = await gql<{ allWebs: StoreInfo[] }>(GET_ALL_WEBS)
+        return data.allWebs
+    } catch {
+        // Fallback durante build time o cuando el backend no está disponible
+        console.warn('[layout] fetchStores falló — usando datos de fallback')
+        return MOCK_STORES_INITIAL
+    }
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -1,6 +1,16 @@
 import type { StoreInfo } from '@/types'
 
-export const MOCK_STORES: StoreInfo[] = [
+/** Simula el estado inicial del backend — pocas tiendas registradas */
+export const MOCK_STORES_INITIAL: StoreInfo[] = [
+    { code: 'jumbo', name: 'Jumbo' },
+    { code: 'lider', name: 'Líder' },
+    { code: 'unimarc', name: 'Unimarc' },
+    { code: 'santa-isabel', name: 'Santa Isabel' },
+    { code: 'walmart', name: 'Walmart' },
+]
+
+/** Simula el backend luego de agregar tiendas nuevas */
+export const MOCK_STORES_FULL: StoreInfo[] = [
     { code: 'jumbo', name: 'Jumbo' },
     { code: 'lider', name: 'Líder' },
     { code: 'unimarc', name: 'Unimarc' },
